@@ -453,6 +453,9 @@ Marks will be deducted for poor git and GitLab usage. For example, meaningless c
 * Moved the player movement, user interface, and JSON input epics and their respective user stories and acceptance criteria to project repository.
 * Moved contribution log to repository
 
+**Duy**
+* fix up epics 4 and 5 from team feedback yesterday
+* Move epics 4 and 5 into gitlab
 
 ### Week-07
 
