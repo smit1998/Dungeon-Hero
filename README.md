@@ -454,8 +454,25 @@ Marks will be deducted for poor git and GitLab usage. For example, meaningless c
 * Moved contribution log to repository
 
 **Duy**
-* fix up epics 4 and 5 from team feedback yesterday
+* Fix up epics 4 and 5 from team feedback yesterday
 * Move epics 4 and 5 into gitlab
+
+**Smit**
+* Moved epics 2 and 3 onto gitlab
+
+**Everyone**
+* Reviewed user stories against the requirements of Milestone 1
+* Made appropriate changes to user stories which do not meet requirements
+* Discussed in a team meeting the requirements for Milestone 2
+* Brainstormed potential classes and design patterns which will be implemented
+* Allocated work to be completed before the next meeting
+
+##### 10/07/2020
+
+**Fergus**
+* Outlined the implementation details of loading dungeon goals from JSON
+* Expanded on the details of the MoveableEntity interface
+* Noted the benefit of having a new Coordinate class in the management of entities in the dungeon
 
 ### Week-07
 
