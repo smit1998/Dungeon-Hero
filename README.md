@@ -474,6 +474,11 @@ Marks will be deducted for poor git and GitLab usage. For example, meaningless c
 * Expanded on the details of the MoveableEntity interface
 * Noted the benefit of having a new Coordinate class in the management of entities in the dungeon
 
+##### 11/07/2020
+
+**Fergus**
+* Modeled starter code in shared UML diagram.
+
 ### Week-07
 
 Fill in here.
