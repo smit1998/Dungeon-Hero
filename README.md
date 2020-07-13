@@ -382,15 +382,133 @@ Marks will be deducted for poor git and GitLab usage. For example, meaningless c
 
 ### Week-05
 
-Fill in here.
+#### 01/07/2020
+
+**Everyone**
+* Team introduction 
+* Review the spec as team
+* Brainstorm requirements
+* Brainstorm Epic stories
+* Split epic stories among others as tasks to do
+
+##### 02/07/2020
+
+**Duy**
+* Add new epic (epic 4)
+* Expanded on epic 3
+* Defined the epic
+* Added few user stories (without acceptance criteria)
+* Brainstorm on what the “client” and “user” is referring to
+
+**Fergus**
+* Wrote user stories for player movement epic.
+* Wrote user stories for JSON input epic.
+
+##### 04/07/2020
+
+**Fergus**
+* Added acceptance criteria to some user stories
+
+**Smit**
+* Defined epic 2.
+* Researched for epic 2
+* Added few user stories for epic 2
 
 ### Week-06
 
-Fill in here.
+##### 05/07/2020
+
+**Smit**
+* Defined epic 3
+* Completed epic 2 user stories
+* Researched few points for epic 3
+* Added all the user storeis related to epic 3
+
+##### 07/07/2020
+
+**Everyone**
+* Discussed how the player inventory worked
+* Clarified each other’s user stories
+* Add new epic for client inventory
+
+##### 08/07/2020
+
+**Fergus**
+* Rewrote epics for player movement and JSON input.
+* Added a user story to JSON input
+* Researched the definition of user story point and how to write them
+* Added dungeon layout user story to User Interface Epic.
+* Marked user stories which may overlap between epics
+* Added user stories and acceptance criteria to User Interface Epic.
+* Moved portal to entity epic
+
+**Duy**
+* Wrote user story description for US5 - achieving goals.
+* Expanded on acceptance criteria for US4 and US5 
+
+**Smit**
+* Discussed acceptance criteria for epic 2 user stories
+* Completed all the acceptance creteria for epic 2
+* Researched for acceptance criteria for epic 3 user stories
+* Completed all the acceptance criteria for epic 3.
+
+**Everyone**
+* Review each others user stories
+* Merge similar user stories
+* Complete the priorities + story points for each user story
+
+##### 09/07/2020
+
+**Fergus**
+* Moved the player movement, user interface, and JSON input epics and their respective user stories and acceptance criteria to project repository.
+* Moved contribution log to repository
+
+**Duy**
+* Fix up epics 4 and 5 from team feedback yesterday
+* Move epics 4 and 5 into gitlab
+
+**Smit**
+* Moved epics 2 and 3 onto gitlab
+
+**Everyone**
+* Reviewed user stories against the requirements of Milestone 1
+* Made appropriate changes to user stories which do not meet requirements
+* Discussed in a team meeting the requirements for Milestone 2
+* Brainstormed potential classes and design patterns which will be implemented
+* Allocated work to be completed before the next meeting
+
+##### 10/07/2020
+
+**Fergus**
+* Outlined the implementation details of loading dungeon goals from JSON
+* Expanded on the details of the MoveableEntity interface
+* Noted the benefit of having a new Coordinate class in the management of entities in the dungeon
+
+##### 11/07/2020
+
+**Fergus**
+* Modeled starter code in shared UML diagram.
+
 
 ### Week-07
 
-Fill in here.
+##### 13/07/2020
+
+**Duy**
+* expand on UML brainstorm of the classes relating to "Goals" and "Inventory" 
+* expand on the use of observer and composite patterns
+* write up the "goal" and "inventory" related classes in UML diagram + some addons for other classes
+
+**Smit**
+* Researched on the UML brainstorm classes relating to "player inventory" and "client inventory"
+* Added some classes for entities such as boulder in the UML diagram
+* Designed the UML classes for "player inventory" and "client inventory".
+
+**Everyone**
+* Discussed each other's contribution to the UML Diagram
+* Figured out how we will integrate our classes with each other
+* Provided feedback on each other's classes
+* Clarified UML Diagram syntax and format
 
 ### Week-08
 
