@@ -490,6 +490,8 @@ Marks will be deducted for poor git and GitLab usage. For example, meaningless c
 * Modeled starter code in shared UML diagram.
 
 
+### Week-07
+
 ##### 13/07/2020
 
 **Duy**
@@ -502,9 +504,11 @@ Marks will be deducted for poor git and GitLab usage. For example, meaningless c
 * Added some classes for entities such as boulder in the UML diagram
 * Designed the UML classes for "player inventory" and "client inventory".
 
-### Week-07
-
-Fill in here.
+**Everyone**
+* Discussed each other's contribution to the UML Diagram
+* Figured out how we will integrate our classes with each other
+* Provided feedback on each other's classes
+* Clarified UML Diagram syntax and format
 
 ### Week-08
 
