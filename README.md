@@ -409,12 +409,20 @@ Marks will be deducted for poor git and GitLab usage. For example, meaningless c
 **Fergus**
 * Added acceptance criteria to some user stories
 
+**Smit**
+* Defined epic 2.
+* Researched for epic 2
+* Added few user stories for epic 2
+
 ### Week-06
 
 ##### 05/07/2020
 
 **Smit**
-* Added user stories for epic 2,3.
+* Defined epic 3
+* Completed epic 2 user stories
+* Researched few points for epic 3
+* Added all the user storeis related to epic 3
 
 ##### 07/07/2020
 
@@ -439,8 +447,10 @@ Marks will be deducted for poor git and GitLab usage. For example, meaningless c
 * Expanded on acceptance criteria for US4 and US5 
 
 **Smit**
-* Wrote user stories for epic 3
-* Wrote acceptance criteria for epic 2 and epic 3.
+* Discussed acceptance criteria for epic 2 user stories
+* Completed all the acceptance creteria for epic 2
+* Researched for acceptance criteria for epic 3 user stories
+* Completed all the acceptance criteria for epic 3.
 
 **Everyone**
 * Review each others user stories
@@ -486,6 +496,11 @@ Marks will be deducted for poor git and GitLab usage. For example, meaningless c
 * expand on UML brainstorm of the classes relating to "Goals" and "Inventory" 
 * expand on the use of observer and composite patterns
 * write up the "goal" and "inventory" related classes in UML diagram + some addons for other classes
+
+**Smit**
+* Researched on the UML brainstorm classes relating to "player inventory" and "client inventory"
+* Added some classes for entities such as boulder in the UML diagram
+* Designed the UML classes for "player inventory" and "client inventory".
 
 ### Week-07
 
