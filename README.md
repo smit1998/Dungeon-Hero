@@ -479,6 +479,14 @@ Marks will be deducted for poor git and GitLab usage. For example, meaningless c
 **Fergus**
 * Modeled starter code in shared UML diagram.
 
+
+##### 13/07/2020
+
+**Duy**
+* expand on UML brainstorm of the classes relating to "Goals" and "Inventory" 
+* expand on the use of observer and composite patterns
+* write up the "goal" and "inventory" related classes in UML diagram + some addons for other classes
+
 ### Week-07
 
 Fill in here.
