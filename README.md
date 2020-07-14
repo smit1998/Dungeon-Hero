@@ -510,6 +510,13 @@ Marks will be deducted for poor git and GitLab usage. For example, meaningless c
 * Provided feedback on each other's classes
 * Clarified UML Diagram syntax and format
 
+##### 14/07/2020
+
+**Fergus**
+* Updated parts of the UML diagram to match the topics discussed in the preivous meeting.
+* Marked associations between some entities and their respective goals.
+
+
 ### Week-08
 
 Fill in here.
