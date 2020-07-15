@@ -1,22 +1,27 @@
 package unsw.dungeon;
 
-import javafx.beans.property.IntegerProperty;
-import javafx.beans.property.SimpleIntegerProperty;
+public class Sword extends Entity {
+    public final static int MAX_PICKUP = 1;
+    public final static int STARTING_DURABILITY = 5;
 
-public class Sword extends Entity{
-    private  String ID;
     private boolean isPickedUp;
     private int remainingHits;
-    static private int maxPickUp;
 
-    public Sword (String ID, int remainingHits) {
-        this.ID = ID;
-        this.remainingHits = remainingHits;
+    // private String ID;
+
+    public Sword(int x, int y, Dungeon dungeon) {
+        super(x, y, dungeon);
+        remainingHits = STARTING_DURABILITY;
     }
 
-    public String getID() {
-        return this.ID;
-    } 
+    // public Sword(String ID, int remainingHits) {
+    // this.ID = ID;
+    // this.remainingHits = remainingHits;
+    // }
+
+    // public String getID() {
+    // return this.ID;
+    // }
 
     public boolean getStatus() {
         return this.isPickedUp;
@@ -27,7 +32,7 @@ public class Sword extends Entity{
     }
 
     public void updateHitsRemaining() {
-        
+
     }
 
 }

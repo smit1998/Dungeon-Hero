@@ -1,26 +1,24 @@
 package unsw.dungeon;
 
-import javafx.beans.property.IntegerProperty;
-import javafx.beans.property.SimpleIntegerProperty;
-
 import java.sql.Time;
 import java.util.Timer;
 import java.util.TimerTask;
 
-public class InvincibilityPotion extends Entity{
-    private int ID;
+public class InvincibilityPotion extends Entity {
+    private int id;
     private boolean isActive;
     private Timer remainingTime;
     private static int maxItem;
-    
-    public InvincibilityPotion(int ID) {
-        this.ID = ID;
+
+    public InvincibilityPotion(int x, int y, Dungeon dungeon, int id) {
+        super(x, y, dungeon);
+        this.id = id;
         this.isActive = false;
-        //this.remainingTime =  NEED TO SET IT TO A PARTICULAR TIME.
+        // this.remainingTime = NEED TO SET IT TO A PARTICULAR TIME.
     }
 
-    public int getID(){
-        return this.ID;
+    public int getID() {
+        return this.id;
     }
 
     public void updateStatus(boolean newActive) {

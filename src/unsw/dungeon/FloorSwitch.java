@@ -1,27 +1,25 @@
 package unsw.dungeon;
 
-import javafx.beans.property.IntegerProperty;
-import javafx.beans.property.SimpleIntegerProperty;
+public class FloorSwitch extends Entity {
+    private boolean isPressed;
+    private int id;
 
-public class FloorSwitch extends Entity{
-    private boolean ispressed;
-    private int ID;
-
-    public FloorSwitch (int ID) {
-        this.ID = ID;
-        this.ispressed = false;
+    public FloorSwitch(int x, int y, Dungeon dungeon, int id) {
+        super(x, y, dungeon);
+        this.id = id;
+        this.isPressed = false;
     }
- 
+
     public int getID() {
-        return this.ID;
+        return this.id;
     }
 
-    public boolean getIsPressed() {
-        return this.ispressed;
+    public boolean isPressed() {
+        return this.isPressed;
     }
 
     public void updateIsPressed(boolean newIsPressed) {
-        this.ispressed = newIsPressed;
+        this.isPressed = newIsPressed;
     }
 
     public void updateObservers() {
