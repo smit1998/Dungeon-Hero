@@ -2,12 +2,17 @@ package unsw.dungeon;
 
 public class BasicGoal implements Observer {
 
-    private boolean isCompleted; 
+    private boolean isCompleted;
 
     public BasicGoal() {
-        this.isCompleted = false; 
+        this.isCompleted = false;
     }
 
     public boolean isCompleted() {
-    } 
+        return isCompleted;
+    }
+
+    public void update(Subject s) {
+
+    }
 }

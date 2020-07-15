@@ -1,7 +1,7 @@
 package unsw.dungeon;
 
 public class Enemy extends MoveableEntity {
-    private Boolean isAlive;
+    private boolean isAlive;
 
     public Enemy(int x, int y, Dungeon dungeon) {
         super(x, y, dungeon);

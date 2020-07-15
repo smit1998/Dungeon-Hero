@@ -1,9 +1,13 @@
 package unsw.dungeon;
 
-public class ComplexGoal implements ComponentGoal {
-    private ArrayList<ComponentGoal> goals; 
+import java.util.ArrayList;
+
+public abstract class ComplexGoal implements ComponentGoal {
+    private ArrayList<ComponentGoal> goals;
 
     public ComplexGoal() {
-        this.goals = new ArrayList<ComponentGoal>(); 
+        this.goals = new ArrayList<ComponentGoal>();
     }
+
+    public abstract boolean isComplete();
 }

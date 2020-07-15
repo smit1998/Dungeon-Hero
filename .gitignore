@@ -3,3 +3,5 @@
 hs_err_pid*
 /bin/
 /lib/
+.DS_Store
+.vscode/
