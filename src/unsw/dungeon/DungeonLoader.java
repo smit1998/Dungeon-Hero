@@ -50,18 +50,83 @@ public abstract class DungeonLoader {
 
         Entity entity = null;
         switch (type) {
-            case "player":
+            case "player": {
                 Player player = new Player(dungeon, x, y);
                 dungeon.setPlayer(player);
                 onLoad(player);
                 entity = player;
                 break;
-            case "wall":
+            }
+            case "wall": {
                 Wall wall = new Wall(x, y, dungeon);
                 onLoad(wall);
                 entity = wall;
                 break;
-            // TODO Handle other possible entities
+            }
+            case "exit": {
+                Exit exit = new Exit(x, y, dungeon);
+                onLoad(exit);
+                entity = exit;
+                break;
+            }
+            case "treasure": {
+                // int id = json.getInt("id");
+                // Treasure treasure = new Treasure(x, y, dungeon);
+                // onLoad(treasure);
+                // entity = treasure;
+                break;
+            }
+            case "door": {
+                int id = json.getInt("id");
+                Door door = new Door(x, y, dungeon, id);
+                onLoad(door);
+                entity = door;
+                break;
+            }
+            case "key": {
+                int id = json.getInt("id");
+                Key key = new Key(x, y, dungeon, id);
+                onLoad(key);
+                entity = key;
+                break;
+            }
+            case "boulder": {
+                Boulder boulder = new Boulder(x, y, dungeon);
+                onLoad(boulder);
+                entity = boulder;
+                break;
+            }
+            case "switch": {
+                // FloorSwitch floorSwitch = new FloorSwitch(x, y, dungeon);
+                // onLoad(floorSwitch);
+                // entity = floorSwitch;
+                break;
+            }
+            case "portal": {
+                int id = json.getInt("id");
+                Portal portal = new Portal(x, y, dungeon, id);
+                onLoad(portal);
+                entity = portal;
+                break;
+            }
+            case "enemy": {
+                Enemy enemy = new Enemy(x, y, dungeon);
+                onLoad(enemy);
+                entity = enemy;
+                break;
+            }
+            case "sword": {
+                // Sword sword = new Sword(x, y, dungeon);
+                // onLoad(sword);
+                // entity = sword;
+                break;
+            }
+            case "invincibility": {
+                // InvincibilityPotion potion = new InvincibilityPotion(x, y, dungeon);
+                // onLoad(potion);
+                // entity = potion;
+                break;
+            }
         }
         dungeon.addEntity(entity);
     }
@@ -70,6 +135,24 @@ public abstract class DungeonLoader {
 
     public abstract void onLoad(Wall wall);
 
-    // TODO Create additional abstract methods for the other entities
+    public abstract void onLoad(Exit exit);
+
+    // public abstract void onLoad(Treasure treasure);
+
+    public abstract void onLoad(Door door);
+
+    public abstract void onLoad(Key key);
+
+    public abstract void onLoad(Boulder boulder);
+
+    // public abstract void onLoad(FloorSwitch floorSwitch);
+
+    public abstract void onLoad(Portal portal);
+
+    public abstract void onLoad(Enemy enemy);
+
+    // public abstract void onLoad(Sword sword);
+
+    // public abstract void onLoad(InvincibilityPotion InvincibilityPotion);
 
 }
