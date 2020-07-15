@@ -22,7 +22,7 @@ public abstract class Entity {
         return position;
     }
 
-    public Dungeon getDungeon() {
+    public Dungeon dungeon() {
         return dungeon;
     }
 
