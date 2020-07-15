@@ -12,7 +12,7 @@ public class Portal extends Entity {
 
     public boolean addPair(Portal pair) {
         // TODO Check not itself
-        // Check no pair
+        // TODO Check no pair
         this.pair = pair;
         return false;
     }

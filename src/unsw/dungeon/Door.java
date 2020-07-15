@@ -8,6 +8,7 @@ public class Door extends Entity {
     public Door(int x, int y, Dungeon dungeon, int id) {
         super(x, y, dungeon);
         this.id = id;
+        isOpen = false;
     }
 
     public int getID() {
