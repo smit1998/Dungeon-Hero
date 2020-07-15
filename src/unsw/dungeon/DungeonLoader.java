@@ -2,6 +2,8 @@ package unsw.dungeon;
 
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -19,6 +21,10 @@ import org.json.JSONTokener;
 public abstract class DungeonLoader {
 
     private JSONObject json;
+
+    private int enemiesSpawned;
+    private int switchesSpawned;
+    private int treasureSpawned;
 
     public DungeonLoader(String filename) throws FileNotFoundException {
         json = new JSONObject(new JSONTokener(new FileReader("dungeons/" + filename)));
@@ -40,6 +46,10 @@ public abstract class DungeonLoader {
         for (int i = 0; i < jsonEntities.length(); i++) {
             loadEntity(dungeon, jsonEntities.getJSONObject(i));
         }
+
+        ComponentGoal goal = loadGoal(json.getJSONObject("goal"));
+        dungeon.setGoal(goal);
+
         return dungeon;
     }
 
@@ -74,6 +84,7 @@ public abstract class DungeonLoader {
                 // Treasure treasure = new Treasure(x, y, dungeon);
                 // onLoad(treasure);
                 // entity = treasure;
+                treasureSpawned++;
                 break;
             }
             case "door": {
@@ -100,6 +111,7 @@ public abstract class DungeonLoader {
                 // FloorSwitch floorSwitch = new FloorSwitch(x, y, dungeon);
                 // onLoad(floorSwitch);
                 // entity = floorSwitch;
+                switchesSpawned++;
                 break;
             }
             case "portal": {
@@ -113,6 +125,7 @@ public abstract class DungeonLoader {
                 Enemy enemy = new Enemy(x, y, dungeon);
                 onLoad(enemy);
                 entity = enemy;
+                enemiesSpawned++;
                 break;
             }
             case "sword": {
@@ -155,4 +168,40 @@ public abstract class DungeonLoader {
 
     // public abstract void onLoad(InvincibilityPotion invincibilityPotion);
 
+    private ComponentGoal loadGoal(JSONObject json) {
+        String goal = json.getString("goal");
+        switch (goal) {
+            case "exit":
+                // TODO: Handle this
+                break;
+            case "enemies":
+                return new EnemiesGoal(enemiesSpawned);
+            case "boulders":
+                return new SwitchesGoal(switchesSpawned);
+            case "treasure":
+                return new TreasureGoal(treasureSpawned);
+            case "AND": {
+                List<ComponentGoal> subgoals = new ArrayList<ComponentGoal>();
+                for (Object o : json.getJSONArray("subgoals")) {
+                    if (o instanceof JSONObject) {
+                        subgoals.add(loadGoal((JSONObject) o));
+                    }
+                }
+                return new AndCompositeGoal(subgoals);
+            }
+            case "OR": {
+                List<ComponentGoal> subgoals = new ArrayList<ComponentGoal>();
+                for (Object o : json.getJSONArray("subgoals")) {
+                    if (o instanceof JSONObject) {
+                        subgoals.add(loadGoal((JSONObject) o));
+                    }
+                }
+                return new OrCompositeGoal(subgoals);
+            }
+            default:
+                // TODO: throw exception
+                break;
+        }
+        return null;
+    }
 }
