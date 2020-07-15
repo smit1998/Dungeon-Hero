@@ -1,5 +1,7 @@
 package unsw.dungeon;
 
+import javafx.beans.property.IntegerProperty;
+
 /**
  * An entity in the dungeon.
  * 
@@ -26,6 +28,22 @@ public abstract class Entity {
 
     public Entity interact(Entity caller) {
         return this;
+    }
+
+    public IntegerProperty x() {
+        return position.x();
+    }
+
+    public IntegerProperty y() {
+        return position.y();
+    }
+
+    public int getY() {
+        return position.getY();
+    }
+
+    public int getX() {
+        return position.getX();
     }
 
 }
