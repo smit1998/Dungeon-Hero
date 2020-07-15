@@ -131,7 +131,7 @@ public abstract class DungeonLoader {
         dungeon.addEntity(entity);
     }
 
-    public abstract void onLoad(Entity player);
+    public abstract void onLoad(Player player);
 
     public abstract void onLoad(Wall wall);
 
@@ -153,6 +153,6 @@ public abstract class DungeonLoader {
 
     // public abstract void onLoad(Sword sword);
 
-    // public abstract void onLoad(InvincibilityPotion InvincibilityPotion);
+    // public abstract void onLoad(InvincibilityPotion invincibilityPotion);
 
 }
