@@ -1,42 +1,49 @@
 package unsw.dungeon;
 
 import javafx.beans.property.IntegerProperty;
-import javafx.beans.property.SimpleIntegerProperty;
 
 /**
  * An entity in the dungeon.
+ * 
  * @author Robert Clifton-Everest
  *
  */
-public class Entity {
+public abstract class Entity {
 
-    // IntegerProperty is used so that changes to the entities position can be
-    // externally observed.
-    private IntegerProperty x, y;
+    private Coordinate position;
+    private Dungeon dungeon;
 
-    /**
-     * Create an entity positioned in square (x,y)
-     * @param x
-     * @param y
-     */
-    public Entity(int x, int y) {
-        this.x = new SimpleIntegerProperty(x);
-        this.y = new SimpleIntegerProperty(y);
+    public Entity(int x, int y, Dungeon dungeon) {
+        position = new Coordinate(x, y);
+        this.dungeon = dungeon;
+    }
+
+    public Coordinate getCoordinate() {
+        return position;
+    }
+
+    public Dungeon dungeon() {
+        return dungeon;
+    }
+
+    public boolean interact(Entity caller) {
+        return false;
     }
 
     public IntegerProperty x() {
-        return x;
+        return position.x();
     }
 
     public IntegerProperty y() {
-        return y;
+        return position.y();
     }
 
     public int getY() {
-        return y().get();
+        return position.getY();
     }
 
     public int getX() {
-        return x().get();
+        return position.getX();
     }
+
 }

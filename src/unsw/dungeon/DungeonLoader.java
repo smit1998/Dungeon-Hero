@@ -26,6 +26,7 @@ public abstract class DungeonLoader {
 
     /**
      * Parses the JSON to create a dungeon.
+     * 
      * @return
      */
     public Dungeon load() {
@@ -49,18 +50,18 @@ public abstract class DungeonLoader {
 
         Entity entity = null;
         switch (type) {
-        case "player":
-            Player player = new Player(dungeon, x, y);
-            dungeon.setPlayer(player);
-            onLoad(player);
-            entity = player;
-            break;
-        case "wall":
-            Wall wall = new Wall(x, y);
-            onLoad(wall);
-            entity = wall;
-            break;
-        // TODO Handle other possible entities
+            case "player":
+                Player player = new Player(dungeon, x, y);
+                dungeon.setPlayer(player);
+                onLoad(player);
+                entity = player;
+                break;
+            case "wall":
+                Wall wall = new Wall(x, y, dungeon);
+                onLoad(wall);
+                entity = wall;
+                break;
+            // TODO Handle other possible entities
         }
         dungeon.addEntity(entity);
     }
