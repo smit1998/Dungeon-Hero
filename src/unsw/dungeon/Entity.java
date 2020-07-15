@@ -26,8 +26,8 @@ public abstract class Entity {
         return dungeon;
     }
 
-    public Entity interact(Entity caller) {
-        return this;
+    public boolean interact(Entity caller) {
+        return false;
     }
 
     public IntegerProperty x() {
