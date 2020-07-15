@@ -7,6 +7,7 @@ public class Portal extends Entity {
 
     public Portal(int x, int y, Dungeon dungeon, String id) {
         super(x, y, dungeon);
+        this.id = id;
     }
 
     public boolean addPair(Portal pair) {
