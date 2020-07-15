@@ -516,6 +516,11 @@ Marks will be deducted for poor git and GitLab usage. For example, meaningless c
 * Updated parts of the UML diagram to match the topics discussed in the preivous meeting.
 * Marked associations between some entities and their respective goals.
 
+##### 15/07/2020
+
+**Fergus**
+* Made UML diagram style uniform
+* Added static methods to items in the UML
 
 ### Week-08
 
