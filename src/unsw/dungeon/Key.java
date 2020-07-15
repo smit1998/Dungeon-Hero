@@ -4,14 +4,14 @@ public class Key extends Entity {
 
     public final static int MAX_PICKUP = 1;
 
-    private String id;
+    private int id;
 
-    public Key(int x, int y, Dungeon dungeon, String id) {
+    public Key(int x, int y, Dungeon dungeon, int id) {
         super(x, y, dungeon);
         this.id = id;
     }
 
-    public String getID() {
+    public int getID() {
         return id;
     }
 

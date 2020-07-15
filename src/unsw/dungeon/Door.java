@@ -2,15 +2,15 @@ package unsw.dungeon;
 
 public class Door extends Entity {
 
-    private String id;
+    private int id;
     private boolean isOpen;
 
-    public Door(int x, int y, Dungeon dungeon, String id) {
+    public Door(int x, int y, Dungeon dungeon, int id) {
         super(x, y, dungeon);
         this.id = id;
     }
 
-    public String getID() {
+    public int getID() {
         return id;
     }
 
