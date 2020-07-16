@@ -13,4 +13,13 @@ public class Exit extends Entity {
     public boolean getExitStatus() {
         return false;
     }
+
+    @Override
+    public boolean interact(Entity caller) {
+        if (caller instanceof Player && dungeon().isComplete()) {
+            // TODO Update game state
+            return true;
+        }
+        return false;
+    }
 }
