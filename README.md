@@ -537,6 +537,10 @@ Marks will be deducted for poor git and GitLab usage. For example, meaningless c
 
 **Fergus**
 * Added all entities to the DungeonLoader and DungeonLoader controller
+* Added very basic enemy movement
+* Added constructor in DungeonLoader to allow for easy testing
+* Created map to test player interaction with entities
+
 
 **Duy**
 * completed method implementation for goal related classes
