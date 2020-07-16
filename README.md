@@ -538,6 +538,9 @@ Marks will be deducted for poor git and GitLab usage. For example, meaningless c
 **Fergus**
 * Added all entities to the DungeonLoader and DungeonLoader controller
 
+**Duy**
+* completed method implementation for goal related classes
+
 
 ### Week-08
 
