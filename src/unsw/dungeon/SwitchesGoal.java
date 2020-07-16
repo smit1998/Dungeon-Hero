@@ -12,17 +12,17 @@ public class SwitchesGoal extends BasicGoal {
 
     @Override
     public boolean isComplete() {
-        return (switchesSpawned == switchesTriggered); 
+        return (switchesSpawned == switchesTriggered);
     }
 
     @Override
     public void update(Subject obj) {
         if (obj instanceof FloorSwitch) {
-            FloorSwitch s = (FloorSwitch) obj; 
+            FloorSwitch s = (FloorSwitch) obj;
             if (s.isPressed() == true) {
-                switchesTriggered += 1; 
-            } else {
-                switchesTriggered -= 1; 
+                switchesTriggered += 1;
+            } else if (switchesTriggered > 0) {
+                switchesTriggered -= 1;
             }
         }
     }

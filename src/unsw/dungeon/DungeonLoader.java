@@ -186,7 +186,14 @@ public abstract class DungeonLoader {
             case "enemies":
                 return new EnemiesGoal(enemiesSpawned);
             case "boulders":
-                return new SwitchesGoal(switchesSpawned);
+                SwitchesGoal switchGoal = new SwitchesGoal(switchesSpawned);
+                for (Entity entity : dungeon.getEntities()) {
+                    if (entity instanceof FloorSwitch) {
+                        FloorSwitch s = (FloorSwitch) entity;
+                        s.attach(switchGoal);
+                    }
+                }
+                return switchGoal;
             case "treasure":
                 return new TreasureGoal(treasureSpawned);
             case "AND": {
