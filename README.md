@@ -522,6 +522,23 @@ Marks will be deducted for poor git and GitLab usage. For example, meaningless c
 * Made UML diagram style uniform
 * Added static methods to items in the UML
 
+**Everyone**
+* Began creating skeleton for classes
+
+**Fergus**
+* Added goal loading functionality to the DungeonLoader
+* Implemented MoveableEntity class
+
+##### 16/07/2020
+
+**Everyone**
+* Allocated work among us
+* Discussed deadline for implementation (Friday 17/7 Afternoon)
+
+**Fergus**
+* Added all entities to the DungeonLoader and DungeonLoader controller
+
+
 ### Week-08
 
 Fill in here.
