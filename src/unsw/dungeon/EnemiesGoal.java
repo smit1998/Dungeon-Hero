@@ -12,7 +12,18 @@ public class EnemiesGoal extends BasicGoal {
 
     @Override
     public boolean isComplete() {
-        // TODO Auto-generated method stub
-        return super.isComplete();
+        return (enemiesSpawned == enemiesKilled);
+    }
+
+    @Override
+    public void update(Subject obj) {
+        if (obj instanceof Enemy) {
+            Enemy e = (Enemy) obj; 
+            if (e.getIsAlive() == true) {
+                enemiesSpawned-=1; 
+            } else {
+                enemiesKilled+=1;
+            }
+        }
     }
 }

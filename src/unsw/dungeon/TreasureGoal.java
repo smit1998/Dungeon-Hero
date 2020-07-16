@@ -12,7 +12,13 @@ public class TreasureGoal extends BasicGoal {
 
     @Override
     public boolean isComplete() {
-        // TODO Auto-generated method stub
-        return super.isComplete();
+        return (treasureSpawned == treasureCollected);
     }
+
+    @Override
+    public void update(Subject obj) {
+        treasureCollected+=1;
+    }
+
+    
 }

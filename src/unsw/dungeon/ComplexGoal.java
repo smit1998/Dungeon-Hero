@@ -13,6 +13,10 @@ public class ComplexGoal implements ComponentGoal {
         goals.add(goal); 
     }
 
+    public ArrayList<ComponentGoal> getGoals() {
+        return goals;
+    }
+
     @Override 
     public boolean isComplete() {
         return false; 

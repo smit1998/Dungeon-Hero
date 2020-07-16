@@ -17,4 +17,8 @@ public class Enemy extends Entity {
     public void updateLifeStatus() {
         // todo
     }
+
+    public boolean getIsAlive() {
+        return this.isAlive; 
+    }
 }

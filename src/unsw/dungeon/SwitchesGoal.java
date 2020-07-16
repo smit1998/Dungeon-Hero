@@ -11,12 +11,19 @@ public class SwitchesGoal extends BasicGoal {
     }
 
     @Override
-<<<<<<< HEAD
-    public boolean isCompleted() {
-=======
     public boolean isComplete() {
->>>>>>> UML_implementation
-        // TODO Auto-generated method stub
-        return super.isComplete();
+        return (switchesSpawned == switchesTriggered); 
+    }
+
+    @Override
+    public void update(Subject obj) {
+        if (obj instanceof FloorSwitch) {
+            FloorSwitch s = (FloorSwitch) obj; 
+            if (s.isPressed() == true) {
+                switchesTriggered += 1; 
+            } else {
+                switchesTriggered -= 1; 
+            }
+        }
     }
 }
