@@ -66,4 +66,7 @@ public class Dungeon {
         return true;
     }
 
+    public boolean isComplete() {
+        return goal.isComplete();
+    }
 }

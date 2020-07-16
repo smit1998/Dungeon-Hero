@@ -19,4 +19,11 @@ public class FloorSwitch extends Entity {
     public void updateObservers() {
         // TODO
     }
+
+    public boolean interact(Entity caller) {
+        if (caller instanceof Boulder) {
+            // TODO press
+        }
+        return true;
+    }
 }
