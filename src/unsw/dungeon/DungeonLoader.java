@@ -48,8 +48,8 @@ public abstract class DungeonLoader {
         }
 
         // TODO: Uncomment when maps have goals
-        // ComponentGoal goal = loadGoal(json.getJSONObject("goal"));
-        // dungeon.setGoal(goal);
+        ComponentGoal goal = loadGoal(json.getJSONObject("goal-condition"));
+        dungeon.setGoal(goal);
 
         return dungeon;
     }
