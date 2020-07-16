@@ -11,8 +11,8 @@ public class TreasureGoal extends BasicGoal {
     }
 
     @Override
-    public boolean isCompleted() {
+    public boolean isComplete() {
         // TODO Auto-generated method stub
-        return super.isCompleted();
+        return super.isComplete();
     }
 }

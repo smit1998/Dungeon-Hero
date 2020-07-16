@@ -2,6 +2,8 @@ package unsw.dungeon;
 
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -19,6 +21,10 @@ import org.json.JSONTokener;
 public abstract class DungeonLoader {
 
     private JSONObject json;
+
+    private int enemiesSpawned;
+    private int switchesSpawned;
+    private int treasureSpawned;
 
     public DungeonLoader(String filename) throws FileNotFoundException {
         json = new JSONObject(new JSONTokener(new FileReader("dungeons/" + filename)));
@@ -40,6 +46,11 @@ public abstract class DungeonLoader {
         for (int i = 0; i < jsonEntities.length(); i++) {
             loadEntity(dungeon, jsonEntities.getJSONObject(i));
         }
+
+        // TODO: Uncomment when maps have goals
+        // ComponentGoal goal = loadGoal(json.getJSONObject("goal"));
+        // dungeon.setGoal(goal);
+
         return dungeon;
     }
 
@@ -50,26 +61,149 @@ public abstract class DungeonLoader {
 
         Entity entity = null;
         switch (type) {
-            case "player":
+            case "player": {
                 Player player = new Player(dungeon, x, y);
                 dungeon.setPlayer(player);
                 onLoad(player);
                 entity = player;
                 break;
-            case "wall":
+            }
+            case "wall": {
                 Wall wall = new Wall(x, y, dungeon);
                 onLoad(wall);
                 entity = wall;
                 break;
-            // TODO Handle other possible entities
+            }
+            case "exit": {
+                Exit exit = new Exit(x, y, dungeon);
+                onLoad(exit);
+                entity = exit;
+                break;
+            }
+            case "treasure": {
+                Treasure treasure = new Treasure(x, y, dungeon);
+                onLoad(treasure);
+                entity = treasure;
+                treasureSpawned++;
+                break;
+            }
+            case "door": {
+                int id = json.getInt("id");
+                Door door = new Door(x, y, dungeon, id);
+                onLoad(door);
+                entity = door;
+                break;
+            }
+            case "key": {
+                int id = json.getInt("id");
+                Key key = new Key(x, y, dungeon, id);
+                onLoad(key);
+                entity = key;
+                break;
+            }
+            case "boulder": {
+                Boulder boulder = new Boulder(x, y, dungeon);
+                onLoad(boulder);
+                entity = boulder;
+                break;
+            }
+            case "switch": {
+                FloorSwitch floorSwitch = new FloorSwitch(x, y, dungeon);
+                onLoad(floorSwitch);
+                entity = floorSwitch;
+                switchesSpawned++;
+                break;
+            }
+            case "portal": {
+                int id = json.getInt("id");
+                Portal portal = new Portal(x, y, dungeon, id);
+                onLoad(portal);
+                entity = portal;
+                break;
+            }
+            case "enemy": {
+                Enemy enemy = new Enemy(x, y, dungeon);
+                onLoad(enemy);
+                entity = enemy;
+                enemiesSpawned++;
+                break;
+            }
+            case "sword": {
+                Sword sword = new Sword(x, y, dungeon);
+                onLoad(sword);
+                entity = sword;
+                break;
+            }
+            case "invincibility": {
+                InvincibilityPotion potion = new InvincibilityPotion(x, y, dungeon);
+                onLoad(potion);
+                entity = potion;
+                break;
+            }
         }
         dungeon.addEntity(entity);
     }
 
-    public abstract void onLoad(Entity player);
+    public abstract void onLoad(Player player);
 
     public abstract void onLoad(Wall wall);
 
-    // TODO Create additional abstract methods for the other entities
+    public abstract void onLoad(Exit exit);
 
+    public abstract void onLoad(Treasure treasure);
+
+    public abstract void onLoad(Door door);
+
+    public abstract void onLoad(Key key);
+
+    public abstract void onLoad(Boulder boulder);
+
+    public abstract void onLoad(FloorSwitch floorSwitch);
+
+    public abstract void onLoad(Portal portal);
+
+    public abstract void onLoad(Enemy enemy);
+
+    public abstract void onLoad(Sword sword);
+
+    public abstract void onLoad(InvincibilityPotion invincibilityPotion);
+
+    private ComponentGoal loadGoal(JSONObject json) {
+        String goal = json.getString("goal");
+        switch (goal) {
+            case "exit":
+                // TODO: Handle this
+                break;
+            case "enemies":
+                return new EnemiesGoal(enemiesSpawned);
+            case "boulders":
+                return new SwitchesGoal(switchesSpawned);
+            case "treasure":
+                return new TreasureGoal(treasureSpawned);
+            case "AND": {
+                List<ComponentGoal> subgoals = new ArrayList<ComponentGoal>();
+                for (Object o : json.getJSONArray("subgoals")) {
+                    if (o instanceof JSONObject) {
+                        subgoals.add(loadGoal((JSONObject) o));
+                    }
+                }
+                // TODO: Implement composite goal
+                // return new AndCompositeGoal(subgoals);
+            }
+            case "OR": {
+                List<ComponentGoal> subgoals = new ArrayList<ComponentGoal>();
+                for (Object o : json.getJSONArray("subgoals")) {
+                    if (o instanceof JSONObject) {
+                        subgoals.add(loadGoal((JSONObject) o));
+                    }
+                }
+                // TODO: Implement composite goal
+                // return new OrCompositeGoal(subgoals);
+            }
+            default:
+                // TODO: throw exception
+                break;
+        }
+        return null;
+    }
 }

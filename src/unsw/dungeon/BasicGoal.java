@@ -1,6 +1,6 @@
 package unsw.dungeon;
 
-public class BasicGoal implements Observer {
+public class BasicGoal implements ComponentGoal, Observer {
 
     private boolean isCompleted;
 
@@ -8,7 +8,7 @@ public class BasicGoal implements Observer {
         this.isCompleted = false;
     }
 
-    public boolean isCompleted() {
+    public boolean isComplete() {
         return isCompleted;
     }
 

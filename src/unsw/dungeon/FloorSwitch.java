@@ -2,16 +2,10 @@ package unsw.dungeon;
 
 public class FloorSwitch extends Entity {
     private boolean isPressed;
-    private int id;
 
-    public FloorSwitch(int x, int y, Dungeon dungeon, int id) {
+    public FloorSwitch(int x, int y, Dungeon dungeon) {
         super(x, y, dungeon);
-        this.id = id;
         this.isPressed = false;
-    }
-
-    public int getID() {
-        return this.id;
     }
 
     public boolean isPressed() {

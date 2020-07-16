@@ -20,6 +20,7 @@ public class Dungeon {
     private int width, height;
     private List<Entity> entities;
     private Player player;
+    private ComponentGoal goal;
 
     public Dungeon(int width, int height) {
         this.width = width;
@@ -46,6 +47,10 @@ public class Dungeon {
 
     public void addEntity(Entity entity) {
         entities.add(entity);
+    }
+
+    public void setGoal(ComponentGoal goal) {
+        this.goal = goal;
     }
 
     public boolean interact(Entity caller, int x, int y) {
