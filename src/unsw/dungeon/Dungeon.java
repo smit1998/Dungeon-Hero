@@ -53,6 +53,10 @@ public class Dungeon {
         this.goal = goal;
     }
 
+    public List<Entity> getEntities() {
+        return new ArrayList<Entity>(entities);
+    }
+
     public boolean interact(Entity caller, int x, int y) {
         for (Entity entity : entities) {
             if (entity == caller || entity == null)

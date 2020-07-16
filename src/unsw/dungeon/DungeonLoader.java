@@ -51,7 +51,7 @@ public abstract class DungeonLoader {
             loadEntity(dungeon, jsonEntities.getJSONObject(i));
         }
 
-        ComponentGoal goal = loadGoal(json.getJSONObject("goal-condition"));
+        ComponentGoal goal = loadGoal(dungeon, json.getJSONObject("goal-condition"));
         dungeon.setGoal(goal);
 
         return dungeon;
@@ -171,12 +171,18 @@ public abstract class DungeonLoader {
 
     public abstract void onLoad(InvincibilityPotion invincibilityPotion);
 
-    private ComponentGoal loadGoal(JSONObject json) {
+    private ComponentGoal loadGoal(Dungeon dungeon, JSONObject json) {
         String goal = json.getString("goal");
         switch (goal) {
             case "exit":
-                // TODO: Handle this
-                break;
+                ExitGoal exitGoal = new ExitGoal();
+                for (Entity entity : dungeon.getEntities()) {
+                    if (entity instanceof Exit) {
+                        Exit exit = (Exit) entity;
+                        exit.attach(exitGoal);
+                    }
+                }
+                return exitGoal;
             case "enemies":
                 return new EnemiesGoal(enemiesSpawned);
             case "boulders":
@@ -187,21 +193,19 @@ public abstract class DungeonLoader {
                 List<ComponentGoal> subgoals = new ArrayList<ComponentGoal>();
                 for (Object o : json.getJSONArray("subgoals")) {
                     if (o instanceof JSONObject) {
-                        subgoals.add(loadGoal((JSONObject) o));
+                        subgoals.add(loadGoal(dungeon, (JSONObject) o));
                     }
                 }
-                // TODO: Implement composite goal
-                // return new AndCompositeGoal(subgoals);
+                return new AndCompositeGoal(subgoals);
             }
             case "OR": {
                 List<ComponentGoal> subgoals = new ArrayList<ComponentGoal>();
                 for (Object o : json.getJSONArray("subgoals")) {
                     if (o instanceof JSONObject) {
-                        subgoals.add(loadGoal((JSONObject) o));
+                        subgoals.add(loadGoal(dungeon, (JSONObject) o));
                     }
                 }
-                // TODO: Implement composite goal
-                // return new OrCompositeGoal(subgoals);
+                return new OrCompositeGoal(subgoals);
             }
             default:
                 // TODO: throw exception
