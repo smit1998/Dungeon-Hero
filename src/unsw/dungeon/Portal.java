@@ -2,17 +2,17 @@ package unsw.dungeon;
 
 public class Portal extends Entity {
 
-    private String id;
+    private int id;
     private Portal pair;
 
-    public Portal(int x, int y, Dungeon dungeon, String id) {
+    public Portal(int x, int y, Dungeon dungeon, int id) {
         super(x, y, dungeon);
         this.id = id;
     }
 
     public boolean addPair(Portal pair) {
         // TODO Check not itself
-        // Check no pair
+        // TODO Check no pair
         this.pair = pair;
         return false;
     }
@@ -21,7 +21,7 @@ public class Portal extends Entity {
         return pair;
     }
 
-    public String getID() {
+    public int getID() {
         return id;
     }
 

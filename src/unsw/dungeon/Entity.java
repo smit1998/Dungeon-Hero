@@ -22,12 +22,12 @@ public abstract class Entity {
         return position;
     }
 
-    public Dungeon getDungeon() {
+    public Dungeon dungeon() {
         return dungeon;
     }
 
-    public Entity interact(Entity caller) {
-        return this;
+    public boolean interact(Entity caller) {
+        return false;
     }
 
     public IntegerProperty x() {

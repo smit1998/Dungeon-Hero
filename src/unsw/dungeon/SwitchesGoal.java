@@ -1,18 +1,22 @@
 package unsw.dungeon;
 
-public class TreasureGoal extends BasicGoal {
+public class SwitchesGoal extends BasicGoal {
 
-    private int switchesSpawned; 
-    private int switchesTriggered; 
+    private int switchesSpawned;
+    private int switchesTriggered;
 
-    public TreasureGoal(int switchesSpawned) {
-        this.switchesSpawned = switchesSpawned; 
-        this.switchesTriggered = 0; 
+    public SwitchesGoal(int switchesSpawned) {
+        this.switchesSpawned = switchesSpawned;
+        this.switchesTriggered = 0;
     }
 
     @Override
+<<<<<<< HEAD
     public boolean isCompleted() {
+=======
+    public boolean isComplete() {
+>>>>>>> UML_implementation
         // TODO Auto-generated method stub
-        return super.isCompleted();
+        return super.isComplete();
     }
 }

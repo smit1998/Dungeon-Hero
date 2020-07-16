@@ -7,7 +7,7 @@ public class OrCompositeGoal extends ComplexGoal{
     private ArrayList<ComponentGoal> goals; 
    
     public OrCompositeGoal() {
-        super(); 
+        super();
     }
 
     // method forwarding 
