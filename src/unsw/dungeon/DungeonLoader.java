@@ -47,8 +47,9 @@ public abstract class DungeonLoader {
             loadEntity(dungeon, jsonEntities.getJSONObject(i));
         }
 
-        ComponentGoal goal = loadGoal(json.getJSONObject("goal"));
-        dungeon.setGoal(goal);
+        // TODO: Uncomment when maps have goals
+        // ComponentGoal goal = loadGoal(json.getJSONObject("goal"));
+        // dungeon.setGoal(goal);
 
         return dungeon;
     }
@@ -186,7 +187,8 @@ public abstract class DungeonLoader {
                         subgoals.add(loadGoal((JSONObject) o));
                     }
                 }
-                return new AndCompositeGoal(subgoals);
+                // TODO: Implement composite goal
+                // return new AndCompositeGoal(subgoals);
             }
             case "OR": {
                 List<ComponentGoal> subgoals = new ArrayList<ComponentGoal>();
@@ -195,7 +197,8 @@ public abstract class DungeonLoader {
                         subgoals.add(loadGoal((JSONObject) o));
                     }
                 }
-                return new OrCompositeGoal(subgoals);
+                // TODO: Implement composite goal
+                // return new OrCompositeGoal(subgoals);
             }
             default:
                 // TODO: throw exception
