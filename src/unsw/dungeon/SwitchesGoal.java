@@ -10,7 +10,7 @@ public class TreasureGoal extends BasicGoal {
         this.switchesTriggered = 0; 
     }
 
-    @Override @Override
+    @Override
     public boolean isCompleted() {
         // TODO Auto-generated method stub
         return super.isCompleted();

@@ -1,6 +1,7 @@
 package unsw.dungeon;
 
 public class Enemy {
+
     private Dungeon dungeon; 
     private Boolean isAlive; 
 
