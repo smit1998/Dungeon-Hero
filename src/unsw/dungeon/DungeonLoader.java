@@ -30,6 +30,10 @@ public abstract class DungeonLoader {
         json = new JSONObject(new JSONTokener(new FileReader("dungeons/" + filename)));
     }
 
+    public DungeonLoader(JSONObject json) {
+        this.json = json;
+    }
+
     /**
      * Parses the JSON to create a dungeon.
      * 
@@ -47,9 +51,8 @@ public abstract class DungeonLoader {
             loadEntity(dungeon, jsonEntities.getJSONObject(i));
         }
 
-        // TODO: Uncomment when maps have goals
-        // ComponentGoal goal = loadGoal(json.getJSONObject("goal"));
-        // dungeon.setGoal(goal);
+        ComponentGoal goal = loadGoal(json.getJSONObject("goal-condition"));
+        dungeon.setGoal(goal);
 
         return dungeon;
     }
