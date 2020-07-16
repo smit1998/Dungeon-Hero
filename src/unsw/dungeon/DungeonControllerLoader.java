@@ -73,11 +73,11 @@ public class DungeonControllerLoader extends DungeonLoader {
         addEntity(exit, view);
     }
 
-    // @Override
-    // public void onLoad(Treasure treasure) {
-    // ImageView view = new ImageView(treasureImage);
-    // addEntity(treasure, view);
-    // }
+    @Override
+    public void onLoad(Treasure treasure) {
+        ImageView view = new ImageView(treasureImage);
+        addEntity(treasure, view);
+    }
 
     @Override
     public void onLoad(Door door) {
@@ -97,11 +97,11 @@ public class DungeonControllerLoader extends DungeonLoader {
         addEntity(boulder, view);
     }
 
-    // @Override
-    // public void onLoad(FloorSwitch floorSwitch) {
-    // ImageView view = new ImageView(switchImage;
-    // addEntity(floorSwitch, view);
-    // }
+    @Override
+    public void onLoad(FloorSwitch floorSwitch) {
+        ImageView view = new ImageView(switchImage);
+        addEntity(floorSwitch, view);
+    }
 
     @Override
     public void onLoad(Portal portal) {
@@ -115,17 +115,17 @@ public class DungeonControllerLoader extends DungeonLoader {
         addEntity(enemy, view);
     }
 
-    // @Override
-    // public void onLoad(Sword sword) {
-    // ImageView view = new ImageView(swordImage);
-    // addEntity(sword, view);
-    // }
+    @Override
+    public void onLoad(Sword sword) {
+        ImageView view = new ImageView(swordImage);
+        addEntity(sword, view);
+    }
 
-    // @Override
-    // public void onLoad(InvincibilityPotion invincibilityPotion) {
-    // ImageView view = new ImageView(invincibilityImage);
-    // addEntity(invincibilityPotion, view);
-    // }
+    @Override
+    public void onLoad(InvincibilityPotion invincibilityPotion) {
+        ImageView view = new ImageView(invincibilityImage);
+        addEntity(invincibilityPotion, view);
+    }
 
     private void addEntity(Entity entity, ImageView view) {
         trackPosition(entity, view);

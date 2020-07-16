@@ -80,10 +80,9 @@ public abstract class DungeonLoader {
                 break;
             }
             case "treasure": {
-                // int id = json.getInt("id");
-                // Treasure treasure = new Treasure(x, y, dungeon);
-                // onLoad(treasure);
-                // entity = treasure;
+                Treasure treasure = new Treasure(x, y, dungeon);
+                onLoad(treasure);
+                entity = treasure;
                 treasureSpawned++;
                 break;
             }
@@ -108,9 +107,9 @@ public abstract class DungeonLoader {
                 break;
             }
             case "switch": {
-                // FloorSwitch floorSwitch = new FloorSwitch(x, y, dungeon);
-                // onLoad(floorSwitch);
-                // entity = floorSwitch;
+                FloorSwitch floorSwitch = new FloorSwitch(x, y, dungeon);
+                onLoad(floorSwitch);
+                entity = floorSwitch;
                 switchesSpawned++;
                 break;
             }
@@ -129,15 +128,15 @@ public abstract class DungeonLoader {
                 break;
             }
             case "sword": {
-                // Sword sword = new Sword(x, y, dungeon);
-                // onLoad(sword);
-                // entity = sword;
+                Sword sword = new Sword(x, y, dungeon);
+                onLoad(sword);
+                entity = sword;
                 break;
             }
             case "invincibility": {
-                // InvincibilityPotion potion = new InvincibilityPotion(x, y, dungeon);
-                // onLoad(potion);
-                // entity = potion;
+                InvincibilityPotion potion = new InvincibilityPotion(x, y, dungeon);
+                onLoad(potion);
+                entity = potion;
                 break;
             }
         }
@@ -150,7 +149,7 @@ public abstract class DungeonLoader {
 
     public abstract void onLoad(Exit exit);
 
-    // public abstract void onLoad(Treasure treasure);
+    public abstract void onLoad(Treasure treasure);
 
     public abstract void onLoad(Door door);
 
@@ -158,15 +157,15 @@ public abstract class DungeonLoader {
 
     public abstract void onLoad(Boulder boulder);
 
-    // public abstract void onLoad(FloorSwitch floorSwitch);
+    public abstract void onLoad(FloorSwitch floorSwitch);
 
     public abstract void onLoad(Portal portal);
 
     public abstract void onLoad(Enemy enemy);
 
-    // public abstract void onLoad(Sword sword);
+    public abstract void onLoad(Sword sword);
 
-    // public abstract void onLoad(InvincibilityPotion invincibilityPotion);
+    public abstract void onLoad(InvincibilityPotion invincibilityPotion);
 
     private ComponentGoal loadGoal(JSONObject json) {
         String goal = json.getString("goal");
