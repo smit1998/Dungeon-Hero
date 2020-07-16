@@ -11,7 +11,6 @@ public class Enemy extends Entity {
     }
 
     public void attack(Entity entity) {
-        // todo
     }
 
     public void updateLifeStatus() {
