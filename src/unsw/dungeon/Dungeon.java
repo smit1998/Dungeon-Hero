@@ -47,4 +47,18 @@ public class Dungeon {
     public void addEntity(Entity entity) {
         entities.add(entity);
     }
+
+    public boolean interact(Entity caller, int x, int y) {
+        for (Entity entity : entities) {
+            if (entity == caller || entity == null)
+                continue;
+            if (entity.getX() == x && entity.getY() == y) {
+                if (!entity.interact(caller)) {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+
 }
