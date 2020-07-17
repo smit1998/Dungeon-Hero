@@ -12,16 +12,23 @@ public class Sword extends Entity {
         remainingHits = STARTING_DURABILITY;
     }
 
+    // returns the current status of the sword.
     public boolean getStatus() {
         return this.isPickedUp;
     }
 
+    // changes the stauts of the sword if picked up or not.
     public void updateStatus(boolean newIsPickedUp) {
         this.isPickedUp = newIsPickedUp;
     }
 
+    // drceases the remaining hits by 1. 
     public void updateHitsRemaining() {
-
+        this.remainingHits--;
     }
 
+    // returns the number of hits remaining.
+    public int getRemainingHits() {
+        return this.remainingHits;
+    }
 }

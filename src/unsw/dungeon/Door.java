@@ -1,6 +1,4 @@
 package unsw.dungeon;
-
-import unsw.dungeon.Key;
 public class Door extends Entity {
 
     private int id;
