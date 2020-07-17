@@ -195,7 +195,14 @@ public abstract class DungeonLoader {
                 }
                 return switchGoal;
             case "treasure":
-                return new TreasureGoal(treasureSpawned);
+                TreasureGoal treasureGoal = new TreasureGoal(treasureSpawned);
+                for (Entity entity : dungeon.getEntities()) {
+                    if (entity instanceof Treasure) {
+                        Treasure t = (Treasure) entity;
+                        t.attach(treasureGoal);
+                    }
+                }
+                return treasureGoal;
             case "AND": {
                 List<ComponentGoal> subgoals = new ArrayList<ComponentGoal>();
                 for (Object o : json.getJSONArray("subgoals")) {
