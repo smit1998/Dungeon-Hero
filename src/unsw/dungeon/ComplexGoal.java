@@ -23,6 +23,12 @@ public class ComplexGoal implements ComponentGoal {
         return new ArrayList<ComponentGoal>(goals);
     }
 
+    public void attachTo(Subject s) {
+        for (ComponentGoal goal : goals) {
+            goal.attachTo(s);
+        }
+    }
+
     public boolean isComplete() {
         return false;
     }

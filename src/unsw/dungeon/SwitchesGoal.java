@@ -26,4 +26,10 @@ public class SwitchesGoal extends BasicGoal {
             }
         }
     }
+
+    public void attachTo(Subject s) {
+        if (s instanceof FloorSwitch) {
+            s.attach(this);
+        }
+    }
 }

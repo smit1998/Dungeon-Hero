@@ -27,4 +27,10 @@ public class EnemiesGoal extends BasicGoal {
             }
         }
     }
+
+    public void attachTo(Subject s) {
+        if (s instanceof Enemy) {
+            s.attach(this);
+        }
+    }
 }

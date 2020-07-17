@@ -54,6 +54,8 @@ public abstract class DungeonLoader {
         ComponentGoal goal = loadGoal(dungeon, json.getJSONObject("goal-condition"));
         dungeon.setGoal(goal);
 
+        dungeon.connectGoals();
+
         return dungeon;
     }
 
@@ -175,41 +177,13 @@ public abstract class DungeonLoader {
         String goal = json.getString("goal");
         switch (goal) {
             case "exit":
-                ExitGoal exitGoal = new ExitGoal();
-                for (Entity entity : dungeon.getEntities()) {
-                    if (entity instanceof Exit) {
-                        Exit exit = (Exit) entity;
-                        exit.attach(exitGoal);
-                    }
-                }
-                return exitGoal;
+                return new ExitGoal();
             case "enemies":
-                EnemiesGoal enemyGoal = new EnemiesGoal(enemiesSpawned);
-                for (Entity entity : dungeon.getEntities()) {
-                    if (entity instanceof Enemy) {
-                        Enemy e = (Enemy) entity;
-                        e.attach(enemyGoal);
-                    }
-                }
-                return enemyGoal;
+                return new EnemiesGoal(enemiesSpawned);
             case "boulders":
-                SwitchesGoal switchGoal = new SwitchesGoal(switchesSpawned);
-                for (Entity entity : dungeon.getEntities()) {
-                    if (entity instanceof FloorSwitch) {
-                        FloorSwitch s = (FloorSwitch) entity;
-                        s.attach(switchGoal);
-                    }
-                }
-                return switchGoal;
+                return new SwitchesGoal(switchesSpawned);
             case "treasure":
-                TreasureGoal treasureGoal = new TreasureGoal(treasureSpawned);
-                for (Entity entity : dungeon.getEntities()) {
-                    if (entity instanceof Treasure) {
-                        Treasure t = (Treasure) entity;
-                        t.attach(treasureGoal);
-                    }
-                }
-                return treasureGoal;
+                return new TreasureGoal(treasureSpawned);
             case "AND": {
                 List<ComponentGoal> subgoals = new ArrayList<ComponentGoal>();
                 for (Object o : json.getJSONArray("subgoals")) {

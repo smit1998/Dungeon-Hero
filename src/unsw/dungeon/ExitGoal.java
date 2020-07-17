@@ -18,4 +18,10 @@ public class ExitGoal extends BasicGoal {
             isComplete = exit.getExitStatus();
         }
     }
+
+    public void attachTo(Subject s) {
+        if (s instanceof Exit) {
+            s.attach(this);
+        }
+    }
 }
