@@ -69,4 +69,13 @@ public class Dungeon {
     public boolean isComplete() {
         return goal.isComplete();
     }
+
+    public void connectGoals() {
+        for (Entity entity : entities) {
+            if (entity instanceof Subject) {
+                Subject s = (Subject) entity;
+                goal.attachTo(s);
+            }
+        }
+    }
 }

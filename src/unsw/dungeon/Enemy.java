@@ -1,9 +1,15 @@
 package unsw.dungeon;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import java.util.Timer;
 import java.util.TimerTask;
 
-public class Enemy extends MoveableEntity {
+public class Enemy extends MoveableEntity implements Subject {
+
+    private List<Observer> observers = new ArrayList<Observer>();
+
     private boolean isAlive;
 
     private Timer timer = new Timer();
@@ -78,14 +84,45 @@ public class Enemy extends MoveableEntity {
         }
     }
 
+    @Override
+    public boolean interact(Entity caller) {
+        if (caller instanceof Player) {
+            // TODO Determine whether player has weapon
+
+            // Assume player has weapon
+            updateLifeStatus(false);
+            notifyObservers();
+            return true;
+        }
+        return false;
+    }
+
     public void attack(Entity entity) {
     }
 
-    public void updateLifeStatus() {
-        // todo
+    public void updateLifeStatus(boolean newLifeStatus) {
+        this.isAlive = newLifeStatus;
     }
 
     public boolean getIsAlive() {
-        return this.isAlive; 
+        return this.isAlive;
+    }
+
+    public void attach(Observer o) {
+        if (!observers.contains(o)) {
+            observers.add(o);
+        }
+
+    }
+
+    public void detach(Observer o) {
+        observers.remove(o);
+
+    }
+
+    public void notifyObservers() {
+        for (Observer observer : observers) {
+            observer.update(this);
+        }
     }
 }
