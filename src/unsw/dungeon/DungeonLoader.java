@@ -184,7 +184,14 @@ public abstract class DungeonLoader {
                 }
                 return exitGoal;
             case "enemies":
-                return new EnemiesGoal(enemiesSpawned);
+                EnemiesGoal enemyGoal = new EnemiesGoal(enemiesSpawned);
+                for (Entity entity : dungeon.getEntities()) {
+                    if (entity instanceof Enemy) {
+                        Enemy e = (Enemy) entity;
+                        e.attach(enemyGoal);
+                    }
+                }
+                return enemyGoal;
             case "boulders":
                 SwitchesGoal switchGoal = new SwitchesGoal(switchesSpawned);
                 for (Entity entity : dungeon.getEntities()) {
