@@ -1,29 +1,24 @@
 package unsw.dungeon;
 
-import java.util.ArrayList;
+import java.util.List;
 
-public class OrCompositeGoal extends ComplexGoal{
+public class OrCompositeGoal extends ComplexGoal {
 
     public OrCompositeGoal() {
         super();
     }
 
-    @Override 
-    public void addGoal(ComponentGoal goal) {
-        super.addGoal(goal);
-    } 
+    public OrCompositeGoal(List<ComponentGoal> goals) {
+        super(goals);
+    }
 
     public boolean isComplete() {
         for (ComponentGoal goal : getGoals()) {
-            if (goal.isComplete() == true) { 
-                return true; 
+            if (goal.isComplete() == true) {
+                return true;
             }
         }
-        return false; 
+        return false;
     }
 
-    @Override
-    public ArrayList<ComponentGoal> getGoals() {
-        return super.getGoals(); 
-    }
 }

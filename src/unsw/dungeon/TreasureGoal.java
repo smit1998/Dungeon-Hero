@@ -17,8 +17,12 @@ public class TreasureGoal extends BasicGoal {
 
     @Override
     public void update(Subject obj) {
-        treasureCollected+=1;
+        treasureCollected += 1;
     }
 
-    
+    public void attachTo(Subject s) {
+        if (s instanceof Treasure) {
+            s.attach(this);
+        }
+    }
 }

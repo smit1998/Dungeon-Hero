@@ -18,12 +18,19 @@ public class EnemiesGoal extends BasicGoal {
     @Override
     public void update(Subject obj) {
         if (obj instanceof Enemy) {
-            Enemy e = (Enemy) obj; 
-            if (e.getIsAlive() == true) {
-                enemiesSpawned-=1; 
-            } else {
-                enemiesKilled+=1;
+            Enemy e = (Enemy) obj;
+            // TODO
+            // remove enemiesKill < enemiesSpawned after figuring out how
+            // to remove entities
+            if (e.getIsAlive() == false && enemiesKilled < enemiesSpawned) {
+                enemiesKilled += 1;
             }
+        }
+    }
+
+    public void attachTo(Subject s) {
+        if (s instanceof Enemy) {
+            s.attach(this);
         }
     }
 }
