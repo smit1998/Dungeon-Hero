@@ -551,6 +551,10 @@ Marks will be deducted for poor git and GitLab usage. For example, meaningless c
 * Added method in entity to allow for visibility manipulation
 * Added sort before loading entities in the Dungeon loader so that floor switch entities are loaded first
 
+**Duy**
+* completed implementing pickup sword feature
+* to do this added extra classes to support this feature (item + inventory), and implemented relevant methods 
+
 ### Week-08
 
 Fill in here.
