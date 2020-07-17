@@ -541,10 +541,15 @@ Marks will be deducted for poor git and GitLab usage. For example, meaningless c
 * Added constructor in DungeonLoader to allow for easy testing
 * Created map to test player interaction with entities
 
-
 **Duy**
 * completed method implementation for goal related classes
 
+##### 17/07/2020
+
+**Fergus**
+* Completed implementation of basic goals using observer pattern
+* Added method in entity to allow for visibility manipulation
+* Added sort before loading entities in the Dungeon loader so that floor switch entities are loaded first
 
 ### Week-08
 
