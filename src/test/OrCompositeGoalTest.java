@@ -228,6 +228,101 @@ class OrCompositeGoalTest {
     }
 
     @Test
+    void testStandardOrGoal4() {
+        JSONObject playerJSON = new JSONObject();
+        playerJSON.put("x", 0);
+        playerJSON.put("y", 0);
+        playerJSON.put("type", "player");
+
+        JSONObject treasureJSON = new JSONObject();
+        treasureJSON.put("x", 3);
+        treasureJSON.put("y", 3);
+        treasureJSON.put("type", "treasure");
+
+        JSONObject boulderJSON = new JSONObject();
+        boulderJSON.put("x", 3);
+        boulderJSON.put("y", 2);
+        boulderJSON.put("type", "boulder");
+
+        JSONObject switchJSON = new JSONObject();
+        switchJSON.put("x", 2);
+        switchJSON.put("y", 3);
+        switchJSON.put("type", "switch");
+
+        JSONObject exitJSON = new JSONObject();
+        exitJSON.put("x", 2);
+        exitJSON.put("y", 2);
+        exitJSON.put("type", "exit");
+
+        JSONObject swordJSON = new JSONObject();
+        swordJSON.put("x", 1);
+        swordJSON.put("y", 0);
+        swordJSON.put("type", "sword");
+
+        JSONObject enemy = new JSONObject();
+        enemy.put("x", 2);
+        enemy.put("y", 0);
+        enemy.put("type", "enemy");
+
+        JSONArray entitiesJSON = new JSONArray();
+        entitiesJSON.put(playerJSON);
+        entitiesJSON.put(treasureJSON);
+        entitiesJSON.put(boulderJSON);
+        entitiesJSON.put(switchJSON);
+        entitiesJSON.put(exitJSON);
+        entitiesJSON.put(swordJSON);
+        entitiesJSON.put(enemy);
+
+        JSONObject exitGoal = new JSONObject();
+        exitGoal.put("goal", "exit");
+
+        JSONObject treasureGoal = new JSONObject();
+        treasureGoal.put("goal", "treasure");
+
+        JSONObject switchGoal = new JSONObject();
+        switchGoal.put("goal", "boulders");
+
+        JSONObject enemyGoal = new JSONObject();
+        enemyGoal.put("goal", "enemies");
+
+        JSONArray subgoals = new JSONArray();
+        subgoals.put(treasureGoal);
+        subgoals.put(switchGoal);
+        subgoals.put(exitGoal);
+        subgoals.put(enemyGoal);
+
+        JSONObject orGoal = new JSONObject();
+        orGoal.put("goal", "OR");
+        orGoal.put("subgoals", subgoals);
+
+        JSONObject json = new JSONObject();
+        json.put("width", 4);
+        json.put("height", 4);
+        json.put("entities", entitiesJSON);
+        json.put("goal-condition", orGoal);
+
+        DungeonLoader loader = new DungeonMockLoader(json);
+        Dungeon dungeon = loader.load();
+        Player player = dungeon.getPlayer();
+
+        // Test that goal isn't complete yet
+        assertFalse(dungeon.isComplete());
+
+        // Move right to pickup sword
+        player.moveRight();
+        assertTrue(player.getX() == 1);
+        assertTrue(player.getY() == 0);
+
+        // Move right to kill enemy
+        player.moveRight();
+        assertTrue(player.getX() == 2);
+        assertTrue(player.getY() == 0);
+
+        // Test that goal has been completed
+        assertTrue(dungeon.isComplete());
+    }
+
+    @Test
     void testNestedGoals() {
         JSONObject playerJSON = new JSONObject();
         playerJSON.put("x", 0);
