@@ -29,8 +29,8 @@ public class Door extends Entity {
 
     // opens the door if the given key is valid
     public boolean open(Key key) {
-        if (key.getID() == this.id) {
-            this.isOpen.setValue(true);
+        if (key.getID() == getID()) {
+            isOpen.setValue(true);
             return true;
         }
         return false;
@@ -39,16 +39,14 @@ public class Door extends Entity {
     @Override
     public boolean interact(Entity caller) {
         if (caller instanceof Player) {
-            // TODO Implement proper opening using key
             Player player = (Player) caller;
             if (!getIsOpen()) {
-                // TODO
-                // for (Item k : player.getInventory()) {
-                // if (k instanceof Key) {
-                // Key key = (Key) k;
-                // open(key);
-                // }
-                // }
+                Inventory inventory = player.getInventory();
+                Key key = inventory.getKey();
+                if (key != null) {
+                    return open(key);
+                }
+
             }
         }
         return false;
