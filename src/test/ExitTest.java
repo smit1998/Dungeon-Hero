@@ -147,8 +147,6 @@ class ExitTest {
         json.put("entities", entitiesJSON);
         json.put("goal-condition", andGoalJSON);
 
-        System.out.println(json);
-
         DungeonLoader loader = new DungeonMockLoader(json);
         Dungeon dungeon = loader.load();
         Player player = dungeon.getPlayer();
@@ -223,8 +221,6 @@ class ExitTest {
         json.put("height", 3);
         json.put("entities", entitiesJSON);
         json.put("goal-condition", andGoalJSON);
-
-        System.out.println(json);
 
         DungeonLoader loader = new DungeonMockLoader(json);
         Dungeon dungeon = loader.load();
