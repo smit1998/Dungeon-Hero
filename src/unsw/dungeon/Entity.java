@@ -1,6 +1,8 @@
 package unsw.dungeon;
 
+import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.SimpleBooleanProperty;
 
 /**
  * An entity in the dungeon.
@@ -13,9 +15,13 @@ public abstract class Entity {
     private Coordinate position;
     private Dungeon dungeon;
 
+    private BooleanProperty isVisible;
+
     public Entity(int x, int y, Dungeon dungeon) {
         position = new Coordinate(x, y);
         this.dungeon = dungeon;
+        isVisible = new SimpleBooleanProperty(true);
+        ;
     }
 
     public Coordinate getCoordinate() {
@@ -44,6 +50,15 @@ public abstract class Entity {
 
     public int getX() {
         return position.getX();
+    }
+
+    public BooleanProperty isVisible() {
+        return isVisible;
+    }
+
+    public void setVisibility(boolean isVisible) {
+        System.out.println("set isvisiable to " + isVisible);
+        this.isVisible.setValue(isVisible);
     }
 
 }

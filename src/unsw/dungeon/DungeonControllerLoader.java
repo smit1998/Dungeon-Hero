@@ -29,7 +29,8 @@ public class DungeonControllerLoader extends DungeonLoader {
     private Image wallImage;
     private Image exitImage;
     private Image treasureImage;
-    private Image doorImage;
+    private Image openDoorImage;
+    private Image closedDoorImage;
     private Image keyImage;
     private Image boulderImage;
     private Image switchImage;
@@ -45,7 +46,8 @@ public class DungeonControllerLoader extends DungeonLoader {
         wallImage = new Image((new File("images/brick_brown_0.png")).toURI().toString());
         exitImage = new Image((new File("images/exit.png")).toURI().toString());
         treasureImage = new Image((new File("images/gold_pile.png")).toURI().toString());
-        doorImage = new Image((new File("images/closed_door.png")).toURI().toString());
+        openDoorImage = new Image((new File("images/open_door.png")).toURI().toString());
+        closedDoorImage = new Image((new File("images/closed_door.png")).toURI().toString());
         keyImage = new Image((new File("images/key.png")).toURI().toString());
         boulderImage = new Image((new File("images/boulder.png")).toURI().toString());
         switchImage = new Image((new File("images/pressure_plate.png")).toURI().toString());
@@ -81,7 +83,8 @@ public class DungeonControllerLoader extends DungeonLoader {
 
     @Override
     public void onLoad(Door door) {
-        ImageView view = new ImageView(doorImage);
+        ImageView view = new ImageView(closedDoorImage);
+        trackOpen(door, view);
         addEntity(door, view);
     }
 
@@ -129,6 +132,7 @@ public class DungeonControllerLoader extends DungeonLoader {
 
     private void addEntity(Entity entity, ImageView view) {
         trackPosition(entity, view);
+        trackVisibility(entity, view);
         entities.add(view);
     }
 
@@ -156,6 +160,29 @@ public class DungeonControllerLoader extends DungeonLoader {
             @Override
             public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
                 GridPane.setRowIndex(node, newValue.intValue());
+            }
+        });
+    }
+
+    public void trackVisibility(Entity entity, Node node) {
+        entity.isVisible().addListener(new ChangeListener<Boolean>() {
+            @Override
+            public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
+                node.setVisible(newValue);
+            }
+        });
+    }
+
+    public void trackOpen(Door door, ImageView view) {
+        door.isOpen().addListener(new ChangeListener<Boolean>() {
+            @Override
+            public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
+                if (newValue) {
+                    view.setImage(openDoorImage);
+
+                } else {
+                    view.setImage(closedDoorImage);
+                }
             }
         });
     }
