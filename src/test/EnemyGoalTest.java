@@ -148,7 +148,7 @@ class EnemyGoalTest {
 
         // Kill second enemy
         player.moveRight();
-        assertTrue(player.getX() == 2);
+        assertTrue(player.getX() == 3);
         assertTrue(player.getY() == 0);
 
         // Test that dungeon has been completed
