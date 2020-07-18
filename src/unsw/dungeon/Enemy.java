@@ -90,6 +90,7 @@ public class Enemy extends MoveableEntity implements Subject {
             // TODO Determine whether player has weapon
             Player p = (Player) caller; 
             if (p.hasWeapon() == true) {
+                p.attack(this); 
                 updateLifeStatus(false);
                 setVisibility(false);
                 notifyObservers();

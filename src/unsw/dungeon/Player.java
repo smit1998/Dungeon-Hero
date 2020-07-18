@@ -38,6 +38,12 @@ public class Player extends MoveableEntity implements Subject {
     // }
 
     public void attack(Entity e) {
+        if (e instanceof Enemy) {
+            Enemy enemy = (Enemy) e; 
+            enemy.updateLifeStatus(false);
+            enemy.setVisibility(false);
+            enemy.notifyObservers();
+        }
     }
 
     public boolean hasWeapon() {
