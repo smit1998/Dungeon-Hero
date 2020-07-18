@@ -90,4 +90,19 @@ public class Dungeon {
             }
         }
     }
+
+    public void connectPortals() {
+        List<Portal> portals = new ArrayList<>();
+        for (Entity entity : entities) {
+            if (entity instanceof Portal) {
+                portals.add((Portal) entity);
+            }
+        }
+        for (Portal portalA : portals) {
+            for (Portal portalB : portals) {
+                portalA.addPair(portalB);
+                portalB.addPair(portalA);
+            }
+        }
+    }
 }
