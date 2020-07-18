@@ -8,7 +8,7 @@ public class InvincibilityPotion extends Entity {
 
     private boolean isActive;
     private Timer remainingTime;
-    private static int maxItem;
+    public final static int maxItem = 1;
 
     public InvincibilityPotion(int x, int y, Dungeon dungeon) {
         super(x, y, dungeon);

@@ -10,15 +10,21 @@ public class Portal extends Entity {
         this.id = id;
     }
 
-    // what do we need this for //
+    public int getID() {
+        return this.id;
+    }
+
+    public Portal getPair() {
+        return this.pair;
+    }
+
     public boolean addPair(Portal pair) {
         // TODO Check not itself        
         if(pair.getCoordinate() == this.getCoordinate()) {
             return false;
         }
-
         // TODO Check no pair
-        if() {
+        if(this.pair != null) {
             return false;
         }
 
@@ -27,12 +33,5 @@ public class Portal extends Entity {
 
     }
 
-    public Portal getPair() {
-        return this.pair;
-    }
-
-    public int getID() {
-        return this.id;
-    }
 
 }
