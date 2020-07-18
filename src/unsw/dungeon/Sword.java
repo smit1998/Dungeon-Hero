@@ -1,6 +1,6 @@
 package unsw.dungeon;
 
-public class Sword extends Entity implements Item, Observer {
+public class Sword extends Entity implements Item, Observer, Weapon {
 
     // use strategy pattern here
     public final static int MAX_PICKUP = 1;
@@ -41,15 +41,14 @@ public class Sword extends Entity implements Item, Observer {
 
     @Override
     public boolean interact(Entity caller) {
+        // makes the player pickup the sword
         if (caller instanceof Player) {
             Player player = (Player) caller; 
-            // make the player interact with this object 
-            if (player.interact(this) == false) {
-                return false; 
-            }  
-            // if successful, make this observe the player
-            else {
+            if (player.pickupItem(this) != null) {
                 player.attach(this); 
+                return true;
+            } else {
+                return false; 
             }
         }
         return false;
@@ -57,7 +56,6 @@ public class Sword extends Entity implements Item, Observer {
 
     @Override
     public void update(Subject obj) {
-        // makes the sword item follow the player
         if (obj instanceof Player) {
             Player player = (Player) obj; 
             x().set(player.getX()); 

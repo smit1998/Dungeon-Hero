@@ -32,4 +32,13 @@ public class Inventory {
         return count;
     }
 
+    public Item getWeapon() {
+        for (Item inventoryItem : items) {
+            if (inventoryItem instanceof Weapon) {
+                return inventoryItem;
+            }
+        }
+        return null; 
+    }
+
 }

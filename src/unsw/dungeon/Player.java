@@ -29,7 +29,7 @@ public class Player extends MoveableEntity implements Subject {
     }
 
     // returns true if i can pickup item, otherwise false
-    private Item pickupItem(Item item) {
+    public Item pickupItem(Item item) {
         return inventory.addItem(item);
     }
 
@@ -38,7 +38,10 @@ public class Player extends MoveableEntity implements Subject {
     // }
 
     public void attack(Entity e) {
-        // todo
+    }
+
+    public boolean hasWeapon() {
+        return (inventory.getWeapon() != null); 
     }
 
     public void updateLifeStatus() {
