@@ -26,4 +26,9 @@ public class Door extends Entity {
         return false;
     }
 
+    public boolean interact(Entity caller) {
+        if(caller instanceof Key && ()) {
+            
+        }
+    }
 }
