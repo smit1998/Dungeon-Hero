@@ -40,6 +40,9 @@ public class Portal extends Entity {
 
             int newX = getX() - caller.getX() + pair.getX();
             int newY = getY() - caller.getY() + pair.getY();
+
+            caller.x().set(pair.getX());
+            caller.y().set(pair.getY());
             if (dungeon().interact(caller, newX, newY)) {
                 if (newX >= 0 && newX < dungeon().getWidth()) {
                     caller.x().set(newX);
@@ -48,19 +51,8 @@ public class Portal extends Entity {
                     caller.y().set(newY);
                 }
             } else {
-                caller.x().set(pair.getX());
-                caller.y().set(pair.getY());
-                if (dungeon().interact(caller, newX, newY)) {
-                    if (newX >= 0 && newX < dungeon().getWidth()) {
-                        caller.x().set(newX);
-                    }
-                    if (newY >= 0 && newY < dungeon().getHeight()) {
-                        caller.y().set(newY);
-                    }
-                } else {
-                    caller.x().setValue(oldX);
-                    caller.y().setValue(oldY);
-                }
+                caller.x().setValue(oldX);
+                caller.y().setValue(oldY);
             }
         } else if (caller instanceof Boulder) {
             int newX = getX() - caller.getX() + pair.getX();
