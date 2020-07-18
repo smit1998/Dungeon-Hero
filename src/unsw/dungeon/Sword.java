@@ -1,6 +1,8 @@
 package unsw.dungeon;
 
-public class Sword extends Entity implements Item, Observer, Weapon {
+import java.util.ArrayList;
+
+public class Sword extends Entity implements Item, Observer, Weapon, Subject {
 
     // use strategy pattern here
     public final static int MAX_PICKUP = 1;
@@ -8,10 +10,20 @@ public class Sword extends Entity implements Item, Observer, Weapon {
 
     private boolean isPickedUp;
     private int remainingHits;
+    private Inventory inventory;
+    private Dungeon dungeon;
+    private ArrayList<Observer> observers; 
 
     public Sword(int x, int y, Dungeon dungeon) {
         super(x, y, dungeon);
-        remainingHits = STARTING_DURABILITY;
+        this.remainingHits = STARTING_DURABILITY;
+        this.inventory = null;
+        this.dungeon = dungeon;
+        this.observers = new ArrayList<Observer>(); 
+    }
+
+    public void setInventory(Inventory i) {
+        inventory = i;
     }
 
     // returns the current status of the sword.
@@ -27,6 +39,12 @@ public class Sword extends Entity implements Item, Observer, Weapon {
     // drceases the remaining hits by 1.
     public void updateHitsRemaining() {
         this.remainingHits--;
+        // probably should use observer pattern, as removing item shouldn't be a swords
+        // responsibility?
+        if (remainingHits == 0) {
+            setVisibility(false);
+            notifyObservers(); 
+        }
     }
 
     // returns the number of hits remaining.
@@ -36,19 +54,19 @@ public class Sword extends Entity implements Item, Observer, Weapon {
 
     @Override
     public int getMaxPickup() {
-        return MAX_PICKUP; 
+        return MAX_PICKUP;
     }
 
     @Override
     public boolean interact(Entity caller) {
         // makes the player pickup the sword
         if (caller instanceof Player) {
-            Player player = (Player) caller; 
+            Player player = (Player) caller;
             if (player.pickupItem(this) != null) {
-                player.attach(this); 
+                player.attach(this);
                 return true;
             } else {
-                return false; 
+                return false;
             }
         }
         return false;
@@ -57,9 +75,26 @@ public class Sword extends Entity implements Item, Observer, Weapon {
     @Override
     public void update(Subject obj) {
         if (obj instanceof Player) {
-            Player player = (Player) obj; 
-            x().set(player.getX()); 
-            y().set(player.getY()); 
+            Player player = (Player) obj;
+            x().set(player.getX());
+            y().set(player.getY());
+        }
+    }
+
+    @Override
+    public void attach(Observer o) {
+        observers.add(o); 
+    }
+
+    @Override
+    public void detach(Observer o) {
+        observers.remove(o); 
+    }
+
+    @Override
+    public void notifyObservers() {
+        for (Observer obs : observers) {
+            obs.update(this); 
         }
     }
 }

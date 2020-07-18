@@ -2,7 +2,7 @@ package unsw.dungeon;
 
 import java.util.ArrayList;
 
-public class Inventory {
+public class Inventory implements Observer {
 
     private ArrayList<Item> items; 
 
@@ -12,7 +12,12 @@ public class Inventory {
 
     public Item addItem(Item item) {
         if (countItem(item) < item.getMaxPickup()) {
+            item.setInventory(this); 
             items.add(item);
+            if (item instanceof Sword) {
+                Sword s = (Sword) item; 
+                s.attach(this); 
+            }
             return item; 
         } 
         return null; 
@@ -32,13 +37,23 @@ public class Inventory {
         return count;
     }
 
-    public Item getWeapon() {
+    public Weapon getWeapon() {
         for (Item inventoryItem : items) {
             if (inventoryItem instanceof Weapon) {
-                return inventoryItem;
+                return (Weapon) inventoryItem;
             }
         }
         return null; 
     }
+
+	@Override
+	public void update(Subject obj) {
+        // removes a sword if hits reaches 0 
+        if (obj instanceof Item) {
+            Item i = (Item) obj; 
+            System.out.println("removed sword"); 
+            removeItem(i); 
+        }
+	}
 
 }

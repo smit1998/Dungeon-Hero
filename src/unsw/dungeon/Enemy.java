@@ -87,16 +87,8 @@ public class Enemy extends MoveableEntity implements Subject {
     @Override
     public boolean interact(Entity caller) {
         if (caller instanceof Player) {
-            // TODO Determine whether player has weapon
             Player p = (Player) caller; 
-            if (p.hasWeapon() == true) {
-                p.attack(this); 
-                updateLifeStatus(false);
-                setVisibility(false);
-                notifyObservers();
-                return true;
-            }
-            return false; 
+            return p.attack(this); 
         }
         return false;
     }

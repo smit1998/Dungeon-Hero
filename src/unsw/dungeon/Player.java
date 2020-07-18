@@ -37,17 +37,24 @@ public class Player extends MoveableEntity implements Subject {
     // // todo
     // }
 
-    public void attack(Entity e) {
-        if (e instanceof Enemy) {
-            Enemy enemy = (Enemy) e; 
-            enemy.updateLifeStatus(false);
-            enemy.setVisibility(false);
-            enemy.notifyObservers();
+    public boolean attack(Entity e) {
+        if ((e instanceof Enemy)) {
+            Weapon weapon = getWeapon(); 
+            if (weapon != null) {
+                Enemy enemy = (Enemy) e; 
+                enemy.updateLifeStatus(false);
+                enemy.setVisibility(false);
+                enemy.notifyObservers();
+                weapon.updateHitsRemaining();
+                return true;
+            }
+            return false; 
         }
+        return false; 
     }
 
-    public boolean hasWeapon() {
-        return (inventory.getWeapon() != null); 
+    public Weapon getWeapon() {
+        return inventory.getWeapon(); 
     }
 
     public void updateLifeStatus() {
