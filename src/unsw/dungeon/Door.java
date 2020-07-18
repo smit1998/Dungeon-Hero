@@ -42,12 +42,13 @@ public class Door extends Entity {
             // TODO Implement proper opening using key
             Player player = (Player) caller;
             if (!getIsOpen()) {
-                for (Item k : player.getInventory()) {
-                    if (k instanceof Key) {
-                        Key key = (Key) k;
-                        open(key);
-                    }
-                }
+                // TODO
+                // for (Item k : player.getInventory()) {
+                // if (k instanceof Key) {
+                // Key key = (Key) k;
+                // open(key);
+                // }
+                // }
             }
         }
         return false;

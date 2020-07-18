@@ -48,12 +48,22 @@ public class Inventory implements Observer {
 
 	@Override
 	public void update(Subject obj) {
-        // removes a sword if hits reaches 0 
         if (obj instanceof Item) {
             Item i = (Item) obj; 
-            System.out.println("removed sword"); 
             removeItem(i); 
         }
-	}
-
+    }
+    
+    public Key getKey(int id) {
+        for (Item item : items) {
+            if (item instanceof Key) {
+                Key key = (Key) item; 
+                if (key.getID() == id) {
+                    return key; 
+                }
+            }
+            return null; 
+        }
+        return null;
+    }
 }
