@@ -35,8 +35,8 @@ public class Portal extends Entity {
 
     public boolean interact(Entity caller) {
         if (caller instanceof Player) {
-            int oldX = getX();
-            int oldY = getY();
+            int oldX = caller.getX();
+            int oldY = caller.getY();
 
             int newX = getX() - caller.getX() + pair.getX();
             int newY = getY() - caller.getY() + pair.getY();
@@ -57,6 +57,9 @@ public class Portal extends Entity {
                     if (newY >= 0 && newY < dungeon().getHeight()) {
                         caller.y().set(newY);
                     }
+                } else {
+                    caller.x().setValue(oldX);
+                    caller.y().setValue(oldY);
                 }
             }
         } else if (caller instanceof Boulder) {
