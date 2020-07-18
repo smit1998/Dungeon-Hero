@@ -54,8 +54,6 @@ public class Door extends Entity {
         return false;
     }
 
-<<<<<<< HEAD
-=======
     // @Override
     // public void attach(Observer o) {
     // observers.add(o);
@@ -72,6 +70,5 @@ public class Door extends Entity {
     // obs.update(this);
     // }
     // }
->>>>>>> 4829bdb3f8e1b5ea6966a018754ed8b8251a5f18
 
 }
