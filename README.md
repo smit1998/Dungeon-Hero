@@ -555,11 +555,20 @@ Marks will be deducted for poor git and GitLab usage. For example, meaningless c
 * completed implementing pickup sword feature
 * to do this added extra classes to support this feature (item + inventory), and implemented relevant methods 
 
-### Week-08
+##### 18/07/2020
 
 **Duy**
 * completed features of player killing enemy, and enemy killing player, depending on whether the player has a sword or not
 * implemented features for inventory interactions with player, items and dungeon
+
+**Fergus**
+* Implemented portal entity
+* Wrote JUnit tests for all goal types
+* Connected door to JavaFX frontend
+* Created DungeonMockLoader to load dungeons from JSONObjects
+* Fixed boulder entities going out of bounds
+
+### Week-08
 
 ### Week-09
 
