@@ -27,10 +27,16 @@ public class Portal extends Entity {
         if(this.pair != null) {
             return false;
         }
-
         this.pair = pair;
         return true;
+    }
 
+    @Override
+    public boolean interact(Entity caller) {
+        if(caller instanceof Player) {
+            // todo
+        }
+        return false;
     }
 
 

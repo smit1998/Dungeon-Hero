@@ -7,13 +7,19 @@ import java.util.TimerTask;
 public class InvincibilityPotion extends Entity {
 
     private boolean isActive;
-    private Timer remainingTime;
+    private Timer timer = new Timer();
+    private TimerTask task = new TimerTask() {
+        public void run() {
+            
+        }
+    }
+
     public final static int maxItem = 1;
 
     public InvincibilityPotion(int x, int y, Dungeon dungeon) {
         super(x, y, dungeon);
         this.isActive = false;
-        // this.remainingTime = NEED TO SET IT TO A PARTICULAR TIME.
+        this.remainingTime = 5;
     }
 
     public void updateStatus(boolean newActive) {
@@ -21,6 +27,28 @@ public class InvincibilityPotion extends Entity {
     }
 
     public void startTimer() {
-        // TODO
+        // attacks at every 100ms and runs for 5s
+        int i = 0;
+        while(i < 50) {
+            timer.schedule(task, 100);
+            i++;
+        }
+        timer.cancel();
     }
+
+    public boolean interact(Entity caller) {
+        if (caller instanceof Player) {
+            Player player = (Player) caller;
+            if(player.pickupItem(this) != null) {
+                if(this.isActive != false) {
+                    startTimer();
+                    player.attack(this);
+                    return true;
+                }
+
+            }
+            return false;
+        }
+    }
+    return false;
 }

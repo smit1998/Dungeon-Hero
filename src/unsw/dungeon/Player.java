@@ -33,6 +33,7 @@ public class Player extends MoveableEntity implements Subject {
         return inventory.addItem(item);
     }
 
+    // being used for door as to find the key in the list.
     public ArrayList<Item> getInventory() {
         return this.inventory;
     }
