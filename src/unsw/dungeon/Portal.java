@@ -41,15 +41,15 @@ public class Portal extends Entity {
             int newX = getX() - caller.getX() + pair.getX();
             int newY = getY() - caller.getY() + pair.getY();
 
+            if (newX < 0 || newX >= dungeon().getWidth() || newY < 0 || newY >= dungeon().getHeight()) {
+                return false;
+            }
+
             caller.x().set(pair.getX());
             caller.y().set(pair.getY());
             if (dungeon().interact(caller, newX, newY)) {
-                if (newX >= 0 && newX < dungeon().getWidth()) {
-                    caller.x().set(newX);
-                }
-                if (newY >= 0 && newY < dungeon().getHeight()) {
-                    caller.y().set(newY);
-                }
+                caller.x().set(newX);
+                caller.y().set(newY);
             } else {
                 caller.x().setValue(oldX);
                 caller.y().setValue(oldY);
