@@ -33,6 +33,9 @@ public class Player extends MoveableEntity implements Subject {
         return inventory.addItem(item);
     }
 
+    public ArrayList<Item> getInventory() {
+        return this.inventory;
+    }
     // public void removeItem(Item i) {
     // // todo
     // }

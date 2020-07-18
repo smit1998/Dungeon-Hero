@@ -2,6 +2,7 @@ package unsw.dungeon;
 
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
+import unsw.dungeon.Player;
 
 public class Door extends Entity {
 
@@ -23,7 +24,7 @@ public class Door extends Entity {
     // return this.isOpen.getValue();
     // }
 
-    public BooleanProperty isOpen() {
+    public BooleanProperty getisOpen() {
         return isOpen;
     }
 
@@ -36,23 +37,38 @@ public class Door extends Entity {
         return false;
     }
 
-<<<<<<< HEAD
-    public boolean interact(Entity caller) {
-        if(caller instanceof Key && ()) {
-            
-        }
-    }
-=======
     @Override
     public boolean interact(Entity caller) {
         if (caller instanceof Player) {
             // TODO Implement proper opening using key
-            if (!isOpen.getValue()) {
-                isOpen.setValue(true);
+            Player player = (Player) caller;
+            if (!getisOpen()) {
+                for (Item k : player.getInventory()) {
+                    if (k instanceof Key) {
+                        Key key = (Key) k;
+                        open(key);
+                    }
+                }
             }
         }
-        return true;
+        return false;
     }
 
->>>>>>> be5319d9280501aee3d7708ce4c1e331e3f0c653
+    @Override
+    public void attach(Observer o) {
+        observers.add(o); 
+    }
+
+    @Override
+    public void detach(Observer o) {
+        observers.remove(o); 
+    }
+
+    @Override
+    public void notifyObservers() {
+        for (Observer obs : observers) {
+            obs.update(this); 
+        }
+    }
+
 }
