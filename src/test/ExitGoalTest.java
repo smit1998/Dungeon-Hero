@@ -51,7 +51,7 @@ class ExitGoalTest {
     }
 
     @Test
-    void testLastToComplete() {
+    void testConjuctionGoal() {
         JSONObject playerJSON = new JSONObject();
         playerJSON.put("x", 0);
         playerJSON.put("y", 0);
@@ -128,7 +128,7 @@ class ExitGoalTest {
     }
 
     @Test
-    void testCompletionOrderInOR() {
+    void testDisjunctionGoal() {
         JSONObject playerJSON = new JSONObject();
         playerJSON.put("x", 0);
         playerJSON.put("y", 0);
