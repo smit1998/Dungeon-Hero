@@ -19,13 +19,12 @@ public class Door extends Entity {
         return id;
     }
 
-    // returns true if door is open and false otherwise.
-    // public boolean isOpen() {
-    // return this.isOpen.getValue();
-    // }
-
-    public BooleanProperty getisOpen() {
+    public BooleanProperty isOpen() {
         return isOpen;
+    }
+
+    public boolean getIsOpen() {
+        return isOpen.getValue();
     }
 
     // opens the door if the given key is valid
@@ -42,17 +41,37 @@ public class Door extends Entity {
         if (caller instanceof Player) {
             // TODO Implement proper opening using key
             Player player = (Player) caller;
-            if (!getisOpen()) {
-                for (Item k : player.getInventory()) {
-                    if (k instanceof Key) {
-                        Key key = (Key) k;
-                        open(key);
-                    }
-                }
+            if (!getIsOpen()) {
+                // TODO
+                // for (Item k : player.getInventory()) {
+                // if (k instanceof Key) {
+                // Key key = (Key) k;
+                // open(key);
+                // }
+                // }
             }
         }
         return false;
     }
 
+<<<<<<< HEAD
+=======
+    // @Override
+    // public void attach(Observer o) {
+    // observers.add(o);
+    // }
+
+    // @Override
+    // public void detach(Observer o) {
+    // observers.remove(o);
+    // }
+
+    // @Override
+    // public void notifyObservers() {
+    // for (Observer obs : observers) {
+    // obs.update(this);
+    // }
+    // }
+>>>>>>> 4829bdb3f8e1b5ea6966a018754ed8b8251a5f18
 
 }
