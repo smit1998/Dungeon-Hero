@@ -8,8 +8,12 @@ public class Boulder extends Entity {
 
     public boolean interact(Entity caller) {
         if (caller instanceof Player) {
+            int oldX = getX();
+            int oldY = getY();
+
             int newX = getX() * 2 - caller.getX();
             int newY = getY() * 2 - caller.getY();
+
             if (dungeon().interact(this, newX, newY)) {
                 if (newX >= 0 && newX < dungeon().getWidth()) {
                     x().set(newX);
@@ -21,6 +25,8 @@ public class Boulder extends Entity {
                 } else {
                     return false;
                 }
+                return true;
+            } else if (getX() != oldX || getY() != oldY) {
                 return true;
             }
         }

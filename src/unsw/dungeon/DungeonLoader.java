@@ -92,6 +92,7 @@ public abstract class DungeonLoader {
         dungeon.setGoal(goal);
 
         dungeon.connectGoals();
+        dungeon.connectPortals();
 
         return dungeon;
     }

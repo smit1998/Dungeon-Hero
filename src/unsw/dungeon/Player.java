@@ -33,7 +33,7 @@ public class Player extends MoveableEntity implements Subject {
         return inventory.addItem(item);
     }
 
-    public ArrayList<Item> getInventory() {
+    public Inventory getInventory() {
         return this.inventory;
     }
     // public void removeItem(Item i) {
@@ -47,7 +47,6 @@ public class Player extends MoveableEntity implements Subject {
                 Enemy enemy = (Enemy) e; 
                 enemy.updateLifeStatus(false);
                 enemy.setVisibility(false);
-                enemy.notifyObservers();
                 weapon.updateHitsRemaining();
                 return true;
             }
@@ -60,17 +59,19 @@ public class Player extends MoveableEntity implements Subject {
         return inventory.getWeapon(); 
     }
 
-    public void updateLifeStatus() {
-        // todo
+    public void updateLifeStatus(boolean newLifeStatus) {
+        this.isAlive = newLifeStatus;
     }
 
     @Override
     public boolean interact(Entity caller) {
-        if (caller instanceof Item) {
-            Item item = (Item) caller; 
-            if (pickupItem(item) == null) {
+        if (caller instanceof Enemy) {
+            Enemy enemy = (Enemy) caller; 
+            if (inventory.getWeapon() != null) {
+                attack(enemy); 
                 return false; 
             } else {
+                enemy.attack(this); 
                 return true; 
             }
         }
