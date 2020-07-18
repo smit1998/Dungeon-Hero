@@ -557,7 +557,9 @@ Marks will be deducted for poor git and GitLab usage. For example, meaningless c
 
 ### Week-08
 
-Fill in here.
+**Duy**
+* completed features of player killing enemy, and enemy killing player, depending on whether the player has a sword or not
+* implemented features for inventory interactions with player, items and dungeon
 
 ### Week-09
 
