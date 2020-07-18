@@ -52,6 +52,18 @@ public class Inventory implements Observer {
             Item i = (Item) obj; 
             removeItem(i); 
         }
-	}
-
+    }
+    
+    public Key getKey(int id) {
+        for (Item item : items) {
+            if (item instanceof Key) {
+                Key key = (Key) item; 
+                if (key.getID() == id) {
+                    return key; 
+                }
+            }
+            return null; 
+        }
+        return null;
+    }
 }

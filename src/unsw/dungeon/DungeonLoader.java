@@ -168,14 +168,12 @@ public abstract class DungeonLoader {
                 onLoad(enemy);
                 entity = enemy;
                 enemiesSpawned++;
-                enemy.attach(dungeon); 
                 break;
             }
             case "sword": {
                 Sword sword = new Sword(x, y, dungeon);
                 onLoad(sword);
                 entity = sword;
-                sword.attach(dungeon); 
                 break;
             }
             case "invincibility": {
