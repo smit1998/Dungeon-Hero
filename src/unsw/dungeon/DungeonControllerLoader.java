@@ -129,6 +129,7 @@ public class DungeonControllerLoader extends DungeonLoader {
 
     private void addEntity(Entity entity, ImageView view) {
         trackPosition(entity, view);
+        trackVisibility(entity, view);
         entities.add(view);
     }
 
@@ -156,6 +157,15 @@ public class DungeonControllerLoader extends DungeonLoader {
             @Override
             public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
                 GridPane.setRowIndex(node, newValue.intValue());
+            }
+        });
+    }
+
+    public void trackVisibility(Entity entity, Node node) {
+        entity.isVisible().addListener(new ChangeListener<Boolean>() {
+            @Override
+            public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
+                node.setVisible(newValue);
             }
         });
     }

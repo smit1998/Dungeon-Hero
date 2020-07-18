@@ -91,6 +91,7 @@ public class Enemy extends MoveableEntity implements Subject {
 
             // Assume player has weapon
             updateLifeStatus(false);
+            setVisibility(false);
             notifyObservers();
             return true;
         }
