@@ -10,7 +10,7 @@ public class InvincibilityPotion extends Entity {
     private Timer timer = new Timer();
     private TimerTask task = new TimerTask() {
         public void run() {
-            
+            notifyo
         }
     }
 
@@ -41,6 +41,7 @@ public class InvincibilityPotion extends Entity {
             Player player = (Player) caller;
             if(player.pickupItem(this) != null) {
                 if(this.isActive != false) {
+                    this.isActive = true;
                     startTimer();
                     player.attack(this);
                     return true;
