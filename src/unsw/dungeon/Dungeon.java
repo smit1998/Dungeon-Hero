@@ -15,7 +15,7 @@ import java.util.List;
  * @author Robert Clifton-Everest
  *
  */
-public class Dungeon {
+public class Dungeon implements Observer {
 
     private int width, height;
     private List<Entity> entities;
@@ -49,6 +49,10 @@ public class Dungeon {
         entities.add(entity);
     }
 
+    public void removeEntity(Entity entity) {
+        entities.remove(entity);
+    }
+
     public void setGoal(ComponentGoal goal) {
         this.goal = goal;
     }
@@ -76,6 +80,15 @@ public class Dungeon {
                 Subject s = (Subject) entity;
                 goal.attachTo(s);
             }
+        }
+    }
+
+    @Override
+    public void update(Subject obj) {
+        if (obj instanceof Entity) {
+            Entity e = (Entity) obj; 
+            System.out.println("Concurrent lolz");
+            removeEntity(e); 
         }
     }
 }

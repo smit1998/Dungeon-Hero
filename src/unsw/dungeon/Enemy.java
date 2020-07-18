@@ -98,6 +98,8 @@ public class Enemy extends MoveableEntity implements Subject {
 
     public void updateLifeStatus(boolean newLifeStatus) {
         this.isAlive = newLifeStatus;
+        this.x().set(-1);
+        this.y().set(-1); 
     }
 
     public boolean getIsAlive() {

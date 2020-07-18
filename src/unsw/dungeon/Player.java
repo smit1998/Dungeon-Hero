@@ -46,8 +46,6 @@ public class Player extends MoveableEntity implements Subject {
             if (weapon != null) {
                 Enemy enemy = (Enemy) e; 
                 enemy.updateLifeStatus(false);
-                enemy.setVisibility(false);
-                enemy.notifyObservers();
                 weapon.updateHitsRemaining();
                 return true;
             }
