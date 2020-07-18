@@ -9,7 +9,7 @@ import org.json.JSONObject;
 
 import unsw.dungeon.*;
 
-class ExitGoalTest {
+class ExitTest {
 
     @Test
     void testStandardExit() {
@@ -48,6 +48,55 @@ class ExitGoalTest {
 
         // Test that goal has been completed
         assertTrue(dungeon.isComplete());
+    }
+
+    @Test
+    void testFailedExit() {
+        JSONObject playerJSON = new JSONObject();
+        playerJSON.put("x", 0);
+        playerJSON.put("y", 0);
+        playerJSON.put("type", "player");
+
+        JSONObject exitJSON = new JSONObject();
+        exitJSON.put("x", 1);
+        exitJSON.put("y", 0);
+        exitJSON.put("type", "exit");
+
+        JSONObject switchJSON = new JSONObject();
+        switchJSON.put("x", 0);
+        switchJSON.put("y", 0);
+        switchJSON.put("type", "switch");
+
+        JSONArray entitiesJSON = new JSONArray();
+        entitiesJSON.put(playerJSON);
+        entitiesJSON.put(exitJSON);
+        entitiesJSON.put(switchJSON);
+
+        JSONObject goalJSON = new JSONObject();
+        goalJSON.put("goal", "boulders");
+
+        JSONObject json = new JSONObject();
+        json.put("width", 2);
+        json.put("height", 1);
+        json.put("entities", entitiesJSON);
+        json.put("goal-condition", goalJSON);
+
+        DungeonLoader loader = new DungeonMockLoader(json);
+        Dungeon dungeon = loader.load();
+        Player player = dungeon.getPlayer();
+
+        // Test that goal isn't complete yet
+        assertFalse(dungeon.isComplete());
+
+        // Try to exit
+        player.moveRight();
+
+        // Test that player didn't move
+        assertTrue(player.getX() == 0);
+        assertTrue(player.getY() == 0);
+
+        // Test that goal hasn't been completed
+        assertFalse(dungeon.isComplete());
     }
 
     @Test
