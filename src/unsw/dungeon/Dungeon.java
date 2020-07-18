@@ -49,11 +49,16 @@ public class Dungeon {
         entities.add(entity);
     }
 
+    public void removeEntity(Entity entity) {
+        entities.remove(entity);
+    }
+
     public void setGoal(ComponentGoal goal) {
         this.goal = goal;
     }
 
     public boolean interact(Entity caller, int x, int y) {
+        List<Entity> toRemove = new ArrayList<Entity>(); 
         for (Entity entity : entities) {
             if (entity == caller || entity == null)
                 continue;
@@ -61,8 +66,15 @@ public class Dungeon {
                 if (!entity.interact(caller)) {
                     return false;
                 }
+                if (entity.isVisible().get() == false) {
+                    toRemove.add(entity); 
+                }
             }
         }
+        for (Entity e : toRemove) {
+            entities.remove(e); 
+        }
+        
         return true;
     }
 

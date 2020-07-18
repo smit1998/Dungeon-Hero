@@ -64,10 +64,8 @@ public class Sword extends Entity implements Item, Observer, Weapon, Subject {
             Player player = (Player) caller;
             if (player.pickupItem(this) != null) {
                 player.attach(this);
-                return true;
-            } else {
-                return false;
             }
+            return true; 
         }
         return false;
     }
