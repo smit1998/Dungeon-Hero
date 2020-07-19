@@ -16,6 +16,9 @@ class BoulderTest {
         Player player = new Player(dungeon, 0, 0);
         Boulder boulder = new Boulder(1, 1, dungeon);
 
+        dungeon.addEntity(player);
+        dungeon.addEntity(boulder);
+
         assertTrue(player.getX() == 0);
         assertTrue(player.getY() == 0);
 
@@ -49,6 +52,12 @@ class BoulderTest {
         Boulder bRight = new Boulder(2, 1, dungeon);
         Boulder bDown = new Boulder(1, 2, dungeon);
         Boulder bLeft = new Boulder(0, 1, dungeon);
+
+        dungeon.addEntity(player);
+        dungeon.addEntity(bUp);
+        dungeon.addEntity(bRight);
+        dungeon.addEntity(bDown);
+        dungeon.addEntity(bLeft);
 
         assertTrue(player.getX() == 1);
         assertTrue(player.getY() == 1);
@@ -93,6 +102,16 @@ class BoulderTest {
         Boulder bLeft = new Boulder(1, 3, dungeon);
         Boulder bLeft1 = new Boulder(2, 3, dungeon);
 
+        dungeon.addEntity(player);
+        dungeon.addEntity(bUp);
+        dungeon.addEntity(bUp1);
+        dungeon.addEntity(bRight);
+        dungeon.addEntity(bRight1);
+        dungeon.addEntity(bDown);
+        dungeon.addEntity(bDown1);
+        dungeon.addEntity(bLeft);
+        dungeon.addEntity(bLeft1);
+
         assertTrue(player.getX() == 3);
         assertTrue(player.getY() == 3);
 
@@ -131,5 +150,28 @@ class BoulderTest {
         assertTrue(bLeft1.getX() == 2);
         assertTrue(bLeft1.getY() == 3);
 
+    }
+
+    @Test
+    void testEnemyObstruction() {
+        Dungeon dungeon = new Dungeon(3, 1);
+        Player player = new Player(dungeon, 0, 0);
+        Boulder boulder = new Boulder(1, 0, dungeon);
+        Enemy enemy = new Enemy(2, 0, dungeon);
+        dungeon.addEntity(player);
+        dungeon.addEntity(boulder);
+        dungeon.addEntity(enemy);
+
+        player.moveRight();
+
+        // Test that no entities have moved
+        assertTrue(player.getX() == 0);
+        assertTrue(player.getY() == 0);
+
+        assertTrue(boulder.getX() == 1);
+        assertTrue(boulder.getY() == 0);
+
+        assertTrue(enemy.getX() == 2);
+        assertTrue(enemy.getY() == 0);
     }
 }
