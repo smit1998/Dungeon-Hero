@@ -11,6 +11,7 @@ import unsw.dungeon.*;
 
 class PortalTest {
 
+    @Test
     void PortalTest1() {
         JSONObject playerJSON = new JSONObject();
         playerJSON.put("x", 1);
@@ -52,6 +53,7 @@ class PortalTest {
     }
 
     // test with the boulder
+    @Test
     void PortalTest2() {
         JSONObject playerJSON = new JSONObject();
         playerJSON.put("x", 0);
@@ -107,6 +109,7 @@ class PortalTest {
     }
 
     // test on player holding the sword and with enemy in the dungeon.
+    @Test
     void PortalTest3() {
         JSONObject playerJSON = new JSONObject();
         playerJSON.put("x", 1);
