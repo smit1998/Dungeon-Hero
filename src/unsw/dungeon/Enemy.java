@@ -1,5 +1,6 @@
 package unsw.dungeon;
 
+import java.beans.Visibility;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -108,6 +109,10 @@ public class Enemy extends MoveableEntity implements Subject {
 
     public void updateLifeStatus(boolean newLifeStatus) {
         this.isAlive = newLifeStatus;
+        if (newLifeStatus == false) {
+            task = null; 
+            timer.cancel(); 
+        }
         notifyObservers();
     }
 
