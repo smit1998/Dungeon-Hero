@@ -16,12 +16,12 @@ public class Boulder extends Entity {
 
             if (dungeon().interact(this, newX, newY)) {
                 if (newX >= 0 && newX < dungeon().getWidth()) {
-                    x().set(newX);
+                    setX(newX);
                 } else {
                     return false;
                 }
                 if (newY >= 0 && newY < dungeon().getHeight()) {
-                    y().set(newY);
+                    setY(newY);
                 } else {
                     return false;
                 }

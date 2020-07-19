@@ -39,8 +39,8 @@ public class Key extends Entity implements Item, Observer {
     public void update(Subject obj) {
         if (obj instanceof Player) {
             Player player = (Player) obj;
-            x().set(player.getX());
-            y().set(player.getY());
+            setX(player.getX());
+            setY(player.getY());
         }
     }
 }
