@@ -9,9 +9,10 @@ import org.json.JSONObject;
 
 import unsw.dungeon.*;
 
-class swordTest{
+class SwordTest {
     // basic test
-    void swordtest1() {
+    @Test
+    void SwordTest1() {
         JSONObject playerJSON = new JSONObject();
         playerJSON.put("x", 0);
         playerJSON.put("y", 0);
@@ -42,7 +43,8 @@ class swordTest{
     }
 
     // test with 1 enemy
-    void swordtest2() {
+    @Test
+    void SwordTest2() {
         JSONObject playerJSON = new JSONObject();
         playerJSON.put("x", 0);
         playerJSON.put("y", 0);
@@ -87,7 +89,8 @@ class swordTest{
     }
 
     // sword with 6 enemies
-    void swordtest3() {
+    @Test
+    void SwordTest3() {
         JSONObject playerJSON = new JSONObject();
         playerJSON.put("x", 0);
         playerJSON.put("y", 0);
@@ -104,9 +107,9 @@ class swordTest{
         enemyJSON1.put("type", "enemy");
 
         JSONObject enemyJSON2 = new JSONObject();
-        enemyJSON.put2("x", 3);
-        enemyJSON.put2("y", 0);
-        enemyJSON.put2("type", "enemy");
+        enemyJSON2.put("x", 3);
+        enemyJSON2.put("y", 0);
+        enemyJSON2.put("type", "enemy");
 
         JSONObject enemyJSON3 = new JSONObject();
         enemyJSON3.put("x", 4);

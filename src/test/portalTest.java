@@ -1,5 +1,4 @@
 package test;
-package test;
 
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -10,9 +9,9 @@ import org.json.JSONObject;
 
 import unsw.dungeon.*;
 
-class portalTest {
+class PortalTest {
 
-    void testPortal1() {
+    void PortalTest1() {
         JSONObject playerJSON = new JSONObject();
         playerJSON.put("x", 1);
         playerJSON.put("y", 0);
@@ -52,9 +51,8 @@ class portalTest {
 
     }
 
-
     // test with the boulder
-    void testPortal2() {
+    void PortalTest2() {
         JSONObject playerJSON = new JSONObject();
         playerJSON.put("x", 0);
         playerJSON.put("y", 0);
@@ -82,7 +80,7 @@ class portalTest {
         entitiesJSON.put(portalJSON);
         entitiesJSON.put(portalPairJSON);
         entitiesJSON.put(boulderJSON);
-        
+
         JSONObject json = new JSONObject();
         json.put("width", 3);
         json.put("height", 2);
@@ -98,7 +96,7 @@ class portalTest {
         assertTrue(player.getX() == 1);
         assertTrue(player.getY() == 0);
 
-        //player should move into the portal
+        // player should move into the portal
         player.moveRight();
         // should not have any effect as boulder is present on x = 0, y = 1;
         player.moveLeft();
@@ -109,7 +107,7 @@ class portalTest {
     }
 
     // test on player holding the sword and with enemy in the dungeon.
-    void testPortal3() {
+    void PortalTest3() {
         JSONObject playerJSON = new JSONObject();
         playerJSON.put("x", 1);
         playerJSON.put("y", 0);
@@ -131,7 +129,6 @@ class portalTest {
         swordJSON.put("x", 2);
         swordJSON.put("y", 0);
         swordJSON.put("type", "sword");
-
 
         JSONObject enemy = new JSONObject();
         enemy.put("x", 0);
