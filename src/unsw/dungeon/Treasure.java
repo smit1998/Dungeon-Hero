@@ -21,6 +21,9 @@ public class Treasure extends Entity implements Subject {
                 System.out.println("VICTORY! All treasure picked up!");
             }
         }
+        if (caller instanceof Boulder) {
+            return false;
+        }
         return true;
     }
 
