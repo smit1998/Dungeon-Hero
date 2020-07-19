@@ -23,9 +23,11 @@ public class Key extends Entity implements Item, Observer {
             if (player.pickupItem(this) != null) {
                 player.attach(this);
             }
-            return true;
         }
-        return false;
+        if (caller instanceof Boulder) {
+            return false;
+        }
+        return true;
     }
 
     @Override
