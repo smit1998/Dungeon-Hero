@@ -8,6 +8,25 @@ import unsw.dungeon.*;
 
 class BoulderTest {
 
+    @Test
+    void testValidPush() {
+        Dungeon dungeon = new Dungeon(3, 1);
+        Player player = new Player(dungeon, 0, 0);
+        Boulder boulder = new Boulder(1, 0, dungeon);
+        dungeon.addEntity(player);
+        dungeon.addEntity(boulder);
+
+        player.moveRight();
+
+        // Test that boulder was pushed
+        assertTrue(player.getX() == 1);
+        assertTrue(player.getY() == 0);
+
+        assertTrue(boulder.getX() == 2);
+        assertTrue(boulder.getY() == 0);
+
+    }
+
     // Test that boulders will not move if the player does not move towards it
     @Test
     void testAdjacentMovement() {
