@@ -10,16 +10,14 @@ import java.util.ArrayList;
  */
 public class Player extends MoveableEntity implements Subject {
 
-    // private Inventory inventory;
     private boolean isAlive;
     private Inventory inventory;
     private ArrayList<Observer> observers;
 
     /**
      * Create a player positioned in square (x,y)
-     * 
-     * @param x
-     * @param y
+     * @param x coordinate where the player spawns at
+     * @param y coordinate where the player spawns at
      */
     public Player(Dungeon dungeon, int x, int y) {
         super(x, y, dungeon);
@@ -28,6 +26,12 @@ public class Player extends MoveableEntity implements Subject {
         this.observers = new ArrayList<Observer>();
     }
 
+    /**
+     * Pickups an item e
+     * @return the item that has been picked up
+     * if the item is not picked up, due to the player not being able to, null is returned
+     * otherwise, the item is added to the inventory
+     */
     public Item pickupItem(Entity e) {
         if (e instanceof Item) {
             Item itemAdded = inventory.addItem((Item) e);
@@ -38,10 +42,6 @@ public class Player extends MoveableEntity implements Subject {
             return null;
         }
         return null;
-    }
-
-    public Inventory getInventory() {
-        return this.inventory;
     }
 
     public boolean attack(Entity e) {
