@@ -235,5 +235,4 @@ class AndCompositeGoalTest {
         // Test that goal has been completed
         assertTrue(dungeon.isComplete());
     }
-
 }
