@@ -112,8 +112,8 @@ public class Enemy extends MoveableEntity implements Subject {
         if (newLifeStatus == false) {
             task = null; 
             timer.cancel(); 
-            notifyObservers(); 
         }
+        notifyObservers();
     }
 
     public boolean getIsAlive() {
@@ -121,16 +121,16 @@ public class Enemy extends MoveableEntity implements Subject {
     }
 
     public void attach(Observer o) {
-        observers.add(o); 
+        observers.add(o);
     }
 
     public void detach(Observer o) {
-        observers.remove(o); 
+        observers.remove(o);
     }
 
     public void notifyObservers() {
         for (Observer obs : observers) {
-            obs.update(this); 
+            obs.update(this);
         }
     }
 

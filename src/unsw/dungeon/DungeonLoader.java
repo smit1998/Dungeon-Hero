@@ -92,6 +92,7 @@ public abstract class DungeonLoader {
         dungeon.setGoal(goal);
 
         dungeon.connectGoals();
+        dungeon.connectPortals();
 
         return dungeon;
     }
@@ -222,21 +223,13 @@ public abstract class DungeonLoader {
             case "treasure":
                 return new TreasureGoal(treasureSpawned);
             case "AND": {
-                List<ComponentGoal> subgoals = new ArrayList<ComponentGoal>();
-                for (Object o : json.getJSONArray("subgoals")) {
-                    if (o instanceof JSONObject) {
-                        subgoals.add(loadGoal(dungeon, (JSONObject) o));
-                    }
-                }
+                JSONArray jsonSubgoals = json.getJSONArray("subgoals");
+                List<ComponentGoal> subgoals = loadSubgoals(dungeon, jsonSubgoals);
                 return new AndCompositeGoal(subgoals);
             }
             case "OR": {
-                List<ComponentGoal> subgoals = new ArrayList<ComponentGoal>();
-                for (Object o : json.getJSONArray("subgoals")) {
-                    if (o instanceof JSONObject) {
-                        subgoals.add(loadGoal(dungeon, (JSONObject) o));
-                    }
-                }
+                JSONArray jsonSubgoals = json.getJSONArray("subgoals");
+                List<ComponentGoal> subgoals = loadSubgoals(dungeon, jsonSubgoals);
                 return new OrCompositeGoal(subgoals);
             }
             default:
@@ -244,5 +237,13 @@ public abstract class DungeonLoader {
                 break;
         }
         return null;
+    }
+
+    private List<ComponentGoal> loadSubgoals(Dungeon dungeon, JSONArray jsonSubgoals) {
+        List<ComponentGoal> subgoals = new ArrayList<ComponentGoal>();
+        for (int i = 0; i < jsonSubgoals.length(); i++) {
+            subgoals.add(loadGoal(dungeon, jsonSubgoals.getJSONObject(i)));
+        }
+        return subgoals;
     }
 }

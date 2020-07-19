@@ -1,0 +1,12 @@
+{
+  "width": 11,
+  "height": 5,
+  "entities": [
+    { "x": 5, "y": 0, "type": "player" },
+    { "x": 5, "y": 2, "type": "boulder" },
+    { "x": 5, "y": 3, "type": "boulder" },
+    { "x": 2, "y": 2, "type": "portal", "id": 1 },
+    { "x": 8, "y": 2, "type": "portal", "id": 1 }
+  ],
+  "goal-condition": { "goal": "exit" }
+}
