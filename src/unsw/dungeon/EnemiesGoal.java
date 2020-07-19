@@ -19,9 +19,6 @@ public class EnemiesGoal extends BasicGoal {
     public void update(Subject obj) {
         if (obj instanceof Enemy) {
             Enemy e = (Enemy) obj;
-            // TODO
-            // remove enemiesKill < enemiesSpawned after figuring out how
-            // to remove entities
             if (e.getIsAlive() == false && enemiesKilled < enemiesSpawned) {
                 enemiesKilled += 1;
             }

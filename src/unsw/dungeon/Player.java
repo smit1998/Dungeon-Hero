@@ -28,7 +28,6 @@ public class Player extends MoveableEntity implements Subject {
         this.observers = new ArrayList<Observer>();
     }
 
-    // returns item if i can pickup item, otherwise null
     public Item pickupItem(Entity e) {
         if (e instanceof Item) {
             Item itemAdded = inventory.addItem((Item) e);
