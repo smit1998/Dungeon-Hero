@@ -17,21 +17,36 @@ public abstract class Entity {
 
     private BooleanProperty isVisible;
 
+    /**
+     * Constructor for entity
+     * @param x coordinate position of entity
+     * @param y coordinate position of entity
+     * @param dungeon entity belongs to 
+     */
     public Entity(int x, int y, Dungeon dungeon) {
         position = new Coordinate(x, y);
         this.dungeon = dungeon;
         isVisible = new SimpleBooleanProperty(true);
-        ;
     }
 
+    /**
+     * @return coordinates of the entity
+     */
     public Coordinate getCoordinate() {
         return position;
     }
 
+    /**
+     * @return dungeon the entity belongs to 
+     */
     public Dungeon dungeon() {
         return dungeon;
     }
 
+    /**
+     * Abstract method to implemented in the entity
+     * @return a boolean to whether the calling entity is able to interact with the current one
+     */
     public boolean interact(Entity caller) {
         return false;
     }
