@@ -51,6 +51,14 @@ public abstract class Entity {
         return position.getX();
     }
 
+    public void setX(int x) {
+        x().set(x);
+    }
+
+    public void setY(int y) {
+        y().set(y);
+    }
+
     public BooleanProperty isVisible() {
         return isVisible;
     }

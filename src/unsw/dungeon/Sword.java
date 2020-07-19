@@ -61,8 +61,8 @@ public class Sword extends Entity implements Item, Observer, Weapon, Subject {
     public void update(Subject obj) {
         if (obj instanceof Player) {
             Player player = (Player) obj;
-            x().set(player.getX());
-            y().set(player.getY());
+            setX(player.getX());
+            setY(player.getY());
         }
     }
 
@@ -85,6 +85,6 @@ public class Sword extends Entity implements Item, Observer, Weapon, Subject {
 
     @Override
     public int getPriority() {
-        return PRIORITY; 
+        return PRIORITY;
     }
 }
