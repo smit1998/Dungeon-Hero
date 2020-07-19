@@ -59,23 +59,29 @@ public class Dungeon {
 
     public boolean interact(Entity caller, int x, int y) {
         List<Entity> toRemove = new ArrayList<Entity>(); 
+        boolean result = true; 
         for (Entity entity : entities) {
             if (entity == caller || entity == null)
                 continue;
             if (entity.getX() == x && entity.getY() == y) {
                 if (!entity.interact(caller)) {
-                    return false;
+                    result = false;
                 }
                 if (entity.isVisible().get() == false) {
                     toRemove.add(entity); 
                 }
             }
         }
+        // for the case where the enemy attacks player and enemy dies
+        if (caller.isVisible().get() == false) {
+            toRemove.add(caller); 
+            result = false; 
+        }
         for (Entity e : toRemove) {
             entities.remove(e); 
         }
         
-        return true;
+        return result;
     }
 
     public boolean isComplete() {
