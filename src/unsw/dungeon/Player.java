@@ -31,10 +31,10 @@ public class Player extends MoveableEntity implements Subject {
     // returns item if i can pickup item, otherwise null
     public Item pickupItem(Entity e) {
         if (e instanceof Item) {
-            Item item = (Item) e;
-            if (inventory.addItem(item) != null) {
+            Item itemAdded = inventory.addItem((Item) e);
+            if (itemAdded != null) {
                 e.setVisibility(false);
-                return item;
+                return itemAdded; 
             }
             return null;
         }
