@@ -45,14 +45,14 @@ public class Portal extends Entity {
                 return false;
             }
 
-            caller.x().set(pair.getX());
-            caller.y().set(pair.getY());
+            caller.setX(pair.getX());
+            caller.setY(pair.getY());
             if (dungeon().interact(caller, newX, newY)) {
-                caller.x().set(newX);
-                caller.y().set(newY);
+                caller.setX(newX);
+                caller.setY(newY);
             } else {
-                caller.x().setValue(oldX);
-                caller.y().setValue(oldY);
+                caller.setX(oldX);
+                caller.setY(oldY);
             }
         }
         return false;

@@ -21,7 +21,6 @@ public abstract class Entity {
         position = new Coordinate(x, y);
         this.dungeon = dungeon;
         isVisible = new SimpleBooleanProperty(true);
-        ;
     }
 
     public Coordinate getCoordinate() {
@@ -50,6 +49,14 @@ public abstract class Entity {
 
     public int getX() {
         return position.getX();
+    }
+
+    public void setX(int x) {
+        x().set(x);
+    }
+
+    public void setY(int y) {
+        y().set(y);
     }
 
     public BooleanProperty isVisible() {

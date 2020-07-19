@@ -223,27 +223,27 @@ public abstract class DungeonLoader {
             case "treasure":
                 return new TreasureGoal(treasureSpawned);
             case "AND": {
-                List<ComponentGoal> subgoals = new ArrayList<ComponentGoal>();
-                for (Object o : json.getJSONArray("subgoals")) {
-                    if (o instanceof JSONObject) {
-                        subgoals.add(loadGoal(dungeon, (JSONObject) o));
-                    }
-                }
-                return new AndCompositeGoal(subgoals);
+                JSONArray jsonSubgoals = json.getJSONArray("subgoals");
+                List<ComponentGoal> subgoals = loadSubgoals(dungeon, jsonSubgoals);
+                return new ComplexGoal(new AndGoalStrategy(), subgoals);
             }
             case "OR": {
-                List<ComponentGoal> subgoals = new ArrayList<ComponentGoal>();
-                for (Object o : json.getJSONArray("subgoals")) {
-                    if (o instanceof JSONObject) {
-                        subgoals.add(loadGoal(dungeon, (JSONObject) o));
-                    }
-                }
-                return new OrCompositeGoal(subgoals);
+                JSONArray jsonSubgoals = json.getJSONArray("subgoals");
+                List<ComponentGoal> subgoals = loadSubgoals(dungeon, jsonSubgoals);
+                return new ComplexGoal(new OrGoalStrategy(), subgoals);
             }
             default:
                 // TODO: throw exception
                 break;
         }
         return null;
+    }
+
+    private List<ComponentGoal> loadSubgoals(Dungeon dungeon, JSONArray jsonSubgoals) {
+        List<ComponentGoal> subgoals = new ArrayList<ComponentGoal>();
+        for (int i = 0; i < jsonSubgoals.length(); i++) {
+            subgoals.add(loadGoal(dungeon, jsonSubgoals.getJSONObject(i)));
+        }
+        return subgoals;
     }
 }

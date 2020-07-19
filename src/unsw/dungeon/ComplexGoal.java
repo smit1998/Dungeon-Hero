@@ -6,13 +6,11 @@ import java.util.ArrayList;
 public class ComplexGoal implements ComponentGoal {
 
     private List<ComponentGoal> goals;
+    private GoalStrategy strategy;
 
-    public ComplexGoal() {
-        this.goals = new ArrayList<ComponentGoal>();
-    }
-
-    public ComplexGoal(List<ComponentGoal> goals) {
+    public ComplexGoal(GoalStrategy strategy, List<ComponentGoal> goals) {
         this.goals = goals;
+        this.strategy = strategy;
     }
 
     public void addGoal(ComponentGoal goal) {
@@ -30,6 +28,6 @@ public class ComplexGoal implements ComponentGoal {
     }
 
     public boolean isComplete() {
-        return false;
+        return strategy.isComplete(goals);
     }
 }

@@ -14,12 +14,15 @@ public class Treasure extends Entity implements Subject {
     public boolean interact(Entity caller) {
         if (caller instanceof Player) {
             notifyObservers();
-            // TODO Change visibility
+            setVisibility(false);
 
-            if (dungeon().isComplete()) {
-                // TODO Change dungeon state
-                System.out.println("VICTORY! All treasure picked up!");
-            }
+            // TODO Uncomment when implemented dungeon state
+            // if (dungeon().isComplete()) {
+            // System.out.println("VICTORY! All treasure picked up!");
+            // }
+        }
+        if (caller instanceof Boulder) {
+            return false;
         }
         return true;
     }
