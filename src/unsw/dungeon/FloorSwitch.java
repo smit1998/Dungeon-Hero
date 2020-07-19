@@ -24,16 +24,15 @@ public class FloorSwitch extends Entity implements Subject {
     public boolean interact(Entity caller) {
         if (caller instanceof Boulder) {
             updateIsPressed(true);
-            notifyObservers();
-
-            if (dungeon().isComplete()) {
-                // Change dungeon state
-                System.out.println("VICTORY! All Switches pressed down");
-            }
+            // TODO Uncomment when game state is implemented
+            // if (dungeon().isComplete()) {
+            // // Change dungeon state
+            // System.out.println("VICTORY! All Switches pressed down");
+            // }
         } else {
             updateIsPressed(false);
-            notifyObservers();
         }
+        notifyObservers();
         return true;
     }
 
