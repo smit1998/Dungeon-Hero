@@ -1,31 +1,41 @@
 package unsw.dungeon;
 
-import java.sql.Time;
 import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
 
 public class InvincibilityPotion extends Entity implements Item, Weapon, Observer, Subject {
 
-    private boolean isActive;
-    private Timer remainingTime;
     public final static int MAX_PICKUP = 1;
-    public final static int MAX_HITS = Integer.MAX_VALUE; 
-    private ArrayList<Observer> observers; 
+    public final static int MAX_HITS = Integer.MAX_VALUE;
+
+    private final static int DURATION_MS = 5000;
+
+    private ArrayList<Observer> observers = new ArrayList<Observer>();
+
+    private boolean isActive;
 
     public InvincibilityPotion(int x, int y, Dungeon dungeon) {
         super(x, y, dungeon);
         this.isActive = false;
-        this.observers = new ArrayList<Observer>(); 
-        // this.remainingTime = NEED TO SET IT TO A PARTICULAR TIME.
     }
 
-    public void updateStatus(boolean newActive) {
-        this.isActive = newActive;
+    private void usePotion() {
+        TimerTask effectsWearOff = new TimerTask() {
+            public void run() {
+                // TODO remove later
+                System.out.println("Potion has worn off");
+                isActive = false;
+                notifyObservers();
+            }
+        };
+        new Timer().schedule(effectsWearOff, DURATION_MS);
+        // TODO remove later
+        System.out.println("Potion is active");
     }
 
-    public void startTimer() {
-        // TODO
+    public boolean isActive() {
+        return isActive;
     }
 
     @Override
@@ -42,21 +52,20 @@ public class InvincibilityPotion extends Entity implements Item, Weapon, Observe
     public void updateHitsRemaining() {
     }
 
-
     @Override
     public void attach(Observer o) {
-        observers.add(o); 
+        observers.add(o);
     }
 
     @Override
     public void detach(Observer o) {
-        observers.remove(o); 
+        observers.remove(o);
     }
 
     @Override
     public void notifyObservers() {
         for (Observer obs : observers) {
-            obs.update(this); 
+            obs.update(this);
         }
     }
 
@@ -65,8 +74,9 @@ public class InvincibilityPotion extends Entity implements Item, Weapon, Observe
             Player player = (Player) caller;
             if (player.pickupItem(this) != null) {
                 player.attach(this);
+                usePotion();
             }
-            return true; 
+            return true;
         }
         return false;
     }
