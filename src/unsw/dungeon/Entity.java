@@ -51,36 +51,62 @@ public abstract class Entity {
         return false;
     }
 
+    /**
+     * @return an IntegerProperty, representing x coordinate of the player
+     */
     public IntegerProperty x() {
         return position.x();
     }
 
+    /**
+     * @return an IntegerProperty, representing y coordinate of the player
+     */
     public IntegerProperty y() {
         return position.y();
     }
 
+    /**
+     * @return an integer, representing y coordinate of the player
+     */
     public int getY() {
         return position.getY();
     }
 
+    /**
+     * @return an integer, representing x coordinate of the player
+     */
     public int getX() {
         return position.getX();
     }
 
+    /**
+     * Sets the x position of the player on the dungeon 
+     * @param x coordinate where the entity belongs
+     */
     public void setX(int x) {
         x().set(x);
     }
 
+    /**
+     * Sets the y position of the player on the dungeon 
+     * @param y coordinate where the entity belongs
+     */
     public void setY(int y) {
         y().set(y);
     }
 
+    /**
+     * @return a BooleanProperty, which determines whether an entity is visible in the dungeon or not
+     */
     public BooleanProperty isVisible() {
         return isVisible;
     }
 
+    /**
+     * Changes the visiblitiy of an entity to the specified argument provided
+     * @param isVisible a boolean representing visibility
+     */
     public void setVisibility(boolean isVisible) {
-        System.out.println("set isvisiable to " + isVisible);
         this.isVisible.setValue(isVisible);
     }
 
