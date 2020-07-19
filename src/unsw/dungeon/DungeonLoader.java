@@ -225,12 +225,12 @@ public abstract class DungeonLoader {
             case "AND": {
                 JSONArray jsonSubgoals = json.getJSONArray("subgoals");
                 List<ComponentGoal> subgoals = loadSubgoals(dungeon, jsonSubgoals);
-                return new AndCompositeGoal(subgoals);
+                return new ComplexGoal(new AndGoalStrategy(), subgoals);
             }
             case "OR": {
                 JSONArray jsonSubgoals = json.getJSONArray("subgoals");
                 List<ComponentGoal> subgoals = loadSubgoals(dungeon, jsonSubgoals);
-                return new OrCompositeGoal(subgoals);
+                return new ComplexGoal(new OrGoalStrategy(), subgoals);
             }
             default:
                 // TODO: throw exception

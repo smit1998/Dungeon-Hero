@@ -35,10 +35,14 @@ class PortalTest {
         entitiesJSON.put(portalJSON);
         entitiesJSON.put(portalPairJSON);
 
+        JSONObject goalJSON = new JSONObject();
+        goalJSON.put("goal", "enemies");
+
         JSONObject json = new JSONObject();
         json.put("width", 3);
         json.put("height", 1);
         json.put("entities", entitiesJSON);
+        json.put("goal-condition", goalJSON);
 
         DungeonLoader loader = new DungeonMockLoader(json);
         Dungeon dungeon = loader.load();
@@ -83,10 +87,14 @@ class PortalTest {
         entitiesJSON.put(portalPairJSON);
         entitiesJSON.put(boulderJSON);
 
+        JSONObject goalJSON = new JSONObject();
+        goalJSON.put("goal", "enemies");
+
         JSONObject json = new JSONObject();
         json.put("width", 3);
         json.put("height", 2);
         json.put("entities", entitiesJSON);
+        json.put("goal-condition", goalJSON);
 
         DungeonLoader loader = new DungeonMockLoader(json);
         Dungeon dungeon = loader.load();

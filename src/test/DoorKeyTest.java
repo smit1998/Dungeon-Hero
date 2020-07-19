@@ -36,10 +36,14 @@ class DoorKeyTest {
         entitiesJSON.put(keyJSON);
         entitiesJSON.put(doorJSON);
 
+        JSONObject goalJSON = new JSONObject();
+        goalJSON.put("goal", "exit");
+
         JSONObject json = new JSONObject();
         json.put("width", 4);
         json.put("height", 1);
         json.put("entities", entitiesJSON);
+        json.put("goal-condition", goalJSON);
 
         DungeonLoader loader = new DungeonMockLoader(json);
         Dungeon dungeon = loader.load();
@@ -81,10 +85,14 @@ class DoorKeyTest {
         entitiesJSON.put(keyJSON);
         entitiesJSON.put(doorJSON);
 
+        JSONObject goalJSON = new JSONObject();
+        goalJSON.put("goal", "exit");
+
         JSONObject json = new JSONObject();
         json.put("width", 4);
         json.put("height", 1);
         json.put("entities", entitiesJSON);
+        json.put("goal-condition", goalJSON);
 
         DungeonLoader loader = new DungeonMockLoader(json);
         Dungeon dungeon = loader.load();
@@ -131,10 +139,14 @@ class DoorKeyTest {
         entitiesJSON.put(doorJSON);
         entitiesJSON.put(enemyJSON);
 
+        JSONObject goalJSON = new JSONObject();
+        goalJSON.put("goal", "exit");
+
         JSONObject json = new JSONObject();
         json.put("width", 5);
         json.put("height", 1);
         json.put("entities", entitiesJSON);
+        json.put("goal-condition", goalJSON);
 
         DungeonLoader loader = new DungeonMockLoader(json);
         Dungeon dungeon = loader.load();
@@ -192,10 +204,14 @@ class DoorKeyTest {
         entitiesJSON.put(keyJSON2);
         entitiesJSON.put(doorJSON2);
 
+        JSONObject goalJSON = new JSONObject();
+        goalJSON.put("goal", "exit");
+
         JSONObject json = new JSONObject();
         json.put("width", 6);
         json.put("height", 1);
         json.put("entities", entitiesJSON);
+        json.put("goal-condition", goalJSON);
 
         DungeonLoader loader = new DungeonMockLoader(json);
         Dungeon dungeon = loader.load();

@@ -72,7 +72,6 @@ public class Dungeon {
                 }
             }
         }
-        // for the case where the enemy attacks player and enemy dies
         if (caller.isVisible().get() == false) {
             toRemove.add(caller); 
             result = false; 
