@@ -290,4 +290,73 @@ class BoulderTest {
         assertTrue(treasure.getY() == 0);
     }
 
+    @Test
+    void testClosedDoorObstruction() {
+        Dungeon dungeon = new Dungeon(3, 1);
+        Player player = new Player(dungeon, 0, 0);
+        Boulder boulder = new Boulder(1, 0, dungeon);
+        Door door = new Door(2, 0, dungeon, 1);
+        dungeon.addEntity(player);
+        dungeon.addEntity(boulder);
+        dungeon.addEntity(door);
+
+        player.moveRight();
+
+        // Test that no entities have moved
+        assertTrue(player.getX() == 0);
+        assertTrue(player.getY() == 0);
+
+        assertTrue(boulder.getX() == 1);
+        assertTrue(boulder.getY() == 0);
+
+        assertTrue(door.getX() == 2);
+        assertTrue(door.getY() == 0);
+    }
+
+    @Test
+    void testOpenDoorObstruction() {
+        Dungeon dungeon = new Dungeon(4, 3);
+        Player player = new Player(dungeon, 2, 2);
+        Boulder boulder = new Boulder(1, 0, dungeon);
+        Door door = new Door(2, 0, dungeon, 1);
+        Key key = new Key(2, 1, dungeon, 1);
+        dungeon.addEntity(player);
+        dungeon.addEntity(boulder);
+        dungeon.addEntity(door);
+        dungeon.addEntity(key);
+
+        // Move up to pickup key
+        player.moveUp();
+        assertTrue(player.getX() == 2);
+        assertTrue(player.getY() == 1);
+
+        // Move up to unlock door
+        player.moveUp();
+        assertTrue(player.getX() == 2);
+        assertTrue(player.getY() == 0);
+
+        // Move around, to the back of the boulder (facing the door)
+        player.moveDown();
+        player.moveLeft();
+        player.moveLeft();
+        player.moveUp();
+        assertTrue(player.getX() == 0);
+        assertTrue(player.getY() == 0);
+
+        // Move right to push boulder into open door
+        player.moveRight();
+        assertTrue(player.getX() == 1);
+        assertTrue(player.getY() == 0);
+        assertTrue(boulder.getX() == 2);
+        assertTrue(boulder.getY() == 0);
+
+        // Move right to push boulder out of door way
+        player.moveRight();
+        assertTrue(player.getX() == 2);
+        assertTrue(player.getY() == 0);
+        assertTrue(boulder.getX() == 3);
+        assertTrue(boulder.getY() == 0);
+
+    }
+
 }
