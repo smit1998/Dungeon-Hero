@@ -36,8 +36,10 @@ public class Enemy extends MoveableEntity implements Subject {
 
     private void gotoPlayer() {
         Player player = getPlayer();
-        int diffX = player.getX() - getX();
-        int diffY = player.getY() - getY();
+        int fearModifier = player.hasPotion() ? -1 : 1;
+
+        int diffX = (player.getX() - getX()) * fearModifier;
+        int diffY = (player.getY() - getY()) * fearModifier;
 
         int xDirection = diffX > 0 ? 1 : -1;
         if (diffY == 0) {
@@ -110,8 +112,8 @@ public class Enemy extends MoveableEntity implements Subject {
     public void updateLifeStatus(boolean newLifeStatus) {
         this.isAlive = newLifeStatus;
         if (newLifeStatus == false) {
-            task = null; 
-            timer.cancel(); 
+            task = null;
+            timer.cancel();
         }
         notifyObservers();
     }
