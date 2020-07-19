@@ -9,10 +9,11 @@ import org.json.JSONObject;
 
 import unsw.dungeon.*;
 
-class doorKeyTest {
+class DoorKeyTest {
 
     // standard 1 door and 1 key
-    void testdoorKey1() {
+    @Test
+    void DoorKeyTest1() {
         JSONObject playerJSON = new JSONObject();
         playerJSON.put("x", 0);
         playerJSON.put("y", 0);
@@ -34,7 +35,7 @@ class doorKeyTest {
         entitiesJSON.put(playerJSON);
         entitiesJSON.put(keyJSON);
         entitiesJSON.put(doorJSON);
-        
+
         JSONObject json = new JSONObject();
         json.put("width", 4);
         json.put("height", 1);
@@ -46,7 +47,7 @@ class doorKeyTest {
 
         // player picks up the key
         player.moveRight();
-        //player moves into the door
+        // player moves into the door
         player.moveRight();
         player.moveRight();
 
@@ -56,7 +57,8 @@ class doorKeyTest {
     }
 
     // test with wrong key.
-    void testdoorKey2() {
+    @Test
+    void DoorKeyTest2() {
         JSONObject playerJSON = new JSONObject();
         playerJSON.put("x", 0);
         playerJSON.put("y", 0);
@@ -78,7 +80,7 @@ class doorKeyTest {
         entitiesJSON.put(playerJSON);
         entitiesJSON.put(keyJSON);
         entitiesJSON.put(doorJSON);
-        
+
         JSONObject json = new JSONObject();
         json.put("width", 4);
         json.put("height", 1);
@@ -90,7 +92,7 @@ class doorKeyTest {
 
         // player picks up the key
         player.moveRight();
-        //player moves into the door
+        // player moves into the door
         player.moveRight();
         player.moveRight();
 
@@ -99,7 +101,8 @@ class doorKeyTest {
     }
 
     // test with the enemies.
-    void testdoorKey3() {
+    @Test
+    void DoorKeyTest3() {
         JSONObject playerJSON = new JSONObject();
         playerJSON.put("x", 1);
         playerJSON.put("y", 0);
@@ -127,7 +130,7 @@ class doorKeyTest {
         entitiesJSON.put(keyJSON);
         entitiesJSON.put(doorJSON);
         entitiesJSON.put(enemyJSON);
-        
+
         JSONObject json = new JSONObject();
         json.put("width", 5);
         json.put("height", 1);
@@ -151,7 +154,8 @@ class doorKeyTest {
     }
 
     // test with multiple doors and keys
-    void testdoorKey4() {
+    @Test
+    void DoorKeyTest4() {
         JSONObject playerJSON = new JSONObject();
         playerJSON.put("x", 0);
         playerJSON.put("y", 0);
@@ -199,11 +203,11 @@ class doorKeyTest {
 
         // picks up the key1
         player.moveRight();
-        //enters door1
+        // enters door1
         player.moveRight();
-        
+
         player.moveRight();
-        //picks up key2
+        // picks up key2
         player.moveRight();
         // enters door2
         player.moveRight();
