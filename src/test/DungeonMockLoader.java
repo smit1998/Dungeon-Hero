@@ -56,5 +56,4 @@ public class DungeonMockLoader extends DungeonLoader {
     @Override
     public void onLoad(InvincibilityPotion invincibilityPotion) {
     }
-
 }
