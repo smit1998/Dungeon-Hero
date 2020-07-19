@@ -21,7 +21,6 @@ public abstract class Entity {
         position = new Coordinate(x, y);
         this.dungeon = dungeon;
         isVisible = new SimpleBooleanProperty(true);
-        ;
     }
 
     public Coordinate getCoordinate() {

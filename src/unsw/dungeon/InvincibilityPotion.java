@@ -24,15 +24,11 @@ public class InvincibilityPotion extends Entity implements Item, Weapon, Observe
     private void usePotion() {
         TimerTask effectsWearOff = new TimerTask() {
             public void run() {
-                // TODO remove later
-                System.out.println("Potion has worn off");
                 isActive = false;
                 notifyObservers();
             }
         };
         new Timer().schedule(effectsWearOff, DURATION_MS);
-        // TODO remove later
-        System.out.println("Potion is active");
     }
 
     public boolean isActive() {
