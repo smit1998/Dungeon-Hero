@@ -5,12 +5,10 @@ public class Key extends Entity implements Item, Observer {
     public final static int MAX_PICKUP = 1;
 
     private int id;
-    private Inventory inventory;
 
     public Key(int x, int y, Dungeon dungeon, int id) {
         super(x, y, dungeon);
         this.id = id;
-        this.inventory = null;
     }
 
     public int getID() {
@@ -33,11 +31,6 @@ public class Key extends Entity implements Item, Observer {
     @Override
     public int getMaxPickup() {
         return MAX_PICKUP;
-    }
-
-    @Override
-    public void setInventory(Inventory i) {
-        this.inventory = i;
     }
 
     @Override
