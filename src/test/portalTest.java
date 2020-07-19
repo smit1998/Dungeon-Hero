@@ -2,7 +2,6 @@ package test;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
-import org.junit.jupiter.api.Test;
 
 import unsw.dungeon.Dungeon;
 import unsw.dungeon.DungeonLoader;
@@ -49,6 +48,8 @@ class portalTest {
         assertTrue(player.getY() == 0);
 
     }
+
+
     // test with the boulder
     void testPortal2() {
         JSONObject playerJSON = new JSONObject();
@@ -172,10 +173,11 @@ class portalTest {
         assertTrue(dungeon.isComplete());
 
     }
-
+     
     private void assertFalse(boolean complete) {
     }
 
     private void assertTrue(boolean b) {
     }
+
 }
