@@ -100,6 +100,8 @@ class portalTest {
 
         //player should move into the portal
         player.moveRight();
+        // should not have any effect as boulder is present on x = 0, y = 1;
+        player.moveLeft();
 
         assertTrue(player.getX() == 1);
         assertTrue(player.getY() == 1);
