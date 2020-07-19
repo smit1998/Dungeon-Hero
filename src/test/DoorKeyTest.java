@@ -152,17 +152,21 @@ class DoorKeyTest {
         Dungeon dungeon = loader.load();
         Player player = dungeon.getPlayer();
 
+        // Pickup key
         player.moveRight();
 
-        player.moveRight();
+        // Unlock door
         player.moveRight();
 
+        // Go through door
+        player.moveRight();
+
+        // Moves back into doorway
         player.moveLeft();
 
-        assertTrue(player.getX() == 2);
+        assertTrue(player.getX() == 3);
         assertTrue(player.getY() == 0);
 
-        assertTrue(player.getLifeStatus() == false);
     }
 
     // test with multiple doors and keys
