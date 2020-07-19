@@ -63,6 +63,10 @@ public class Player extends MoveableEntity implements Subject {
         this.isAlive = newLifeStatus;
     }
 
+    public boolean getLifeStatus() {
+        return this.isAlive;
+    }
+    
     @Override
     public boolean interact(Entity caller) {
         if (caller instanceof Enemy) {
