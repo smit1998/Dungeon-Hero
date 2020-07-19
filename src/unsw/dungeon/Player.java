@@ -28,14 +28,17 @@ public class Player extends MoveableEntity implements Subject {
         this.observers = new ArrayList<Observer>(); 
     }
 
-    // returns true if i can pickup item, otherwise false
+    // returns item if i can pickup item, otherwise null 
     public Item pickupItem(Entity e) {
-        Item item = null; 
         if (e instanceof Item) {
-            e.setVisibility(false);
-            item = (Item) e; 
+            Item item = (Item) e; 
+            if (inventory.addItem(item) != null) {
+                e.setVisibility(false);
+                return item; 
+            }
+            return null; 
         }
-        return inventory.addItem(item);
+        return null; 
     }
 
     public Inventory getInventory() {

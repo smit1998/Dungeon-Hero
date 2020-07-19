@@ -10,20 +10,12 @@ public class Sword extends Entity implements Item, Observer, Weapon, Subject {
 
     private boolean isPickedUp;
     private int remainingHits;
-    private Inventory inventory;
-    private Dungeon dungeon;
     private ArrayList<Observer> observers; 
 
     public Sword(int x, int y, Dungeon dungeon) {
         super(x, y, dungeon);
         this.remainingHits = STARTING_DURABILITY;
-        this.inventory = null;
-        this.dungeon = dungeon;
         this.observers = new ArrayList<Observer>(); 
-    }
-
-    public void setInventory(Inventory i) {
-        inventory = i;
     }
 
     // returns the current status of the sword.

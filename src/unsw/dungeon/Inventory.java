@@ -12,7 +12,7 @@ public class Inventory implements Observer {
 
     public Item addItem(Item item) {
         if (countItem(item) < item.getMaxPickup()) {
-            item.setInventory(this);
+            System.out.println("adding item"); 
             items.add(item);
             if (item instanceof Sword) {
                 Sword s = (Sword) item;
