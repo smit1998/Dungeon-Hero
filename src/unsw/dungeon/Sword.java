@@ -10,12 +10,12 @@ public class Sword extends Entity implements Item, Observer, Weapon, Subject {
 
     private boolean isPickedUp;
     private int remainingHits;
-    private ArrayList<Observer> observers; 
+    private ArrayList<Observer> observers;
 
     public Sword(int x, int y, Dungeon dungeon) {
         super(x, y, dungeon);
         this.remainingHits = STARTING_DURABILITY;
-        this.observers = new ArrayList<Observer>(); 
+        this.observers = new ArrayList<Observer>();
     }
 
     // returns the current status of the sword.
@@ -31,10 +31,10 @@ public class Sword extends Entity implements Item, Observer, Weapon, Subject {
     // drceases the remaining hits by 1.
     public void updateHitsRemaining() {
         this.remainingHits--;
-        System.out.println("MAH WEAPON"); 
+        System.out.println("MAH WEAPON");
         if (remainingHits == 0) {
             setVisibility(false);
-            notifyObservers(); 
+            notifyObservers();
         }
     }
 
@@ -56,9 +56,11 @@ public class Sword extends Entity implements Item, Observer, Weapon, Subject {
             if (player.pickupItem(this) != null) {
                 player.attach(this);
             }
-            return true; 
         }
-        return false;
+        if (caller instanceof Boulder) {
+            return false;
+        }
+        return true;
     }
 
     @Override
@@ -72,18 +74,18 @@ public class Sword extends Entity implements Item, Observer, Weapon, Subject {
 
     @Override
     public void attach(Observer o) {
-        observers.add(o); 
+        observers.add(o);
     }
 
     @Override
     public void detach(Observer o) {
-        observers.remove(o); 
+        observers.remove(o);
     }
 
     @Override
     public void notifyObservers() {
         for (Observer obs : observers) {
-            obs.update(this); 
+            obs.update(this);
         }
     }
 }

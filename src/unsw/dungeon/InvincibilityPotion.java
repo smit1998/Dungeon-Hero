@@ -76,9 +76,11 @@ public class InvincibilityPotion extends Entity implements Item, Weapon, Observe
                 player.attach(this);
                 usePotion();
             }
-            return true;
         }
-        return false;
+        if (caller instanceof Boulder) {
+            return false;
+        }
+        return true;
     }
 
     public void update(Subject obj) {
