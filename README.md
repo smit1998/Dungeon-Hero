@@ -568,6 +568,12 @@ Marks will be deducted for poor git and GitLab usage. For example, meaningless c
 * Created DungeonMockLoader to load dungeons from JSONObjects
 * Fixed boulder entities going out of bounds
 
+##### 19/07/2020
+
+**Fergus**
+* Wrote tests for Exit
+* Wrote tests for Boulder
+
 ### Week-08
 
 ### Week-09
