@@ -39,8 +39,7 @@ public class Sword extends Entity implements Item, Observer, Weapon, Subject {
     // drceases the remaining hits by 1.
     public void updateHitsRemaining() {
         this.remainingHits--;
-        // probably should use observer pattern, as removing item shouldn't be a swords
-        // responsibility?
+        System.out.println("MAH WEAPON"); 
         if (remainingHits == 0) {
             setVisibility(false);
             notifyObservers(); 

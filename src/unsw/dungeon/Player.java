@@ -29,16 +29,18 @@ public class Player extends MoveableEntity implements Subject {
     }
 
     // returns true if i can pickup item, otherwise false
-    public Item pickupItem(Item item) {
+    public Item pickupItem(Entity e) {
+        Item item = null; 
+        if (e instanceof Item) {
+            e.setVisibility(false);
+            item = (Item) e; 
+        }
         return inventory.addItem(item);
     }
 
     public Inventory getInventory() {
         return this.inventory;
     }
-    // public void removeItem(Item i) {
-    // // todo
-    // }
 
     public boolean attack(Entity e) {
         if ((e instanceof Enemy)) {
@@ -67,8 +69,11 @@ public class Player extends MoveableEntity implements Subject {
     public boolean interact(Entity caller) {
         if (caller instanceof Enemy) {
             Enemy enemy = (Enemy) caller; 
-            if (inventory.getWeapon() != null) {
-                attack(enemy); 
+            Weapon weapon = inventory.getWeapon(); 
+            if (weapon != null) {
+                enemy.setVisibility(false);
+                enemy.updateLifeStatus(false);
+                weapon.updateHitsRemaining();
                 return false; 
             } else {
                 enemy.attack(this); 
