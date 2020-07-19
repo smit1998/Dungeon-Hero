@@ -1,11 +1,14 @@
 package test;
+package test;
+
+import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-import unsw.dungeon.Dungeon;
-import unsw.dungeon.DungeonLoader;
-import unsw.dungeon.Player;
+import unsw.dungeon.*;
 
 class portalTest {
 
@@ -172,12 +175,6 @@ class portalTest {
         // goal is acheived.
         assertTrue(dungeon.isComplete());
 
-    }
-     
-    private void assertFalse(boolean complete) {
-    }
-
-    private void assertTrue(boolean b) {
     }
 
 }
