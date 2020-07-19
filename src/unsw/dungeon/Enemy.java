@@ -1,5 +1,6 @@
 package unsw.dungeon;
 
+import java.beans.Visibility;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -35,8 +36,10 @@ public class Enemy extends MoveableEntity implements Subject {
 
     private void gotoPlayer() {
         Player player = getPlayer();
-        int diffX = player.getX() - getX();
-        int diffY = player.getY() - getY();
+        int fearModifier = player.hasPotion() ? -1 : 1;
+
+        int diffX = (player.getX() - getX()) * fearModifier;
+        int diffY = (player.getY() - getY()) * fearModifier;
 
         int xDirection = diffX > 0 ? 1 : -1;
         if (diffY == 0) {
@@ -108,6 +111,11 @@ public class Enemy extends MoveableEntity implements Subject {
 
     public void updateLifeStatus(boolean newLifeStatus) {
         this.isAlive = newLifeStatus;
+        if (newLifeStatus == false) {
+            task = null;
+            timer.cancel();
+        }
+        notifyObservers();
     }
 
     public boolean getIsAlive() {
@@ -115,16 +123,16 @@ public class Enemy extends MoveableEntity implements Subject {
     }
 
     public void attach(Observer o) {
-        observers.add(o); 
+        observers.add(o);
     }
 
     public void detach(Observer o) {
-        observers.remove(o); 
+        observers.remove(o);
     }
 
     public void notifyObservers() {
         for (Observer obs : observers) {
-            obs.update(this); 
+            obs.update(this);
         }
     }
 
