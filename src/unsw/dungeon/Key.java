@@ -5,12 +5,10 @@ public class Key extends Entity implements Item, Observer {
     public final static int MAX_PICKUP = 1;
 
     private int id;
-    private Inventory inventory;
 
     public Key(int x, int y, Dungeon dungeon, int id) {
         super(x, y, dungeon);
         this.id = id;
-        this.inventory = null;
     }
 
     public int getID() {
@@ -25,19 +23,16 @@ public class Key extends Entity implements Item, Observer {
             if (player.pickupItem(this) != null) {
                 player.attach(this);
             }
-            return true;
         }
-        return false;
+        if (caller instanceof Boulder) {
+            return false;
+        }
+        return true;
     }
 
     @Override
     public int getMaxPickup() {
         return MAX_PICKUP;
-    }
-
-    @Override
-    public void setInventory(Inventory i) {
-        this.inventory = i;
     }
 
     @Override
