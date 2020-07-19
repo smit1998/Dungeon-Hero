@@ -35,7 +35,7 @@ class SwordTest {
         json.put("height", 1);
         json.put("entities", entitiesJSON);
         json.put("goal-condition", goalJSON);
-        
+
         DungeonLoader loader = new DungeonMockLoader(json);
         Dungeon dungeon = loader.load();
         Player player = dungeon.getPlayer();
@@ -62,7 +62,7 @@ class SwordTest {
         JSONObject enemyJSON = new JSONObject();
         enemyJSON.put("x", 2);
         enemyJSON.put("y", 0);
-        enemyJSON.put("type", ":enemy");
+        enemyJSON.put("type", "enemy");
 
         JSONArray entitiesJSON = new JSONArray();
         entitiesJSON.put(playerJSON);

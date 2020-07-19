@@ -22,7 +22,7 @@ class InvincibilityPotionTest {
         JSONObject potionJSON = new JSONObject();
         potionJSON.put("x", 1);
         potionJSON.put("y", 0);
-        potionJSON.put("type", "potion");
+        potionJSON.put("type", "invincibility");
 
         JSONArray entitiesJSON = new JSONArray();
         entitiesJSON.put(playerJSON);
@@ -62,7 +62,7 @@ class InvincibilityPotionTest {
         JSONObject potionJSON = new JSONObject();
         potionJSON.put("x", 2);
         potionJSON.put("y", 0);
-        potionJSON.put("type", "potion");
+        potionJSON.put("type", "invincibility");
 
         JSONObject enemyJSON = new JSONObject();
         enemyJSON.put("x", 0);
@@ -112,7 +112,7 @@ class InvincibilityPotionTest {
         JSONObject potionJSON = new JSONObject();
         potionJSON.put("x", 2);
         potionJSON.put("y", 0);
-        potionJSON.put("type", "potion");
+        potionJSON.put("type", "invincibility");
 
         JSONObject enemyJSON = new JSONObject();
         enemyJSON.put("x", 0);
