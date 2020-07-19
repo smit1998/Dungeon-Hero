@@ -7,6 +7,7 @@ public class Sword extends Entity implements Item, Observer, Weapon, Subject {
     // use strategy pattern here
     public final static int MAX_PICKUP = 1;
     public final static int STARTING_DURABILITY = 5;
+    public final static int PRIORITY = 50;
 
     private boolean isPickedUp;
     private int remainingHits;
@@ -85,5 +86,10 @@ public class Sword extends Entity implements Item, Observer, Weapon, Subject {
         for (Observer obs : observers) {
             obs.update(this); 
         }
+    }
+
+    @Override
+    public int getPriority() {
+        return PRIORITY; 
     }
 }

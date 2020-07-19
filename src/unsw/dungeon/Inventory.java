@@ -14,8 +14,8 @@ public class Inventory implements Observer {
         if (countItem(item) < item.getMaxPickup()) {
             System.out.println("adding item"); 
             items.add(item);
-            if (item instanceof Sword) {
-                Sword s = (Sword) item;
+            if (item instanceof Subject) {
+                Subject s = (Subject) item;
                 s.attach(this);
             }
             return item;
@@ -38,12 +38,16 @@ public class Inventory implements Observer {
     }
 
     public Weapon getWeapon() {
+        Weapon chosenWeapon = null; 
         for (Item inventoryItem : items) {
             if (inventoryItem instanceof Weapon) {
-                return (Weapon) inventoryItem;
+                Weapon inventoryWeapon = (Weapon) inventoryItem; 
+                if (chosenWeapon == null || chosenWeapon.getPriority() < inventoryWeapon.getPriority())  {
+                    chosenWeapon = (Weapon) inventoryItem;
+                }
             }
         }
-        return null;
+        return chosenWeapon;
     }
 
     @Override
