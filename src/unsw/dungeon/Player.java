@@ -29,29 +29,49 @@ public class Player extends MoveableEntity implements Subject {
     }
 
     // returns true if i can pickup item, otherwise false
-    private Item pickupItem(Item item) {
+    public Item pickupItem(Item item) {
         return inventory.addItem(item);
     }
 
+    public Inventory getInventory() {
+        return this.inventory;
+    }
     // public void removeItem(Item i) {
     // // todo
     // }
 
-    public void attack(Entity e) {
-        // todo
+    public boolean attack(Entity e) {
+        if ((e instanceof Enemy)) {
+            Weapon weapon = getWeapon(); 
+            if (weapon != null) {
+                Enemy enemy = (Enemy) e; 
+                enemy.updateLifeStatus(false);
+                enemy.setVisibility(false);
+                weapon.updateHitsRemaining();
+                return true;
+            }
+            return false; 
+        }
+        return false; 
     }
 
-    public void updateLifeStatus() {
-        // todo
+    public Weapon getWeapon() {
+        return inventory.getWeapon(); 
+    }
+
+    public void updateLifeStatus(boolean newLifeStatus) {
+        this.isAlive = newLifeStatus;
     }
 
     @Override
     public boolean interact(Entity caller) {
-        if (caller instanceof Item) {
-            Item item = (Item) caller; 
-            if (pickupItem(item) == null) {
+        if (caller instanceof Enemy) {
+            Enemy enemy = (Enemy) caller; 
+            if (inventory.getWeapon() != null) {
+                attack(enemy); 
                 return false; 
             } else {
+                enemy.attack(this); 
                 return true; 
             }
         }

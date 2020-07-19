@@ -84,16 +84,21 @@ public class Enemy extends MoveableEntity implements Subject {
         }
     }
 
+    public void attack(Player p) {
+        p.updateLifeStatus(false);
+        p.setVisibility(false);
+    }
+
     @Override
     public boolean interact(Entity caller) {
         if (caller instanceof Player) {
-            // TODO Determine whether player has weapon
-
-            // Assume player has weapon
-            updateLifeStatus(false);
-            setVisibility(false);
-            notifyObservers();
-            return true;
+            Player player = (Player) caller;
+            if (player.attack(this) == true) {
+                return true;
+            } else {
+                this.attack(player);
+                return false;
+            }
         }
         return false;
     }
@@ -103,6 +108,7 @@ public class Enemy extends MoveableEntity implements Subject {
 
     public void updateLifeStatus(boolean newLifeStatus) {
         this.isAlive = newLifeStatus;
+        notifyObservers();
     }
 
     public boolean getIsAlive() {
@@ -110,20 +116,17 @@ public class Enemy extends MoveableEntity implements Subject {
     }
 
     public void attach(Observer o) {
-        if (!observers.contains(o)) {
-            observers.add(o);
-        }
-
+        observers.add(o);
     }
 
     public void detach(Observer o) {
         observers.remove(o);
-
     }
 
     public void notifyObservers() {
-        for (Observer observer : observers) {
-            observer.update(this);
+        for (Observer obs : observers) {
+            obs.update(this);
         }
     }
+
 }

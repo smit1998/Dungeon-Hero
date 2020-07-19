@@ -3,6 +3,8 @@ package unsw.dungeon;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 import org.json.JSONArray;
@@ -47,14 +49,50 @@ public abstract class DungeonLoader {
 
         JSONArray jsonEntities = json.getJSONArray("entities");
 
+        // Sort entities so that switches are at the start and players are at the end
+        List<JSONObject> jsonValues = new ArrayList<JSONObject>();
         for (int i = 0; i < jsonEntities.length(); i++) {
-            loadEntity(dungeon, jsonEntities.getJSONObject(i));
+            jsonValues.add(jsonEntities.getJSONObject(i));
         }
+        Collections.sort(jsonValues, new Comparator<JSONObject>() {
+            private static final String KEY_NAME = "type";
+
+            @Override
+            public int compare(JSONObject a, JSONObject b) {
+                String typeA = a.getString(KEY_NAME);
+                String typeB = b.getString(KEY_NAME);
+
+                if (typeA.equals("player") && typeB.equals("player"))
+                    return 0;
+                else if (typeA.equals("player") && !typeB.equals("player")) {
+                    return 1;
+                } else if (!typeA.equals("player") && typeB.equals("player")) {
+                    return -1;
+                }
+                if (typeA.equals("switch") && typeB.equals("switch")) {
+                    return 0;
+                } else if (typeA.equals("switch") && !typeB.equals("switch")) {
+                    return 1;
+                } else if (!typeA.equals("switch") && typeB.equals("switch")) {
+                    return -1;
+                }
+
+                return 0;
+            }
+        });
+        for (JSONObject entity : jsonValues) {
+            loadEntity(dungeon, entity);
+        }
+        // Original code
+        // for (int i = 0; i < jsonEntities.length(); i++) {
+        // loadEntity(dungeon, jsonEntities.getJSONObject(i));
+        // }
 
         ComponentGoal goal = loadGoal(dungeon, json.getJSONObject("goal-condition"));
         dungeon.setGoal(goal);
 
         dungeon.connectGoals();
+        dungeon.connectPortals();
 
         return dungeon;
     }
@@ -185,21 +223,13 @@ public abstract class DungeonLoader {
             case "treasure":
                 return new TreasureGoal(treasureSpawned);
             case "AND": {
-                List<ComponentGoal> subgoals = new ArrayList<ComponentGoal>();
-                for (Object o : json.getJSONArray("subgoals")) {
-                    if (o instanceof JSONObject) {
-                        subgoals.add(loadGoal(dungeon, (JSONObject) o));
-                    }
-                }
+                JSONArray jsonSubgoals = json.getJSONArray("subgoals");
+                List<ComponentGoal> subgoals = loadSubgoals(dungeon, jsonSubgoals);
                 return new AndCompositeGoal(subgoals);
             }
             case "OR": {
-                List<ComponentGoal> subgoals = new ArrayList<ComponentGoal>();
-                for (Object o : json.getJSONArray("subgoals")) {
-                    if (o instanceof JSONObject) {
-                        subgoals.add(loadGoal(dungeon, (JSONObject) o));
-                    }
-                }
+                JSONArray jsonSubgoals = json.getJSONArray("subgoals");
+                List<ComponentGoal> subgoals = loadSubgoals(dungeon, jsonSubgoals);
                 return new OrCompositeGoal(subgoals);
             }
             default:
@@ -207,5 +237,13 @@ public abstract class DungeonLoader {
                 break;
         }
         return null;
+    }
+
+    private List<ComponentGoal> loadSubgoals(Dungeon dungeon, JSONArray jsonSubgoals) {
+        List<ComponentGoal> subgoals = new ArrayList<ComponentGoal>();
+        for (int i = 0; i < jsonSubgoals.length(); i++) {
+            subgoals.add(loadGoal(dungeon, jsonSubgoals.getJSONObject(i)));
+        }
+        return subgoals;
     }
 }
