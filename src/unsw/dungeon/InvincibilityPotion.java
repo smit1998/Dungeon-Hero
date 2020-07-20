@@ -6,10 +6,10 @@ import java.util.HashSet;
 import java.util.Set;
 
 /**
- * class for the invisibility potion
- * fears all enemies, and kills all enemies upon impact for 5 seconds
+ * class for the invisibility potion fears all enemies, and kills all enemies
+ * upon impact for 5 seconds
  */
-public class InvincibilityPotion extends Entity implements Item, Weapon, Observer, Subject {
+public class InvincibilityPotion extends ItemEntity implements Weapon, Observer, Subject {
 
     public final static int MAX_PICKUP = 1;
     public final static int MAX_HITS = Integer.MAX_VALUE;
@@ -23,9 +23,10 @@ public class InvincibilityPotion extends Entity implements Item, Weapon, Observe
 
     /**
      * Constructor for an invincibility potion
-     * @param dungeon that the potion belongs to 
-     * @param x coordinate where the potion spawns
-     * @param y coordinate where the potion spawns
+     * 
+     * @param dungeon that the potion belongs to
+     * @param x       coordinate where the potion spawns
+     * @param y       coordinate where the potion spawns
      */
     public InvincibilityPotion(int x, int y, Dungeon dungeon) {
         super(x, y, dungeon);
@@ -33,8 +34,8 @@ public class InvincibilityPotion extends Entity implements Item, Weapon, Observe
     }
 
     /**
-     * sets a timer task, for DURATION_MS amount of time
-     * during this time all enemies run from the entity that uses potion
+     * sets a timer task, for DURATION_MS amount of time during this time all
+     * enemies run from the entity that uses potion
      */
     private void usePotion() {
         TimerTask effectsWearOff = new TimerTask() {
@@ -54,7 +55,8 @@ public class InvincibilityPotion extends Entity implements Item, Weapon, Observe
     }
 
     /**
-     * @return integer MAX_PICKUP, the maximum number of invincibilityPotions someone can pickup
+     * @return integer MAX_PICKUP, the maximum number of invincibilityPotions
+     *         someone can pickup
      */
     @Override
     public int getMaxPickup() {
@@ -70,7 +72,8 @@ public class InvincibilityPotion extends Entity implements Item, Weapon, Observe
     }
 
     /**
-     * updates the number of hits remaining in the potion (since it is infinity, this does nothing)
+     * updates the number of hits remaining in the potion (since it is infinity,
+     * this does nothing)
      */
     @Override
     public void updateHitsRemaining() {
@@ -78,6 +81,7 @@ public class InvincibilityPotion extends Entity implements Item, Weapon, Observe
 
     /**
      * attach an observer to observer list
+     * 
      * @param o observer to be added
      */
     @Override
@@ -87,6 +91,7 @@ public class InvincibilityPotion extends Entity implements Item, Weapon, Observe
 
     /**
      * remove an observer from the observer list
+     * 
      * @param o observer to be removed
      */
     @Override
@@ -95,8 +100,8 @@ public class InvincibilityPotion extends Entity implements Item, Weapon, Observe
     }
 
     /**
-     * calles the update method for all observers in the observer list
-     * uses the concept of pulling, by passing the whole potion object to the observer
+     * calles the update method for all observers in the observer list uses the
+     * concept of pulling, by passing the whole potion object to the observer
      */
     @Override
     public void notifyObservers() {
@@ -106,8 +111,10 @@ public class InvincibilityPotion extends Entity implements Item, Weapon, Observe
     }
 
     /**
-     * Used to determine interaction between a calling entity and the invincibility potion
-     * if calling object is a player, determines if the potion can be picked up 
+     * Used to determine interaction between a calling entity and the invincibility
+     * potion if calling object is a player, determines if the potion can be picked
+     * up
+     * 
      * @param caller - the entity who calls the interact method
      * @return true if the interaction can go through otherwise false
      */
@@ -136,7 +143,8 @@ public class InvincibilityPotion extends Entity implements Item, Weapon, Observe
     }
 
     /**
-     * @return an integer (0 - MAX_INTEGER) representing the priority of the current weapon
+     * @return an integer (0 - MAX_INTEGER) representing the priority of the current
+     *         weapon
      */
     @Override
     public int getPriority() {
@@ -144,7 +152,8 @@ public class InvincibilityPotion extends Entity implements Item, Weapon, Observe
     }
 
     /**
-     * Attacks a given enemy, by setting their life status to false (kills enemy); 
+     * Attacks a given enemy, by setting their life status to false (kills enemy);
+     * 
      * @param e enemy to be attacked
      */
     @Override
