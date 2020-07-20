@@ -118,7 +118,7 @@ public class Sword extends ItemEntity implements Weapon, Subject {
      * @param e enemy to be attacked
      */
     public void attack(LifeEntity e) {
-        e.updateLifeStatus(false);
+        e.kill();
         updateHitsRemaining();
     }
 }
