@@ -59,7 +59,10 @@ public class Door extends Entity {
     }
 
     /**
-     * opens the door if the player has the right key for that door.
+     * Interact with this entity. If the caller is a player, they will open this
+     * door if they have the right key.
+     * 
+     * @return whether the interaction was successful
      */
     public boolean interact(Entity caller) {
         if (getIsOpen()) {
@@ -67,14 +70,12 @@ public class Door extends Entity {
         }
         if (caller instanceof Player) {
             Player player = (Player) caller;
-            if (!getIsOpen()) {
-                Key key = player.getKey();
-                if (key != null) {
-                    if (open(key)) {
-                        key.isVisible().setValue(false);
-                        key.notifyObservers();
-                        return true;
-                    }
+            Key key = player.getKey();
+            if (key != null) {
+                if (open(key)) {
+                    key.setVisibility(false);
+                    key.notifyObservers();
+                    return true;
                 }
             }
         }

@@ -25,10 +25,7 @@ public class Inventory implements Observer {
     public ItemEntity addItem(ItemEntity item) {
         if (countItem(item) < item.getMaxPickup()) {
             items.add(item);
-            if (item instanceof Subject) {
-                Subject s = (Subject) item;
-                s.attach(this);
-            }
+            item.attach(this);
             return item;
         }
         return null;
@@ -86,12 +83,8 @@ public class Inventory implements Observer {
      * 
      * @param obj to be removed
      */
-    @Override
     public void update(Subject obj) {
-        if (obj instanceof ItemEntity) {
-            ItemEntity i = (ItemEntity) obj;
-            removeItem(i);
-        }
+        removeItem((ItemEntity) obj);
     }
 
     /**
