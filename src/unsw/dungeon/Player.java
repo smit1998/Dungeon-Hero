@@ -61,7 +61,7 @@ public class Player extends MoveableEntity {
     /**
      * @return a Weapon with the highest priority in the players inventory
      */
-    public Weapon getWeapon() {
+    private Weapon getWeapon() {
         return inventory.getWeapon();
     }
 
