@@ -92,4 +92,9 @@ public class InvincibilityPotion extends Entity implements Item, Weapon, Observe
     public int getPriority() {
         return PRIORITY;
     }
+
+    @Override
+    public void attack(Enemy e) {
+        e.updateLifeStatus(false);
+    }
 }
