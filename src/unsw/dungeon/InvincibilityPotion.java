@@ -107,9 +107,8 @@ public class InvincibilityPotion extends Entity implements Item, Weapon, Observe
     /**
      * Used to determine interaction between a calling entity and the invincibility potion
      * if calling object is a player, determines if the potion can be picked up 
-     * 
-     * @param caller
-     * @return 
+     * @param caller - the entity who calls the interact method
+     * @return true if the interaction can go through otherwise false
      */
     public boolean interact(Entity caller) {
         if (caller instanceof Player) {
