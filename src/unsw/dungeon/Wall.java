@@ -6,4 +6,8 @@ public class Wall extends Entity {
         super(x, y, dungeon);
     }
 
+    public boolean interact(Entity caller) {
+        return false;
+    }
+
 }
