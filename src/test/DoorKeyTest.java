@@ -282,13 +282,13 @@ class DoorKeyTest {
         playerJSON.put("type", "player");
 
         JSONObject keyJSON = new JSONObject();
-        keyJSON.put("x", 1);
+        keyJSON.put("x", 2);
         keyJSON.put("y", 0);
         keyJSON.put("id", 1);
         keyJSON.put("type", "key");
 
         JSONObject swordJSON = new JSONObject();
-        swordJSON.put("x", 2);
+        swordJSON.put("x", 1);
         swordJSON.put("y", 0);
         swordJSON.put("type", "sword");
 
@@ -323,10 +323,10 @@ class DoorKeyTest {
         Dungeon dungeon = loader.load();
         Player player = dungeon.getPlayer();
 
-        // Pickup key
+        // Pickup sword
         player.moveRight();
 
-        // Pickup sword
+        // Pickup key
         player.moveRight();
 
         // enters door
