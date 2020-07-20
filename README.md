@@ -533,9 +533,102 @@ Marks will be deducted for poor git and GitLab usage. For example, meaningless c
 * Provided feedback on each other's classes
 * Clarified UML Diagram syntax and format
 
+##### 14/07/2020
+
+**Fergus**
+* Updated parts of the UML diagram to match the topics discussed in the preivous meeting.
+* Marked associations between some entities and their respective goals.
+
+##### 15/07/2020
+
+**Fergus**
+* Made UML diagram style uniform
+* Added static methods to items in the UML
+
+**Everyone**
+* Began creating skeleton for classes
+
+**Fergus**
+* Added goal loading functionality to the DungeonLoader
+* Implemented MoveableEntity class
+
+**Smit**
+* Began writting the classes for Entities.
+
+##### 16/07/2020
+
+**Everyone**
+* Allocated work among us
+* Discussed deadline for implementation (Friday 17/7 Afternoon)
+
+**Fergus**
+* Added all entities to the DungeonLoader and DungeonLoader controller
+* Added very basic enemy movement
+* Added constructor in DungeonLoader to allow for easy testing
+* Created map to test player interaction with entities
+
+**Duy**
+* completed method implementation for goal related classes
+
+**Smit**
+* Made Sword, Key, Portal, Door class.
+
+##### 17/07/2020
+
+**Fergus**
+* Completed implementation of basic goals using observer pattern
+* Added method in entity to allow for visibility manipulation
+* Added sort before loading entities in the Dungeon loader so that floor switch entities are loaded first
+
+**Duy**
+* completed implementing pickup sword feature
+* to do this added extra classes to support this feature (item + inventory), and implemented relevant methods 
+
+**Smit**
+* Worked on sword, key, portal, potion, door, switch, treasure.
+* Added interact method for door entity.
+
+##### 18/07/2020
+
+**Duy**
+* completed features of player killing enemy, and enemy killing player, depending on whether the player has a sword or not
+* implemented features for inventory interactions with player, items and dungeon
+
+**Fergus**
+* Implemented portal entity
+* Wrote JUnit tests for all goal types
+* Connected door to JavaFX frontend
+* Created DungeonMockLoader to load dungeons from JSONObjects
+* Fixed boulder entities going out of bounds
+
+**Smit**
+* Wrote JUnit tests for key, door and portal.
+
+##### 19/07/2020
+
+**Fergus**
+* Wrote tests for Exit
+* Wrote tests for Boulder
+
+**Duy**
+* fixed up some bugs with enemy interaction 
+* incorporate potion > sword priority + how potion interacts with entities
+* started on javaDocs
+
+**Smit**
+* Completed JUnit tests for Door, portal, potion, boulder, enemy, switch, key, treasure entities.
+* Refactored some functionality for entities.
+
 ### Week-08
 
-Fill in here.
+**Duy**
+* refactoring of code + javaDocs
+* cleaned up UML
+* 
+
+**Smit**
+* Added Junit tests for increasing the coverage of the code.
+* Refactored code with fergus.
 
 ### Week-09
 
