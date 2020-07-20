@@ -574,6 +574,11 @@ Marks will be deducted for poor git and GitLab usage. For example, meaningless c
 * Wrote tests for Exit
 * Wrote tests for Boulder
 
+**Duy**
+* fixed up some bugs with enemy interaction 
+* incorporate potion > sword priority + how potion interacts with entities
+* started on javaDocs
+
 ### Week-08
 
 ### Week-09
