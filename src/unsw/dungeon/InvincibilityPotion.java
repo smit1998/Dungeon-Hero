@@ -9,7 +9,7 @@ import java.util.Set;
  * class for the invisibility potion fears all enemies, and kills all enemies
  * upon impact for 5 seconds
  */
-public class InvincibilityPotion extends Entity implements Item, Weapon, Observer, Subject {
+public class InvincibilityPotion extends ItemEntity implements Weapon, Observer, Subject {
 
     public final static int MAX_PICKUP = 1;
     public final static int MAX_HITS = Integer.MAX_VALUE;
