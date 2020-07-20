@@ -6,7 +6,7 @@ import java.util.Set;
 /**
  * Class for the sword
  */
-public class Sword extends ItemEntity implements Observer, Weapon, Subject {
+public class Sword extends ItemEntity implements Weapon, Subject {
 
     public final static int MAX_PICKUP = 1;
     public final static int STARTING_DURABILITY = 5;
@@ -68,7 +68,6 @@ public class Sword extends ItemEntity implements Observer, Weapon, Subject {
      * @return an integer representing the maximum number of swords a player can
      *         carry
      */
-    @Override
     public int getMaxPickup() {
         return MAX_PICKUP;
     }
@@ -80,7 +79,6 @@ public class Sword extends ItemEntity implements Observer, Weapon, Subject {
      * @param caller - the entity who calls the interact method
      * @return true if the interaction can go through otherwise false
      */
-    @Override
     public boolean interact(Entity caller) {
         if (caller instanceof Player) {
             Player player = (Player) caller;
@@ -92,29 +90,14 @@ public class Sword extends ItemEntity implements Observer, Weapon, Subject {
         return true;
     }
 
-    /**
-     * makes the player step on position of current item
-     */
-    @Override
-    public void update(Subject obj) {
-        if (obj instanceof Player) {
-            Player player = (Player) obj;
-            setX(player.getX());
-            setY(player.getY());
-        }
-    }
-
-    @Override
     public void attach(Observer o) {
         observers.add(o);
     }
 
-    @Override
     public void detach(Observer o) {
         observers.remove(o);
     }
 
-    @Override
     public void notifyObservers() {
         for (Observer obs : observers) {
             obs.update(this);
@@ -125,7 +108,6 @@ public class Sword extends ItemEntity implements Observer, Weapon, Subject {
      * @return an integer (0 - MAX_INTEGER) representing the priority of the current
      *         weapon
      */
-    @Override
     public int getPriority() {
         return PRIORITY;
     }
@@ -135,7 +117,6 @@ public class Sword extends ItemEntity implements Observer, Weapon, Subject {
      * 
      * @param e enemy to be attacked
      */
-    @Override
     public void attack(LifeEntity e) {
         e.updateLifeStatus(false);
         updateHitsRemaining();
