@@ -1,11 +1,11 @@
 package unsw.dungeon;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 public class Treasure extends Entity implements Subject {
 
-    private List<Observer> observers = new ArrayList<Observer>();
+    private Set<Observer> observers = new HashSet<Observer>();
 
     public Treasure(int x, int y, Dungeon dungeon) {
         super(x, y, dungeon);
@@ -28,15 +28,11 @@ public class Treasure extends Entity implements Subject {
     }
 
     public void attach(Observer o) {
-        if (!observers.contains(o)) {
-            observers.add(o);
-        }
-
+        observers.add(o);
     }
 
     public void detach(Observer o) {
         observers.remove(o);
-
     }
 
     public void notifyObservers() {

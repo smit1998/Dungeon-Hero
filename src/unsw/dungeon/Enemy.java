@@ -1,14 +1,13 @@
 package unsw.dungeon;
 
-import java.util.ArrayList;
-import java.util.List;
-
+import java.util.HashSet;
+import java.util.Set;
 import java.util.Timer;
 import java.util.TimerTask;
 
 public class Enemy extends MoveableEntity implements Subject {
 
-    private List<Observer> observers = new ArrayList<Observer>();
+    private Set<Observer> observers = new HashSet<Observer>();
 
     private boolean isAlive;
 
@@ -88,7 +87,6 @@ public class Enemy extends MoveableEntity implements Subject {
 
     public void attack(Player p) {
         p.updateLifeStatus(false);
-        p.setVisibility(false);
     }
 
     @Override
@@ -105,12 +103,10 @@ public class Enemy extends MoveableEntity implements Subject {
         return false;
     }
 
-    public void attack(Entity entity) {
-    }
-
     public void updateLifeStatus(boolean newLifeStatus) {
         this.isAlive = newLifeStatus;
         if (newLifeStatus == false) {
+            setVisibility(false);
             task = null;
             timer.cancel();
         }
