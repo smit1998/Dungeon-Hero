@@ -14,6 +14,5 @@ public abstract class BasicGoal implements ComponentGoal, Observer {
      * 
      * @param obj subject being observed
      */
-    public void update(Subject obj) {
-    };
+    public abstract void update(Subject obj);
 }
