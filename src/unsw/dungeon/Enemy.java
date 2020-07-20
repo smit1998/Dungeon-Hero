@@ -5,7 +5,7 @@ import java.util.Set;
 import java.util.Timer;
 import java.util.TimerTask;
 
-public class Enemy extends MoveableEntity implements Subject {
+public class Enemy extends LifeEntity implements Subject {
 
     private Set<Observer> observers = new HashSet<Observer>();
 
@@ -103,18 +103,14 @@ public class Enemy extends MoveableEntity implements Subject {
         return false;
     }
 
+    @Override
     public void updateLifeStatus(boolean newLifeStatus) {
-        this.isAlive = newLifeStatus;
+        super.updateLifeStatus(newLifeStatus); 
         if (newLifeStatus == false) {
-            setVisibility(false);
             task = null;
             timer.cancel();
         }
         notifyObservers();
-    }
-
-    public boolean getIsAlive() {
-        return this.isAlive;
     }
 
     public void attach(Observer o) {

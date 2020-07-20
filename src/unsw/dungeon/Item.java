@@ -9,4 +9,5 @@ public interface Item {
      * the maximum amount of the item type that a player can pick up 
      */
     public int getMaxPickup(); 
+    public 
 }

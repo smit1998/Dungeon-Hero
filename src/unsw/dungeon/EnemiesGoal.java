@@ -33,7 +33,7 @@ public class EnemiesGoal extends BasicGoal {
     public void update(Subject obj) {
         if (obj instanceof Enemy) {
             Enemy e = (Enemy) obj;
-            if (e.getIsAlive() == false && enemiesKilled < enemiesSpawned) {
+            if (e.getLifeStatus() == false && enemiesKilled < enemiesSpawned) {
                 enemiesKilled += 1;
             }
         }
