@@ -53,26 +53,13 @@ public class Player extends MoveableEntity implements Subject {
         return inventory.getKey();
     }
 
-    /**
-     * Method for player to attack another entity, using a weapon
-     * 
-     * @param e the entity that is being attacked
-     * @return true if the attack was able to be carried through (player has a valid
-     *         weapon), otherwise false
-     */
-    public boolean attack(Entity e) {
-        if ((e instanceof Enemy)) {
-            Weapon weapon = getWeapon();
-            if (weapon != null) {
-                Enemy enemy = (Enemy) e;
-                enemy.updateLifeStatus(false);
-                enemy.setVisibility(false);
-                weapon.updateHitsRemaining();
-                return true;
-            }
-            return false;
+    public boolean attack(Enemy e) {
+        Weapon weapon = getWeapon(); 
+        if (weapon != null) {
+            weapon.attack(e); 
+            return true;
         }
-        return false;
+        return false; 
     }
 
     /**
@@ -90,6 +77,9 @@ public class Player extends MoveableEntity implements Subject {
      */
     public void updateLifeStatus(boolean newLifeStatus) {
         this.isAlive = newLifeStatus;
+        if (isAlive == false) {
+            setVisibility(false);
+        }
     }
 
     /**
@@ -112,9 +102,7 @@ public class Player extends MoveableEntity implements Subject {
             Enemy enemy = (Enemy) caller;
             Weapon weapon = inventory.getWeapon();
             if (weapon != null) {
-                enemy.setVisibility(false);
-                enemy.updateLifeStatus(false);
-                weapon.updateHitsRemaining();
+                weapon.attack(enemy); 
                 return false;
             } else {
                 enemy.attack(this);

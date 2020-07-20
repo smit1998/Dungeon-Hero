@@ -88,7 +88,6 @@ public class Enemy extends MoveableEntity implements Subject {
 
     public void attack(Player p) {
         p.updateLifeStatus(false);
-        p.setVisibility(false);
     }
 
     @Override
@@ -111,6 +110,7 @@ public class Enemy extends MoveableEntity implements Subject {
     public void updateLifeStatus(boolean newLifeStatus) {
         this.isAlive = newLifeStatus;
         if (newLifeStatus == false) {
+            setVisibility(false);
             task = null;
             timer.cancel();
         }
