@@ -28,10 +28,21 @@ public abstract class DungeonLoader {
     private int switchesSpawned;
     private int treasureSpawned;
 
+    /**
+     * Constructor for a DungeonLoader
+     * 
+     * @param filename the filename of a file located in the 'dungeons' directory
+     * @throws FileNotFoundException
+     */
     public DungeonLoader(String filename) throws FileNotFoundException {
         json = new JSONObject(new JSONTokener(new FileReader("dungeons/" + filename)));
     }
 
+    /**
+     * Constructor for a DungeonLoader
+     * 
+     * @param json dungeon specifications
+     */
     public DungeonLoader(JSONObject json) {
         this.json = json;
     }
@@ -39,7 +50,7 @@ public abstract class DungeonLoader {
     /**
      * Parses the JSON to create a dungeon.
      * 
-     * @return
+     * @return a dungeon generated according to the dungeon specifications
      */
     public Dungeon load() {
         int width = json.getInt("width");
@@ -49,46 +60,11 @@ public abstract class DungeonLoader {
 
         JSONArray jsonEntities = json.getJSONArray("entities");
 
-        // Sort entities so that switches are at the start and players are at the end
-        List<JSONObject> jsonValues = new ArrayList<JSONObject>();
         for (int i = 0; i < jsonEntities.length(); i++) {
-            jsonValues.add(jsonEntities.getJSONObject(i));
+            loadEntity(dungeon, jsonEntities.getJSONObject(i));
         }
-        Collections.sort(jsonValues, new Comparator<JSONObject>() {
-            private static final String KEY_NAME = "type";
 
-            @Override
-            public int compare(JSONObject a, JSONObject b) {
-                String typeA = a.getString(KEY_NAME);
-                String typeB = b.getString(KEY_NAME);
-
-                if (typeA.equals("player") && typeB.equals("player"))
-                    return 0;
-                else if (typeA.equals("player") && !typeB.equals("player")) {
-                    return 1;
-                } else if (!typeA.equals("player") && typeB.equals("player")) {
-                    return -1;
-                }
-                if (typeA.equals("switch") && typeB.equals("switch")) {
-                    return 0;
-                } else if (typeA.equals("switch") && !typeB.equals("switch")) {
-                    return 1;
-                } else if (!typeA.equals("switch") && typeB.equals("switch")) {
-                    return -1;
-                }
-
-                return 0;
-            }
-        });
-        for (JSONObject entity : jsonValues) {
-            loadEntity(dungeon, entity);
-        }
-        // Original code
-        // for (int i = 0; i < jsonEntities.length(); i++) {
-        // loadEntity(dungeon, jsonEntities.getJSONObject(i));
-        // }
-
-        ComponentGoal goal = loadGoal(dungeon, json.getJSONObject("goal-condition"));
+        ComponentGoal goal = loadGoal(json.getJSONObject("goal-condition"));
         dungeon.setGoal(goal);
 
         dungeon.connectGoals();
@@ -97,6 +73,12 @@ public abstract class DungeonLoader {
         return dungeon;
     }
 
+    /**
+     * Load an entity into the dungeon.
+     * 
+     * @param dungeon the dungeon the entity will be loaded into
+     * @param json    JSONObject containing entity details
+     */
     private void loadEntity(Dungeon dungeon, JSONObject json) {
         String type = json.getString("type");
         int x = json.getInt("x");
@@ -211,7 +193,14 @@ public abstract class DungeonLoader {
 
     public abstract void onLoad(InvincibilityPotion invincibilityPotion);
 
-    private ComponentGoal loadGoal(Dungeon dungeon, JSONObject json) {
+    /**
+     * Load a goal
+     * 
+     * @param json a JSONObject describing a goal
+     * @return the Component goal representing the goal described
+     * @throws Error if goal in "goal" key is invalid
+     */
+    private ComponentGoal loadGoal(JSONObject json) {
         String goal = json.getString("goal");
         switch (goal) {
             case "exit":
@@ -224,26 +213,31 @@ public abstract class DungeonLoader {
                 return new TreasureGoal(treasureSpawned);
             case "AND": {
                 JSONArray jsonSubgoals = json.getJSONArray("subgoals");
-                List<ComponentGoal> subgoals = loadSubgoals(dungeon, jsonSubgoals);
+                List<ComponentGoal> subgoals = loadGoals(jsonSubgoals);
                 return new ComplexGoal(new AndGoalStrategy(), subgoals);
             }
             case "OR": {
                 JSONArray jsonSubgoals = json.getJSONArray("subgoals");
-                List<ComponentGoal> subgoals = loadSubgoals(dungeon, jsonSubgoals);
+                List<ComponentGoal> subgoals = loadGoals(jsonSubgoals);
                 return new ComplexGoal(new OrGoalStrategy(), subgoals);
             }
-            default:
-                // TODO: throw exception
-                break;
+            default: {
+                throw new Error(String.format("Invalid goal type: \"%s\"", goal));
+            }
         }
-        return null;
     }
 
-    private List<ComponentGoal> loadSubgoals(Dungeon dungeon, JSONArray jsonSubgoals) {
-        List<ComponentGoal> subgoals = new ArrayList<ComponentGoal>();
-        for (int i = 0; i < jsonSubgoals.length(); i++) {
-            subgoals.add(loadGoal(dungeon, jsonSubgoals.getJSONObject(i)));
+    /**
+     * Load a JSONArray of goals.
+     * 
+     * @param jsonSubgoals a JSONArray of goals
+     * @return a list of goals which represent the JSONArray of goal
+     */
+    private List<ComponentGoal> loadGoals(JSONArray goalsJSON) {
+        List<ComponentGoal> goals = new ArrayList<ComponentGoal>();
+        for (int i = 0; i < goalsJSON.length(); i++) {
+            goals.add(loadGoal(goalsJSON.getJSONObject(i)));
         }
-        return subgoals;
+        return goals;
     }
 }
