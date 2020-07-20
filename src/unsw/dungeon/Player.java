@@ -28,14 +28,11 @@ public class Player extends LifeEntity{
      *         the player not being able to, null is returned otherwise, the item is
      *         added to the inventory
      */
-    public Item pickupItem(Entity e) {
-        if (e instanceof Item) {
-            Item itemAdded = inventory.addItem((Item) e);
-            if (itemAdded != null) {
-                e.setVisibility(false);
-                return itemAdded;
-            }
-            return null;
+    public ItemEntity pickupItem(ItemEntity e) {
+        ItemEntity itemAdded = inventory.addItem(e);
+        if (itemAdded != null) {
+            e.setVisibility(false);
+            return itemAdded;
         }
         return null;
     }

@@ -6,7 +6,7 @@ import java.util.Set;
 /**
  * Class for the sword
  */
-public class Sword extends Entity implements Item, Observer, Weapon, Subject {
+public class Sword extends ItemEntity implements Observer, Weapon, Subject {
 
     public final static int MAX_PICKUP = 1;
     public final static int STARTING_DURABILITY = 5;
@@ -18,9 +18,10 @@ public class Sword extends Entity implements Item, Observer, Weapon, Subject {
 
     /**
      * Constructor for an sword
-     * @param dungeon that the sword belongs to 
-     * @param x coordinate where the sword spawns
-     * @param y coordinate where the sword spawns
+     * 
+     * @param dungeon that the sword belongs to
+     * @param x       coordinate where the sword spawns
+     * @param y       coordinate where the sword spawns
      */
     public Sword(int x, int y, Dungeon dungeon) {
         super(x, y, dungeon);
@@ -36,6 +37,7 @@ public class Sword extends Entity implements Item, Observer, Weapon, Subject {
 
     /**
      * changes the status of the sword being picked up
+     * 
      * @param newIsPickedUp boolean that the pickedUp attribute will change to
      */
     public void updateStatus(boolean newIsPickedUp) {
@@ -43,9 +45,8 @@ public class Sword extends Entity implements Item, Observer, Weapon, Subject {
     }
 
     /**
-     * reduces the remaining hits of a sword by 1
-     * if no more hits, then the sword is removed from dungeon
-     * and inventory (by notifying observers)
+     * reduces the remaining hits of a sword by 1 if no more hits, then the sword is
+     * removed from dungeon and inventory (by notifying observers)
      */
     public void updateHitsRemaining() {
         this.remainingHits--;
@@ -56,16 +57,16 @@ public class Sword extends Entity implements Item, Observer, Weapon, Subject {
     }
 
     /**
-     * @return an integer between 0 - STARTING DURABILITY
-     * representing how many hits the sword has left
+     * @return an integer between 0 - STARTING DURABILITY representing how many hits
+     *         the sword has left
      */
     public int getRemainingHits() {
         return this.remainingHits;
     }
 
     /**
-     * @return an integer representing the maximum number of swords a player
-     * can carry
+     * @return an integer representing the maximum number of swords a player can
+     *         carry
      */
     @Override
     public int getMaxPickup() {
@@ -73,11 +74,12 @@ public class Sword extends Entity implements Item, Observer, Weapon, Subject {
     }
 
     /**
-     * Used to determine interaction between a calling entity and the sword
-     * if calling object is a player, determines if the sword can be picked up 
+     * Used to determine interaction between a calling entity and the sword if
+     * calling object is a player, determines if the sword can be picked up
+     * 
      * @param caller - the entity who calls the interact method
      * @return true if the interaction can go through otherwise false
-    */
+     */
     @Override
     public boolean interact(Entity caller) {
         if (caller instanceof Player) {
@@ -120,7 +122,8 @@ public class Sword extends Entity implements Item, Observer, Weapon, Subject {
     }
 
     /**
-     * @return an integer (0 - MAX_INTEGER) representing the priority of the current weapon
+     * @return an integer (0 - MAX_INTEGER) representing the priority of the current
+     *         weapon
      */
     @Override
     public int getPriority() {
@@ -128,7 +131,8 @@ public class Sword extends Entity implements Item, Observer, Weapon, Subject {
     }
 
     /**
-     * Attacks a given enemy, by setting their life status to false (kills enemy); 
+     * Attacks a given enemy, by setting their life status to false (kills enemy);
+     * 
      * @param e enemy to be attacked
      */
     @Override

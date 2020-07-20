@@ -194,4 +194,47 @@ class enemyTest {
 
         assertTrue(dungeon.isComplete());
     }
+
+    @Test
+    void enemyMoveTest() {
+        JSONObject playerJSON = new JSONObject();
+        playerJSON.put("x", 0);
+        playerJSON.put("y", 0);
+        playerJSON.put("type", "player");
+
+        JSONObject enemy = new JSONObject();
+        enemy.put("x", 2);
+        enemy.put("y", 1);
+        enemy.put("type", "enemy");
+
+        JSONArray entitiesJSON = new JSONArray();
+        entitiesJSON.put(playerJSON);
+        entitiesJSON.put(enemy);
+
+        JSONObject goalJSON = new JSONObject();
+        goalJSON.put("goal", "enemies");
+
+        JSONObject json = new JSONObject();
+        json.put("width", 3);
+        json.put("height", 1);
+        json.put("entities", entitiesJSON);
+        json.put("goal-condition", goalJSON);
+
+        DungeonLoader loader = new DungeonMockLoader(json);
+        Dungeon dungeon = loader.load();
+        Player player = dungeon.getPlayer();
+
+        assertFalse(dungeon.isComplete());
+
+        // lets the enemy move towards the player
+        try{
+            Thread.sleep(5000);
+        }
+        catch (InterruptedException e){
+            fail();
+        }
+        //enemy kills the player
+        assertFalse(player.isVisible() == true);
+
+    }
 }
