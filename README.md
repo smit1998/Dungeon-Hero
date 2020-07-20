@@ -619,16 +619,31 @@ Marks will be deducted for poor git and GitLab usage. For example, meaningless c
 * Completed JUnit tests for Door, portal, potion, boulder, enemy, switch, key, treasure entities.
 * Refactored some functionality for entities.
 
+**Fergus**
+* Made enemies fear invincible player
+* Implement strategy pattern for complex goals
+* Add methods for method forwarding
+
 ### Week-08
+
+##### 20/07/2020
 
 **Duy**
 * refactoring of code + javaDocs
 * cleaned up UML
-* 
 
 **Smit**
 * Added Junit tests for increasing the coverage of the code.
 * Refactored code with fergus.
+
+**Fergus**
+* Wrote javadoc for remaining classes
+* Refactored Item interface
+* Removed player-item observer-subject relationship
+* Wrote additional tests to increase test coverage
+* Removed redundant code to improve coverage
+* Removed coordinate class
+
 
 ### Week-09
 
