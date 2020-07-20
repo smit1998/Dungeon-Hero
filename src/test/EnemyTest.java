@@ -389,7 +389,7 @@ class EnemyTest {
 
         // Wait for enemy to attack
         try {
-            Thread.sleep(2000);
+            Thread.sleep(3000);
         } catch (InterruptedException e) {
             fail();
         }
