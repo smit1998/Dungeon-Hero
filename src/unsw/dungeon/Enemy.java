@@ -1,14 +1,13 @@
 package unsw.dungeon;
 
-import java.util.ArrayList;
-import java.util.List;
-
+import java.util.HashSet;
+import java.util.Set;
 import java.util.Timer;
 import java.util.TimerTask;
 
 public class Enemy extends MoveableEntity implements Subject {
 
-    private List<Observer> observers = new ArrayList<Observer>();
+    private Set<Observer> observers = new HashSet<Observer>();
 
     private boolean isAlive;
 

@@ -1,18 +1,18 @@
 package unsw.dungeon;
 
-import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
 
 public class Key extends Entity implements Item, Observer, Subject {
 
     public final static int MAX_PICKUP = 1;
 
     private int id;
-    private ArrayList<Observer> observers; 
+    private Set<Observer> observers = new HashSet<Observer>();
 
     public Key(int x, int y, Dungeon dungeon, int id) {
         super(x, y, dungeon);
         this.id = id;
-        this.observers = new ArrayList<Observer>(); 
     }
 
     public int getID() {
@@ -24,9 +24,7 @@ public class Key extends Entity implements Item, Observer, Subject {
         // makes the player pickup the sword
         if (caller instanceof Player) {
             Player player = (Player) caller;
-            if (player.pickupItem(this) != null) {
-                player.attach(this);
-            }
+            player.pickupItem(this);
         }
         if (caller instanceof Boulder) {
             return false;
@@ -50,18 +48,18 @@ public class Key extends Entity implements Item, Observer, Subject {
 
     @Override
     public void attach(Observer o) {
-        observers.add(o); 
+        observers.add(o);
     }
 
     @Override
     public void detach(Observer o) {
-        observers.remove(o); 
+        observers.remove(o);
     }
 
     @Override
     public void notifyObservers() {
         for (Observer obs : observers) {
-            obs.update(this); 
+            obs.update(this);
         }
     }
 }

@@ -1,6 +1,7 @@
 package unsw.dungeon;
 
-import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * Class for the sword
@@ -13,7 +14,7 @@ public class Sword extends Entity implements Item, Observer, Weapon, Subject {
 
     private boolean isPickedUp;
     private int remainingHits;
-    private ArrayList<Observer> observers;
+    private Set<Observer> observers = new HashSet<Observer>();
 
     /**
      * Constructor for an sword
@@ -24,7 +25,6 @@ public class Sword extends Entity implements Item, Observer, Weapon, Subject {
     public Sword(int x, int y, Dungeon dungeon) {
         super(x, y, dungeon);
         this.remainingHits = STARTING_DURABILITY;
-        this.observers = new ArrayList<Observer>();
     }
 
     /**
@@ -82,9 +82,7 @@ public class Sword extends Entity implements Item, Observer, Weapon, Subject {
     public boolean interact(Entity caller) {
         if (caller instanceof Player) {
             Player player = (Player) caller;
-            if (player.pickupItem(this) != null) {
-                player.attach(this);
-            }
+            player.pickupItem(this);
         }
         if (caller instanceof Boulder) {
             return false;
