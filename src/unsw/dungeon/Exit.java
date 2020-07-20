@@ -10,6 +10,7 @@ public class Exit extends Entity implements Subject {
 
     /**
      * Create an exit entity at the position (x, y)
+     * 
      * @param x coordinate where the exit is placed
      * @param y coordinate where the exit is placed
      */
@@ -18,16 +19,6 @@ public class Exit extends Entity implements Subject {
         isExiting = false;
     }
 
-    /**
-     * Update the state of the game
-     */
-    public void updateGameState() {
-        return;
-    }
-
-    /**
-     * @return the exit status i.e. if the player can exit or not
-     */
     public boolean getExitStatus() {
         return isExiting;
     }
@@ -41,8 +32,6 @@ public class Exit extends Entity implements Subject {
             isExiting = true;
             notifyObservers();
             if (dungeon().isComplete()) {
-                // TODO Update game state
-                System.out.println("VICTORY!");
                 return true;
             }
             isExiting = false;
@@ -53,8 +42,9 @@ public class Exit extends Entity implements Subject {
 
     /**
      * attaches an observer to the player, by storing it to the observerlist
+     * 
      * @param o the observer that wants to observe the player
-     */ 
+     */
     public void attach(Observer o) {
         observers.add(o);
 
@@ -62,6 +52,7 @@ public class Exit extends Entity implements Subject {
 
     /**
      * removes an observer from the observer list
+     * 
      * @param o the observer to be removed
      */
     public void detach(Observer o) {

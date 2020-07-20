@@ -5,11 +5,9 @@ import java.util.Set;
 import java.util.Timer;
 import java.util.TimerTask;
 
-public class Enemy extends MoveableEntity implements Subject {
+public class Enemy extends LifeEntity implements Subject {
 
     private Set<Observer> observers = new HashSet<Observer>();
-
-    private boolean isAlive;
 
     private Timer timer = new Timer();
     private TimerTask task = new TimerTask() {
@@ -20,12 +18,12 @@ public class Enemy extends MoveableEntity implements Subject {
 
     /**
      * Creates an enemy entity in the square(x, y)
+     * 
      * @param x coordinate where the enemy is initially placed
      * @param y coordinate where the enemy is initially placed
      */
     public Enemy(int x, int y, Dungeon dungeon) {
         super(x, y, dungeon);
-        this.isAlive = true;
         start();
     }
 
@@ -53,16 +51,18 @@ public class Enemy extends MoveableEntity implements Subject {
         int diffX = (player.getX() - getX()) * fearModifier;
         int diffY = (player.getY() - getY()) * fearModifier;
 
+        // TOOD
+        // if (diffX == 0 && diffY == 0) {
+        // return;
+        // }
+
         int xDirection = diffX > 0 ? 1 : -1;
         if (diffY == 0) {
             if (dungeon().interact(this, getX() + xDirection, getY())) {
-                switch (xDirection) {
-                    case 1:
-                        moveRight();
-                        break;
-                    case -1:
-                        moveLeft();
-                        break;
+                if (diffX > 0) {
+                    moveRight();
+                } else {
+                    moveLeft();
                 }
             } else {
                 moveUp();
@@ -72,13 +72,10 @@ public class Enemy extends MoveableEntity implements Subject {
         int yDirection = diffY > 0 ? 1 : -1;
         if (diffX == 0) {
             if (dungeon().interact(this, getX(), getY() + yDirection)) {
-                switch (yDirection) {
-                    case 1:
-                        moveDown();
-                        break;
-                    case -1:
-                        moveUp();
-                        break;
+                if (diffY > 0) {
+                    moveDown();
+                } else {
+                    moveUp();
                 }
             } else {
                 moveLeft();
@@ -88,12 +85,12 @@ public class Enemy extends MoveableEntity implements Subject {
         if (diffX != 0 && diffY != 0) {
             if (diffX > 0) {
                 moveRight();
-            } else if (diffX < 0) {
+            } else {
                 moveLeft();
             }
             if (diffY > 0) {
                 moveDown();
-            } else if (diffY < 0) {
+            } else {
                 moveUp();
             }
         }
@@ -101,14 +98,17 @@ public class Enemy extends MoveableEntity implements Subject {
 
     /**
      * Attacks the player when in contact
-     * @param p is the player that is to be attacked
+     * 
+     * @param e is the entity that is to be attacked
      */
-    public void attack(Player p) {
-        p.updateLifeStatus(false);
+    public boolean attack(LifeEntity e) {
+        e.kill();
+        return true;
     }
 
     /**
      * Interacts with the player entity when player is on the same grid as enemy
+     * 
      * @param caller is the player entity that is to be attacked
      */
     @Override
@@ -125,40 +125,21 @@ public class Enemy extends MoveableEntity implements Subject {
         return false;
     }
 
-    public void attack(Entity entity) {
-    }
-
-    /**
-     * Changes the life status and visibility of the enemy
-     * @param newLifeStatus is the new boolean value of isAlive variable
-     */
-    public void updateLifeStatus(boolean newLifeStatus) {
-        this.isAlive = newLifeStatus;
-        if (newLifeStatus == false) {
-            setVisibility(false);
-            task = null;
-            timer.cancel();
-        }
+    @Override
+    public void kill() {
+        super.kill();
+        task = null;
+        timer.cancel();
         notifyObservers();
     }
 
-    /**
-     * @return the life status of the enemy entity
-     */
-    public boolean getIsAlive() {
-        return this.isAlive;
-    }
-
-    /**
-     * attaches as observer to the enemy, by storing it inside the observerlist  
-     * @param o is the observer
-     */
     public void attach(Observer o) {
         observers.add(o);
     }
 
     /**
      * removes an observer from the observer list
+     * 
      * @param 0 the observer to be removed
      */
     public void detach(Observer o) {

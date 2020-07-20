@@ -1,7 +1,8 @@
 package unsw.dungeon;
 
-import javafx.beans.property.BooleanProperty;
+import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
 
 /**
@@ -12,9 +13,10 @@ import javafx.beans.property.SimpleBooleanProperty;
  */
 public abstract class Entity {
 
-    private Coordinate position;
+    // IntegerProperty is used so that changes to the entities position can be
+    // externally observed.
+    private IntegerProperty x, y;
     private Dungeon dungeon;
-
     private BooleanProperty isVisible;
 
     /**
@@ -25,16 +27,10 @@ public abstract class Entity {
      * @param dungeon entity belongs to
      */
     public Entity(int x, int y, Dungeon dungeon) {
-        position = new Coordinate(x, y);
+        this.x = new SimpleIntegerProperty(x);
+        this.y = new SimpleIntegerProperty(y);
         this.dungeon = dungeon;
         isVisible = new SimpleBooleanProperty(true);
-    }
-
-    /**
-     * @return coordinates of the entity
-     */
-    public Coordinate getCoordinate() {
-        return position;
     }
 
     /**
@@ -56,28 +52,28 @@ public abstract class Entity {
      * @return an IntegerProperty, representing x coordinate of the entity
      */
     public IntegerProperty x() {
-        return position.x();
+        return x;
     }
 
     /**
      * @return an IntegerProperty, representing y coordinate of the entity
      */
     public IntegerProperty y() {
-        return position.y();
+        return y;
     }
 
     /**
      * @return an integer, representing y coordinate of the entity
      */
     public int getY() {
-        return position.getY();
+        return y().get();
     }
 
     /**
      * @return an integer, representing x coordinate of the entity
      */
     public int getX() {
-        return position.getX();
+        return x().get();
     }
 
     /**

@@ -1,9 +1,12 @@
 package unsw.dungeon;
 
-public abstract class MoveableEntity extends Entity {
+public abstract class LifeEntity extends Entity {
 
-    public MoveableEntity(int x, int y, Dungeon dungeon) {
+    private boolean isAlive;
+
+    public LifeEntity(int x, int y, Dungeon dungeon) {
         super(x, y, dungeon);
+        this.isAlive = true;
     }
 
     public void moveUp() {
@@ -32,6 +35,23 @@ public abstract class MoveableEntity extends Entity {
             if (getX() < dungeon().getWidth() - 1)
                 setX(getX() + 1);
         }
+    }
+
+    // TODO
+    public void kill() {
+        isAlive = false;
+        setVisibility(false);
+    }
+
+    // TODO
+    public abstract boolean attack(LifeEntity e);
+
+    /**
+     * @return the life status of the player true - the player is alive false - the
+     *         player is dead
+     */
+    public boolean getLifeStatus() {
+        return this.isAlive;
     }
 
 }

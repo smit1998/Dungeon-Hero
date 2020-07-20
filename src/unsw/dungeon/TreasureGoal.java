@@ -31,9 +31,7 @@ public class TreasureGoal extends BasicGoal {
      * @param obj a subject being observed
      */
     public void update(Subject obj) {
-        if (obj instanceof Treasure) {
-            treasureCollected += 1;
-        }
+        treasureCollected += 1;
     }
 
     /**
