@@ -241,4 +241,58 @@ class PortalTest {
 
     }
 
+    @Test
+    void PortalAndBoulder() {
+        JSONObject playerJSON = new JSONObject();
+        playerJSON.put("x", 0);
+        playerJSON.put("y", 0);
+        playerJSON.put("type", "player");
+
+        JSONObject portalJSON = new JSONObject();
+        portalJSON.put("x", 2);
+        portalJSON.put("y", 0);
+        portalJSON.put("id", 1);
+        portalJSON.put("type", "portal");
+
+        JSONObject portalPairJSON = new JSONObject();
+        portalPairJSON.put("x", 4);
+        portalPairJSON.put("y", 0);
+        portalPairJSON.put("id", 1);
+        portalPairJSON.put("type", "portal");
+
+        JSONObject boulderJSON = new JSONObject();
+        boulderJSON.put("x", 1);
+        boulderJSON.put("y", 0);
+        boulderJSON.put("type", "boulder");
+
+        JSONObject boulderJSON2 = new JSONObject();
+        boulderJSON2.put("x", 5);
+        boulderJSON2.put("y", 0);
+        boulderJSON2.put("type", "boulder");
+
+        JSONArray entitiesJSON = new JSONArray();
+        entitiesJSON.put(playerJSON);
+        entitiesJSON.put(portalJSON);
+        entitiesJSON.put(portalPairJSON);
+        entitiesJSON.put(boulderJSON);
+        entitiesJSON.put(boulderJSON2);
+
+        JSONObject goalJSON = new JSONObject();
+        goalJSON.put("goal", "enemies");
+
+        JSONObject json = new JSONObject();
+        json.put("width", 7);
+        json.put("height", 1);
+        json.put("entities", entitiesJSON);
+        json.put("goal-condition", goalJSON);
+
+        DungeonLoader loader = new DungeonMockLoader(json);
+        Dungeon dungeon = loader.load();
+        Player player = dungeon.getPlayer();
+
+        player.moveRight();
+
+        assertTrue(player.getX() == 0);
+        assertTrue(player.getY() == 0);
+    }
 }
