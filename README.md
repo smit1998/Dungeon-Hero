@@ -529,6 +529,9 @@ Marks will be deducted for poor git and GitLab usage. For example, meaningless c
 * Added goal loading functionality to the DungeonLoader
 * Implemented MoveableEntity class
 
+**Smit**
+* Began writting the classes for Entities.
+
 ##### 16/07/2020
 
 **Everyone**
@@ -544,6 +547,9 @@ Marks will be deducted for poor git and GitLab usage. For example, meaningless c
 **Duy**
 * completed method implementation for goal related classes
 
+**Smit**
+* Made Sword, Key, Portal, Door class.
+
 ##### 17/07/2020
 
 **Fergus**
@@ -554,6 +560,10 @@ Marks will be deducted for poor git and GitLab usage. For example, meaningless c
 **Duy**
 * completed implementing pickup sword feature
 * to do this added extra classes to support this feature (item + inventory), and implemented relevant methods 
+
+**Smit**
+* Worked on sword, key, portal, potion, door, switch, treasure.
+* Added interact method for door entity.
 
 ##### 18/07/2020
 
@@ -568,6 +578,9 @@ Marks will be deducted for poor git and GitLab usage. For example, meaningless c
 * Created DungeonMockLoader to load dungeons from JSONObjects
 * Fixed boulder entities going out of bounds
 
+**Smit**
+* Wrote JUnit tests for key, door and portal.
+
 ##### 19/07/2020
 
 **Fergus**
@@ -579,12 +592,19 @@ Marks will be deducted for poor git and GitLab usage. For example, meaningless c
 * incorporate potion > sword priority + how potion interacts with entities
 * started on javaDocs
 
+**Smit**
+* Completed JUnit tests for Door, portal, potion, boulder, enemy, switch, key, treasure entities.
+* Refactored some functionality for entities.
+
 ### Week-08
 
 **Duy**
 * refactoring of code + javaDocs
 * cleaned up UML
 * 
+
+**Smit**
+* Added Junit tests for increasing the coverage of the code.
 
 ### Week-09
 
