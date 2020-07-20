@@ -1,6 +1,8 @@
 package test;
 
 import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -12,7 +14,7 @@ import unsw.dungeon.*;
 class PortalTest {
 
     @Test
-    void basicportaltest() {
+    void testBasicPortal() {
         JSONObject playerJSON = new JSONObject();
         playerJSON.put("x", 1);
         playerJSON.put("y", 0);
@@ -58,7 +60,7 @@ class PortalTest {
 
     // test with the boulder
     @Test
-    void PortaltestwithBoulder() {
+    void testPortalWithBoulder() {
         JSONObject playerJSON = new JSONObject();
         playerJSON.put("x", 0);
         playerJSON.put("y", 0);
@@ -119,7 +121,7 @@ class PortalTest {
 
     // test on player holding the sword and with enemy in the dungeon.
     @Test
-    void PortalWithSwordAndEnemy() {
+    void testPortalWithSwordAndEnemy() {
         JSONObject playerJSON = new JSONObject();
         playerJSON.put("x", 1);
         playerJSON.put("y", 0);
@@ -187,6 +189,55 @@ class PortalTest {
 
         // goal is acheived.
         assertTrue(dungeon.isComplete());
+
+    }
+
+    @Test
+    void testDifferentPortalID() {
+        JSONObject playerJSON = new JSONObject();
+        playerJSON.put("x", 1);
+        playerJSON.put("y", 0);
+        playerJSON.put("type", "player");
+
+        JSONObject portalJSON = new JSONObject();
+        portalJSON.put("x", 0);
+        portalJSON.put("y", 0);
+        portalJSON.put("id", 1);
+        portalJSON.put("type", "portal");
+
+        JSONObject portal2JSON = new JSONObject();
+        portal2JSON.put("x", 3);
+        portal2JSON.put("y", 0);
+        portal2JSON.put("id", 2);
+        portal2JSON.put("type", "portal");
+
+        JSONArray entitiesJSON = new JSONArray();
+        entitiesJSON.put(playerJSON);
+        entitiesJSON.put(portalJSON);
+        entitiesJSON.put(portal2JSON);
+
+        JSONObject goalJSON = new JSONObject();
+        goalJSON.put("goal", "exit");
+
+        JSONObject json = new JSONObject();
+        json.put("width", 4);
+        json.put("height", 1);
+        json.put("entities", entitiesJSON);
+        json.put("goal-condition", goalJSON);
+
+        DungeonLoader loader = new DungeonMockLoader(json);
+        Dungeon dungeon = loader.load();
+        Player player = dungeon.getPlayer();
+
+        assertEquals(player.getX(), 1);
+        assertEquals(player.getY(), 0);
+
+        // Move left into dud portal
+        player.moveLeft();
+
+        // Test that player did not move
+        assertEquals(player.getX(), 1);
+        assertEquals(player.getY(), 0);
 
     }
 

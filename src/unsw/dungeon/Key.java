@@ -3,7 +3,7 @@ package unsw.dungeon;
 import java.util.HashSet;
 import java.util.Set;
 
-public class Key extends Entity implements Item, Observer, Subject {
+public class Key extends ItemEntity implements Subject {
 
     public final static int MAX_PICKUP = 1;
 
@@ -35,15 +35,6 @@ public class Key extends Entity implements Item, Observer, Subject {
     @Override
     public int getMaxPickup() {
         return MAX_PICKUP;
-    }
-
-    @Override
-    public void update(Subject obj) {
-        if (obj instanceof Player) {
-            Player player = (Player) obj;
-            setX(player.getX());
-            setY(player.getY());
-        }
     }
 
     @Override
