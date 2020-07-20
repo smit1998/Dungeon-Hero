@@ -14,14 +14,6 @@ public class Portal extends Entity {
         return this.id;
     }
 
-    public Portal getPair() {
-        return this.pair;
-    }
-
-    public boolean hasPair() {
-        return pair != null;
-    }
-
     public boolean addPair(Portal pair) {
         if (this == pair) {
             return false;
@@ -34,6 +26,10 @@ public class Portal extends Entity {
     }
 
     public boolean interact(Entity caller) {
+        if (pair == null) {
+            return false;
+        }
+
         if (caller instanceof Player || caller instanceof Boulder) {
             int oldX = caller.getX();
             int oldY = caller.getY();
