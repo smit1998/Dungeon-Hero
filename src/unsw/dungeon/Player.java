@@ -16,6 +16,7 @@ public class Player extends MoveableEntity implements Subject {
 
     /**
      * Create a player positioned in square (x,y)
+     * 
      * @param x coordinate where the player spawns at
      * @param y coordinate where the player spawns at
      */
@@ -28,16 +29,17 @@ public class Player extends MoveableEntity implements Subject {
 
     /**
      * Pickups an item e
-     * @return the item that has been picked up
-     * if the item is not picked up, due to the player not being able to, null is returned
-     * otherwise, the item is added to the inventory
+     * 
+     * @return the item that has been picked up if the item is not picked up, due to
+     *         the player not being able to, null is returned otherwise, the item is
+     *         added to the inventory
      */
     public Item pickupItem(Entity e) {
         if (e instanceof Item) {
             Item itemAdded = inventory.addItem((Item) e);
             if (itemAdded != null) {
                 e.setVisibility(false);
-                return itemAdded; 
+                return itemAdded;
             }
             return null;
         }
@@ -45,10 +47,18 @@ public class Player extends MoveableEntity implements Subject {
     }
 
     /**
+     * @return a Key item if the player is holding one
+     */
+    public Key getKey() {
+        return inventory.getKey();
+    }
+
+    /**
      * Method for player to attack another entity, using a weapon
+     * 
      * @param e the entity that is being attacked
-     * @return true if the attack was able to be carried through (player has a valid weapon), 
-     * otherwise false
+     * @return true if the attack was able to be carried through (player has a valid
+     *         weapon), otherwise false
      */
     public boolean attack(Entity e) {
         if ((e instanceof Enemy)) {
@@ -74,23 +84,25 @@ public class Player extends MoveableEntity implements Subject {
 
     /**
      * Changes the life status of the player - whether the player is alive or dead
-     * @param newLifeStatus - a boolean, representing the new life status of the player
+     * 
+     * @param newLifeStatus - a boolean, representing the new life status of the
+     *                      player
      */
     public void updateLifeStatus(boolean newLifeStatus) {
         this.isAlive = newLifeStatus;
     }
 
     /**
-     * @return the life status of the player
-     * true - the player is alive
-     * false - the player is dead
+     * @return the life status of the player true - the player is alive false - the
+     *         player is dead
      */
     public boolean getLifeStatus() {
         return this.isAlive;
     }
-    
+
     /**
      * Invokes the interaction of another entity on the player if possible
+     * 
      * @param caller - the entity who wants to interact with the player
      * @return - true if caller was able to interact with the player otherwise false
      */
@@ -113,9 +125,8 @@ public class Player extends MoveableEntity implements Subject {
     }
 
     /**
-     * @return a boolean representing whether the player has a potion or not
-     * True - player has potion
-     * False - player does not have potion
+     * @return a boolean representing whether the player has a potion or not True -
+     *         player has potion False - player does not have potion
      */
     public boolean hasPotion() {
         return getWeapon() instanceof InvincibilityPotion;
@@ -123,6 +134,7 @@ public class Player extends MoveableEntity implements Subject {
 
     /**
      * attaches an observer to the player, by storing inside the observerList
+     * 
      * @param o the observer that wants to observe the player
      */
     public void attach(Observer o) {
@@ -131,6 +143,7 @@ public class Player extends MoveableEntity implements Subject {
 
     /**
      * removes an observer from the observer list
+     * 
      * @param o the observer to be removed
      */
     public void detach(Observer o) {
@@ -147,8 +160,8 @@ public class Player extends MoveableEntity implements Subject {
     }
 
     /**
-     * attempts to move up the player up in the dungeon, and notify all observers
-     * of the positional change
+     * attempts to move up the player up in the dungeon, and notify all observers of
+     * the positional change
      */
     @Override
     public void moveUp() {
@@ -167,8 +180,8 @@ public class Player extends MoveableEntity implements Subject {
     }
 
     /**
-     * attempts to move the player left in the dungeon, and notify all observers
-     * of the positional change
+     * attempts to move the player left in the dungeon, and notify all observers of
+     * the positional change
      */
     @Override
     public void moveLeft() {
@@ -177,8 +190,8 @@ public class Player extends MoveableEntity implements Subject {
     }
 
     /**
-     * attempts to move the player right in the dungeon, and notify all observers
-     * of the positional change
+     * attempts to move the player right in the dungeon, and notify all observers of
+     * the positional change
      */
     @Override
     public void moveRight() {
