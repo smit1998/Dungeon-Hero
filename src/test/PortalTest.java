@@ -12,7 +12,7 @@ import unsw.dungeon.*;
 class PortalTest {
 
     @Test
-    void PortalTest1() {
+    void basicportaltest() {
         JSONObject playerJSON = new JSONObject();
         playerJSON.put("x", 1);
         playerJSON.put("y", 0);
@@ -58,7 +58,7 @@ class PortalTest {
 
     // test with the boulder
     @Test
-    void PortalTest2() {
+    void PortaltestwithBoulder() {
         JSONObject playerJSON = new JSONObject();
         playerJSON.put("x", 0);
         playerJSON.put("y", 0);
@@ -91,7 +91,7 @@ class PortalTest {
         goalJSON.put("goal", "enemies");
 
         JSONObject json = new JSONObject();
-        json.put("width", 3);
+        json.put("width", 5);
         json.put("height", 2);
         json.put("entities", entitiesJSON);
         json.put("goal-condition", goalJSON);
@@ -108,17 +108,18 @@ class PortalTest {
 
         // player should move into the portal
         player.moveRight();
+
         // should not have any effect as boulder is present on x = 0, y = 1;
         player.moveLeft();
 
         assertTrue(player.getX() == 1);
-        assertTrue(player.getY() == 1);
+        assertTrue(player.getY() == 0);
 
     }
 
     // test on player holding the sword and with enemy in the dungeon.
     @Test
-    void PortalTest3() {
+    void PortalWithSwordAndEnemy() {
         JSONObject playerJSON = new JSONObject();
         playerJSON.put("x", 1);
         playerJSON.put("y", 0);
@@ -157,7 +158,7 @@ class PortalTest {
         goalJSON.put("goal", "enemies");
 
         JSONObject json = new JSONObject();
-        json.put("width", 4);
+        json.put("width", 5);
         json.put("height", 2);
         json.put("entities", entitiesJSON);
         json.put("goal-condition", goalJSON);
@@ -174,12 +175,14 @@ class PortalTest {
 
         // kills the enemy
         player.moveLeft();
+        player.moveLeft();
 
         // Player goes into the portal
         player.moveRight();
         player.moveRight();
+        player.moveRight();
 
-        assertTrue(player.getX() == 1);
+        assertTrue(player.getX() == 4);
         assertTrue(player.getY() == 1);
 
         // goal is acheived.
