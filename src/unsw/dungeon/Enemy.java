@@ -36,11 +36,6 @@ public class Enemy extends LifeEntity implements Subject {
         int diffX = (player.getX() - getX()) * fearModifier;
         int diffY = (player.getY() - getY()) * fearModifier;
 
-        // TOOD
-        // if (diffX == 0 && diffY == 0) {
-        // return;
-        // }
-
         int xDirection = diffX > 0 ? 1 : -1;
         if (diffY == 0) {
             if (dungeon().interact(this, getX() + xDirection, getY())) {
