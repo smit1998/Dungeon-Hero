@@ -110,7 +110,6 @@ public class Enemy extends LifeEntity implements Subject {
      * 
      * @param caller is the player entity that is to be attacked
      */
-    @Override
     public boolean interact(Entity caller) {
         if (caller instanceof Player) {
             Player player = (Player) caller;

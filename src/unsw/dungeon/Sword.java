@@ -5,9 +5,9 @@ package unsw.dungeon;
  */
 public class Sword extends ItemEntity implements Weapon {
 
-    public final static int MAX_PICKUP = 1;
-    public final static int STARTING_DURABILITY = 5;
-    public final static int PRIORITY = 50;
+    private final static int MAX_PICKUP = 1;
+    private final static int STARTING_DURABILITY = 5;
+    private final static int PRIORITY = 50;
 
     private boolean isPickedUp;
     private int remainingHits;

@@ -50,7 +50,7 @@ public class Door extends Entity {
      * @param key used to open the door
      * @return wether the door can be opened or not.
      */
-    public boolean open(Key key) {
+    private boolean open(Key key) {
         if (key.getID() == getID()) {
             isOpen.setValue(true);
             return true;

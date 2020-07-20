@@ -9,8 +9,8 @@ import java.util.TimerTask;
  */
 public class InvincibilityPotion extends ItemEntity implements Weapon {
 
-    public final static int MAX_PICKUP = 1;
-    public final static int PRIORITY = 100;
+    private final static int MAX_PICKUP = 1;
+    private final static int PRIORITY = 100;
 
     private final static int DURATION_MS = 5000;
 

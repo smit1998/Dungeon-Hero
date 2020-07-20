@@ -5,7 +5,7 @@ package unsw.dungeon;
  */
 public class Key extends ItemEntity {
 
-    public final static int MAX_PICKUP = 1;
+    private final static int MAX_PICKUP = 1;
 
     private int id;
 

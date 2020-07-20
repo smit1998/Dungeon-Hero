@@ -12,7 +12,7 @@ public abstract class LifeEntity extends Entity {
      * 
      * @param x       the horizontal position
      * @param y       the vertical position
-     * @param dungeon the dungeon this entity belonds to
+     * @param dungeon the dungeon this entity belongs to
      */
     public LifeEntity(int x, int y, Dungeon dungeon) {
         super(x, y, dungeon);
