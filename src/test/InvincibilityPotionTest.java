@@ -13,7 +13,7 @@ class InvincibilityPotionTest {
 
     // basic test with just potion and player
     @Test
-    void PotionTest1() {
+    void Testbasicpotion() {
         JSONObject playerJSON = new JSONObject();
         playerJSON.put("x", 0);
         playerJSON.put("y", 0);
@@ -22,7 +22,7 @@ class InvincibilityPotionTest {
         JSONObject potionJSON = new JSONObject();
         potionJSON.put("x", 1);
         potionJSON.put("y", 0);
-        potionJSON.put("type", "potion");
+        potionJSON.put("type", "invincibility");
 
         JSONArray entitiesJSON = new JSONArray();
         entitiesJSON.put(playerJSON);
@@ -53,7 +53,7 @@ class InvincibilityPotionTest {
 
     // potion with enemies
     @Test
-    void PotionTest2() {
+    void testpotionwithenemies() {
         JSONObject playerJSON = new JSONObject();
         playerJSON.put("x", 1);
         playerJSON.put("y", 0);
@@ -62,7 +62,7 @@ class InvincibilityPotionTest {
         JSONObject potionJSON = new JSONObject();
         potionJSON.put("x", 2);
         potionJSON.put("y", 0);
-        potionJSON.put("type", "potion");
+        potionJSON.put("type", "invincibility");
 
         JSONObject enemyJSON = new JSONObject();
         enemyJSON.put("x", 0);
@@ -103,7 +103,7 @@ class InvincibilityPotionTest {
 
     // potion with multiple enemies
     @Test
-    void PortionTest3() {
+    void Portionwithmultipleenemies() {
         JSONObject playerJSON = new JSONObject();
         playerJSON.put("x", 1);
         playerJSON.put("y", 0);
@@ -112,7 +112,7 @@ class InvincibilityPotionTest {
         JSONObject potionJSON = new JSONObject();
         potionJSON.put("x", 2);
         potionJSON.put("y", 0);
-        potionJSON.put("type", "potion");
+        potionJSON.put("type", "invincibility");
 
         JSONObject enemyJSON = new JSONObject();
         enemyJSON.put("x", 0);
@@ -161,7 +161,7 @@ class InvincibilityPotionTest {
     // sword and potion.
 
     @Test
-    void PotionTest4() {
+    void PotionwithSword() {
         JSONObject playerJSON = new JSONObject();
         playerJSON.put("x", 0);
         playerJSON.put("y", 0);
