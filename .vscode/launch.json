@@ -7,13 +7,6 @@
   "configurations": [
     {
       "type": "java",
-      "name": "CodeLens (Launch) - AndCompositeGoalTest",
-      "request": "launch",
-      "mainClass": "test.AndCompositeGoalTest",
-      "projectName": "H09B-Trio_439d274e"
-    },
-    {
-      "type": "java",
       "name": "CodeLens (Launch) - DungeonApplication",
       "request": "launch",
       "vmArgs": "--module-path ./lib/symlink_javafx --add-modules javafx.controls,javafx.fxml",
