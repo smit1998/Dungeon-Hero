@@ -34,21 +34,18 @@ public class Door extends Entity {
         return false;
     }
 
-    @Override
     public boolean interact(Entity caller) {
         if (getIsOpen()) {
             return true;
         }
         if (caller instanceof Player) {
             Player player = (Player) caller;
-            if (!getIsOpen()) {
-                Key key = player.getKey();
-                if (key != null) {
-                    if (open(key)) {
-                        key.isVisible().setValue(false);
-                        key.notifyObservers();
-                        return true;
-                    }
+            Key key = player.getKey();
+            if (key != null) {
+                if (open(key)) {
+                    key.setVisibility(false);
+                    key.notifyObservers();
+                    return true;
                 }
             }
         }
