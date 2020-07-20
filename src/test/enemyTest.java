@@ -283,11 +283,6 @@ class EnemyTest {
         } catch (InterruptedException e) {
             fail();
         }
-<<<<<<< HEAD
-        //enemy kills the player
-        assertFalse(player.getLifeStatus() == true);
-=======
->>>>>>> c1b876f856a69fefee3cc7dc64ad93ad6f99f1e8
 
         assertTrue(player.getLifeStatus());
         assertFalse(dungeon.isComplete());

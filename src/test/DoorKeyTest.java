@@ -349,6 +349,7 @@ class DoorKeyTest {
         JSONObject keyJSON = new JSONObject();
         keyJSON.put("x", 1);
         keyJSON.put("y", 0);
+        keyJSON.put("id", 1);
         keyJSON.put("type", "key");
 
         JSONObject enemyJSON = new JSONObject();
@@ -379,7 +380,7 @@ class DoorKeyTest {
         player.moveRight();
         // player kills enemy
         player.moveRight();
-        assertTrue(player.getLifeStatus());
+        assertFalse(player.getLifeStatus());
 
     }
 }
