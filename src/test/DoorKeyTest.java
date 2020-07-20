@@ -1,6 +1,9 @@
 package test;
 
 import org.junit.jupiter.api.Test;
+
+import static org.junit.Assert.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -13,7 +16,7 @@ class DoorKeyTest {
 
     // standard 1 door and 1 key
     @Test
-    void Standart1Door1key() {
+    void testStandard1Door1key() {
         JSONObject playerJSON = new JSONObject();
         playerJSON.put("x", 0);
         playerJSON.put("y", 0);
@@ -62,7 +65,7 @@ class DoorKeyTest {
 
     // test with wrong key.
     @Test
-    void WrongKey() {
+    void testWrongKey() {
         JSONObject playerJSON = new JSONObject();
         playerJSON.put("x", 0);
         playerJSON.put("y", 0);
@@ -110,7 +113,7 @@ class DoorKeyTest {
 
     // test with the enemies.
     @Test
-    void DoorKeywithenemies() {
+    void testDoorKeyWithEnemies() {
         JSONObject playerJSON = new JSONObject();
         playerJSON.put("x", 1);
         playerJSON.put("y", 0);
@@ -171,7 +174,7 @@ class DoorKeyTest {
 
     // test with multiple doors and keys
     @Test
-    void MultipleDoorKeys() {
+    void testMultipleDoorKeys() {
         JSONObject playerJSON = new JSONObject();
         playerJSON.put("x", 0);
         playerJSON.put("y", 0);
@@ -238,7 +241,7 @@ class DoorKeyTest {
     }
 
     @Test
-    void EnterDoorWithoutKey() {
+    void testEnterDoorWithoutKey() {
         JSONObject playerJSON = new JSONObject();
         playerJSON.put("x", 0);
         playerJSON.put("y", 0);
@@ -271,11 +274,11 @@ class DoorKeyTest {
 
         assertTrue(player.getX() == 0);
         assertTrue(player.getY() == 0);
-        
+
     }
 
     @Test
-    void PlayerHasSwordAndKey() {
+    void testPlayerHasSwordAndKey() {
         JSONObject playerJSON = new JSONObject();
         playerJSON.put("x", 0);
         playerJSON.put("y", 0);
@@ -340,7 +343,7 @@ class DoorKeyTest {
     }
 
     @Test
-    void PlayerAttacksWithKey() {
+    void testPlayerAttacksWithKey() {
         JSONObject playerJSON = new JSONObject();
         playerJSON.put("x", 0);
         playerJSON.put("y", 0);
@@ -383,4 +386,115 @@ class DoorKeyTest {
         assertFalse(player.getLifeStatus());
 
     }
+
+    // Test that dungeon can be created with 3 unique doors
+    @Test
+    void test3UniqueDoors() {
+        JSONObject playerJSON = new JSONObject();
+        playerJSON.put("x", 0);
+        playerJSON.put("y", 0);
+        playerJSON.put("type", "player");
+
+        JSONObject doorJSON = new JSONObject();
+        doorJSON.put("x", 1);
+        doorJSON.put("y", 0);
+        doorJSON.put("id", 1);
+        doorJSON.put("type", "door");
+
+        JSONObject doorJSON2 = new JSONObject();
+        doorJSON2.put("x", 2);
+        doorJSON2.put("y", 0);
+        doorJSON2.put("id", 2);
+        doorJSON2.put("type", "door");
+
+        JSONObject doorJSON3 = new JSONObject();
+        doorJSON3.put("x", 3);
+        doorJSON3.put("y", 0);
+        doorJSON3.put("id", 3);
+        doorJSON3.put("type", "door");
+
+        JSONArray entitiesJSON = new JSONArray();
+        entitiesJSON.put(playerJSON);
+        entitiesJSON.put(doorJSON);
+        entitiesJSON.put(doorJSON2);
+        entitiesJSON.put(doorJSON3);
+
+        JSONObject goalJSON = new JSONObject();
+        goalJSON.put("goal", "exit");
+
+        JSONObject json = new JSONObject();
+        json.put("width", 4);
+        json.put("height", 1);
+        json.put("entities", entitiesJSON);
+        json.put("goal-condition", goalJSON);
+
+        DungeonLoader loader = new DungeonMockLoader(json);
+        Dungeon dungeon = loader.load();
+        Player player = dungeon.getPlayer();
+
+        assertEquals(player.getX(), 0);
+        assertEquals(player.getY(), 0);
+
+        player.moveRight();
+
+        // Test that player did not go through door
+        assertEquals(player.getX(), 0);
+        assertEquals(player.getY(), 0);
+
+    }
+
+    // Test that dungeon cannot be created with more than 3 unique doors
+    @Test
+    void testMoreThan3UniqueDoors() {
+        JSONObject playerJSON = new JSONObject();
+        playerJSON.put("x", 0);
+        playerJSON.put("y", 0);
+        playerJSON.put("type", "player");
+
+        JSONObject doorJSON = new JSONObject();
+        doorJSON.put("x", 1);
+        doorJSON.put("y", 0);
+        doorJSON.put("id", 1);
+        doorJSON.put("type", "door");
+
+        JSONObject doorJSON2 = new JSONObject();
+        doorJSON2.put("x", 2);
+        doorJSON2.put("y", 0);
+        doorJSON2.put("id", 2);
+        doorJSON2.put("type", "door");
+
+        JSONObject doorJSON3 = new JSONObject();
+        doorJSON3.put("x", 3);
+        doorJSON3.put("y", 0);
+        doorJSON3.put("id", 3);
+        doorJSON3.put("type", "door");
+
+        JSONObject doorJSON4 = new JSONObject();
+        doorJSON4.put("x", 4);
+        doorJSON4.put("y", 0);
+        doorJSON4.put("id", 4);
+        doorJSON4.put("type", "door");
+
+        JSONArray entitiesJSON = new JSONArray();
+        entitiesJSON.put(playerJSON);
+        entitiesJSON.put(doorJSON);
+        entitiesJSON.put(doorJSON2);
+        entitiesJSON.put(doorJSON3);
+        entitiesJSON.put(doorJSON4);
+
+        JSONObject goalJSON = new JSONObject();
+        goalJSON.put("goal", "exit");
+
+        JSONObject json = new JSONObject();
+        json.put("width", 4);
+        json.put("height", 1);
+        json.put("entities", entitiesJSON);
+        json.put("goal-condition", goalJSON);
+
+        DungeonLoader loader = new DungeonMockLoader(json);
+        assertThrows(Error.class, () -> {
+            loader.load();
+        });
+    }
+
 }

@@ -1,7 +1,9 @@
 package unsw.dungeon;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 /**
  * A dungeon in the interactive dungeon player.
@@ -13,6 +15,8 @@ import java.util.List;
  *
  */
 public class Dungeon {
+
+    private final static int MAX_DOORS = 3;
 
     private int width, height;
     private List<Entity> entities;
@@ -75,6 +79,7 @@ public class Dungeon {
      */
     public void addEntity(Entity entity) {
         entities.add(entity);
+        checkDoorQuota();
     }
 
     /**
@@ -167,6 +172,19 @@ public class Dungeon {
                 portalA.addPair(portalB);
                 portalB.addPair(portalA);
             }
+        }
+    }
+
+    private void checkDoorQuota() {
+        Set<Integer> doorIDs = new HashSet<>();
+        for (Entity entity : entities) {
+            if (entity instanceof Door) {
+                Door door = (Door) entity;
+                doorIDs.add(door.getID());
+            }
+        }
+        if (doorIDs.size() > MAX_DOORS) {
+            throw new Error(String.format("Dungeon door quota exceeded: %d doors maximum", MAX_DOORS));
         }
     }
 }
