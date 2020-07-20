@@ -87,4 +87,10 @@ public class Sword extends Entity implements Item, Observer, Weapon, Subject {
     public int getPriority() {
         return PRIORITY;
     }
+
+    @Override
+    public void attack(Enemy e) {
+        e.updateLifeStatus(false);
+        updateHitsRemaining();
+    }
 }
