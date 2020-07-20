@@ -2,7 +2,6 @@ package test;
 
 import org.junit.jupiter.api.Test;
 
-import static org.junit.Assert.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -443,7 +442,7 @@ class DoorKeyTest {
 
     }
 
-    // Test that dungeon cannot be created with more than 3 unique doors
+    // Test that dungeon can be created with more than 3 unique doors
     @Test
     void testMoreThan3UniqueDoors() {
         JSONObject playerJSON = new JSONObject();
@@ -492,9 +491,17 @@ class DoorKeyTest {
         json.put("goal-condition", goalJSON);
 
         DungeonLoader loader = new DungeonMockLoader(json);
-        assertThrows(Error.class, () -> {
-            loader.load();
-        });
+        Dungeon dungeon = loader.load();
+        Player player = dungeon.getPlayer();
+
+        assertEquals(player.getX(), 0);
+        assertEquals(player.getY(), 0);
+
+        player.moveRight();
+
+        // Test that player did not go through door
+        assertEquals(player.getX(), 0);
+        assertEquals(player.getY(), 0);
     }
 
 }
