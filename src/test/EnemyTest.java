@@ -1,6 +1,8 @@
 package test;
 
 import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.fail;
@@ -286,6 +288,58 @@ class EnemyTest {
 
         assertTrue(player.getLifeStatus());
         assertFalse(dungeon.isComplete());
+    }
+
+    @Test
+    void testEnemyBlockedByWall() {
+        JSONObject playerJSON = new JSONObject();
+        playerJSON.put("x", 0);
+        playerJSON.put("y", 0);
+        playerJSON.put("type", "player");
+
+        JSONObject wallJSON = new JSONObject();
+        wallJSON.put("x", 0);
+        wallJSON.put("y", 1);
+        wallJSON.put("type", "wall");
+
+        JSONObject enemy = new JSONObject();
+        enemy.put("x", 0);
+        enemy.put("y", 2);
+        enemy.put("type", "enemy");
+
+        JSONArray entitiesJSON = new JSONArray();
+        entitiesJSON.put(playerJSON);
+        entitiesJSON.put(wallJSON);
+        entitiesJSON.put(enemy);
+
+        JSONObject goalJSON = new JSONObject();
+        goalJSON.put("goal", "enemies");
+
+        JSONObject json = new JSONObject();
+        json.put("width", 1);
+        json.put("height", 3);
+        json.put("entities", entitiesJSON);
+        json.put("goal-condition", goalJSON);
+
+        DungeonLoader loader = new DungeonMockLoader(json);
+        Dungeon dungeon = loader.load();
+        Player player = dungeon.getPlayer();
+
+        assertEquals(player.getX(), 0);
+        assertEquals(player.getY(), 0);
+
+        try {
+            Thread.sleep(2000);
+        } catch (InterruptedException e) {
+            fail();
+        }
+
+        assertEquals(player.getX(), 0);
+        assertEquals(player.getY(), 0);
+
+        // Test that player is alive
+        assertTrue(player.getLifeStatus());
+
     }
 
 }
