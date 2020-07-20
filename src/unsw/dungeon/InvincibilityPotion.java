@@ -115,6 +115,6 @@ public class InvincibilityPotion extends ItemEntity implements Weapon, Subject {
      */
     @Override
     public void attack(LifeEntity e) {
-        e.updateLifeStatus(false);
+        e.kill();
     }
 }
