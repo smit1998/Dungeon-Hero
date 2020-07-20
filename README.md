@@ -581,6 +581,11 @@ Marks will be deducted for poor git and GitLab usage. For example, meaningless c
 
 ### Week-08
 
+**Duy**
+* refactoring of code + javaDocs
+* cleaned up UML
+* 
+
 ### Week-09
 
 Fill in here.
