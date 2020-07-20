@@ -47,9 +47,7 @@ public class Sword extends Entity implements Item, Observer, Weapon, Subject {
     public boolean interact(Entity caller) {
         if (caller instanceof Player) {
             Player player = (Player) caller;
-            if (player.pickupItem(this) != null) {
-                player.attach(this);
-            }
+            player.pickupItem(this);
         }
         if (caller instanceof Boulder) {
             return false;

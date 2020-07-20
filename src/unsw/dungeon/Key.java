@@ -24,9 +24,7 @@ public class Key extends Entity implements Item, Observer, Subject {
         // makes the player pickup the sword
         if (caller instanceof Player) {
             Player player = (Player) caller;
-            if (player.pickupItem(this) != null) {
-                player.attach(this);
-            }
+            player.pickupItem(this);
         }
         if (caller instanceof Boulder) {
             return false;
