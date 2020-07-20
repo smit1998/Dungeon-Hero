@@ -18,7 +18,6 @@ public class Enemy extends LifeEntity implements Subject {
 
     public Enemy(int x, int y, Dungeon dungeon) {
         super(x, y, dungeon);
-        this.isAlive = true;
         start();
     }
 
