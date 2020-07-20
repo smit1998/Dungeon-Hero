@@ -111,4 +111,22 @@ class FloorSwitchTest {
         assertFalse(floorSwitch.isPressed());
     }
 
+    @Test 
+    void PlayerWalksOverMultipleTimes() {
+        Dungeon dungeon = new Dungeon(3, 1);
+        Player player = new Player(dungeon, 0, 0);
+        FloorSwitch floorSwitch = new FloorSwitch(1, 0, dungeon);
+
+        dungeon.addEntity(player);
+        dungeon.addEntity(floorSwitch);
+
+        //player moves on and of the switch multiple times
+        player.moveRight();
+        player.moveLeft();
+        player.moveRight();
+        player.moveLeft();
+
+        assertTrue(player.getX() == 0);
+        assertTrue(player.getY() == 0);
+    }
 }

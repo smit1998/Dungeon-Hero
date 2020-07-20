@@ -236,4 +236,41 @@ class DoorKeyTest {
         assertTrue(player.getY() == 0);
 
     }
+
+    @Test
+    void EnterDoorWithoutKey() {
+        JSONObject playerJSON = new JSONObject();
+        playerJSON.put("x", 0);
+        playerJSON.put("y", 0);
+        playerJSON.put("type", "player");
+
+        JSONObject doorJSON = new JSONObject();
+        doorJSON.put("x", 1);
+        doorJSON.put("y", 0);
+        doorJSON.put("id", 1);
+        doorJSON.put("type", "door");
+
+        JSONArray entitiesJSON = new JSONArray();
+        entitiesJSON.put(playerJSON);
+        entitiesJSON.put(doorJSON);
+
+        JSONObject goalJSON = new JSONObject();
+        goalJSON.put("goal", "exit");
+
+        JSONObject json = new JSONObject();
+        json.put("width", 3);
+        json.put("height", 1);
+        json.put("entities", entitiesJSON);
+        json.put("goal-condition", goalJSON);
+
+        DungeonLoader loader = new DungeonMockLoader(json);
+        Dungeon dungeon = loader.load();
+        Player player = dungeon.getPlayer();
+
+        player.moveRight();
+
+        assertTrue(player.getX() == 0);
+        assertTrue(player.getY() == 0);
+        
+    }
 }
