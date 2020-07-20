@@ -71,7 +71,6 @@ public class InvincibilityPotion extends Entity implements Item, Weapon, Observe
         if (caller instanceof Player) {
             Player player = (Player) caller;
             if (player.pickupItem(this) != null) {
-                player.attach(this);
                 usePotion();
             }
         }

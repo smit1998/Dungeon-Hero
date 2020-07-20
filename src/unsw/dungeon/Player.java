@@ -9,7 +9,7 @@ import java.util.Set;
  * @author Robert Clifton-Everest
  *
  */
-public class Player extends MoveableEntity implements Subject {
+public class Player extends MoveableEntity {
 
     private boolean isAlive;
     private Inventory inventory;
@@ -85,44 +85,6 @@ public class Player extends MoveableEntity implements Subject {
 
     public boolean hasPotion() {
         return getWeapon() instanceof InvincibilityPotion;
-    }
-
-    public void attach(Observer o) {
-        observers.add(o);
-    }
-
-    public void detach(Observer o) {
-        observers.remove(o);
-    }
-
-    public void notifyObservers() {
-        for (Observer observer : observers) {
-            observer.update(this);
-        }
-    }
-
-    @Override
-    public void moveUp() {
-        super.moveUp();
-        notifyObservers();
-    }
-
-    @Override
-    public void moveDown() {
-        super.moveDown();
-        notifyObservers();
-    }
-
-    @Override
-    public void moveLeft() {
-        super.moveLeft();
-        notifyObservers();
-    }
-
-    @Override
-    public void moveRight() {
-        super.moveRight();
-        notifyObservers();
     }
 
 }
