@@ -13,7 +13,7 @@ class InvincibilityPotionTest {
 
     // basic test with just potion and player
     @Test
-    void PotionTest1() {
+    void Testbasicpotion() {
         JSONObject playerJSON = new JSONObject();
         playerJSON.put("x", 0);
         playerJSON.put("y", 0);
@@ -53,7 +53,7 @@ class InvincibilityPotionTest {
 
     // potion with enemies
     @Test
-    void PotionTest2() {
+    void testpotionwithenemies() {
         JSONObject playerJSON = new JSONObject();
         playerJSON.put("x", 1);
         playerJSON.put("y", 0);
@@ -103,7 +103,7 @@ class InvincibilityPotionTest {
 
     // potion with multiple enemies
     @Test
-    void PortionTest3() {
+    void Portionwithmultipleenemies() {
         JSONObject playerJSON = new JSONObject();
         playerJSON.put("x", 1);
         playerJSON.put("y", 0);
@@ -161,7 +161,7 @@ class InvincibilityPotionTest {
     // sword and potion.
 
     @Test
-    void PotionTest4() {
+    void PotionwithSword() {
         JSONObject playerJSON = new JSONObject();
         playerJSON.put("x", 0);
         playerJSON.put("y", 0);

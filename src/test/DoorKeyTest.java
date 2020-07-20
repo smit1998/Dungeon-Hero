@@ -13,7 +13,7 @@ class DoorKeyTest {
 
     // standard 1 door and 1 key
     @Test
-    void DoorKeyTest1() {
+    void Standart1Door1key() {
         JSONObject playerJSON = new JSONObject();
         playerJSON.put("x", 0);
         playerJSON.put("y", 0);
@@ -62,7 +62,7 @@ class DoorKeyTest {
 
     // test with wrong key.
     @Test
-    void DoorKeyTest2() {
+    void WrongKey() {
         JSONObject playerJSON = new JSONObject();
         playerJSON.put("x", 0);
         playerJSON.put("y", 0);
@@ -110,7 +110,7 @@ class DoorKeyTest {
 
     // test with the enemies.
     @Test
-    void DoorKeyTest3() {
+    void DoorKeywithenemies() {
         JSONObject playerJSON = new JSONObject();
         playerJSON.put("x", 1);
         playerJSON.put("y", 0);
@@ -171,7 +171,7 @@ class DoorKeyTest {
 
     // test with multiple doors and keys
     @Test
-    void DoorKeyTest4() {
+    void MultipleDoorKeys() {
         JSONObject playerJSON = new JSONObject();
         playerJSON.put("x", 0);
         playerJSON.put("y", 0);
