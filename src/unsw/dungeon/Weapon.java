@@ -21,5 +21,5 @@ public interface Weapon {
      * attacks an enemy, with unique interaction depending on the weapon used
      * @param the enemy to be attacked
      */
-    public void attack(Enemy e); 
+    public void attack(LifeEntity e); 
 }

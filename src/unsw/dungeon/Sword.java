@@ -136,7 +136,7 @@ public class Sword extends ItemEntity implements Observer, Weapon, Subject {
      * @param e enemy to be attacked
      */
     @Override
-    public void attack(Enemy e) {
+    public void attack(LifeEntity e) {
         e.updateLifeStatus(false);
         updateHitsRemaining();
     }

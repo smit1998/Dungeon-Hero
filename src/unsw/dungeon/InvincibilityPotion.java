@@ -157,7 +157,7 @@ public class InvincibilityPotion extends ItemEntity implements Weapon, Observer,
      * @param e enemy to be attacked
      */
     @Override
-    public void attack(Enemy e) {
+    public void attack(LifeEntity e) {
         e.updateLifeStatus(false);
     }
 }

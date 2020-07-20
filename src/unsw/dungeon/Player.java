@@ -6,9 +6,8 @@ package unsw.dungeon;
  * @author Robert Clifton-Everest
  *
  */
-public class Player extends MoveableEntity {
+public class Player extends LifeEntity{
 
-    private boolean isAlive;
     private Inventory inventory;
 
     /**
@@ -19,7 +18,6 @@ public class Player extends MoveableEntity {
      */
     public Player(Dungeon dungeon, int x, int y) {
         super(x, y, dungeon);
-        this.isAlive = true;
         this.inventory = new Inventory();
     }
 
@@ -46,7 +44,8 @@ public class Player extends MoveableEntity {
         return inventory.getKey();
     }
 
-    public boolean attack(Enemy e) {
+    @Override
+    public boolean attack(LifeEntity e) {
         Weapon weapon = getWeapon();
         if (weapon != null) {
             weapon.attack(e);
@@ -62,26 +61,7 @@ public class Player extends MoveableEntity {
         return inventory.getWeapon();
     }
 
-    /**
-     * Changes the life status of the player - whether the player is alive or dead
-     * 
-     * @param newLifeStatus - a boolean, representing the new life status of the
-     *                      player
-     */
-    public void updateLifeStatus(boolean newLifeStatus) {
-        this.isAlive = newLifeStatus;
-        if (isAlive == false) {
-            setVisibility(false);
-        }
-    }
 
-    /**
-     * @return the life status of the player true - the player is alive false - the
-     *         player is dead
-     */
-    public boolean getLifeStatus() {
-        return this.isAlive;
-    }
 
     /**
      * Invokes the interaction of another entity on the player if possible
