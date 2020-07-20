@@ -19,20 +19,34 @@ public class Enemy extends MoveableEntity implements Subject {
         }
     };
 
+    /**
+     * Creates an enemy entity in the square(x, y)
+     * @param x coordinate where the enemy is initially placed
+     * @param y coordinate where the enemy is initially placed
+     */
     public Enemy(int x, int y, Dungeon dungeon) {
         super(x, y, dungeon);
         this.isAlive = true;
         start();
     }
 
+    /**
+     * Starts the timer for the enemy movement
+     */
     public void start() {
         timer.scheduleAtFixedRate(task, 2000, 500);
     }
 
+    /**
+     * @return the player entity in the dungeon
+     */
     private Player getPlayer() {
         return dungeon().getPlayer();
     }
 
+    /**
+     * Enemy entity moves towards the player entity
+     */
     private void gotoPlayer() {
         Player player = getPlayer();
         int fearModifier = player.hasPotion() ? -1 : 1;
@@ -86,10 +100,18 @@ public class Enemy extends MoveableEntity implements Subject {
         }
     }
 
+    /**
+     * Attacks the player when in contact
+     * @param p is the player that is to be attacked
+     */
     public void attack(Player p) {
         p.updateLifeStatus(false);
     }
 
+    /**
+     * Interacts with the player entity when player is on the same grid as enemy
+     * @param caller is the player entity that is to be attacked
+     */
     @Override
     public boolean interact(Entity caller) {
         if (caller instanceof Player) {
@@ -107,6 +129,10 @@ public class Enemy extends MoveableEntity implements Subject {
     public void attack(Entity entity) {
     }
 
+    /**
+     * Changes the life status and visibility of the enemy
+     * @param newLifeStatus is the new boolean value of isAlive variable
+     */
     public void updateLifeStatus(boolean newLifeStatus) {
         this.isAlive = newLifeStatus;
         if (newLifeStatus == false) {
@@ -117,18 +143,32 @@ public class Enemy extends MoveableEntity implements Subject {
         notifyObservers();
     }
 
+    /**
+     * @return the life status of the enemy entity
+     */
     public boolean getIsAlive() {
         return this.isAlive;
     }
 
+    /**
+     * attaches as observer to the enemy, by storing it inside the observerlist  
+     * @param o is the observer
+     */
     public void attach(Observer o) {
         observers.add(o);
     }
 
+    /**
+     * removes an observer from the observer list
+     * @param 0 the observer to be removed
+     */
     public void detach(Observer o) {
         observers.remove(o);
     }
 
+    /**
+     * invokes the update method of all observers in the observer list
+     */
     public void notifyObservers() {
         for (Observer obs : observers) {
             obs.update(this);

@@ -2,10 +2,18 @@ package unsw.dungeon;
 
 public class Boulder extends Entity {
 
+    /**
+     * create a Boulder positioned at square(x, y)
+     * @param x coordinate where the boulder is placed
+     * @param y coordinate where the boulder is placed
+     */
     public Boulder(int x, int y, Dungeon dungeon) {
         super(x, y, dungeon);
     }
 
+    /**
+     * Interacts with player entity and moves to the next position if possible
+     */
     public boolean interact(Entity caller) {
         if (caller instanceof Player) {
             int oldX = getX();
