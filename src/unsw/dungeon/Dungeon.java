@@ -58,8 +58,8 @@ public class Dungeon {
     }
 
     public boolean interact(Entity caller, int x, int y) {
-        List<Entity> toRemove = new ArrayList<Entity>(); 
-        boolean result = true; 
+        List<Entity> toRemove = new ArrayList<Entity>();
+        boolean result = true;
         for (Entity entity : entities) {
             if (entity == caller || entity == null)
                 continue;
@@ -68,18 +68,18 @@ public class Dungeon {
                     result = false;
                 }
                 if (entity.isVisible().get() == false) {
-                    toRemove.add(entity); 
+                    toRemove.add(entity);
                 }
             }
         }
         if (caller.isVisible().get() == false) {
-            toRemove.add(caller); 
-            result = false; 
+            toRemove.add(caller);
+            result = false;
         }
         for (Entity e : toRemove) {
-            entities.remove(e); 
+            removeEntity(e);
         }
-        
+
         return result;
     }
 

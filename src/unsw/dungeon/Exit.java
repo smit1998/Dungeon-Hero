@@ -13,10 +13,6 @@ public class Exit extends Entity implements Subject {
         isExiting = false;
     }
 
-    public void updateGameState() {
-        return;
-    }
-
     public boolean getExitStatus() {
         return isExiting;
     }
