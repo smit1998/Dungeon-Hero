@@ -5,3 +5,5 @@ hs_err_pid*
 /lib/
 .DS_Store
 .vscode/
+/build/
+/.gradle/
