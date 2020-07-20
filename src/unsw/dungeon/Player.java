@@ -1,18 +1,15 @@
 package unsw.dungeon;
 
-import java.util.ArrayList;
-
 /**
  * The player entity
  * 
  * @author Robert Clifton-Everest
  *
  */
-public class Player extends MoveableEntity implements Subject {
+public class Player extends MoveableEntity {
 
     private boolean isAlive;
     private Inventory inventory;
-    private ArrayList<Observer> observers;
 
     /**
      * Create a player positioned in square (x,y)
@@ -24,7 +21,6 @@ public class Player extends MoveableEntity implements Subject {
         super(x, y, dungeon);
         this.isAlive = true;
         this.inventory = new Inventory();
-        this.observers = new ArrayList<Observer>();
     }
 
     /**
@@ -54,12 +50,12 @@ public class Player extends MoveableEntity implements Subject {
     }
 
     public boolean attack(Enemy e) {
-        Weapon weapon = getWeapon(); 
+        Weapon weapon = getWeapon();
         if (weapon != null) {
-            weapon.attack(e); 
+            weapon.attack(e);
             return true;
         }
-        return false; 
+        return false;
     }
 
     /**
@@ -102,7 +98,7 @@ public class Player extends MoveableEntity implements Subject {
             Enemy enemy = (Enemy) caller;
             Weapon weapon = inventory.getWeapon();
             if (weapon != null) {
-                weapon.attack(enemy); 
+                weapon.attack(enemy);
                 return false;
             } else {
                 enemy.attack(this);
@@ -119,72 +115,4 @@ public class Player extends MoveableEntity implements Subject {
     public boolean hasPotion() {
         return getWeapon() instanceof InvincibilityPotion;
     }
-
-    /**
-     * attaches an observer to the player, by storing inside the observerList
-     * 
-     * @param o the observer that wants to observe the player
-     */
-    public void attach(Observer o) {
-        observers.add(o);
-    }
-
-    /**
-     * removes an observer from the observer list
-     * 
-     * @param o the observer to be removed
-     */
-    public void detach(Observer o) {
-        observers.remove(o);
-    }
-
-    /**
-     * invokes the update method of all observers in the observer list
-     */
-    public void notifyObservers() {
-        for (Observer observer : observers) {
-            observer.update(this);
-        }
-    }
-
-    /**
-     * attempts to move up the player up in the dungeon, and notify all observers of
-     * the positional change
-     */
-    @Override
-    public void moveUp() {
-        super.moveUp();
-        notifyObservers();
-    }
-
-    /**
-     * attempts to move down the player up in the dungeon, and notify all observers
-     * of the positional change
-     */
-    @Override
-    public void moveDown() {
-        super.moveDown();
-        notifyObservers();
-    }
-
-    /**
-     * attempts to move the player left in the dungeon, and notify all observers of
-     * the positional change
-     */
-    @Override
-    public void moveLeft() {
-        super.moveLeft();
-        notifyObservers();
-    }
-
-    /**
-     * attempts to move the player right in the dungeon, and notify all observers of
-     * the positional change
-     */
-    @Override
-    public void moveRight() {
-        super.moveRight();
-        notifyObservers();
-    }
-
 }
