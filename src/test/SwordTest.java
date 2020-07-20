@@ -3,6 +3,7 @@ package test;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.fail;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -174,5 +175,98 @@ class SwordTest {
         // player dies
         player.moveRight();
         assertFalse(dungeon.isComplete());
+    }
+
+    @Test
+    void EnemyAttacksPlayerWithSword() {
+        JSONObject playerJSON = new JSONObject();
+        playerJSON.put("x", 0);
+        playerJSON.put("y", 0);
+        playerJSON.put("type", "player");
+
+        JSONObject swordJSON = new JSONObject();
+        swordJSON.put("x", 1);
+        swordJSON.put("y", 0);
+        swordJSON.put("type", "sword");
+
+        JSONObject enemyJSON = new JSONObject();
+        enemyJSON.put("x", 3);
+        enemyJSON.put("y", 0);
+        enemyJSON.put("type", "enemy");
+
+        JSONArray entitiesJSON = new JSONArray();
+        entitiesJSON.put(playerJSON);
+        entitiesJSON.put(swordJSON);
+        entitiesJSON.put(enemyJSON);
+
+        JSONObject goalJSON = new JSONObject();
+        goalJSON.put("goal", "enemies");
+
+        JSONObject json = new JSONObject();
+        json.put("width", 4);
+        json.put("height", 1);
+        json.put("entities", entitiesJSON);
+        json.put("goal-condition", goalJSON);
+
+        DungeonLoader loader = new DungeonMockLoader(json);
+        Dungeon dungeon = loader.load();
+        Player player = dungeon.getPlayer();
+
+        assertFalse(dungeon.isComplete());
+        // player picks up sword
+        player.moveRight();
+        // enemy attacks player
+        try{
+            Thread.sleep(5000);
+        }
+        catch(InterruptedException e) {
+            fail();
+        }
+
+        player.moveRight();
+        player.moveRight();
+        assertTrue(dungeon.isComplete());
+
+    }
+
+    @Test
+    void MultipleSword() {
+        JSONObject playerJSON = new JSONObject();
+        playerJSON.put("x", 0);
+        playerJSON.put("y", 0);
+        playerJSON.put("type", "player");
+
+        JSONObject swordJSON = new JSONObject();
+        swordJSON.put("x", 1);
+        swordJSON.put("y", 0);
+        swordJSON.put("type", "sword");
+
+        JSONObject swordJSON2 = new JSONObject();
+        swordJSON2.put("x", 2);
+        swordJSON2.put("y", 0);
+        swordJSON2.put("type", "sword");
+
+        JSONArray entitiesJSON = new JSONArray();
+        entitiesJSON.put(playerJSON);
+        entitiesJSON.put(swordJSON);
+        entitiesJSON.put(swordJSON2);
+
+        JSONObject goalJSON = new JSONObject();
+        goalJSON.put("goal", "enemies");
+
+        JSONObject json = new JSONObject();
+        json.put("width", 3);
+        json.put("height", 1);
+        json.put("entities", entitiesJSON);
+        json.put("goal-condition", goalJSON);
+
+        DungeonLoader loader = new DungeonMockLoader(json);
+        Dungeon dungeon = loader.load();
+        Player player = dungeon.getPlayer();
+        
+        // player pick up the sword
+        player.moveRight();
+        // player can not pick up 2nd sword
+        player.moveRight();
     }
 }
