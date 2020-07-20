@@ -273,4 +273,69 @@ class DoorKeyTest {
         assertTrue(player.getY() == 0);
         
     }
+
+    @Test
+    void PlayerHasSwordAndKey() {
+        JSONObject playerJSON = new JSONObject();
+        playerJSON.put("x", 0);
+        playerJSON.put("y", 0);
+        playerJSON.put("type", "player");
+
+        JSONObject keyJSON = new JSONObject();
+        keyJSON.put("x", 1);
+        keyJSON.put("y", 0);
+        keyJSON.put("id", 1);
+        keyJSON.put("type", "key");
+
+        JSONObject swordJSON = new JSONObject();
+        swordJSON.put("x", 2);
+        swordJSON.put("y", 0);
+        swordJSON.put("type", "sword");
+
+        JSONObject doorJSON = new JSONObject();
+        doorJSON.put("x", 3);
+        doorJSON.put("y", 0);
+        doorJSON.put("id", 1);
+        doorJSON.put("type", "door");
+
+        JSONObject enemyJSON = new JSONObject();
+        enemyJSON.put("x", 4);
+        enemyJSON.put("y", 0);
+        enemyJSON.put("type", "enemy");
+
+        JSONArray entitiesJSON = new JSONArray();
+        entitiesJSON.put(playerJSON);
+        entitiesJSON.put(keyJSON);
+        entitiesJSON.put(doorJSON);
+        entitiesJSON.put(enemyJSON);
+        entitiesJSON.put(swordJSON);
+
+        JSONObject goalJSON = new JSONObject();
+        goalJSON.put("goal", "enemies");
+
+        JSONObject json = new JSONObject();
+        json.put("width", 5);
+        json.put("height", 1);
+        json.put("entities", entitiesJSON);
+        json.put("goal-condition", goalJSON);
+
+        DungeonLoader loader = new DungeonMockLoader(json);
+        Dungeon dungeon = loader.load();
+        Player player = dungeon.getPlayer();
+
+        // Pickup key
+        player.moveRight();
+
+        // Pickup sword
+        player.moveRight();
+
+        // enters door
+        player.moveRight();
+
+        // kills enemy
+        player.moveRight();
+
+        assertTrue(dungeon.isComplete());
+
+    }
 }
