@@ -3,6 +3,7 @@ package test;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.fail;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -12,7 +13,7 @@ import unsw.dungeon.*;
 class enemyTest {
 
     @Test
-    void basicEnemyTest() {
+    void BasicEnemyTest() {
         JSONObject playerJSON = new JSONObject();
         playerJSON.put("x", 0);
         playerJSON.put("y", 0);
@@ -50,7 +51,7 @@ class enemyTest {
     }
 
     @Test
-    void enemyWithSword() {
+    void EnemyWithSword() {
         JSONObject playerJSON = new JSONObject();
         playerJSON.put("x", 0);
         playerJSON.put("y", 0);
@@ -95,7 +96,7 @@ class enemyTest {
     }
 
     @Test
-    void enemyWithPotion() {
+    void EnemyWithPotion() {
         JSONObject playerJSON = new JSONObject();
         playerJSON.put("x", 0);
         playerJSON.put("y", 0);
@@ -143,7 +144,7 @@ class enemyTest {
     }
 
     @Test
-    void multipleEnemies() {
+    void MultipleEnemies() {
         JSONObject playerJSON = new JSONObject();
         playerJSON.put("x", 0);
         playerJSON.put("y", 0);
@@ -196,7 +197,7 @@ class enemyTest {
     }
 
     @Test
-    void enemyMoveTest() {
+    void EnemyMoveTest() {
         JSONObject playerJSON = new JSONObject();
         playerJSON.put("x", 0);
         playerJSON.put("y", 0);
@@ -234,7 +235,58 @@ class enemyTest {
             fail();
         }
         //enemy kills the player
-        assertFalse(player.isVisible() == true);
+        assertFalse(player.getLifeStatus() == true);
 
+    }
+
+    void EnemyFear() {
+        JSONObject playerJSON = new JSONObject();
+        playerJSON.put("x", 0);
+        playerJSON.put("y", 0);
+        playerJSON.put("type", "player");
+
+        JSONObject potionJSON = new JSONObject();
+        potionJSON.put("x", 1);
+        potionJSON.put("y", 0);
+        potionJSON.put("type", "invincibility");
+        
+        JSONObject enemy = new JSONObject();
+        enemy.put("x", 2);
+        enemy.put("y", 1);
+        enemy.put("type", "enemy");
+
+        JSONArray entitiesJSON = new JSONArray();
+        entitiesJSON.put(playerJSON);
+        entitiesJSON.put(potionJSON);
+        entitiesJSON.put(enemy);
+
+        JSONObject goalJSON = new JSONObject();
+        goalJSON.put("goal", "enemies");
+
+        JSONObject json = new JSONObject();
+        json.put("width", 3);
+        json.put("height", 2);
+        json.put("entities", entitiesJSON);
+        json.put("goal-condition", goalJSON);
+
+        DungeonLoader loader = new DungeonMockLoader(json);
+        Dungeon dungeon = loader.load();
+        Player player = dungeon.getPlayer();
+
+        // Test that goal isn't complete yet
+        assertFalse(dungeon.isComplete());
+
+        // player picks up potion
+        player.moveRight();
+        
+        try{
+            Thread.sleep(5000);
+        }
+        catch(InterruptedException e) {
+            fail();
+        }
+
+        assertTrue(player.getLifeStatus());
+        assertFalse(dungeon.isComplete());
     }
 }
