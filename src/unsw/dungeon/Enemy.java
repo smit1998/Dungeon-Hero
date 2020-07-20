@@ -36,16 +36,18 @@ public class Enemy extends LifeEntity implements Subject {
         int diffX = (player.getX() - getX()) * fearModifier;
         int diffY = (player.getY() - getY()) * fearModifier;
 
+        // TOOD
+        // if (diffX == 0 && diffY == 0) {
+        // return;
+        // }
+
         int xDirection = diffX > 0 ? 1 : -1;
         if (diffY == 0) {
             if (dungeon().interact(this, getX() + xDirection, getY())) {
-                switch (xDirection) {
-                    case 1:
-                        moveRight();
-                        break;
-                    case -1:
-                        moveLeft();
-                        break;
+                if (diffX > 0) {
+                    moveRight();
+                } else {
+                    moveLeft();
                 }
             } else {
                 moveUp();
@@ -55,13 +57,10 @@ public class Enemy extends LifeEntity implements Subject {
         int yDirection = diffY > 0 ? 1 : -1;
         if (diffX == 0) {
             if (dungeon().interact(this, getX(), getY() + yDirection)) {
-                switch (yDirection) {
-                    case 1:
-                        moveDown();
-                        break;
-                    case -1:
-                        moveUp();
-                        break;
+                if (diffY > 0) {
+                    moveDown();
+                } else {
+                    moveUp();
                 }
             } else {
                 moveLeft();
@@ -71,12 +70,12 @@ public class Enemy extends LifeEntity implements Subject {
         if (diffX != 0 && diffY != 0) {
             if (diffX > 0) {
                 moveRight();
-            } else if (diffX < 0) {
+            } else {
                 moveLeft();
             }
             if (diffY > 0) {
                 moveDown();
-            } else if (diffY < 0) {
+            } else {
                 moveUp();
             }
         }

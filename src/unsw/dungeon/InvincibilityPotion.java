@@ -2,21 +2,17 @@ package unsw.dungeon;
 
 import java.util.Timer;
 import java.util.TimerTask;
-import java.util.HashSet;
-import java.util.Set;
 
 /**
  * class for the invisibility potion fears all enemies, and kills all enemies
  * upon impact for 5 seconds
  */
-public class InvincibilityPotion extends ItemEntity implements Weapon, Subject {
+public class InvincibilityPotion extends ItemEntity implements Weapon {
 
     public final static int MAX_PICKUP = 1;
     public final static int PRIORITY = 100;
 
     private final static int DURATION_MS = 5000;
-
-    private Set<Observer> observers = new HashSet<Observer>();
 
     /**
      * Constructor for an invincibility potion
@@ -48,34 +44,6 @@ public class InvincibilityPotion extends ItemEntity implements Weapon, Subject {
      */
     public int getMaxPickup() {
         return MAX_PICKUP;
-    }
-
-    /**
-     * attach an observer to observer list
-     * 
-     * @param o observer to be added
-     */
-    public void attach(Observer o) {
-        observers.add(o);
-    }
-
-    /**
-     * remove an observer from the observer list
-     * 
-     * @param o observer to be removed
-     */
-    public void detach(Observer o) {
-        observers.remove(o);
-    }
-
-    /**
-     * calls the update method for all observers in the observer list uses the
-     * concept of pulling, by passing the whole potion object to the observer
-     */
-    public void notifyObservers() {
-        for (Observer obs : observers) {
-            obs.update(this);
-        }
     }
 
     /**
