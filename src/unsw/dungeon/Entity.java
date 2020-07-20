@@ -41,45 +41,73 @@ public abstract class Entity {
     }
 
     /**
-     * Abstract method to implemented in the entity
+     * Interact with this entity
      * 
-     * @return a boolean to whether the calling entity is able to interact with the
-     *         current one
+     * @param caller the calling entity
+     * @return whether the calling entity is able to interact with this one
      */
-    public boolean interact(Entity caller) {
-        return false;
-    }
+    public abstract boolean interact(Entity caller);
 
+    /**
+     * @return an IntegerProperty, representing x coordinate of the entity
+     */
     public IntegerProperty x() {
         return x;
     }
 
+    /**
+     * @return an IntegerProperty, representing y coordinate of the entity
+     */
     public IntegerProperty y() {
         return y;
     }
 
+    /**
+     * @return an integer, representing y coordinate of the entity
+     */
     public int getY() {
         return y().get();
     }
 
+    /**
+     * @return an integer, representing x coordinate of the entity
+     */
     public int getX() {
         return x().get();
     }
 
+    /**
+     * Sets the x position of the entity on the dungeon
+     * 
+     * @param x coordinate where the entity belongs
+     */
     public void setX(int x) {
         x().set(x);
     }
 
+    /**
+     * Sets the y position of the entity on the dungeon
+     * 
+     * @param y coordinate where the entity belongs
+     */
     public void setY(int y) {
         y().set(y);
     }
 
+    /**
+     * @return a BooleanProperty, which determines whether an entity is visible in
+     *         the dungeon or not
+     */
     public BooleanProperty isVisible() {
         return isVisible;
     }
 
+    /**
+     * Changes the visibility of an entity to the specified argument provided
+     * 
+     * @param isVisible a boolean representing visibility
+     */
     public void setVisibility(boolean isVisible) {
-        System.out.println("set isvisiable to " + isVisible);
         this.isVisible.setValue(isVisible);
     }
 
