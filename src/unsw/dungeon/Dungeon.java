@@ -20,6 +20,7 @@ public class Dungeon {
     private int width, height;
     private List<Entity> entities;
     private Player player;
+    private ComponentGoal goal;
 
     public Dungeon(int width, int height) {
         this.width = width;
@@ -46,5 +47,67 @@ public class Dungeon {
 
     public void addEntity(Entity entity) {
         entities.add(entity);
+    }
+
+    public void removeEntity(Entity entity) {
+        entities.remove(entity);
+    }
+
+    public void setGoal(ComponentGoal goal) {
+        this.goal = goal;
+    }
+
+    public boolean interact(Entity caller, int x, int y) {
+        List<Entity> toRemove = new ArrayList<Entity>();
+        boolean result = true;
+        for (Entity entity : entities) {
+            if (entity == caller || entity == null)
+                continue;
+            if (entity.getX() == x && entity.getY() == y) {
+                if (!entity.interact(caller)) {
+                    result = false;
+                }
+                if (entity.isVisible().get() == false) {
+                    toRemove.add(entity);
+                }
+            }
+        }
+        if (caller.isVisible().get() == false) {
+            toRemove.add(caller);
+            result = false;
+        }
+        for (Entity e : toRemove) {
+            removeEntity(e);
+        }
+
+        return result;
+    }
+
+    public boolean isComplete() {
+        return goal.isComplete();
+    }
+
+    public void connectGoals() {
+        for (Entity entity : entities) {
+            if (entity instanceof Subject) {
+                Subject s = (Subject) entity;
+                goal.attachTo(s);
+            }
+        }
+    }
+
+    public void connectPortals() {
+        List<Portal> portals = new ArrayList<>();
+        for (Entity entity : entities) {
+            if (entity instanceof Portal) {
+                portals.add((Portal) entity);
+            }
+        }
+        for (Portal portalA : portals) {
+            for (Portal portalB : portals) {
+                portalA.addPair(portalB);
+                portalB.addPair(portalA);
+            }
+        }
     }
 }
