@@ -643,6 +643,7 @@ Marks will be deducted for poor git and GitLab usage. For example, meaningless c
 * Wrote additional tests to increase test coverage
 * Removed redundant code to improve coverage
 * Removed coordinate class
+* Finished UML diagram
 
 
 ### Week-09
