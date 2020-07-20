@@ -295,4 +295,48 @@ class PortalTest {
         assertTrue(player.getX() == 0);
         assertTrue(player.getY() == 0);
     }
+
+    @Test
+    void PortalOutOfBound() {
+        JSONObject playerJSON = new JSONObject();
+        playerJSON.put("x", 0);
+        playerJSON.put("y", 0);
+        playerJSON.put("type", "player");
+
+        JSONObject portalJSON = new JSONObject();
+        portalJSON.put("x", 1);
+        portalJSON.put("y", 0);
+        portalJSON.put("id", 1);
+        portalJSON.put("type", "portal");
+
+        JSONObject portalPairJSON = new JSONObject();
+        portalPairJSON.put("x", 3);
+        portalPairJSON.put("y", 0);
+        portalPairJSON.put("id", 1);
+        portalPairJSON.put("type", "portal");
+
+        JSONArray entitiesJSON = new JSONArray();
+        entitiesJSON.put(playerJSON);
+        entitiesJSON.put(portalJSON);
+        entitiesJSON.put(portalPairJSON);
+
+        JSONObject goalJSON = new JSONObject();
+        goalJSON.put("goal", "enemies");
+
+        JSONObject json = new JSONObject();
+        json.put("width", 4);
+        json.put("height", 1);
+        json.put("entities", entitiesJSON);
+        json.put("goal-condition", goalJSON);
+
+        DungeonLoader loader = new DungeonMockLoader(json);
+        Dungeon dungeon = loader.load();
+        Player player = dungeon.getPlayer();
+
+        // player can not move in to portal
+        player.moveRight();
+
+        assertTrue(player.getX() == 0);
+        assertTrue(player.getY() == 0);
+    }
 }
