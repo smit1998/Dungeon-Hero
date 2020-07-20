@@ -1,9 +1,14 @@
 package unsw.dungeon;
 
+import java.util.HashSet;
+import java.util.Set;
+
 /**
  * interface for an item
  */
-public abstract class ItemEntity extends Entity {
+public abstract class ItemEntity extends Entity implements Subject {
+
+    private Set<Observer> observers = new HashSet<Observer>();
 
     /**
      * Constructor for item entity
@@ -21,4 +26,33 @@ public abstract class ItemEntity extends Entity {
      *         a player can pick up
      */
     public abstract int getMaxPickup();
+
+    /**
+     * attach an observer to observer list
+     * 
+     * @param o observer to be added
+     */
+    public void attach(Observer o) {
+        observers.add(o);
+    }
+
+    /**
+     * remove an observer from the observer list
+     * 
+     * @param o observer to be removed
+     */
+    public void detach(Observer o) {
+        observers.remove(o);
+    }
+
+    /**
+     * calls the update method for all observers in the observer list uses the
+     * concept of pulling, by passing the whole potion object to the observer
+     */
+    public void notifyObservers() {
+        for (Observer obs : observers) {
+            obs.update(this);
+        }
+    }
+
 }

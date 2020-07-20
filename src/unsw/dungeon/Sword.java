@@ -1,12 +1,9 @@
 package unsw.dungeon;
 
-import java.util.HashSet;
-import java.util.Set;
-
 /**
  * Class for the sword
  */
-public class Sword extends ItemEntity implements Weapon, Subject {
+public class Sword extends ItemEntity implements Weapon {
 
     public final static int MAX_PICKUP = 1;
     public final static int STARTING_DURABILITY = 5;
@@ -14,7 +11,6 @@ public class Sword extends ItemEntity implements Weapon, Subject {
 
     private boolean isPickedUp;
     private int remainingHits;
-    private Set<Observer> observers = new HashSet<Observer>();
 
     /**
      * Constructor for an sword
@@ -88,20 +84,6 @@ public class Sword extends ItemEntity implements Weapon, Subject {
             return false;
         }
         return true;
-    }
-
-    public void attach(Observer o) {
-        observers.add(o);
-    }
-
-    public void detach(Observer o) {
-        observers.remove(o);
-    }
-
-    public void notifyObservers() {
-        for (Observer obs : observers) {
-            obs.update(this);
-        }
     }
 
     /**

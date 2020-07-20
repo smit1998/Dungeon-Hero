@@ -1,14 +1,10 @@
 package unsw.dungeon;
 
-import java.util.HashSet;
-import java.util.Set;
-
-public class Key extends ItemEntity implements Subject {
+public class Key extends ItemEntity {
 
     public final static int MAX_PICKUP = 1;
 
     private int id;
-    private Set<Observer> observers = new HashSet<Observer>();
 
     public Key(int x, int y, Dungeon dungeon, int id) {
         super(x, y, dungeon);
@@ -37,20 +33,4 @@ public class Key extends ItemEntity implements Subject {
         return MAX_PICKUP;
     }
 
-    @Override
-    public void attach(Observer o) {
-        observers.add(o);
-    }
-
-    @Override
-    public void detach(Observer o) {
-        observers.remove(o);
-    }
-
-    @Override
-    public void notifyObservers() {
-        for (Observer obs : observers) {
-            obs.update(this);
-        }
-    }
 }
