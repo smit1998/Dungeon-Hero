@@ -2,7 +2,7 @@ package unsw.dungeon;
 
 public abstract class LifeEntity extends Entity {
 
-    private boolean isAlive; 
+    private boolean isAlive;
 
     public LifeEntity(int x, int y, Dungeon dungeon) {
         super(x, y, dungeon);
@@ -37,23 +37,14 @@ public abstract class LifeEntity extends Entity {
         }
     }
 
-    /**
-     * Changes the life status of the player - whether the player is alive or dead
-     * 
-     * @param newLifeStatus - a boolean, representing the new life status of the
-     *                      player
-     */
-    public void updateLifeStatus(boolean newLifeStatus) {
-        this.isAlive = newLifeStatus;
-        if (isAlive == false) {
-            setVisibility(false);
-        }
+    // TODO
+    public void kill() {
+        isAlive = false;
+        setVisibility(false);
     }
 
-    public boolean attack(LifeEntity e) {
-        e.updateLifeStatus(false); 
-        return true;
-    }
+    // TODO
+    public abstract boolean attack(LifeEntity e);
 
     /**
      * @return the life status of the player true - the player is alive false - the

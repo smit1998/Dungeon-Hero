@@ -82,8 +82,9 @@ public class Enemy extends LifeEntity implements Subject {
         }
     }
 
-    public void attack(Player p) {
-        p.updateLifeStatus(false);
+    public boolean attack(LifeEntity e) {
+        e.kill();
+        return true;
     }
 
     @Override
@@ -101,15 +102,12 @@ public class Enemy extends LifeEntity implements Subject {
     }
 
     @Override
-    public void updateLifeStatus(boolean newLifeStatus) {
-        super.updateLifeStatus(newLifeStatus); 
-        if (newLifeStatus == false) {
-            task = null;
-            timer.cancel();
-        }
+    public void kill() {
+        super.kill();
+        task = null;
+        timer.cancel();
         notifyObservers();
     }
-
 
     public void attach(Observer o) {
         observers.add(o);

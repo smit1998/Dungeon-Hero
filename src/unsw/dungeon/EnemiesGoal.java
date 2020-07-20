@@ -31,11 +31,9 @@ public class EnemiesGoal extends BasicGoal {
      * @param obj a subject being observed
      */
     public void update(Subject obj) {
-        if (obj instanceof Enemy) {
-            Enemy e = (Enemy) obj;
-            if (e.getLifeStatus() == false && enemiesKilled < enemiesSpawned) {
-                enemiesKilled += 1;
-            }
+        Enemy e = (Enemy) obj;
+        if (!e.getLifeStatus()) {
+            enemiesKilled += 1;
         }
     }
 
