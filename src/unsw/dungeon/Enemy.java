@@ -9,8 +9,6 @@ public class Enemy extends LifeEntity implements Subject {
 
     private Set<Observer> observers = new HashSet<Observer>();
 
-    private boolean isAlive;
-
     private Timer timer = new Timer();
     private TimerTask task = new TimerTask() {
         public void run() {
