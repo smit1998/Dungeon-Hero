@@ -605,6 +605,7 @@ Marks will be deducted for poor git and GitLab usage. For example, meaningless c
 
 **Smit**
 * Added Junit tests for increasing the coverage of the code.
+* Refactored code.
 
 ### Week-09
 
