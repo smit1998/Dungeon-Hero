@@ -42,16 +42,14 @@ public class Door extends Entity {
         if (caller instanceof Player) {
             Player player = (Player) caller;
             if (!getIsOpen()) {
-                Inventory inventory = player.getInventory();
-                Key key = inventory.getKey();
+                Key key = player.getKey();
                 if (key != null) {
                     if (open(key)) {
                         key.isVisible().setValue(false);
-                        inventory.removeItem(key);
+                        key.notifyObservers();
                         return true;
                     }
                 }
-
             }
         }
         return false;

@@ -1,14 +1,18 @@
 package unsw.dungeon;
 
-public class Key extends Entity implements Item, Observer {
+import java.util.ArrayList;
+
+public class Key extends Entity implements Item, Observer, Subject {
 
     public final static int MAX_PICKUP = 1;
 
     private int id;
+    private ArrayList<Observer> observers; 
 
     public Key(int x, int y, Dungeon dungeon, int id) {
         super(x, y, dungeon);
         this.id = id;
+        this.observers = new ArrayList<Observer>(); 
     }
 
     public int getID() {
@@ -41,6 +45,23 @@ public class Key extends Entity implements Item, Observer {
             Player player = (Player) obj;
             setX(player.getX());
             setY(player.getY());
+        }
+    }
+
+    @Override
+    public void attach(Observer o) {
+        observers.add(o); 
+    }
+
+    @Override
+    public void detach(Observer o) {
+        observers.remove(o); 
+    }
+
+    @Override
+    public void notifyObservers() {
+        for (Observer obs : observers) {
+            obs.update(this); 
         }
     }
 }

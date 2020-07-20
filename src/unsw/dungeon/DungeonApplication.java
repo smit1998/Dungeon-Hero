@@ -14,7 +14,7 @@ public class DungeonApplication extends Application {
     public void start(Stage primaryStage) throws IOException {
         primaryStage.setTitle("Dungeon");
 
-        DungeonControllerLoader dungeonLoader = new DungeonControllerLoader("items.json");
+        DungeonControllerLoader dungeonLoader = new DungeonControllerLoader("test_entities.json");
 
         DungeonController controller = dungeonLoader.loadController();
 

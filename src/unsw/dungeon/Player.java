@@ -40,8 +40,8 @@ public class Player extends MoveableEntity implements Subject {
         return null;
     }
 
-    public Inventory getInventory() {
-        return this.inventory;
+    public Key getKey() {
+        return inventory.getKey();
     }
 
     public boolean attack(Entity e) {
