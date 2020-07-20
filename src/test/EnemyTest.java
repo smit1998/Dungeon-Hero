@@ -342,4 +342,63 @@ class EnemyTest {
 
     }
 
+    @Test
+    void testEnemyMoveDownwards() {
+        JSONObject playerJSON = new JSONObject();
+        playerJSON.put("x", 0);
+        playerJSON.put("y", 2);
+        playerJSON.put("type", "player");
+
+        JSONObject swordJSON = new JSONObject();
+        swordJSON.put("x", 0);
+        swordJSON.put("y", 1);
+        swordJSON.put("type", "sword");
+
+        JSONObject enemy = new JSONObject();
+        enemy.put("x", 0);
+        enemy.put("y", 0);
+        enemy.put("type", "enemy");
+
+        JSONArray entitiesJSON = new JSONArray();
+        entitiesJSON.put(playerJSON);
+        entitiesJSON.put(swordJSON);
+        entitiesJSON.put(enemy);
+
+        JSONObject goalJSON = new JSONObject();
+        goalJSON.put("goal", "enemies");
+
+        JSONObject json = new JSONObject();
+        json.put("width", 1);
+        json.put("height", 3);
+        json.put("entities", entitiesJSON);
+        json.put("goal-condition", goalJSON);
+
+        DungeonLoader loader = new DungeonMockLoader(json);
+        Dungeon dungeon = loader.load();
+        Player player = dungeon.getPlayer();
+
+        assertEquals(player.getX(), 0);
+        assertEquals(player.getY(), 2);
+
+        // Move up to pickup sword
+        player.moveUp();
+
+        // Test that player moved up
+        assertEquals(player.getX(), 0);
+        assertEquals(player.getY(), 1);
+
+        // Wait for enemy to attack
+        try {
+            Thread.sleep(2000);
+        } catch (InterruptedException e) {
+            fail();
+        }
+
+        // Test that player defended against enemy
+        assertTrue(player.getLifeStatus());
+
+        // Test that enemy is killed
+        assertTrue(dungeon.isComplete());
+    }
+
 }
