@@ -1,19 +1,41 @@
 package unsw.dungeon;
 
+/**
+ * A portal entity that can transport the player to a different linked portal
+ */
 public class Portal extends Entity {
 
     private int id;
     private Portal pair;
 
+    /**
+     * Constructs a new portal at (x,y) in the dungeon with the id
+     * 
+     * @param x       the horizontal position
+     * @param y       the vertical position
+     * @param dungeon the dungeon this portal belongs to
+     * @param id      the id of this portal
+     */
     public Portal(int x, int y, Dungeon dungeon, int id) {
         super(x, y, dungeon);
         this.id = id;
     }
 
+    /**
+     * Get the id of this portal
+     * 
+     * @return the id of this portal
+     */
     public int getID() {
         return this.id;
     }
 
+    /**
+     * Connect this portal to the give portal if the id of the portals are the same
+     * 
+     * @param pair the portal to be connected to
+     * @return whether the connection was established
+     */
     public boolean addPair(Portal pair) {
         if (this == pair) {
             return false;
@@ -25,6 +47,13 @@ public class Portal extends Entity {
         return true;
     }
 
+    /**
+     * Interact with this portal. The entity will be transported to the other portal
+     * if possible
+     * 
+     * @param caller the calling entity
+     * @return whether the interaction was successful
+     */
     public boolean interact(Entity caller) {
         if (pair == null) {
             return false;

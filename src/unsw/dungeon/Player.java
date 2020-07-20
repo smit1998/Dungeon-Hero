@@ -6,15 +6,16 @@ package unsw.dungeon;
  * @author Robert Clifton-Everest
  *
  */
-public class Player extends LifeEntity{
+public class Player extends LifeEntity {
 
     private Inventory inventory;
 
     /**
-     * Create a player positioned in square (x,y)
+     * Create a player positioned in square (x,y) in the dungeon
      * 
-     * @param x coordinate where the player spawns at
-     * @param y coordinate where the player spawns at
+     * @param dungeon the dungeon this player belongs to
+     * @param x       coordinate where the player spawns at
+     * @param y       coordinate where the player spawns at
      */
     public Player(Dungeon dungeon, int x, int y) {
         super(x, y, dungeon);
@@ -22,11 +23,11 @@ public class Player extends LifeEntity{
     }
 
     /**
-     * Pickups an item e
+     * Pickup an item e
      * 
-     * @return the item that has been picked up if the item is not picked up, due to
-     *         the player not being able to, null is returned otherwise, the item is
-     *         added to the inventory
+     * @return the item that has been picked up. if the item is not picked up, due
+     *         to the player not being able to, null is returned otherwise, the item
+     *         is added to the inventory
      */
     public ItemEntity pickupItem(ItemEntity e) {
         ItemEntity itemAdded = inventory.addItem(e);
@@ -44,7 +45,11 @@ public class Player extends LifeEntity{
         return inventory.getKey();
     }
 
-    @Override
+    /**
+     * Attack the given entity using a weapon
+     * 
+     * @return whether the attack was successful
+     */
     public boolean attack(LifeEntity e) {
         Weapon weapon = getWeapon();
         if (weapon != null) {
@@ -61,15 +66,12 @@ public class Player extends LifeEntity{
         return inventory.getWeapon();
     }
 
-
-
     /**
-     * Invokes the interaction of another entity on the player if possible
+     * Interact with this entity
      * 
      * @param caller - the entity who wants to interact with the player
      * @return - true if caller was able to interact with the player otherwise false
      */
-    @Override
     public boolean interact(Entity caller) {
         if (caller instanceof Enemy) {
             Enemy enemy = (Enemy) caller;
@@ -86,8 +88,7 @@ public class Player extends LifeEntity{
     }
 
     /**
-     * @return a boolean representing whether the player has a potion or not True -
-     *         player has potion False - player does not have potion
+     * @return whether the player has an invincibility potion
      */
     public boolean hasPotion() {
         return getWeapon() instanceof InvincibilityPotion;

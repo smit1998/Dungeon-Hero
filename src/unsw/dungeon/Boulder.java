@@ -1,9 +1,13 @@
 package unsw.dungeon;
 
+/**
+ * A boulder entity that can be pushed by the player
+ */
 public class Boulder extends Entity {
 
     /**
-     * create a Boulder positioned at square(x, y)
+     * Constructs a Boulder positioned at square(x, y)
+     * 
      * @param x coordinate where the boulder is placed
      * @param y coordinate where the boulder is placed
      */

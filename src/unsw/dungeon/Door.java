@@ -11,6 +11,14 @@ public class Door extends Entity {
     private int id;
     private BooleanProperty isOpen;
 
+    /**
+     * Constructs a door at coordinate (x,y) in the dungeon with the give id
+     * 
+     * @param x       the horizontal position of the door
+     * @param y       the vertical position of the door
+     * @param dungeon the dungeon the entity belongs to
+     * @param id      the id of the door
+     */
     public Door(int x, int y, Dungeon dungeon, int id) {
         super(x, y, dungeon);
         this.id = id;
@@ -53,7 +61,6 @@ public class Door extends Entity {
     /**
      * opens the door if the player has the right key for that door.
      */
-    @Override
     public boolean interact(Entity caller) {
         if (getIsOpen()) {
             return true;

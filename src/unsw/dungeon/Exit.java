@@ -3,6 +3,9 @@ package unsw.dungeon;
 import java.util.HashSet;
 import java.util.Set;
 
+/**
+ * An exit entity representing the dungeon exit
+ */
 public class Exit extends Entity implements Subject {
 
     private Set<Observer> observers = new HashSet<Observer>();
@@ -19,6 +22,11 @@ public class Exit extends Entity implements Subject {
         isExiting = false;
     }
 
+    /**
+     * Get whether the player is trying to exit
+     * 
+     * @return whether the player is exiting
+     */
     public boolean getExitStatus() {
         return isExiting;
     }

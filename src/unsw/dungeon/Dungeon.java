@@ -22,6 +22,12 @@ public class Dungeon {
     private Player player;
     private ComponentGoal goal;
 
+    /**
+     * Constructs a dungeon of width and height
+     * 
+     * @param width  the number of horizontal grid squares
+     * @param height the number of vertical grid squares
+     */
     public Dungeon(int width, int height) {
         this.width = width;
         this.height = height;
@@ -29,34 +35,79 @@ public class Dungeon {
         this.player = null;
     }
 
+    /**
+     * Get the width of the dungeon
+     * 
+     * @return the width of the dungeon
+     */
     public int getWidth() {
         return width;
     }
 
+    /**
+     * Get the height of the dungeon
+     * 
+     * @return the height of the dungeon
+     */
     public int getHeight() {
         return height;
     }
 
+    /**
+     * Get the player entity of the dungeon
+     * 
+     * @return the player entity of the dungeon
+     */
     public Player getPlayer() {
         return player;
     }
 
+    /**
+     * Set the player entity of the dungeon
+     * 
+     * @param player the player entity
+     */
     public void setPlayer(Player player) {
         this.player = player;
     }
 
+    /**
+     * Add an entity to the dungeon
+     * 
+     * @param entity the entity to be added
+     */
     public void addEntity(Entity entity) {
         entities.add(entity);
     }
 
+    /**
+     * Remove an entity from the dungeon
+     * 
+     * @param entity the entity to be removed
+     */
     public void removeEntity(Entity entity) {
         entities.remove(entity);
     }
 
+    /**
+     * Set the goal of the dungeon
+     * 
+     * @param goal
+     */
     public void setGoal(ComponentGoal goal) {
         this.goal = goal;
     }
 
+    /**
+     * Make the given caller entity interact with all entities at the given
+     * coordinate
+     * 
+     * @param caller the entity starting the interaction
+     * @param x      target horizontal coordinate position
+     * @param y      target vertical coordinate position
+     * @return whether the calling entity successfully interacted with the entities
+     *         at the coordinate
+     */
     public boolean interact(Entity caller, int x, int y) {
         List<Entity> toRemove = new ArrayList<Entity>();
         boolean result = true;
@@ -83,10 +134,18 @@ public class Dungeon {
         return result;
     }
 
+    /**
+     * Return whether the dungeon goal has been completed
+     * 
+     * @return whether the dungeon goal is completed
+     */
     public boolean isComplete() {
         return goal.isComplete();
     }
 
+    /**
+     * Connect the dungeon goal to its respective goal requirements
+     */
     public void connectGoals() {
         for (Entity entity : entities) {
             if (entity instanceof Subject) {
@@ -96,6 +155,9 @@ public class Dungeon {
         }
     }
 
+    /**
+     * Connect all portal entities with the same ID together
+     */
     public void connectPortals() {
         List<Portal> portals = new ArrayList<>();
         for (Entity entity : entities) {

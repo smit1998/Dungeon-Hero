@@ -4,7 +4,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 /**
- * interface for an item
+ * An abstract class for an ItemEntity
  */
 public abstract class ItemEntity extends Entity implements Subject {
 

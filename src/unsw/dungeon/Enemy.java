@@ -5,6 +5,10 @@ import java.util.Set;
 import java.util.Timer;
 import java.util.TimerTask;
 
+/**
+ * An enemy entity which moves towards/away from the player in hopes of
+ * defeating them
+ */
 public class Enemy extends LifeEntity implements Subject {
 
     private Set<Observer> observers = new HashSet<Observer>();
@@ -133,6 +137,11 @@ public class Enemy extends LifeEntity implements Subject {
         notifyObservers();
     }
 
+    /**
+     * attach the observer to the subject
+     * 
+     * @param o observer to be attached
+     */
     public void attach(Observer o) {
         observers.add(o);
     }

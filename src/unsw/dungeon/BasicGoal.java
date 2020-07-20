@@ -4,6 +4,7 @@ package unsw.dungeon;
  * A basic goal which observes a goal requirement
  */
 public abstract class BasicGoal implements ComponentGoal, Observer {
+
     /**
      * @return whether the goal is complete
      */
@@ -15,4 +16,5 @@ public abstract class BasicGoal implements ComponentGoal, Observer {
      * @param obj subject being observed
      */
     public abstract void update(Subject obj);
+
 }

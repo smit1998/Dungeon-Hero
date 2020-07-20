@@ -4,8 +4,8 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 /**
- * class for the invisibility potion fears all enemies, and kills all enemies
- * upon impact for 5 seconds
+ * An invisibility potion entity that shakes fear in all enemies, and kills all
+ * enemies upon impact. Effects lasts for 5 seconds
  */
 public class InvincibilityPotion extends ItemEntity implements Weapon {
 
@@ -26,7 +26,7 @@ public class InvincibilityPotion extends ItemEntity implements Weapon {
     }
 
     /**
-     * sets a timer task, for DURATION_MS amount of time during this time all
+     * Sets a timer task, for DURATION_MS amount of time during this time all
      * enemies run from the entity that uses potion
      */
     private void usePotion() {
@@ -71,7 +71,6 @@ public class InvincibilityPotion extends ItemEntity implements Weapon {
      * @return an integer (0 - MAX_INTEGER) representing the priority of the current
      *         weapon
      */
-    @Override
     public int getPriority() {
         return PRIORITY;
     }
@@ -81,7 +80,6 @@ public class InvincibilityPotion extends ItemEntity implements Weapon {
      * 
      * @param e enemy to be attacked
      */
-    @Override
     public void attack(LifeEntity e) {
         e.kill();
     }
