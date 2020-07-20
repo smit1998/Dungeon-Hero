@@ -27,10 +27,8 @@ public class ExitGoal extends BasicGoal {
      * @param s a subject being observed
      */
     public void update(Subject s) {
-        if (s instanceof Exit) {
-            Exit exit = (Exit) s;
-            isComplete = exit.getExitStatus();
-        }
+        Exit exit = (Exit) s;
+        isComplete = exit.getExitStatus();
     }
 
     /**
