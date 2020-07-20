@@ -1,6 +1,7 @@
 package unsw.dungeon;
 
-import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * The player entity
@@ -10,10 +11,9 @@ import java.util.ArrayList;
  */
 public class Player extends MoveableEntity implements Subject {
 
-    // private Inventory inventory;
     private boolean isAlive;
     private Inventory inventory;
-    private ArrayList<Observer> observers;
+    private Set<Observer> observers = new HashSet<Observer>();
 
     /**
      * Create a player positioned in square (x,y)
@@ -25,7 +25,6 @@ public class Player extends MoveableEntity implements Subject {
         super(x, y, dungeon);
         this.isAlive = true;
         this.inventory = new Inventory();
-        this.observers = new ArrayList<Observer>();
     }
 
     public Item pickupItem(Entity e) {
@@ -33,7 +32,7 @@ public class Player extends MoveableEntity implements Subject {
             Item itemAdded = inventory.addItem((Item) e);
             if (itemAdded != null) {
                 e.setVisibility(false);
-                return itemAdded; 
+                return itemAdded;
             }
             return null;
         }
@@ -45,12 +44,12 @@ public class Player extends MoveableEntity implements Subject {
     }
 
     public boolean attack(Enemy e) {
-        Weapon weapon = getWeapon(); 
+        Weapon weapon = getWeapon();
         if (weapon != null) {
-            weapon.attack(e); 
+            weapon.attack(e);
             return true;
         }
-        return false; 
+        return false;
     }
 
     public Weapon getWeapon() {
@@ -67,14 +66,14 @@ public class Player extends MoveableEntity implements Subject {
     public boolean getLifeStatus() {
         return this.isAlive;
     }
-    
+
     @Override
     public boolean interact(Entity caller) {
         if (caller instanceof Enemy) {
             Enemy enemy = (Enemy) caller;
             Weapon weapon = inventory.getWeapon();
             if (weapon != null) {
-                weapon.attack(enemy); 
+                weapon.attack(enemy);
                 return false;
             } else {
                 enemy.attack(this);

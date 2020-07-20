@@ -1,8 +1,9 @@
 package unsw.dungeon;
 
-import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
+import java.util.HashSet;
+import java.util.Set;
 
 public class InvincibilityPotion extends Entity implements Item, Weapon, Observer, Subject {
 
@@ -12,7 +13,7 @@ public class InvincibilityPotion extends Entity implements Item, Weapon, Observe
 
     private final static int DURATION_MS = 5000;
 
-    private ArrayList<Observer> observers = new ArrayList<Observer>();
+    private Set<Observer> observers = new HashSet<Observer>();
 
     private boolean isActive;
 
