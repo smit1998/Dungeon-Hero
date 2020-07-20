@@ -175,6 +175,12 @@ public class Dungeon {
         }
     }
 
+    /**
+     * Check if the number of unique doors exceed the maximum number
+     * 
+     * @throws Error if number of doors with unique ID in the dungeon exceed the
+     *               maximum value
+     */
     private void checkDoorQuota() {
         Set<Integer> doorIDs = new HashSet<>();
         for (Entity entity : entities) {
