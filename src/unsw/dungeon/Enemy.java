@@ -113,6 +113,7 @@ public class Enemy extends LifeEntity implements Subject {
         notifyObservers();
     }
 
+
     public void attach(Observer o) {
         observers.add(o);
     }
