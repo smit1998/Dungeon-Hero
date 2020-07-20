@@ -59,6 +59,9 @@ public class Player extends MoveableEntity implements Subject {
 
     public void updateLifeStatus(boolean newLifeStatus) {
         this.isAlive = newLifeStatus;
+        if (isAlive == false) {
+            setVisibility(false);
+        }
     }
 
     public boolean getLifeStatus() {
@@ -71,9 +74,7 @@ public class Player extends MoveableEntity implements Subject {
             Enemy enemy = (Enemy) caller;
             Weapon weapon = inventory.getWeapon();
             if (weapon != null) {
-                enemy.setVisibility(false);
-                enemy.updateLifeStatus(false);
-                weapon.updateHitsRemaining();
+                weapon.attack(enemy); 
                 return false;
             } else {
                 enemy.attack(this);

@@ -88,7 +88,6 @@ public class Enemy extends MoveableEntity implements Subject {
 
     public void attack(Player p) {
         p.updateLifeStatus(false);
-        p.setVisibility(false);
     }
 
     @Override
