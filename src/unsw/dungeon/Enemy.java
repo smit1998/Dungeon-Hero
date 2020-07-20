@@ -103,9 +103,6 @@ public class Enemy extends MoveableEntity implements Subject {
         return false;
     }
 
-    public void attack(Entity entity) {
-    }
-
     public void updateLifeStatus(boolean newLifeStatus) {
         this.isAlive = newLifeStatus;
         if (newLifeStatus == false) {
