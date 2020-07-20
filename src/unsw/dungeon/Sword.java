@@ -1,7 +1,7 @@
 package unsw.dungeon;
 
 /**
- * Class for the sword
+ * A sword entity that can be used to defeat enemies
  */
 public class Sword extends ItemEntity implements Weapon {
 
