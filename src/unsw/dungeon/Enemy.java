@@ -2,8 +2,6 @@ package unsw.dungeon;
 
 import java.util.HashSet;
 import java.util.Set;
-import java.util.Timer;
-import java.util.TimerTask;
 
 /**
  * An enemy entity which moves towards/away from the player in hopes of
@@ -13,13 +11,6 @@ public class Enemy extends LifeEntity implements Subject {
 
     private Set<Observer> observers = new HashSet<Observer>();
 
-    private Timer timer = new Timer();
-    private TimerTask task = new TimerTask() {
-        public void run() {
-            gotoPlayer();
-        }
-    };
-
     /**
      * Creates an enemy entity in the square(x, y)
      * 
@@ -28,72 +19,63 @@ public class Enemy extends LifeEntity implements Subject {
      */
     public Enemy(int x, int y) {
         super(x, y);
-        start();
-    }
-
-    /**
-     * Starts the timer for the enemy movement
-     */
-    public void start() {
-        timer.scheduleAtFixedRate(task, 2000, 500);
     }
 
     /**
      * @return the player entity in the dungeon
      */
-    private Player getPlayer() {
-        // return dungeon().getPlayer();
-        return null;
+    private Player getPlayer(Dungeon dungeon) {
+        return dungeon.getPlayer();
     }
 
     /**
      * Enemy entity moves towards the player entity
      */
-    private void gotoPlayer() {
-        // Player player = getPlayer();
-        // int fearModifier = player.hasPotion() ? -1 : 1;
+    private void gotoPlayer(Dungeon dungeon) {
+        Player player = getPlayer(dungeon);
+        int fearModifier = player.hasPotion() ? -1 : 1;
 
-        // int diffX = (player.getX() - getX()) * fearModifier;
-        // int diffY = (player.getY() - getY()) * fearModifier;
+        int diffX = (player.getX() - getX()) * fearModifier;
+        int diffY = (player.getY() - getY()) * fearModifier;
 
-        // int xDirection = diffX > 0 ? 1 : -1;
-        // if (diffY == 0) {
-        // if (dungeon().interact(this, getX() + xDirection, getY())) {
-        // if (diffX > 0) {
-        // moveRight();
-        // } else {
-        // moveLeft();
-        // }
-        // } else {
-        // moveUp();
-        // }
-        // }
+        int xDirection = diffX > 0 ? 1 : -1;
+        if (diffY == 0) {
+            if (dungeon.interact(this, getX() + xDirection, getY())) {
+                if (diffX > 0) {
+                    moveRight();
+                } else {
+                    moveLeft();
+                }
+            } else {
+                moveUp();
+            }
+        }
 
-        // int yDirection = diffY > 0 ? 1 : -1;
-        // if (diffX == 0) {
-        // if (dungeon().interact(this, getX(), getY() + yDirection)) {
-        // if (diffY > 0) {
-        // moveDown();
-        // } else {
-        // moveUp();
-        // }
-        // } else {
-        // moveLeft();
-        // }
-        // }
+        int yDirection = diffY > 0 ? 1 : -1;
+        if (diffX == 0) {
+            if (dungeon.interact(this, getX(), getY() + yDirection)) {
+                if (diffY > 0) {
+                    moveDown();
+                } else {
+                    moveUp();
+                }
+            } else {
+                moveLeft();
+            }
+        }
 
-        // if (diffX != 0 && diffY != 0) {
-        // if (diffX > 0) {
-        // moveRight();
-        // } else {
-        // moveLeft();
-        // }
-        // if (diffY > 0) {
-        // moveDown();
-        // } else {
-        // moveUp();
-        // }
-        // }
+        if (diffX != 0 && diffY != 0) {
+            if (diffX > 0) {
+                moveRight();
+            } else {
+                moveLeft();
+            }
+            if (diffY > 0) {
+                moveDown();
+            } else {
+                moveUp();
+            }
+        }
     }
 
     /**
@@ -127,8 +109,6 @@ public class Enemy extends LifeEntity implements Subject {
     @Override
     public void kill() {
         super.kill();
-        task = null;
-        timer.cancel();
         notifyObservers();
     }
 
@@ -162,7 +142,7 @@ public class Enemy extends LifeEntity implements Subject {
     @Override
     public void tick(Dungeon dungeon) {
         // TODO Auto-generated method stub
-
+        gotoPlayer(dungeon);
     }
 
 }

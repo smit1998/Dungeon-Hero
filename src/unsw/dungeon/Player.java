@@ -8,6 +8,7 @@ package unsw.dungeon;
  */
 public class Player extends LifeEntity {
 
+    private Dungeon dungeon;
     private Inventory inventory;
 
     /**
@@ -17,8 +18,9 @@ public class Player extends LifeEntity {
      * @param x       coordinate where the player spawns at
      * @param y       coordinate where the player spawns at
      */
-    public Player(int x, int y) {
+    public Player(int x, int y, Dungeon dungeon) {
         super(x, y);
+        this.dungeon = dungeon;
         this.inventory = new Inventory();
     }
 
@@ -97,6 +99,50 @@ public class Player extends LifeEntity {
     @Override
     public void tick(Dungeon dungeon) {
         // TODO Auto-generated method stub
-
     }
+
+    /**
+     * Move upwards in the dungeon if possible
+     */
+    @Override
+    public void moveUp() {
+        if (dungeon.interact(this, getX(), getY() - 1)) {
+            if (getY() > 0)
+                setY(getY() - 1);
+        }
+    }
+
+    /**
+     * Move downwards in the dungeon if possible
+     */
+    @Override
+    public void moveDown() {
+        if (dungeon.interact(this, getX(), getY() + 1)) {
+            if (getY() < dungeon.getHeight() - 1)
+                setY(getY() + 1);
+        }
+    }
+
+    /**
+     * Move leftwards in the dungeon if possible
+     */
+    @Override
+    public void moveLeft() {
+        if (dungeon.interact(this, getX() - 1, getY())) {
+            if (getX() > 0)
+                setX(getX() - 1);
+        }
+    }
+
+    /**
+     * Move rightwards in the dungeon if possible
+     */
+    @Override
+    public void moveRight() {
+        if (dungeon.interact(this, getX() + 1, getY())) {
+            if (getX() < dungeon.getWidth() - 1)
+                setX(getX() + 1);
+        }
+    }
+
 }
