@@ -134,6 +134,15 @@ public class Dungeon {
         }
     }
 
+    public void connectPlayerObservers() {
+        for (Entity entity : entities) {
+            if (entity instanceof PlayerObserver) {
+                player.addPlayerObserver((PlayerObserver) entity);
+
+            }
+        }
+    }
+
     /**
      * Make the given caller entity interact with all entities at the given
      * coordinate
@@ -173,4 +182,5 @@ public class Dungeon {
         // }
         // entities.removeAll(toRemove);
     }
+
 }

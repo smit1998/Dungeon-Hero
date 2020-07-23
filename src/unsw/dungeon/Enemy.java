@@ -7,9 +7,14 @@ import java.util.Set;
  * An enemy entity which moves towards/away from the player in hopes of
  * defeating them
  */
-public class Enemy extends LifeEntity implements Subject {
+public class Enemy extends LifeEntity implements Subject, PlayerObserver {
 
     private Set<Observer> observers = new HashSet<Observer>();
+
+    private final int NO_POSITION = -1;
+    private int playerX = NO_POSITION;
+    private int playerY = NO_POSITION;
+    private boolean playerPotion = false;
 
     /**
      * Creates an enemy entity in the square(x, y)
@@ -22,21 +27,13 @@ public class Enemy extends LifeEntity implements Subject {
     }
 
     /**
-     * @return the player entity in the dungeon
-     */
-    private Player getPlayer(Dungeon dungeon) {
-        return dungeon.getPlayer();
-    }
-
-    /**
      * Enemy entity moves towards the player entity
      */
     private void gotoPlayer(Dungeon dungeon) {
-        Player player = getPlayer(dungeon);
-        int fearModifier = player.hasPotion() ? -1 : 1;
+        int fearModifier = playerPotion ? -1 : 1;
 
-        int diffX = (player.getX() - getX()) * fearModifier;
-        int diffY = (player.getY() - getY()) * fearModifier;
+        int diffX = (playerX - getX()) * fearModifier;
+        int diffY = (playerY - getY()) * fearModifier;
 
         int xDirection = diffX > 0 ? 1 : -1;
         if (diffY == 0) {
@@ -183,6 +180,15 @@ public class Enemy extends LifeEntity implements Subject {
             if (getX() < dungeon.getWidth() - 1)
                 setX(getX() + 1);
         }
+    }
+
+    public void update(int x, int y) {
+        playerX = x;
+        playerY = y;
+    }
+
+    public void updateFear(boolean fear) {
+        playerPotion = fear;
     }
 
 }
