@@ -145,6 +145,10 @@ public class Dungeon {
      *         at the coordinate
      */
     public boolean interact(Entity caller, int x, int y) {
+        if (x < 0 || x >= getWidth() || y < 0 || y >= getHeight()) {
+            return false;
+        }
+
         for (Entity entity : entities) {
             if (entity == caller || entity == null)
                 continue;

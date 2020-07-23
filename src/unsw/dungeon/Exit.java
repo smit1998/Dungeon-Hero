@@ -10,6 +10,7 @@ public class Exit extends Entity implements Subject {
 
     private Set<Observer> observers = new HashSet<Observer>();
     private boolean isExiting;
+    private Dungeon dungeon;
 
     /**
      * Create an exit entity at the position (x, y)
@@ -17,9 +18,10 @@ public class Exit extends Entity implements Subject {
      * @param x coordinate where the exit is placed
      * @param y coordinate where the exit is placed
      */
-    public Exit(int x, int y) {
+    public Exit(int x, int y, Dungeon dungeon) {
         super(x, y);
         isExiting = false;
+        this.dungeon = dungeon;
     }
 
     /**
@@ -36,15 +38,15 @@ public class Exit extends Entity implements Subject {
      */
     @Override
     public boolean interact(Entity caller) {
-        // if (caller instanceof Player) {
-        // isExiting = true;
-        // notifyObservers();
-        // if (dungeon().isComplete()) {
-        // return true;
-        // }
-        // isExiting = false;
-        // notifyObservers();
-        // }
+        if (caller instanceof Player) {
+            isExiting = true;
+            notifyObservers();
+            if (dungeon.isComplete()) {
+                return true;
+            }
+            isExiting = false;
+            notifyObservers();
+        }
         return false;
     }
 

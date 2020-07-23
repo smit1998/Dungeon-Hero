@@ -74,12 +74,10 @@ public class InvincibilityPotion extends ItemEntity implements Weapon {
     }
 
     private void usePotion() {
-        System.out.println("Potion used");
         isActive = true;
     }
 
     private void wearOff() {
-        System.out.println("Potion wore off");
         isActive = false;
         notifyObservers();
     }
@@ -88,7 +86,6 @@ public class InvincibilityPotion extends ItemEntity implements Weapon {
     public void tick(Dungeon dungeon) {
         // TODO Auto-generated method stub
         if (isActive) {
-            System.out.println("ticksElapsed = " + ticksElapsed);
             ticksElapsed++;
             if (ticksElapsed > DURATION_TICKS) {
                 wearOff();

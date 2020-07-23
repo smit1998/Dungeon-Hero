@@ -98,7 +98,7 @@ public abstract class DungeonLoader {
                 break;
             }
             case "exit": {
-                Exit exit = new Exit(x, y);
+                Exit exit = new Exit(x, y, dungeon);
                 onLoad(exit);
                 entity = exit;
                 break;
@@ -125,7 +125,7 @@ public abstract class DungeonLoader {
                 break;
             }
             case "boulder": {
-                Boulder boulder = new Boulder(x, y);
+                Boulder boulder = new Boulder(x, y, dungeon);
                 onLoad(boulder);
                 entity = boulder;
                 break;
@@ -139,7 +139,7 @@ public abstract class DungeonLoader {
             }
             case "portal": {
                 int id = json.getInt("id");
-                Portal portal = new Portal(x, y, id);
+                Portal portal = new Portal(x, y, id, dungeon);
                 onLoad(portal);
                 entity = portal;
                 break;
