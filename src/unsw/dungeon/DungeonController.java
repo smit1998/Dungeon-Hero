@@ -87,7 +87,7 @@ public class DungeonController implements Runnable {
 
     public void run() {
         // https://youtu.be/w1aB5gc38C8
-        int fps = 60;
+        int fps = 3;
         double timePerTick = 1000000000 / fps;
         double delta = 0;
         long now;
