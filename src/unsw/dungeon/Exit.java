@@ -17,8 +17,8 @@ public class Exit extends Entity implements Subject {
      * @param x coordinate where the exit is placed
      * @param y coordinate where the exit is placed
      */
-    public Exit(int x, int y, Dungeon dungeon) {
-        super(x, y, dungeon);
+    public Exit(int x, int y) {
+        super(x, y);
         isExiting = false;
     }
 

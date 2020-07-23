@@ -14,8 +14,8 @@ public abstract class LifeEntity extends Entity {
      * @param y       the vertical position
      * @param dungeon the dungeon this entity belongs to
      */
-    public LifeEntity(int x, int y, Dungeon dungeon) {
-        super(x, y, dungeon);
+    public LifeEntity(int x, int y) {
+        super(x, y);
         this.isAlive = true;
     }
 

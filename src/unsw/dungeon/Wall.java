@@ -12,8 +12,8 @@ public class Wall extends Entity {
      * @param y       the vertical position
      * @param dungeon the dungeon this entity belongs to
      */
-    public Wall(int x, int y, Dungeon dungeon) {
-        super(x, y, dungeon);
+    public Wall(int x, int y) {
+        super(x, y);
     }
 
     /**

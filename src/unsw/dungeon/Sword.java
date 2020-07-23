@@ -19,8 +19,8 @@ public class Sword extends ItemEntity implements Weapon {
      * @param x       coordinate where the sword spawns
      * @param y       coordinate where the sword spawns
      */
-    public Sword(int x, int y, Dungeon dungeon) {
-        super(x, y, dungeon);
+    public Sword(int x, int y) {
+        super(x, y);
         this.remainingHits = STARTING_DURABILITY;
     }
 

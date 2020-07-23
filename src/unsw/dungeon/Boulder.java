@@ -11,8 +11,8 @@ public class Boulder extends Entity {
      * @param x coordinate where the boulder is placed
      * @param y coordinate where the boulder is placed
      */
-    public Boulder(int x, int y, Dungeon dungeon) {
-        super(x, y, dungeon);
+    public Boulder(int x, int y) {
+        super(x, y);
     }
 
     /**

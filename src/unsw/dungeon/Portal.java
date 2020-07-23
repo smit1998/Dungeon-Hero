@@ -16,8 +16,8 @@ public class Portal extends Entity {
      * @param dungeon the dungeon this portal belongs to
      * @param id      the id of this portal
      */
-    public Portal(int x, int y, Dungeon dungeon, int id) {
-        super(x, y, dungeon);
+    public Portal(int x, int y, int id) {
+        super(x, y);
         this.id = id;
     }
 

@@ -85,26 +85,26 @@ public abstract class DungeonLoader {
         Entity entity = null;
         switch (type) {
             case "player": {
-                Player player = new Player(dungeon, x, y);
+                Player player = new Player(x, y);
                 dungeon.setPlayer(player);
                 onLoad(player);
                 entity = player;
                 break;
             }
             case "wall": {
-                Wall wall = new Wall(x, y, dungeon);
+                Wall wall = new Wall(x, y);
                 onLoad(wall);
                 entity = wall;
                 break;
             }
             case "exit": {
-                Exit exit = new Exit(x, y, dungeon);
+                Exit exit = new Exit(x, y);
                 onLoad(exit);
                 entity = exit;
                 break;
             }
             case "treasure": {
-                Treasure treasure = new Treasure(x, y, dungeon);
+                Treasure treasure = new Treasure(x, y);
                 onLoad(treasure);
                 entity = treasure;
                 treasureSpawned++;
@@ -112,26 +112,26 @@ public abstract class DungeonLoader {
             }
             case "door": {
                 int id = json.getInt("id");
-                Door door = new Door(x, y, dungeon, id);
+                Door door = new Door(x, y, id);
                 onLoad(door);
                 entity = door;
                 break;
             }
             case "key": {
                 int id = json.getInt("id");
-                Key key = new Key(x, y, dungeon, id);
+                Key key = new Key(x, y, id);
                 onLoad(key);
                 entity = key;
                 break;
             }
             case "boulder": {
-                Boulder boulder = new Boulder(x, y, dungeon);
+                Boulder boulder = new Boulder(x, y);
                 onLoad(boulder);
                 entity = boulder;
                 break;
             }
             case "switch": {
-                FloorSwitch floorSwitch = new FloorSwitch(x, y, dungeon);
+                FloorSwitch floorSwitch = new FloorSwitch(x, y);
                 onLoad(floorSwitch);
                 entity = floorSwitch;
                 switchesSpawned++;
@@ -139,26 +139,26 @@ public abstract class DungeonLoader {
             }
             case "portal": {
                 int id = json.getInt("id");
-                Portal portal = new Portal(x, y, dungeon, id);
+                Portal portal = new Portal(x, y, id);
                 onLoad(portal);
                 entity = portal;
                 break;
             }
             case "enemy": {
-                Enemy enemy = new Enemy(x, y, dungeon);
+                Enemy enemy = new Enemy(x, y);
                 onLoad(enemy);
                 entity = enemy;
                 enemiesSpawned++;
                 break;
             }
             case "sword": {
-                Sword sword = new Sword(x, y, dungeon);
+                Sword sword = new Sword(x, y);
                 onLoad(sword);
                 entity = sword;
                 break;
             }
             case "invincibility": {
-                InvincibilityPotion potion = new InvincibilityPotion(x, y, dungeon);
+                InvincibilityPotion potion = new InvincibilityPotion(x, y);
                 onLoad(potion);
                 entity = potion;
                 break;

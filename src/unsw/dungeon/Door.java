@@ -19,8 +19,8 @@ public class Door extends Entity {
      * @param dungeon the dungeon the entity belongs to
      * @param id      the id of the door
      */
-    public Door(int x, int y, Dungeon dungeon, int id) {
-        super(x, y, dungeon);
+    public Door(int x, int y, int id) {
+        super(x, y);
         this.id = id;
         this.isOpen = new SimpleBooleanProperty(false);
     }

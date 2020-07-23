@@ -25,7 +25,7 @@ public abstract class Entity {
      * @param y       coordinate position of entity
      * @param dungeon entity belongs to
      */
-    public Entity(int x, int y, Dungeon dungeon) {
+    public Entity(int x, int y) {
         this.x = new SimpleIntegerProperty(x);
         this.y = new SimpleIntegerProperty(y);
         isVisible = new SimpleBooleanProperty(true);

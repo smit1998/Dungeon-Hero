@@ -18,8 +18,8 @@ public class FloorSwitch extends Entity implements Subject {
      * @param y       the vertical position
      * @param dungeon the dungeon the switch belongs to
      */
-    public FloorSwitch(int x, int y, Dungeon dungeon) {
-        super(x, y, dungeon);
+    public FloorSwitch(int x, int y) {
+        super(x, y);
         this.isPressed = false;
     }
 

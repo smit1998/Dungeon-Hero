@@ -17,8 +17,8 @@ public class Treasure extends Entity implements Subject {
      * @param y       the vertical position
      * @param dungeon the dungeon this entity belongs to
      */
-    public Treasure(int x, int y, Dungeon dungeon) {
-        super(x, y, dungeon);
+    public Treasure(int x, int y) {
+        super(x, y);
     }
 
     /**

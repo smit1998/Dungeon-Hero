@@ -17,8 +17,8 @@ public class Player extends LifeEntity {
      * @param x       coordinate where the player spawns at
      * @param y       coordinate where the player spawns at
      */
-    public Player(Dungeon dungeon, int x, int y) {
-        super(x, y, dungeon);
+    public Player(int x, int y) {
+        super(x, y);
         this.inventory = new Inventory();
     }
 

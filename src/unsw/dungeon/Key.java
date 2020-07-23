@@ -18,8 +18,8 @@ public class Key extends ItemEntity {
      * @param dungeon the dungeon this key belongs to
      * @param id      the id of the key
      */
-    public Key(int x, int y, Dungeon dungeon, int id) {
-        super(x, y, dungeon);
+    public Key(int x, int y, int id) {
+        super(x, y);
         this.id = id;
     }
 

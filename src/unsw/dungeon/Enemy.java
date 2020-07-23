@@ -26,8 +26,8 @@ public class Enemy extends LifeEntity implements Subject {
      * @param x coordinate where the enemy is initially placed
      * @param y coordinate where the enemy is initially placed
      */
-    public Enemy(int x, int y, Dungeon dungeon) {
-        super(x, y, dungeon);
+    public Enemy(int x, int y) {
+        super(x, y);
         start();
     }
 
