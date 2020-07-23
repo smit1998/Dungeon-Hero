@@ -87,8 +87,7 @@ public class DungeonController implements Runnable {
 
     public void run() {
         // https://youtu.be/w1aB5gc38C8
-        System.out.println("Controller run");
-        int fps = 60;
+        int fps = 5;
         double timePerTick = 1000000000 / fps;
         double delta = 0;
         long now;
@@ -109,7 +108,6 @@ public class DungeonController implements Runnable {
 
     public synchronized void start() {
         if (!running) {
-            System.out.println("Start");
             running = true;
             thread = new Thread(this);
             thread.start();
