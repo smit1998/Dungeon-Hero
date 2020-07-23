@@ -138,9 +138,9 @@ public class Dungeon {
         for (Entity entity : entities) {
             if (entity instanceof PlayerObserver) {
                 player.addPlayerObserver((PlayerObserver) entity);
-
             }
         }
+        player.notifyObservers();
     }
 
     /**
@@ -171,6 +171,14 @@ public class Dungeon {
     }
 
     public void tick() {
+        // Iterator<Entity> it = entities.iterator();
+        // while (it.hasNext()) {
+        // Entity next = it.next();
+        // next.tick(this);
+        // if (!next.isVisible().getValue()) {
+        // it.remove();
+        // }
+        // }
         // List<Entity> toRemove = new ArrayList<Entity>();
         for (Entity e : entities) {
             e.tick(this);
