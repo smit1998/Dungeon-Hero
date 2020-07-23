@@ -152,7 +152,7 @@ public class Dungeon {
         for (Entity entity : entities) {
             if (entity == caller || entity == null)
                 continue;
-            if (entity.getX() == x && entity.getY() == y) {
+            if (entity.isVisible().getValue() && entity.getX() == x && entity.getY() == y) {
                 if (!entity.interact(caller)) {
                     return false;
                 }
@@ -162,15 +162,15 @@ public class Dungeon {
     }
 
     public void tick() {
-        List<Entity> toRemove = new ArrayList<Entity>();
+        // List<Entity> toRemove = new ArrayList<Entity>();
         for (Entity e : entities) {
             e.tick(this);
         }
-        for (Entity e : entities) {
-            if (!e.isVisible().getValue()) {
-                toRemove.add(e);
-            }
-        }
-        entities.removeAll(toRemove);
+        // for (Entity e : entities) {
+        // if (!e.isVisible().getValue()) {
+        // toRemove.add(e);
+        // }
+        // }
+        // entities.removeAll(toRemove);
     }
 }
