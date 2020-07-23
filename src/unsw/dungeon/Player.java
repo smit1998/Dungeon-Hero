@@ -93,4 +93,10 @@ public class Player extends LifeEntity {
     public boolean hasPotion() {
         return getWeapon() instanceof InvincibilityPotion;
     }
+
+    @Override
+    public void tick(Dungeon dungeon) {
+        // TODO Auto-generated method stub
+
+    }
 }

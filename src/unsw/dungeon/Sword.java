@@ -104,7 +104,9 @@ public class Sword extends ItemEntity implements Weapon {
         updateHitsRemaining();
     }
 
-    public void tick() {
+    @Override
+    public void tick(Dungeon dungeon) {
+        // TODO Auto-generated method stub
 
     }
 }

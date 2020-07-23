@@ -84,7 +84,9 @@ public class InvincibilityPotion extends ItemEntity implements Weapon {
         e.kill();
     }
 
-    public void tick() {
+    @Override
+    public void tick(Dungeon dungeon) {
+        // TODO Auto-generated method stub
 
     }
 }

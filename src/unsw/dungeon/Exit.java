@@ -77,7 +77,9 @@ public class Exit extends Entity implements Subject {
         }
     }
 
-    public void tick() {
+    @Override
+    public void tick(Dungeon dungeon) {
+        // TODO Auto-generated method stub
 
     }
 
