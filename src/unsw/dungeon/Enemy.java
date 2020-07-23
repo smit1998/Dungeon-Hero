@@ -42,12 +42,12 @@ public class Enemy extends LifeEntity implements Subject {
         if (diffY == 0) {
             if (dungeon.interact(this, getX() + xDirection, getY())) {
                 if (diffX > 0) {
-                    moveRight();
+                    moveRight(dungeon);
                 } else {
-                    moveLeft();
+                    moveLeft(dungeon);
                 }
             } else {
-                moveUp();
+                moveUp(dungeon);
             }
         }
 
@@ -55,25 +55,25 @@ public class Enemy extends LifeEntity implements Subject {
         if (diffX == 0) {
             if (dungeon.interact(this, getX(), getY() + yDirection)) {
                 if (diffY > 0) {
-                    moveDown();
+                    moveDown(dungeon);
                 } else {
-                    moveUp();
+                    moveUp(dungeon);
                 }
             } else {
-                moveLeft();
+                moveLeft(dungeon);
             }
         }
 
         if (diffX != 0 && diffY != 0) {
             if (diffX > 0) {
-                moveRight();
+                moveRight(dungeon);
             } else {
-                moveLeft();
+                moveLeft(dungeon);
             }
             if (diffY > 0) {
-                moveDown();
+                moveDown(dungeon);
             } else {
-                moveUp();
+                moveUp(dungeon);
             }
         }
     }
@@ -143,6 +143,46 @@ public class Enemy extends LifeEntity implements Subject {
     public void tick(Dungeon dungeon) {
         // TODO Auto-generated method stub
         gotoPlayer(dungeon);
+    }
+
+    /**
+     * Move upwards in the dungeon if possible
+     */
+    public void moveUp(Dungeon dungeon) {
+        if (dungeon.interact(this, getX(), getY() - 1)) {
+            if (getY() > 0)
+                setY(getY() - 1);
+        }
+    }
+
+    /**
+     * Move downwards in the dungeon if possible
+     */
+    public void moveDown(Dungeon dungeon) {
+        if (dungeon.interact(this, getX(), getY() + 1)) {
+            if (getY() < dungeon.getHeight() - 1)
+                setY(getY() + 1);
+        }
+    }
+
+    /**
+     * Move leftwards in the dungeon if possible
+     */
+    public void moveLeft(Dungeon dungeon) {
+        if (dungeon.interact(this, getX() - 1, getY())) {
+            if (getX() > 0)
+                setX(getX() - 1);
+        }
+    }
+
+    /**
+     * Move rightwards in the dungeon if possible
+     */
+    public void moveRight(Dungeon dungeon) {
+        if (dungeon.interact(this, getX() + 1, getY())) {
+            if (getX() < dungeon.getWidth() - 1)
+                setX(getX() + 1);
+        }
     }
 
 }

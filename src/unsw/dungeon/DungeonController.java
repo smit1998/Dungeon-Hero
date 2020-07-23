@@ -99,7 +99,7 @@ public class DungeonController implements Runnable {
             lastTime = now;
             if (delta >= 1) {
                 movePlayer();
-                // dungeon.tick();
+                dungeon.tick();
                 delta -= 1;
             }
         }
@@ -109,6 +109,7 @@ public class DungeonController implements Runnable {
 
     public synchronized void start() {
         if (!running) {
+            System.out.println("Start");
             running = true;
             thread = new Thread(this);
             thread.start();
