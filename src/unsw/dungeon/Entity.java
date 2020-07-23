@@ -16,7 +16,6 @@ public abstract class Entity {
     // IntegerProperty is used so that changes to the entities position can be
     // externally observed.
     private IntegerProperty x, y;
-    private Dungeon dungeon;
     private BooleanProperty isVisible;
 
     /**
@@ -29,15 +28,7 @@ public abstract class Entity {
     public Entity(int x, int y, Dungeon dungeon) {
         this.x = new SimpleIntegerProperty(x);
         this.y = new SimpleIntegerProperty(y);
-        this.dungeon = dungeon;
         isVisible = new SimpleBooleanProperty(true);
-    }
-
-    /**
-     * @return dungeon the entity belongs to
-     */
-    public Dungeon dungeon() {
-        return dungeon;
     }
 
     /**
@@ -110,5 +101,7 @@ public abstract class Entity {
     public void setVisibility(boolean isVisible) {
         this.isVisible.setValue(isVisible);
     }
+
+    public abstract void tick();
 
 }

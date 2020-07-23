@@ -84,4 +84,8 @@ public class FloorSwitch extends Entity implements Subject {
             observer.update(this);
         }
     }
+
+    public void tick() {
+
+    }
 }

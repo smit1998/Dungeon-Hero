@@ -83,4 +83,8 @@ public class InvincibilityPotion extends ItemEntity implements Weapon {
     public void attack(LifeEntity e) {
         e.kill();
     }
+
+    public void tick() {
+
+    }
 }

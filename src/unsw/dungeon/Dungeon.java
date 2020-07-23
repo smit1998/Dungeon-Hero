@@ -106,29 +106,30 @@ public class Dungeon {
      *         at the coordinate
      */
     public boolean interact(Entity caller, int x, int y) {
-        List<Entity> toRemove = new ArrayList<Entity>();
-        boolean result = true;
-        for (Entity entity : entities) {
-            if (entity == caller || entity == null)
-                continue;
-            if (entity.getX() == x && entity.getY() == y) {
-                if (!entity.interact(caller)) {
-                    result = false;
-                }
-                if (entity.isVisible().get() == false) {
-                    toRemove.add(entity);
-                }
-            }
-        }
-        if (caller.isVisible().get() == false) {
-            toRemove.add(caller);
-            result = false;
-        }
-        for (Entity e : toRemove) {
-            removeEntity(e);
-        }
+        return false;
+        // List<Entity> toRemove = new ArrayList<Entity>();
+        // boolean result = true;
+        // for (Entity entity : entities) {
+        // if (entity == caller || entity == null)
+        // continue;
+        // if (entity.getX() == x && entity.getY() == y) {
+        // if (!entity.interact(caller)) {
+        // result = false;
+        // }
+        // if (entity.isVisible().get() == false) {
+        // toRemove.add(entity);
+        // }
+        // }
+        // }
+        // if (caller.isVisible().get() == false) {
+        // toRemove.add(caller);
+        // result = false;
+        // }
+        // for (Entity e : toRemove) {
+        // removeEntity(e);
+        // }
 
-        return result;
+        // return result;
     }
 
     /**
@@ -170,4 +171,9 @@ public class Dungeon {
         }
     }
 
+    public void tick() {
+        for (Entity e : entities) {
+            e.tick();
+        }
+    }
 }

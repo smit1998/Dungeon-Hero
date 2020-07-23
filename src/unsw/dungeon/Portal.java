@@ -59,28 +59,32 @@ public class Portal extends Entity {
             return false;
         }
 
-        if (caller instanceof Player || caller instanceof Boulder) {
-            int oldX = caller.getX();
-            int oldY = caller.getY();
+        // if (caller instanceof Player || caller instanceof Boulder) {
+        // int oldX = caller.getX();
+        // int oldY = caller.getY();
 
-            int newX = getX() - caller.getX() + pair.getX();
-            int newY = getY() - caller.getY() + pair.getY();
+        // int newX = getX() - caller.getX() + pair.getX();
+        // int newY = getY() - caller.getY() + pair.getY();
 
-            if (newX < 0 || newX >= dungeon().getWidth() || newY < 0 || newY >= dungeon().getHeight()) {
-                return false;
-            }
+        // if (newX < 0 || newX >= dungeon().getWidth() || newY < 0 || newY >=
+        // dungeon().getHeight()) {
+        // return false;
+        // }
 
-            caller.setX(pair.getX());
-            caller.setY(pair.getY());
-            if (dungeon().interact(caller, newX, newY)) {
-                caller.setX(newX);
-                caller.setY(newY);
-            } else {
-                caller.setX(oldX);
-                caller.setY(oldY);
-            }
-        }
+        // caller.setX(pair.getX());
+        // caller.setY(pair.getY());
+        // if (dungeon().interact(caller, newX, newY)) {
+        // caller.setX(newX);
+        // caller.setY(newY);
+        // } else {
+        // caller.setX(oldX);
+        // caller.setY(oldY);
+        // }
+        // }
         return false;
     }
 
+    public void tick() {
+
+    }
 }

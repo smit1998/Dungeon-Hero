@@ -57,4 +57,8 @@ public class Key extends ItemEntity {
         return MAX_PICKUP;
     }
 
+    public void tick() {
+
+    }
+
 }

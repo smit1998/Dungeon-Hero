@@ -65,4 +65,8 @@ public class Treasure extends Entity implements Subject {
             observer.update(this);
         }
     }
+
+    public void tick() {
+
+    }
 }

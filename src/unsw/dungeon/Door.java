@@ -82,4 +82,7 @@ public class Door extends Entity {
         return false;
     }
 
+    public void tick() {
+
+    }
 }

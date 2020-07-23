@@ -103,4 +103,8 @@ public class Sword extends ItemEntity implements Weapon {
         e.kill();
         updateHitsRemaining();
     }
+
+    public void tick() {
+
+    }
 }

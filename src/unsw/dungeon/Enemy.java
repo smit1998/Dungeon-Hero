@@ -42,57 +42,58 @@ public class Enemy extends LifeEntity implements Subject {
      * @return the player entity in the dungeon
      */
     private Player getPlayer() {
-        return dungeon().getPlayer();
+        // return dungeon().getPlayer();
+        return null;
     }
 
     /**
      * Enemy entity moves towards the player entity
      */
     private void gotoPlayer() {
-        Player player = getPlayer();
-        int fearModifier = player.hasPotion() ? -1 : 1;
+        // Player player = getPlayer();
+        // int fearModifier = player.hasPotion() ? -1 : 1;
 
-        int diffX = (player.getX() - getX()) * fearModifier;
-        int diffY = (player.getY() - getY()) * fearModifier;
+        // int diffX = (player.getX() - getX()) * fearModifier;
+        // int diffY = (player.getY() - getY()) * fearModifier;
 
-        int xDirection = diffX > 0 ? 1 : -1;
-        if (diffY == 0) {
-            if (dungeon().interact(this, getX() + xDirection, getY())) {
-                if (diffX > 0) {
-                    moveRight();
-                } else {
-                    moveLeft();
-                }
-            } else {
-                moveUp();
-            }
-        }
+        // int xDirection = diffX > 0 ? 1 : -1;
+        // if (diffY == 0) {
+        // if (dungeon().interact(this, getX() + xDirection, getY())) {
+        // if (diffX > 0) {
+        // moveRight();
+        // } else {
+        // moveLeft();
+        // }
+        // } else {
+        // moveUp();
+        // }
+        // }
 
-        int yDirection = diffY > 0 ? 1 : -1;
-        if (diffX == 0) {
-            if (dungeon().interact(this, getX(), getY() + yDirection)) {
-                if (diffY > 0) {
-                    moveDown();
-                } else {
-                    moveUp();
-                }
-            } else {
-                moveLeft();
-            }
-        }
+        // int yDirection = diffY > 0 ? 1 : -1;
+        // if (diffX == 0) {
+        // if (dungeon().interact(this, getX(), getY() + yDirection)) {
+        // if (diffY > 0) {
+        // moveDown();
+        // } else {
+        // moveUp();
+        // }
+        // } else {
+        // moveLeft();
+        // }
+        // }
 
-        if (diffX != 0 && diffY != 0) {
-            if (diffX > 0) {
-                moveRight();
-            } else {
-                moveLeft();
-            }
-            if (diffY > 0) {
-                moveDown();
-            } else {
-                moveUp();
-            }
-        }
+        // if (diffX != 0 && diffY != 0) {
+        // if (diffX > 0) {
+        // moveRight();
+        // } else {
+        // moveLeft();
+        // }
+        // if (diffY > 0) {
+        // moveDown();
+        // } else {
+        // moveUp();
+        // }
+        // }
     }
 
     /**
@@ -156,6 +157,10 @@ public class Enemy extends LifeEntity implements Subject {
         for (Observer obs : observers) {
             obs.update(this);
         }
+    }
+
+    public void tick() {
+
     }
 
 }

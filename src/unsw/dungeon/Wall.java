@@ -25,4 +25,7 @@ public class Wall extends Entity {
         return false;
     }
 
+    public void tick() {
+
+    }
 }
