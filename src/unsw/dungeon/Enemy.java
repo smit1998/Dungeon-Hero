@@ -22,14 +22,14 @@ public class Enemy extends LifeEntity implements Subject, PlayerObserver {
      * @param x coordinate where the enemy is initially placed
      * @param y coordinate where the enemy is initially placed
      */
-    public Enemy(int x, int y) {
-        super(x, y);
+    public Enemy(int x, int y, Dungeon dungeon) {
+        super(x, y, dungeon);
     }
 
     /**
      * Enemy entity moves towards the player entity
      */
-    private void gotoPlayer(Dungeon dungeon) {
+    private void gotoPlayer() {
         int fearModifier = playerPotion ? -1 : 1;
 
         int diffX = (playerX - getX()) * fearModifier;
@@ -37,40 +37,40 @@ public class Enemy extends LifeEntity implements Subject, PlayerObserver {
 
         int xDirection = diffX > 0 ? 1 : -1;
         if (diffY == 0) {
-            if (dungeon.interact(this, getX() + xDirection, getY())) {
+            if (dungeon().interact(this, getX() + xDirection, getY())) {
                 if (diffX > 0) {
-                    moveRight(dungeon);
+                    moveRight();
                 } else {
-                    moveLeft(dungeon);
+                    moveLeft();
                 }
             } else {
-                moveUp(dungeon);
+                moveUp();
             }
         }
 
         int yDirection = diffY > 0 ? 1 : -1;
         if (diffX == 0) {
-            if (dungeon.interact(this, getX(), getY() + yDirection)) {
+            if (dungeon().interact(this, getX(), getY() + yDirection)) {
                 if (diffY > 0) {
-                    moveDown(dungeon);
+                    moveDown();
                 } else {
-                    moveUp(dungeon);
+                    moveUp();
                 }
             } else {
-                moveLeft(dungeon);
+                moveLeft();
             }
         }
 
         if (diffX != 0 && diffY != 0) {
             if (diffX > 0) {
-                moveRight(dungeon);
+                moveRight();
             } else {
-                moveLeft(dungeon);
+                moveLeft();
             }
             if (diffY > 0) {
-                moveDown(dungeon);
+                moveDown();
             } else {
-                moveUp(dungeon);
+                moveUp();
             }
         }
     }
@@ -139,47 +139,7 @@ public class Enemy extends LifeEntity implements Subject, PlayerObserver {
     @Override
     public void tick(Dungeon dungeon) {
         // TODO Auto-generated method stub
-        gotoPlayer(dungeon);
-    }
-
-    /**
-     * Move upwards in the dungeon if possible
-     */
-    public void moveUp(Dungeon dungeon) {
-        if (dungeon.interact(this, getX(), getY() - 1)) {
-            if (getY() > 0)
-                setY(getY() - 1);
-        }
-    }
-
-    /**
-     * Move downwards in the dungeon if possible
-     */
-    public void moveDown(Dungeon dungeon) {
-        if (dungeon.interact(this, getX(), getY() + 1)) {
-            if (getY() < dungeon.getHeight() - 1)
-                setY(getY() + 1);
-        }
-    }
-
-    /**
-     * Move leftwards in the dungeon if possible
-     */
-    public void moveLeft(Dungeon dungeon) {
-        if (dungeon.interact(this, getX() - 1, getY())) {
-            if (getX() > 0)
-                setX(getX() - 1);
-        }
-    }
-
-    /**
-     * Move rightwards in the dungeon if possible
-     */
-    public void moveRight(Dungeon dungeon) {
-        if (dungeon.interact(this, getX() + 1, getY())) {
-            if (getX() < dungeon.getWidth() - 1)
-                setX(getX() + 1);
-        }
+        gotoPlayer();
     }
 
     public void update(int x, int y) {

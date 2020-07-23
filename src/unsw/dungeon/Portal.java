@@ -7,7 +7,6 @@ public class Portal extends Entity {
 
     private int id;
     private Portal pair;
-    private Dungeon dungeon;
 
     /**
      * Constructs a new portal at (x,y) in the dungeon with the id
@@ -17,10 +16,9 @@ public class Portal extends Entity {
      * @param dungeon the dungeon this portal belongs to
      * @param id      the id of this portal
      */
-    public Portal(int x, int y, int id, Dungeon dungeon) {
-        super(x, y);
+    public Portal(int x, int y, Dungeon dungeon, int id) {
+        super(x, y, dungeon);
         this.id = id;
-        this.dungeon = dungeon;
     }
 
     /**
@@ -70,7 +68,7 @@ public class Portal extends Entity {
 
             caller.setX(pair.getX());
             caller.setY(pair.getY());
-            if (dungeon.interact(caller, newX, newY)) {
+            if (dungeon().interact(caller, newX, newY)) {
                 caller.setX(newX);
                 caller.setY(newY);
             } else {

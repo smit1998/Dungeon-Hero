@@ -14,8 +14,8 @@ public abstract class LifeEntity extends Entity {
      * @param y       the vertical position
      * @param dungeon the dungeon this entity belongs to
      */
-    public LifeEntity(int x, int y) {
-        super(x, y);
+    public LifeEntity(int x, int y, Dungeon dungeon) {
+        super(x, y, dungeon);
         this.isAlive = true;
     }
 
@@ -23,40 +23,40 @@ public abstract class LifeEntity extends Entity {
      * Move upwards in the dungeon if possible
      */
     public void moveUp() {
-        // if (dungeon().interact(this, getX(), getY() - 1)) {
-        // if (getY() > 0)
-        // setY(getY() - 1);
-        // }
+        if (dungeon().interact(this, getX(), getY() - 1)) {
+            if (getY() > 0)
+                setY(getY() - 1);
+        }
     }
 
     /**
      * Move downwards in the dungeon if possible
      */
     public void moveDown() {
-        // if (dungeon().interact(this, getX(), getY() + 1)) {
-        // if (getY() < dungeon().getHeight() - 1)
-        // setY(getY() + 1);
-        // }
+        if (dungeon().interact(this, getX(), getY() + 1)) {
+            if (getY() < dungeon().getHeight() - 1)
+                setY(getY() + 1);
+        }
     }
 
     /**
      * Move leftwards in the dungeon if possible
      */
     public void moveLeft() {
-        // if (dungeon().interact(this, getX() - 1, getY())) {
-        // if (getX() > 0)
-        // setX(getX() - 1);
-        // }
+        if (dungeon().interact(this, getX() - 1, getY())) {
+            if (getX() > 0)
+                setX(getX() - 1);
+        }
     }
 
     /**
      * Move rightwards in the dungeon if possible
      */
     public void moveRight() {
-        // if (dungeon().interact(this, getX() + 1, getY())) {
-        // if (getX() < dungeon().getWidth() - 1)
-        // setX(getX() + 1);
-        // }
+        if (dungeon().interact(this, getX() + 1, getY())) {
+            if (getX() < dungeon().getWidth() - 1)
+                setX(getX() + 1);
+        }
     }
 
     /**

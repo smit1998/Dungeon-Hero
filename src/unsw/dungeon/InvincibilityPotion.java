@@ -23,8 +23,8 @@ public class InvincibilityPotion extends ItemEntity implements Weapon {
      * @param x       coordinate where the potion spawns
      * @param y       coordinate where the potion spawns
      */
-    public InvincibilityPotion(int x, int y) {
-        super(x, y);
+    public InvincibilityPotion(int x, int y, Dungeon dungeon) {
+        super(x, y, dungeon);
     }
 
     /**

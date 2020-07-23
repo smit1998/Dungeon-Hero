@@ -17,8 +17,8 @@ public abstract class ItemEntity extends Entity implements Subject {
      * @param y       coordinate position of entity
      * @param dungeon entity belongs to
      */
-    public ItemEntity(int x, int y) {
-        super(x, y);
+    public ItemEntity(int x, int y, Dungeon dungeon) {
+        super(x, y, dungeon);
     }
 
     /**

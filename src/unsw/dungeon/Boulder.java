@@ -5,8 +5,6 @@ package unsw.dungeon;
  */
 public class Boulder extends Entity {
 
-    private Dungeon dungeon;
-
     /**
      * Constructs a Boulder positioned at square(x, y)
      * 
@@ -14,8 +12,7 @@ public class Boulder extends Entity {
      * @param y coordinate where the boulder is placed
      */
     public Boulder(int x, int y, Dungeon dungeon) {
-        super(x, y);
-        this.dungeon = dungeon;
+        super(x, y, dungeon);
     }
 
     /**
@@ -29,9 +26,18 @@ public class Boulder extends Entity {
             int newX = getX() * 2 - caller.getX();
             int newY = getY() * 2 - caller.getY();
 
-            if (dungeon.interact(this, newX, newY)) {
-                setX(newX);
-                setY(newY);
+            if (dungeon().interact(this, newX, newY)) {
+                if (newX >= 0 && newX < dungeon().getWidth()) {
+                    setX(newX);
+                } else {
+                    return false;
+                }
+                if (newY >= 0 && newY < dungeon().getHeight()) {
+                    setY(newY);
+                } else {
+                    return false;
+                }
+                return true;
             } else if (getX() != oldX || getY() != oldY) {
                 return true;
             }

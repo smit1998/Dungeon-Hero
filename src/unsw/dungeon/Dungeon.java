@@ -171,24 +171,16 @@ public class Dungeon {
     }
 
     public void tick() {
-        // Iterator<Entity> it = entities.iterator();
-        // while (it.hasNext()) {
-        // Entity next = it.next();
-        // next.tick(this);
-        // if (!next.isVisible().getValue()) {
-        // it.remove();
-        // }
-        // }
-        // List<Entity> toRemove = new ArrayList<Entity>();
         for (Entity e : entities) {
             e.tick(this);
         }
-        // for (Entity e : entities) {
-        // if (!e.isVisible().getValue()) {
-        // toRemove.add(e);
-        // }
-        // }
-        // entities.removeAll(toRemove);
+        List<Entity> toRemove = new ArrayList<>();
+        for (Entity e : entities) {
+            if (e.isVisible().getValue() == false) {
+                toRemove.add(e);
+            }
+        }
+        entities.removeAll(toRemove);
     }
 
 }

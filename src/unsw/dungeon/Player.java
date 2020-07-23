@@ -11,7 +11,6 @@ import java.util.ArrayList;
  */
 public class Player extends LifeEntity {
 
-    private Dungeon dungeon;
     private Inventory inventory;
 
     // private Set<PlayerObserver> playerObservers = new TreeSet<>();
@@ -24,9 +23,8 @@ public class Player extends LifeEntity {
      * @param x       coordinate where the player spawns at
      * @param y       coordinate where the player spawns at
      */
-    public Player(int x, int y, Dungeon dungeon) {
-        super(x, y);
-        this.dungeon = dungeon;
+    public Player(Dungeon dungeon, int x, int y) {
+        super(x, y, dungeon);
         this.inventory = new Inventory();
     }
 
@@ -112,12 +110,8 @@ public class Player extends LifeEntity {
      */
     @Override
     public void moveUp() {
-        if (dungeon.interact(this, getX(), getY() - 1)) {
-            if (getY() > 0) {
-                setY(getY() - 1);
-                notifyObservers();
-            }
-        }
+        super.moveUp();
+        notifyObservers();
     }
 
     /**
@@ -125,12 +119,8 @@ public class Player extends LifeEntity {
      */
     @Override
     public void moveDown() {
-        if (dungeon.interact(this, getX(), getY() + 1)) {
-            if (getY() < dungeon.getHeight() - 1) {
-                setY(getY() + 1);
-                notifyObservers();
-            }
-        }
+        super.moveDown();
+        notifyObservers();
     }
 
     /**
@@ -138,12 +128,8 @@ public class Player extends LifeEntity {
      */
     @Override
     public void moveLeft() {
-        if (dungeon.interact(this, getX() - 1, getY())) {
-            if (getX() > 0) {
-                setX(getX() - 1);
-                notifyObservers();
-            }
-        }
+        super.moveLeft();
+        notifyObservers();
     }
 
     /**
@@ -151,12 +137,8 @@ public class Player extends LifeEntity {
      */
     @Override
     public void moveRight() {
-        if (dungeon.interact(this, getX() + 1, getY())) {
-            if (getX() < dungeon.getWidth() - 1) {
-                setX(getX() + 1);
-                notifyObservers();
-            }
-        }
+        super.moveRight();
+        notifyObservers();
     }
 
     public void addPlayerObserver(PlayerObserver o) {
