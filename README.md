@@ -607,6 +607,12 @@ Marks will be deducted for poor git and GitLab usage. For example, meaningless c
 * Added Junit tests for increasing the coverage of the code.
 * Refactored code with fergus.
 
+
+##### 24/07/2020
+
+**Duy**
+* updated UML to reflect imagined refactored potion and sword classes
+
 ### Week-09
 
 Fill in here.
