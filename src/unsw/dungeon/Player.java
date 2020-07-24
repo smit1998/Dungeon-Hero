@@ -111,6 +111,7 @@ public class Player extends LifeEntity {
     @Override
     public void tick(Dungeon dungeon) {
         // TODO Auto-generated method stub
+        inventory.tick(dungeon);
         ticksSinceUp++;
         ticksSinceDown++;
         ticksSinceLeft++;

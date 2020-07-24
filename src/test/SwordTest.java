@@ -213,15 +213,12 @@ class SwordTest {
         Player player = dungeon.getPlayer();
 
         assertFalse(dungeon.isComplete());
+
         // player picks up sword
         player.moveRight();
+
         // enemy attacks player
-        try{
-            Thread.sleep(5000);
-        }
-        catch(InterruptedException e) {
-            fail();
-        }
+        dungeon.tick(30 * 5);
 
         player.moveRight();
         player.moveRight();
@@ -263,7 +260,7 @@ class SwordTest {
         DungeonLoader loader = new DungeonMockLoader(json);
         Dungeon dungeon = loader.load();
         Player player = dungeon.getPlayer();
-        
+
         // player pick up the sword
         player.moveRight();
         // player can not pick up 2nd sword

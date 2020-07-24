@@ -290,11 +290,7 @@ class PortalTest {
         assertEquals(player.getY(), 0);
 
         // Wait for enemy to move towards player
-        try {
-            Thread.sleep(1000);
-        } catch (InterruptedException e) {
-            fail();
-        }
+        dungeon.tick(30);
 
         // Test that player is still alive
         assertTrue(player.getLifeStatus());
