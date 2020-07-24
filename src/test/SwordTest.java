@@ -160,20 +160,32 @@ class SwordTest {
         Player player = dungeon.getPlayer();
 
         assertFalse(dungeon.isComplete());
+
         // player picks up sword
         player.moveRight();
+
         // player kills enemy1
         player.moveRight();
+
         // player kills enemy2
         player.moveRight();
+
         // player kills enemy3
         player.moveRight();
+
         // player kills enemy4
         player.moveRight();
+
         // player kills enemy5
         player.moveRight();
+
+        dungeon.tick();
+
         // player dies
         player.moveRight();
+
+        assertFalse(player.getLifeStatus());
+
         assertFalse(dungeon.isComplete());
     }
 

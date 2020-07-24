@@ -109,7 +109,7 @@ class TreasureGoalTest {
         goalJSON.put("goal", "treasure");
 
         JSONObject json = new JSONObject();
-        json.put("width", 3);
+        json.put("width", 4);
         json.put("height", 1);
         json.put("entities", entitiesJSON);
         json.put("goal-condition", goalJSON);
