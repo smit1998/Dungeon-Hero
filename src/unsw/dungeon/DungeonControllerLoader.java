@@ -57,6 +57,24 @@ public class DungeonControllerLoader extends DungeonLoader {
         invincibilityImage = new Image((new File("images/brilliant_blue_new.png")).toURI().toString());
     }
 
+    public DungeonControllerLoader(File file) throws FileNotFoundException {
+        super(file);
+        entities = new ArrayList<>();
+        playerImage = new Image((new File("images/human_new.png")).toURI().toString());
+        wallImage = new Image((new File("images/brick_brown_0.png")).toURI().toString());
+        exitImage = new Image((new File("images/exit.png")).toURI().toString());
+        treasureImage = new Image((new File("images/gold_pile.png")).toURI().toString());
+        openDoorImage = new Image((new File("images/open_door.png")).toURI().toString());
+        closedDoorImage = new Image((new File("images/closed_door.png")).toURI().toString());
+        keyImage = new Image((new File("images/key.png")).toURI().toString());
+        boulderImage = new Image((new File("images/boulder.png")).toURI().toString());
+        switchImage = new Image((new File("images/pressure_plate.png")).toURI().toString());
+        portalImage = new Image((new File("images/portal.png")).toURI().toString());
+        enemyImage = new Image((new File("images/deep_elf_master_archer.png")).toURI().toString());
+        swordImage = new Image((new File("images/greatsword_1_new.png")).toURI().toString());
+        invincibilityImage = new Image((new File("images/brilliant_blue_new.png")).toURI().toString());
+    }
+
     @Override
     public void onLoad(Player player) {
         ImageView view = new ImageView(playerImage);

@@ -1,13 +1,18 @@
 package unsw.dungeon;
 
 import java.io.FileNotFoundException;
+import java.io.IOException;
 
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 import javafx.scene.input.KeyEvent;
+import javafx.stage.Stage;
 import javafx.collections.FXCollections;
 
 public class DungeonMenuController {
@@ -85,5 +90,30 @@ public class DungeonMenuController {
             // TODO Display message
         }
         System.out.println(selection);
+
+        try {
+            DungeonControllerLoader dungeonLoader = new DungeonControllerLoader(selection.getDungeonFile());
+
+            DungeonController controller = dungeonLoader.loadController();
+
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("DungeonView.fxml"));
+            loader.setController(controller);
+            Parent root = loader.load();
+            Scene scene = new Scene(root);
+            root.requestFocus();
+            Stage stage = new Stage();
+            stage.setScene(scene);
+            prevStage.close();
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
+
+    Stage prevStage;
+
+    public void setPrevStage(Stage stage) {
+        this.prevStage = stage;
+    }
+
 }

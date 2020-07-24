@@ -15,7 +15,7 @@ public class DungeonMenuApplication extends Application {
         primaryStage.setTitle("Dungeon Menu");
 
         DungeonMenuController controller = new DungeonMenuController();
-
+        controller.setPrevStage(primaryStage);
         FXMLLoader loader = new FXMLLoader(getClass().getResource("DungeonMenuView.fxml"));
         loader.setController(controller);
         Parent root = loader.load();

@@ -1,5 +1,6 @@
 package unsw.dungeon;
 
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.util.ArrayList;
@@ -25,6 +26,16 @@ public abstract class DungeonLoader {
     private int enemiesSpawned;
     private int switchesSpawned;
     private int treasureSpawned;
+
+    /**
+     * Constructor for a DungeonLoader
+     * 
+     * @param filename the filename of a file located in the 'dungeons' directory
+     * @throws FileNotFoundException
+     */
+    public DungeonLoader(File file) throws FileNotFoundException {
+        json = new JSONObject(new JSONTokener(new FileReader(file)));
+    }
 
     /**
      * Constructor for a DungeonLoader
