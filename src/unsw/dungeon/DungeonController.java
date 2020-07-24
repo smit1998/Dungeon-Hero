@@ -70,24 +70,9 @@ public class DungeonController implements Runnable {
         input.remove(code);
     }
 
-    public void movePlayer() {
-        if (input.contains("LEFT")) {
-            player.moveLeft();
-        }
-        if (input.contains("RIGHT")) {
-            player.moveRight();
-        }
-        if (input.contains("UP")) {
-            player.moveUp();
-        }
-        if (input.contains("DOWN")) {
-            player.moveDown();
-        }
-    }
-
     public void run() {
         // https://youtu.be/w1aB5gc38C8
-        int fps = 3;
+        int fps = 30;
         double timePerTick = 1000000000 / fps;
         double delta = 0;
         long now;
@@ -97,12 +82,11 @@ public class DungeonController implements Runnable {
             delta += (now - lastTime) / timePerTick;
             lastTime = now;
             if (delta >= 1) {
-                movePlayer();
+                player.tick(input);
                 dungeon.tick();
                 delta -= 1;
             }
         }
-
         stop();
     }
 

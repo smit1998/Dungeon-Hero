@@ -10,7 +10,7 @@ public class InvincibilityPotion extends ItemEntity implements Weapon {
     private final static int PRIORITY = 100;
 
     private boolean isActive = false;
-    private final int TPS = 3;
+    private final int TPS = 30;
     private final int DURATION_SEC = 5;
     private final int DURATION_TICKS = TPS * DURATION_SEC;
 

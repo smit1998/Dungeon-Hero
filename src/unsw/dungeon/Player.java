@@ -1,6 +1,7 @@
 package unsw.dungeon;
 
 import java.util.List;
+import java.util.Set;
 import java.util.ArrayList;
 
 /**
@@ -10,6 +11,13 @@ import java.util.ArrayList;
  *
  */
 public class Player extends LifeEntity {
+
+    private final static int TICKS_PER_MOVE = 5;
+
+    private int ticksSinceUp = 0;
+    private int ticksSinceDown = 0;
+    private int ticksSinceLeft = 0;
+    private int ticksSinceRight = 0;
 
     private Inventory inventory;
 
@@ -103,6 +111,29 @@ public class Player extends LifeEntity {
     @Override
     public void tick(Dungeon dungeon) {
         // TODO Auto-generated method stub
+        ticksSinceUp++;
+        ticksSinceDown++;
+        ticksSinceLeft++;
+        ticksSinceRight++;
+    }
+
+    public void tick(Set<String> input) {
+        if (input.contains("LEFT") && ticksSinceLeft > TICKS_PER_MOVE) {
+            ticksSinceLeft = 0;
+            moveLeft();
+        }
+        if (input.contains("RIGHT") && ticksSinceRight > TICKS_PER_MOVE) {
+            ticksSinceRight = 0;
+            moveRight();
+        }
+        if (input.contains("UP") && ticksSinceUp > TICKS_PER_MOVE) {
+            ticksSinceUp = 0;
+            moveUp();
+        }
+        if (input.contains("DOWN") && ticksSinceDown > TICKS_PER_MOVE) {
+            ticksSinceDown = 0;
+            moveDown();
+        }
     }
 
     /**

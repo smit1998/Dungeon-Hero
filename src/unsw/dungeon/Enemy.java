@@ -136,10 +136,18 @@ public class Enemy extends LifeEntity implements Subject, PlayerObserver {
         }
     }
 
+    private int ticksSinceLastMove;
+    private final static int TICKS_PER_MOVE = 10;
+
     @Override
     public void tick(Dungeon dungeon) {
         // TODO Auto-generated method stub
-        gotoPlayer();
+        if (ticksSinceLastMove < TICKS_PER_MOVE) {
+            ticksSinceLastMove++;
+        } else {
+            gotoPlayer();
+            ticksSinceLastMove = 0;
+        }
     }
 
     public void update(int x, int y) {
