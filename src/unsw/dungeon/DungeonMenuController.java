@@ -5,8 +5,10 @@ import java.io.IOException;
 
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -39,14 +41,14 @@ public class DungeonMenuController {
 
     @FXML
     public void handlePlay(ActionEvent event) {
-        play();
+        play(event);
     }
 
     @FXML
     public void handleListKeyPress(KeyEvent event) {
         switch (event.getCode()) {
             case ENTER:
-                play();
+                play(event);
                 break;
 
             default:
@@ -69,7 +71,7 @@ public class DungeonMenuController {
                 }
                 break;
             case ENTER:
-                play();
+                play(event);
                 break;
             default:
                 break;
@@ -82,14 +84,16 @@ public class DungeonMenuController {
 
     }
 
-    private void play() {
+    private void play(Event event) {
         DungeonMenuItem selection = listview.getSelectionModel().getSelectedItem();
         if (selection == null) {
             System.out.println("No dungeon selected");
             return;
             // TODO Display message
         }
-        System.out.println(selection);
+        System.out.println("Loading map: " + selection + "...");
+
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 
         try {
             DungeonControllerLoader dungeonLoader = new DungeonControllerLoader(selection.getDungeonFile());
@@ -101,19 +105,10 @@ public class DungeonMenuController {
             Parent root = loader.load();
             Scene scene = new Scene(root);
             root.requestFocus();
-            Stage stage = new Stage();
             stage.setScene(scene);
-            prevStage.close();
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
-
-    Stage prevStage;
-
-    public void setPrevStage(Stage stage) {
-        this.prevStage = stage;
-    }
-
 }
