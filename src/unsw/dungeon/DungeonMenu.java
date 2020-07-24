@@ -42,4 +42,8 @@ public class DungeonMenu {
         return new ArrayList<>(menuItems);
     }
 
+    public int size() {
+        return menuItems.size();
+    }
+
 }

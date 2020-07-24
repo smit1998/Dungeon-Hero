@@ -3,18 +3,23 @@ package unsw.dungeon;
 import java.io.FileNotFoundException;
 
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
+import javafx.scene.input.KeyEvent;
 import javafx.collections.FXCollections;
 
 public class DungeonMenuController {
 
     @FXML
     private ListView<DungeonMenuItem> listview;
+
+    @FXML
+    private Button play_btn;
+
     private DungeonMenu menu;
     private ObservableList<DungeonMenuItem> observableList;
-    // ObservableList<String> names = FXCollections.observableArrayList("Mary",
-    // "Bob", "sam");
 
     public DungeonMenuController() throws FileNotFoundException {
         menu = new DungeonMenu();
@@ -24,5 +29,61 @@ public class DungeonMenuController {
     @FXML
     public void initialize() {
         listview.setItems(observableList);
+        listview.getSelectionModel().selectFirst();
+    }
+
+    @FXML
+    public void handlePlay(ActionEvent event) {
+        play();
+    }
+
+    @FXML
+    public void handleListKeyPress(KeyEvent event) {
+        switch (event.getCode()) {
+            case ENTER:
+                play();
+                break;
+
+            default:
+                break;
+        }
+    }
+
+    @FXML
+    public void handlePlayKeyPress(KeyEvent event) {
+        int selectionIndex = listview.getSelectionModel().getSelectedIndex();
+        switch (event.getCode()) {
+            case UP:
+                if (selectionIndex > 0) {
+                    listview.getSelectionModel().selectPrevious();
+                }
+                break;
+            case DOWN:
+                if (selectionIndex < menu.size() - 1) {
+                    listview.getSelectionModel().selectNext();
+                }
+                break;
+            case ENTER:
+                play();
+                break;
+            default:
+                break;
+        }
+    }
+
+    @FXML
+    public void handleKeyPress(KeyEvent event) {
+        listview.requestFocus();
+
+    }
+
+    private void play() {
+        DungeonMenuItem selection = listview.getSelectionModel().getSelectedItem();
+        if (selection == null) {
+            System.out.println("No dungeon selected");
+            return;
+            // TODO Display message
+        }
+        System.out.println(selection);
     }
 }
