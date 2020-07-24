@@ -84,4 +84,7 @@ public abstract class LifeEntity extends Entity {
         return this.isAlive;
     }
 
+    public void tick() {
+
+    }
 }

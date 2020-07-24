@@ -1,5 +1,9 @@
 package unsw.dungeon;
 
+import java.util.List;
+import java.util.Set;
+import java.util.ArrayList;
+
 /**
  * The player entity
  * 
@@ -8,7 +12,17 @@ package unsw.dungeon;
  */
 public class Player extends LifeEntity {
 
+    private final static int TICKS_PER_MOVE = 5;
+
+    private int ticksSinceUp = 0;
+    private int ticksSinceDown = 0;
+    private int ticksSinceLeft = 0;
+    private int ticksSinceRight = 0;
+
     private Inventory inventory;
+
+    // private Set<PlayerObserver> playerObservers = new TreeSet<>();
+    private List<PlayerObserver> playerObservers = new ArrayList<>();
 
     /**
      * Create a player positioned in square (x,y) in the dungeon
@@ -93,4 +107,80 @@ public class Player extends LifeEntity {
     public boolean hasPotion() {
         return getWeapon() instanceof InvincibilityPotion;
     }
+
+    @Override
+    public void tick(Dungeon dungeon) {
+        // TODO Auto-generated method stub
+        ticksSinceUp++;
+        ticksSinceDown++;
+        ticksSinceLeft++;
+        ticksSinceRight++;
+    }
+
+    public void tick(Set<String> input) {
+        if (input.contains("LEFT") && ticksSinceLeft > TICKS_PER_MOVE) {
+            ticksSinceLeft = 0;
+            moveLeft();
+        }
+        if (input.contains("RIGHT") && ticksSinceRight > TICKS_PER_MOVE) {
+            ticksSinceRight = 0;
+            moveRight();
+        }
+        if (input.contains("UP") && ticksSinceUp > TICKS_PER_MOVE) {
+            ticksSinceUp = 0;
+            moveUp();
+        }
+        if (input.contains("DOWN") && ticksSinceDown > TICKS_PER_MOVE) {
+            ticksSinceDown = 0;
+            moveDown();
+        }
+    }
+
+    /**
+     * Move upwards in the dungeon if possible
+     */
+    @Override
+    public void moveUp() {
+        super.moveUp();
+        notifyObservers();
+    }
+
+    /**
+     * Move downwards in the dungeon if possible
+     */
+    @Override
+    public void moveDown() {
+        super.moveDown();
+        notifyObservers();
+    }
+
+    /**
+     * Move leftwards in the dungeon if possible
+     */
+    @Override
+    public void moveLeft() {
+        super.moveLeft();
+        notifyObservers();
+    }
+
+    /**
+     * Move rightwards in the dungeon if possible
+     */
+    @Override
+    public void moveRight() {
+        super.moveRight();
+        notifyObservers();
+    }
+
+    public void addPlayerObserver(PlayerObserver o) {
+        playerObservers.add(o);
+    }
+
+    public void notifyObservers() {
+        for (PlayerObserver o : playerObservers) {
+            o.update(getX(), getY());
+            o.updateFear(hasPotion());
+        }
+    }
+
 }

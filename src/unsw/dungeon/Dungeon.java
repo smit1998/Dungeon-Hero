@@ -96,42 +96,6 @@ public class Dungeon {
     }
 
     /**
-     * Make the given caller entity interact with all entities at the given
-     * coordinate
-     * 
-     * @param caller the entity starting the interaction
-     * @param x      target horizontal coordinate position
-     * @param y      target vertical coordinate position
-     * @return whether the calling entity successfully interacted with the entities
-     *         at the coordinate
-     */
-    public boolean interact(Entity caller, int x, int y) {
-        List<Entity> toRemove = new ArrayList<Entity>();
-        boolean result = true;
-        for (Entity entity : entities) {
-            if (entity == caller || entity == null)
-                continue;
-            if (entity.getX() == x && entity.getY() == y) {
-                if (!entity.interact(caller)) {
-                    result = false;
-                }
-                if (entity.isVisible().get() == false) {
-                    toRemove.add(entity);
-                }
-            }
-        }
-        if (caller.isVisible().get() == false) {
-            toRemove.add(caller);
-            result = false;
-        }
-        for (Entity e : toRemove) {
-            removeEntity(e);
-        }
-
-        return result;
-    }
-
-    /**
      * Return whether the dungeon goal has been completed
      * 
      * @return whether the dungeon goal is completed
@@ -168,6 +132,55 @@ public class Dungeon {
                 portalB.addPair(portalA);
             }
         }
+    }
+
+    public void connectPlayerObservers() {
+        for (Entity entity : entities) {
+            if (entity instanceof PlayerObserver) {
+                player.addPlayerObserver((PlayerObserver) entity);
+            }
+        }
+        player.notifyObservers();
+    }
+
+    /**
+     * Make the given caller entity interact with all entities at the given
+     * coordinate
+     * 
+     * @param caller the entity starting the interaction
+     * @param x      target horizontal coordinate position
+     * @param y      target vertical coordinate position
+     * @return whether the calling entity successfully interacted with the entities
+     *         at the coordinate
+     */
+    public boolean interact(Entity caller, int x, int y) {
+        if (x < 0 || x >= getWidth() || y < 0 || y >= getHeight()) {
+            return false;
+        }
+
+        for (Entity entity : entities) {
+            if (entity == caller || entity == null)
+                continue;
+            if (entity.isVisible().getValue() && entity.getX() == x && entity.getY() == y) {
+                if (!entity.interact(caller)) {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+
+    public void tick() {
+        for (Entity e : entities) {
+            e.tick(this);
+        }
+        List<Entity> toRemove = new ArrayList<>();
+        for (Entity e : entities) {
+            if (e.isVisible().getValue() == false) {
+                toRemove.add(e);
+            }
+        }
+        entities.removeAll(toRemove);
     }
 
 }

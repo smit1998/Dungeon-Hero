@@ -45,4 +45,10 @@ public class Boulder extends Entity {
         return false;
     }
 
+    @Override
+    public void tick(Dungeon dungeon) {
+        // TODO Auto-generated method stub
+
+    }
+
 }

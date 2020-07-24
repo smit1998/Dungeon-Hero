@@ -66,10 +66,6 @@ public class Portal extends Entity {
             int newX = getX() - caller.getX() + pair.getX();
             int newY = getY() - caller.getY() + pair.getY();
 
-            if (newX < 0 || newX >= dungeon().getWidth() || newY < 0 || newY >= dungeon().getHeight()) {
-                return false;
-            }
-
             caller.setX(pair.getX());
             caller.setY(pair.getY());
             if (dungeon().interact(caller, newX, newY)) {
@@ -83,4 +79,9 @@ public class Portal extends Entity {
         return false;
     }
 
+    @Override
+    public void tick(Dungeon dungeon) {
+        // TODO Auto-generated method stub
+
+    }
 }

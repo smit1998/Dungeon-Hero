@@ -67,6 +67,7 @@ public abstract class DungeonLoader {
 
         dungeon.connectGoals();
         dungeon.connectPortals();
+        dungeon.connectPlayerObservers();
 
         return dungeon;
     }

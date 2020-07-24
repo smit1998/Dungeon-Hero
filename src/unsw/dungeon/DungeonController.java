@@ -2,6 +2,8 @@ package unsw.dungeon;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
+import java.util.TreeSet;
 
 import javafx.fxml.FXML;
 import javafx.scene.image.Image;
@@ -13,10 +15,11 @@ import java.io.File;
 
 /**
  * A JavaFX controller for the dungeon.
+ * 
  * @author Robert Clifton-Everest
  *
  */
-public class DungeonController {
+public class DungeonController implements Runnable {
 
     @FXML
     private GridPane squares;
@@ -26,6 +29,9 @@ public class DungeonController {
     private Player player;
 
     private Dungeon dungeon;
+
+    private boolean running = false;
+    private Thread thread;
 
     public DungeonController(Dungeon dungeon, List<ImageView> initialEntities) {
         this.dungeon = dungeon;
@@ -47,27 +53,60 @@ public class DungeonController {
         for (ImageView entity : initialEntities)
             squares.getChildren().add(entity);
 
+        start();
+    }
+
+    private Set<String> input = new TreeSet<String>();
+
+    @FXML
+    public void handleKeyPress(KeyEvent e) {
+        String code = e.getCode().toString();
+        input.add(code);
     }
 
     @FXML
-    public void handleKeyPress(KeyEvent event) {
-        switch (event.getCode()) {
-        case UP:
-            player.moveUp();
-            break;
-        case DOWN:
-            player.moveDown();
-            break;
-        case LEFT:
-            player.moveLeft();
-            break;
-        case RIGHT:
-            player.moveRight();
-            break;
-        default:
-            break;
+    public void handleKeyRelease(KeyEvent e) {
+        String code = e.getCode().toString();
+        input.remove(code);
+    }
+
+    public void run() {
+        // https://youtu.be/w1aB5gc38C8
+        int fps = 30;
+        double timePerTick = 1000000000 / fps;
+        double delta = 0;
+        long now;
+        long lastTime = System.nanoTime();
+        while (running) {
+            now = System.nanoTime();
+            delta += (now - lastTime) / timePerTick;
+            lastTime = now;
+            if (delta >= 1) {
+                player.tick(input);
+                dungeon.tick();
+                delta -= 1;
+            }
+        }
+        stop();
+    }
+
+    public synchronized void start() {
+        if (!running) {
+            running = true;
+            thread = new Thread(this);
+            thread.start();
+        }
+    }
+
+    public synchronized void stop() {
+        if (running) {
+            running = false;
+            try {
+                thread.join();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
         }
     }
 
 }
-
