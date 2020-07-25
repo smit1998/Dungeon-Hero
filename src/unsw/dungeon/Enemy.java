@@ -30,6 +30,7 @@ public class Enemy extends LifeEntity implements Subject, PlayerObserver {
      * Enemy entity moves towards the player entity
      */
     private void gotoPlayer() {
+        System.out.println(feared); 
         int fearModifier = feared ? -1 : 1;
 
         int diffX = (playerX - getX()) * fearModifier;
@@ -156,7 +157,8 @@ public class Enemy extends LifeEntity implements Subject, PlayerObserver {
     }
 
     public void updateFear(boolean fear) {
-        feared = fear;
+        this.feared = fear;
+        System.out.println("feared updated" + feared); 
     }
 
 }

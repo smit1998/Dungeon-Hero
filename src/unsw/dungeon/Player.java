@@ -189,7 +189,6 @@ public class Player extends LifeEntity {
     public void notifyObservers() {
         for (PlayerObserver o : playerObservers) {
             o.update(getX(), getY());
-            o.updateFear(hasPotion());
         }
     }
 
