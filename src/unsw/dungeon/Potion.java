@@ -10,10 +10,12 @@ public class Potion extends ItemEntity {
 
     private ArrayList<EffectBehaviour> effectsBehaviours; 
     private boolean isActive; 
+    private int ticksElapsed; 
 
     public Potion(int x, int y, Dungeon dungeon, EffectBehaviour... effectBehaviours) {
         super(x, y, dungeon);
         this.isActive = false; 
+        this.ticksElapsed = 0; 
         for (EffectBehaviour e : effectBehaviours) {
             this.effectsBehaviours.add(e); 
         }
@@ -43,7 +45,7 @@ public class Potion extends ItemEntity {
         if (isActive) {
             ticksElapsed++;
             if (ticksElapsed > DURATION_TICKS) {
-                endEffects();
+                endEffect();
             }
         }
     }
