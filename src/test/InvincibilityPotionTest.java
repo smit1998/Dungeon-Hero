@@ -289,11 +289,7 @@ class InvincibilityPotionTest {
         assertEquals(player.getY(), 0);
 
         // Wait till potion wears off
-        try {
-            Thread.sleep(6000);
-        } catch (InterruptedException e) {
-            fail();
-        }
+        dungeon.tick(30 * 6);
 
         // Move right to push boulder
         player.moveRight();
@@ -302,6 +298,8 @@ class InvincibilityPotionTest {
 
         // Move down to be killed by enemy
         player.moveDown();
+
+        assertFalse(player.hasPotion());
 
         assertFalse(dungeon.isComplete());
 

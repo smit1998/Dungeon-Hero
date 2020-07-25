@@ -225,14 +225,21 @@ class DoorKeyTest {
 
         // picks up the key1
         player.moveRight();
+
         // enters door1
         player.moveRight();
 
+        dungeon.tick();
+
         player.moveRight();
+
         // picks up key2
         player.moveRight();
+
         // enters door2
         player.moveRight();
+
+        dungeon.tick();
 
         assertTrue(player.getX() == 5);
         assertTrue(player.getY() == 0);

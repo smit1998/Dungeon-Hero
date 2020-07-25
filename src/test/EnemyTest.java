@@ -230,11 +230,8 @@ class EnemyTest {
         assertFalse(dungeon.isComplete());
 
         // lets the enemy move towards the player
-        try {
-            Thread.sleep(5000);
-        } catch (InterruptedException e) {
-            fail();
-        }
+        dungeon.tick(30 * 5);
+
         // enemy kills the player
         assertFalse(player.getLifeStatus());
     }
@@ -280,11 +277,7 @@ class EnemyTest {
         // player picks up potion
         player.moveRight();
 
-        try {
-            Thread.sleep(5000);
-        } catch (InterruptedException e) {
-            fail();
-        }
+        dungeon.tick(30 * 5);
 
         assertTrue(player.getLifeStatus());
         assertFalse(dungeon.isComplete());
@@ -328,11 +321,7 @@ class EnemyTest {
         assertEquals(player.getX(), 0);
         assertEquals(player.getY(), 0);
 
-        try {
-            Thread.sleep(2000);
-        } catch (InterruptedException e) {
-            fail();
-        }
+        dungeon.tick(30 * 2);
 
         assertEquals(player.getX(), 0);
         assertEquals(player.getY(), 0);
@@ -388,11 +377,7 @@ class EnemyTest {
         assertEquals(player.getY(), 1);
 
         // Wait for enemy to attack
-        try {
-            Thread.sleep(3000);
-        } catch (InterruptedException e) {
-            fail();
-        }
+        dungeon.tick(30 * 3);
 
         // Test that player defended against enemy
         assertTrue(player.getLifeStatus());

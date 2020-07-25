@@ -183,4 +183,10 @@ public class Dungeon {
         entities.removeAll(toRemove);
     }
 
+    public void tick(long ticks) {
+        for (int i = 0; i < ticks; i++) {
+            tick();
+        }
+    }
+
 }
