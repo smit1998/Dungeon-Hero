@@ -613,6 +613,12 @@ Marks will be deducted for poor git and GitLab usage. For example, meaningless c
 **Duy**
 * updated UML to reflect imagined refactored potion and sword classes
 
+##### 26/07/2020
+
+**Duy**
+* refactored the weapon, potion and inventory
+* added changes to UML
+
 ### Week-09
 
 Fill in here.
