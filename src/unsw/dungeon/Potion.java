@@ -45,7 +45,7 @@ public class Potion extends ItemEntity {
 
     public boolean interact(Player player) {
         if (player.pickupItem(this) != null) {
-            startEffect(); 
+            startEffects(); 
         }
         return true; 
     }
