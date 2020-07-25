@@ -1,17 +1,27 @@
 package unsw.dungeon;
 
-public class FearEffect implements EffectBehaviour{
+import java.util.ArrayList;
+
+public class FearEffect implements EffectBehaviour {
+
+    private ArrayList<Enemy> enemies; 
+
+    public FearEffect(Dungeon dungeon) {
+        enemies = dungeon.getEnemies(); 
+    }
 
     @Override
     public void startEffect() {
-        // TODO Auto-generated method stub
-
+        for (Enemy e : enemies) {
+            e.updateFear(true); 
+        }
     }
 
     @Override
     public void stopEffect() {
-        // TODO Auto-generated method stub
-
+        for (Enemy e : enemies) {
+            e.updateFear(false); 
+        }
     }
     
 }
