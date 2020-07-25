@@ -20,7 +20,7 @@ public class Potion extends ItemEntity {
         }
     }
 
-    public void startEffect() {
+    public void startEffects() {
         for (EffectBehaviour e : effectsBehaviours) {
             e.startEffect(); 
         }
