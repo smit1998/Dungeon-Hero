@@ -119,7 +119,7 @@ public class DungeonControllerLoader extends DungeonLoader {
     }
 
     @Override
-    public void onLoad(Sword sword) {
+    public void onLoad(Weapon sword) {
         ImageView view = new ImageView(swordImage);
         addEntity(sword, view);
     }
