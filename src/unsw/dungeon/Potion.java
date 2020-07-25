@@ -2,11 +2,10 @@ package unsw.dungeon;
 
 import java.util.ArrayList;
 
-import unsw.dungeon.ItemEntity;
-
 public class Potion extends ItemEntity {
 
     private final int DURATION_TICKS = 150; 
+    private final static int MAX_PICKUP = 1;
 
     private ArrayList<EffectBehaviour> effectsBehaviours; 
     private boolean isActive; 
@@ -22,13 +21,28 @@ public class Potion extends ItemEntity {
     }
 
     public void startEffect() {
-
+        for (EffectBehaviour e : effectsBehaviours) {
+            e.startEffect(); 
+        }
     } 
 
-    public void endEffect() {
-
+    public void stopEffects() {
+        for (EffectBehaviour e : effectsBehaviours) {
+            e.stopEffect(); 
+        }
     }
     
+    @Override
+    public boolean interact(Entity caller) {
+        if (caller instanceof Player) {
+            return interact((Player) caller); 
+        }
+        if (caller instanceof Boulder) {
+            return interact((Boulder) caller); 
+        }
+        return false; 
+    }
+
     public boolean interact(Player player) {
         if (player.pickupItem(this) != null) {
             startEffect(); 
@@ -45,8 +59,14 @@ public class Potion extends ItemEntity {
         if (isActive) {
             ticksElapsed++;
             if (ticksElapsed > DURATION_TICKS) {
-                endEffect();
+                stopEffects(); 
             }
         }
     }
+
+    @Override
+    public int getMaxPickup() {
+        return MAX_PICKUP; 
+    }
+
 }
