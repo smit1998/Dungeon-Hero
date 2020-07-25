@@ -31,8 +31,8 @@ import java.io.IOException;
 
 public class DungeonController implements Runnable, Controller {
 
-    @FXML
-    private StackPane pane;
+    // @FXML
+    // private StackPane pane;
 
     @FXML
     private GridPane squares;
@@ -71,11 +71,11 @@ public class DungeonController implements Runnable, Controller {
 
         squares.requestFocus();
 
-        double windowHeight = squares.getHeight();
-        double windowWidth = squares.getWidth();
+        // double windowHeight = squares.getHeight();
+        // double windowWidth = squares.getWidth();
 
-        pane.setPrefHeight(windowHeight);
-        pane.setPrefWidth(windowWidth);
+        // pane.setPrefHeight(windowHeight);
+        // pane.setPrefWidth(windowWidth);
 
         start();
     }

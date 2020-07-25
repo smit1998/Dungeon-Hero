@@ -1,12 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.image.ImageView ?>
+<?import javafx.scene.layout.ColumnConstraints ?>
 <?import javafx.scene.layout.GridPane ?>
-<?import javafx.scene.layout.Pane ?>
-<?import javafx.scene.layout.StackPane ?>
+<?import javafx.scene.layout.HBox ?>
+<?import javafx.scene.layout.RowConstraints ?>
+<?import javafx.scene.layout.VBox ?>
 
-<StackPane fx:id="pane" onKeyPressed="#handleKeyPress" onKeyReleased="#handleKeyRelease" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
-   <children>
-      <GridPane fx:id="squares" alignment="CENTER" />
-   </children>
-</StackPane>
+
+<VBox fx:id="pane" alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onKeyPressed="#handleKeyPress" onKeyReleased="#handleKeyRelease" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+  <children>
+    <GridPane fx:id="squares">
+      <columnConstraints></columnConstraints>
+      <rowConstraints></rowConstraints>
+    </GridPane>
+    <HBox fx:id="items" alignment="CENTER" prefHeight="100.0" />
+  </children>
+</VBox>
