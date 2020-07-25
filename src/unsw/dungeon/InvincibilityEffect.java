@@ -2,16 +2,18 @@ package unsw.dungeon;
 
 public class InvincibilityEffect implements EffectBehaviour {
 
+    LifeEntity subject; 
+
     @Override
     public void startEffect() {
-        // TODO Auto-generated method stub
-
+        // set the player mortality to false - player is immortal
+        subject.setMortality(false);
     }
 
     @Override
     public void stopEffect() {
-        // TODO Auto-generated method stub
-
+        // player no longer immortal
+        subject.setMortality(true); 
     }
     
 }
