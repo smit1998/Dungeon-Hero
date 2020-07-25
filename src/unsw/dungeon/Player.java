@@ -88,17 +88,22 @@ public class Player extends LifeEntity {
      */
     public boolean interact(Entity caller) {
         if (caller instanceof Enemy) {
-            Enemy enemy = (Enemy) caller;
-            Weapon weapon = inventory.getWeapon();
-            if (weapon != null) {
-                weapon.attack(enemy);
-                return false;
-            } else {
-                enemy.attack(this);
-                return true;
-            }
+            return interact((Enemy) caller); 
         }
         return false;
+    }
+
+    public boolean interact(Enemy enemy) {
+        Weapon weapon = inventory.getWeapon();
+        if (weapon != null) { // player has weapon, player kills enemy
+            weapon.attack(enemy);
+            return false;
+        } else if (this.isMortal()) { // player is mortal, enemy kills player
+            enemy.attack(this); 
+            return true;
+        } else { // player is immortal, enemy kill me
+            return false; 
+        }
     }
 
     /**
