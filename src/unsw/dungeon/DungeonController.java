@@ -22,7 +22,7 @@ import java.io.IOException;
  * @author Robert Clifton-Everest
  *
  */
-public class DungeonController {
+public class DungeonController implements Controller {
 
     @FXML
     private GridPane squares;

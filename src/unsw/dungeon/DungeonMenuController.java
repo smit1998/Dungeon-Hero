@@ -17,7 +17,7 @@ import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
 import javafx.collections.FXCollections;
 
-public class DungeonMenuController {
+public class DungeonMenuController implements Controller {
 
     @FXML
     private ListView<DungeonMenuItem> listview;

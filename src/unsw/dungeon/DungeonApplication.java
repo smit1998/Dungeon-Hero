@@ -11,7 +11,7 @@ public class DungeonApplication extends Application {
     public void start(Stage primaryStage) throws IOException {
         primaryStage.setTitle("Dungeon");
 
-        DungeonMenuController controller = new DungeonMenuController();
+        MainMenuController controller = new MainMenuController();
         primaryStage.setScene(controller.getScene());
         primaryStage.show();
     }
