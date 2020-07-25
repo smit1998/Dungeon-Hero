@@ -159,7 +159,10 @@ public abstract class DungeonLoader {
                 break;
             }
             case "invincibility": {
-                InvincibilityPotion potion = new InvincibilityPotion(x, y, dungeon);
+                ArrayList<EffectBehaviour> effects = new ArrayList<EffectBehaviour>(); 
+                effects.add(new InvincibilityEffect(dungeon)); 
+                // effects.add(new FearEffect(dungeon)); 
+                Potion potion = new Potion(x, y, dungeon, effects);
                 onLoad(potion);
                 entity = potion;
                 break;
@@ -190,7 +193,7 @@ public abstract class DungeonLoader {
 
     public abstract void onLoad(Sword sword);
 
-    public abstract void onLoad(InvincibilityPotion invincibilityPotion);
+    public abstract void onLoad(Potion invincibilityPotion);
 
     /**
      * Load a goal
