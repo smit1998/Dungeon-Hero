@@ -21,7 +21,6 @@ public class Player extends LifeEntity {
 
     private Inventory inventory;
 
-    // private Set<PlayerObserver> playerObservers = new TreeSet<>();
     private List<PlayerObserver> playerObservers = new ArrayList<>();
 
     /**
@@ -43,17 +42,9 @@ public class Player extends LifeEntity {
      *         to the player not being able to, null is returned otherwise, the item
      *         is added to the inventory
      */
-    public ItemEntity pickupItem(ItemEntity e) {
-        ItemEntity itemAdded = inventory.addItem(e);
-        if (itemAdded != null) {
-            e.setVisibility(false);
-            if (e instanceof Potion) {
-                Potion potion = (Potion) e; 
-                potion.startEffects();
-            }
-            return itemAdded;
-        }
-        return null;
+    public boolean pickupItem(ItemEntity e) {
+        inventory.addItem(e); 
+        return true; 
     }
 
     /**
@@ -80,10 +71,13 @@ public class Player extends LifeEntity {
     /**
      * @return a Weapon with the highest priority in the players inventory
      */
-    private Weapon getWeapon() {
+    public Weapon getWeapon() {
         return inventory.getWeapon();
     }
 
+    public Inventory getInventory() {
+        return inventory; 
+    }
     /**
      * Interact with this entity
      * 
@@ -108,13 +102,6 @@ public class Player extends LifeEntity {
         } else { // player is immortal, enemy cannot kill player
             return false; 
         }
-    }
-
-    /**
-     * @return whether the player has an invincibility potion
-     */
-    public boolean hasPotion() {
-        return getWeapon() instanceof InvincibilityPotion;
     }
 
     @Override

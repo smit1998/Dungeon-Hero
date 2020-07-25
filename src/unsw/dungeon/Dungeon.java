@@ -78,6 +78,10 @@ public class Dungeon {
         this.player = player;
     }
 
+    public Inventory getInventory() {
+        return player.getInventory();
+    }
+
     /**
      * Add an entity to the dungeon
      * 

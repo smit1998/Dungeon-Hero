@@ -40,5 +40,26 @@ public class Weapon extends ItemEntity {
         inventory.removeItem(this); 
     }
 
+    @Override
+    public boolean interact(Entity caller) {
+        if (caller instanceof Player) {
+            return interact((Player) caller); 
+        }
+        if (caller instanceof Boulder) {
+            return interact((Boulder) caller); 
+        }
+        return false; 
+    }
 
+    private boolean interact(Player player) {
+        player.pickupItem(this); 
+        return true; 
+    }
+    private boolean interact(Boulder boulder) {
+        return false;
+    }
+
+    @Override
+    public void tick(Dungeon dungeon) {
+    }
 }

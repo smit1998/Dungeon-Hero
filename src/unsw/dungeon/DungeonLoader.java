@@ -153,7 +153,7 @@ public abstract class DungeonLoader {
                 break;
             }
             case "sword": {
-                Sword sword = new Sword(x, y, dungeon);
+                Weapon sword = new Weapon(x, y, dungeon, new InstantKillAttack(), 5);
                 onLoad(sword);
                 entity = sword;
                 break;
@@ -162,6 +162,7 @@ public abstract class DungeonLoader {
                 ArrayList<EffectBehaviour> effects = new ArrayList<EffectBehaviour>(); 
                 effects.add(new InvincibilityEffect(dungeon)); 
                 effects.add(new FearEffect(dungeon)); 
+                effects.add(new MeleeKillEffect(dungeon)); 
                 Potion potion = new Potion(x, y, dungeon, effects);
                 onLoad(potion);
                 entity = potion;
@@ -191,7 +192,7 @@ public abstract class DungeonLoader {
 
     public abstract void onLoad(Enemy enemy);
 
-    public abstract void onLoad(Sword sword);
+    public abstract void onLoad(Weapon sword);
 
     public abstract void onLoad(Potion invincibilityPotion);
 
