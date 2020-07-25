@@ -51,6 +51,7 @@ public class DungeonController implements Runnable, Controller {
         this.player = dungeon.getPlayer();
         this.initialEntities = new ArrayList<>(initialEntities);
         trackCompletion(dungeon);
+        trackIsAlive(player);
     }
 
     @FXML
@@ -161,6 +162,16 @@ public class DungeonController implements Runnable, Controller {
             @Override
             public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
                 running = false;
+            }
+        });
+    }
+
+    public void trackIsAlive(Player player) {
+        player.isAlive().addListener(new ChangeListener<Boolean>() {
+            @Override
+            public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
+                running = false;
+                System.out.println("Player has died");
             }
         });
     }

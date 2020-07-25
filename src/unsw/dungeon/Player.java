@@ -2,6 +2,10 @@ package unsw.dungeon;
 
 import java.util.List;
 import java.util.Set;
+
+import javafx.beans.property.BooleanProperty;
+import javafx.beans.property.SimpleBooleanProperty;
+
 import java.util.ArrayList;
 
 /**
@@ -11,6 +15,8 @@ import java.util.ArrayList;
  *
  */
 public class Player extends LifeEntity {
+
+    private BooleanProperty isAlive = new SimpleBooleanProperty(true);
 
     private final static int TICKS_PER_MOVE = 5;
 
@@ -182,6 +188,26 @@ public class Player extends LifeEntity {
             o.update(getX(), getY());
             o.updateFear(hasPotion());
         }
+    }
+
+    @Override
+    public void kill() {
+        super.kill();
+        isAlive.setValue(false);
+    }
+
+    /**
+     * Get whether the entity is alive
+     * 
+     * @return whether this entity is alive
+     */
+    @Override
+    public boolean getLifeStatus() {
+        return isAlive.getValue();
+    }
+
+    public BooleanProperty isAlive() {
+        return isAlive;
     }
 
 }
