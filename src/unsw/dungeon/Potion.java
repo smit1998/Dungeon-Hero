@@ -1,19 +1,31 @@
 package unsw.dungeon;
 
+import java.util.ArrayList;
+
 import unsw.dungeon.ItemEntity;
 
 public class Potion extends ItemEntity {
 
-    EffectBehaviour effectBehaviour; 
+    private final int DURATION_TICKS = 150; 
 
-    public Potion(int x, int y, Dungeon dungeon, EffectBehaviour effectBehaviour) {
+    private ArrayList<EffectBehaviour> effectsBehaviours; 
+    private boolean isActive; 
+
+    public Potion(int x, int y, Dungeon dungeon, EffectBehaviour... effectBehaviours) {
         super(x, y, dungeon);
-        this.effectBehaviour = effectBehaviour; 
+        this.isActive = false; 
+        for (EffectBehaviour e : effectBehaviours) {
+            this.effectsBehaviours.add(e); 
+        }
     }
 
     public void startEffect() {
 
     } 
+
+    public void endEffect() {
+
+    }
     
     public boolean interact(Player player) {
         if (player.pickupItem(this) != null) {
@@ -24,5 +36,15 @@ public class Potion extends ItemEntity {
 
     public boolean interact(Boulder boulder) {
         return false; 
+    }
+
+    @Override
+    public void tick(Dungeon dungeon) {
+        if (isActive) {
+            ticksElapsed++;
+            if (ticksElapsed > DURATION_TICKS) {
+                endEffects();
+            }
+        }
     }
 }
