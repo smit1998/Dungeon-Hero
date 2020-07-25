@@ -3,16 +3,22 @@ package unsw.dungeon;
 import java.util.ArrayList;
 import java.util.List;
 
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.FXML;
+
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.GridPane;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 
 import java.io.File;
+import java.io.IOException;
 
 /**
  * A JavaFX controller for the dungeon.
+ * 
  * @author Robert Clifton-Everest
  *
  */
@@ -52,22 +58,30 @@ public class DungeonController {
     @FXML
     public void handleKeyPress(KeyEvent event) {
         switch (event.getCode()) {
-        case UP:
-            player.moveUp();
-            break;
-        case DOWN:
-            player.moveDown();
-            break;
-        case LEFT:
-            player.moveLeft();
-            break;
-        case RIGHT:
-            player.moveRight();
-            break;
-        default:
-            break;
+            case UP:
+                player.moveUp();
+                break;
+            case DOWN:
+                player.moveDown();
+                break;
+            case LEFT:
+                player.moveLeft();
+                break;
+            case RIGHT:
+                player.moveRight();
+                break;
+            default:
+                break;
         }
     }
 
-}
+    public Scene getScene() throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("DungeonView.fxml"));
+        loader.setController(this);
+        Parent root = loader.load();
+        Scene scene = new Scene(root);
+        root.requestFocus();
+        return scene;
+    }
 
+}

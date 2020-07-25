@@ -111,4 +111,14 @@ public class DungeonMenuController {
             e.printStackTrace();
         }
     }
+
+    public Scene getScene() throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("DungeonMenuView.fxml"));
+        loader.setController(this);
+        Parent root = loader.load();
+        Scene scene = new Scene(root);
+        root.requestFocus();
+        return scene;
+    }
+
 }
