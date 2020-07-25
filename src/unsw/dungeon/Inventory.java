@@ -22,6 +22,7 @@ public class Inventory {
         if (item instanceof Potion) {
             return setPotion((Potion) item); 
         }
+        return false; 
     }
     public boolean setWeapon (Weapon weapon) {
         boolean isEmpty = (this.weapon == null) ? true : false; 
