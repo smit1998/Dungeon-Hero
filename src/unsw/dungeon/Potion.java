@@ -7,27 +7,25 @@ public class Potion extends ItemEntity {
     private final int DURATION_TICKS = 150; 
     private final static int MAX_PICKUP = 1;
 
-    private ArrayList<EffectBehaviour> effectsBehaviours; 
+    private ArrayList<EffectBehaviour> effects; 
     private boolean isActive; 
     private int ticksElapsed; 
 
-    public Potion(int x, int y, Dungeon dungeon, EffectBehaviour... effectBehaviours) {
+    public Potion(int x, int y, Dungeon dungeon, ArrayList<EffectBehaviour> effects) {
         super(x, y, dungeon);
         this.isActive = false; 
         this.ticksElapsed = 0; 
-        for (EffectBehaviour e : effectBehaviours) {
-            this.effectsBehaviours.add(e); 
-        }
+        this.effects = effects; 
     }
 
     public void startEffects() {
-        for (EffectBehaviour e : effectsBehaviours) {
+        for (EffectBehaviour e : effects) {
             e.startEffect(); 
         }
     } 
 
     public void stopEffects() {
-        for (EffectBehaviour e : effectsBehaviours) {
+        for (EffectBehaviour e : effects) {
             e.stopEffect(); 
         }
     }
