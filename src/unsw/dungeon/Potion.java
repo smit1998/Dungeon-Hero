@@ -15,4 +15,14 @@ public class Potion extends ItemEntity {
 
     } 
     
+    public boolean interact(Player player) {
+        if (player.pickupItem(this) != null) {
+            startEffect(); 
+        }
+        return true; 
+    }
+
+    public boolean interact(Boulder boulder) {
+        return false; 
+    }
 }
