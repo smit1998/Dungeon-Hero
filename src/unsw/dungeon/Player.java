@@ -49,7 +49,6 @@ public class Player extends LifeEntity {
             e.setVisibility(false);
             if (e instanceof Potion) {
                 Potion potion = (Potion) e; 
-                System.out.println("picked potion"); 
                 potion.startEffects();
             }
             return itemAdded;
