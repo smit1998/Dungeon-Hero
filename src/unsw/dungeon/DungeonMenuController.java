@@ -45,6 +45,15 @@ public class DungeonMenuController implements Controller {
     }
 
     @FXML
+    private void handleBack(ActionEvent event) throws IOException {
+        System.out.println("Going back to main menu");
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        MainMenuController controller = new MainMenuController();
+        stage.setScene(controller.getScene());
+        stage.show();
+    }
+
+    @FXML
     public void handleListKeyPress(KeyEvent event) throws IOException {
         switch (event.getCode()) {
             case ENTER:
