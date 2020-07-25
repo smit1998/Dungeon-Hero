@@ -40,12 +40,12 @@ public class DungeonMenuController {
     }
 
     @FXML
-    public void handlePlay(ActionEvent event) {
+    public void handlePlay(ActionEvent event) throws IOException {
         play(event);
     }
 
     @FXML
-    public void handleListKeyPress(KeyEvent event) {
+    public void handleListKeyPress(KeyEvent event) throws IOException {
         switch (event.getCode()) {
             case ENTER:
                 play(event);
@@ -57,7 +57,7 @@ public class DungeonMenuController {
     }
 
     @FXML
-    public void handlePlayKeyPress(KeyEvent event) {
+    public void handlePlayKeyPress(KeyEvent event) throws IOException {
         int selectionIndex = listview.getSelectionModel().getSelectedIndex();
         switch (event.getCode()) {
             case UP:
@@ -84,7 +84,7 @@ public class DungeonMenuController {
 
     }
 
-    private void play(Event event) {
+    private void play(Event event) throws IOException {
         DungeonMenuItem selection = listview.getSelectionModel().getSelectedItem();
         if (selection == null) {
             System.out.println("No dungeon selected");
@@ -94,22 +94,10 @@ public class DungeonMenuController {
         System.out.println("Loading map: " + selection + "...");
 
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-
-        try {
-            DungeonControllerLoader dungeonLoader = new DungeonControllerLoader(selection.getDungeonFile());
-
-            DungeonController controller = dungeonLoader.loadController();
-
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("DungeonView.fxml"));
-            loader.setController(controller);
-            Parent root = loader.load();
-            Scene scene = new Scene(root);
-            root.requestFocus();
-            stage.setScene(scene);
-            stage.show();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        DungeonControllerLoader dungeonLoader = new DungeonControllerLoader(selection.getDungeonFile());
+        DungeonController controller = dungeonLoader.loadController();
+        stage.setScene(controller.getScene());
+        stage.show();
     }
 
     public Scene getScene() throws IOException {
