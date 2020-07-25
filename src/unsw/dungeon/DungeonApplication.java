@@ -14,6 +14,7 @@ public class DungeonApplication extends Application {
         MainMenuController controller = new MainMenuController();
         primaryStage.setScene(controller.getScene());
         primaryStage.show();
+        primaryStage.setResizable(false);
     }
 
     public static void main(String[] args) {

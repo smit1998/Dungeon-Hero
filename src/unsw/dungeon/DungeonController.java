@@ -12,6 +12,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.StackPane;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 
@@ -26,6 +27,9 @@ import java.io.IOException;
  */
 
 public class DungeonController implements Runnable, Controller {
+
+    @FXML
+    private StackPane pane;
 
     @FXML
     private GridPane squares;
@@ -47,6 +51,7 @@ public class DungeonController implements Runnable, Controller {
 
     @FXML
     public void initialize() {
+
         Image ground = new Image((new File("images/dirt_0_new.png")).toURI().toString());
 
         // Add the ground first so it is below all other entities
@@ -58,6 +63,14 @@ public class DungeonController implements Runnable, Controller {
 
         for (ImageView entity : initialEntities)
             squares.getChildren().add(entity);
+
+        squares.requestFocus();
+
+        double windowHeight = squares.getHeight();
+        double windowWidth = squares.getWidth();
+
+        pane.setPrefHeight(windowHeight);
+        pane.setPrefWidth(windowWidth);
 
         start();
     }
