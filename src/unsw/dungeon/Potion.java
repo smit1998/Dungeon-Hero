@@ -4,10 +4,15 @@ import unsw.dungeon.ItemEntity;
 
 public class Potion extends ItemEntity {
 
-    public Potion(int x, int y, Dungeon dungeon, EffectBehaviour effect) {
+    EffectBehaviour effectBehaviour; 
+
+    public Potion(int x, int y, Dungeon dungeon, EffectBehaviour effectBehaviour) {
         super(x, y, dungeon);
+        this.effectBehaviour = effectBehaviour; 
     }
 
-    public initiateEffect
+    public void startEffect() {
+
+    } 
     
 }
