@@ -25,22 +25,36 @@ public class Inventory {
         return false; 
     }
     public boolean setWeapon (Weapon weapon) {
-        boolean isEmpty = (this.weapon == null) ? true : false; 
-        this.weapon = (this.weapon == null) ? this.weapon : weapon; 
-        return isEmpty; 
+        if (this.weapon == null) {
+            this.weapon = weapon; 
+            weapon.setVisibility(false);
+            return true; 
+        } else {
+            return false; 
+        }
     }
 
     public boolean setKey (Key key) {
-        boolean isEmpty = (this.key == null) ? true : false; 
-        this.key = (this.key == null) ? this.key : key; 
-        return isEmpty; 
+        if (this.key == null) {
+            this.key = key; 
+            key.setVisibility(false);
+            return true; 
+        } else {
+            return false; 
+        }
     }
 
     public boolean setPotion (Potion potion) {
-        boolean isEmpty = (this.potion == null) ? true : false; 
-        this.potion = (this.potion == null) ? this.potion : potion; 
-        return isEmpty; 
+        if (this.potion == null) {
+            this.potion = potion; 
+            potion.setVisibility(false);
+            potion.startEffects();
+            return true; 
+        } else {
+            return false; 
+        }
     }
+
     public Weapon getWeapon() {
         return weapon; 
     }
