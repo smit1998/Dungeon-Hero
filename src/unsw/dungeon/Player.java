@@ -18,6 +18,7 @@ public class Player extends LifeEntity {
     private int ticksSinceDown = 0;
     private int ticksSinceLeft = 0;
     private int ticksSinceRight = 0;
+    private boolean isMortal = true; 
 
     private Inventory inventory;
 
@@ -34,6 +35,15 @@ public class Player extends LifeEntity {
     public Player(Dungeon dungeon, int x, int y) {
         super(x, y, dungeon);
         this.inventory = new Inventory();
+        this.isMortal = true; 
+    }
+
+    public boolean isMortal() {
+        return isMortal; 
+    }
+
+    public void setMortality(boolean isMortal) {
+        this.isMortal = isMortal; 
     }
 
     /**
