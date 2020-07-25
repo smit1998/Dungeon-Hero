@@ -101,7 +101,7 @@ public class Player extends LifeEntity {
         } else if (this.isMortal()) { // player is mortal, enemy kills player
             enemy.attack(this); 
             return true;
-        } else { // player is immortal, enemy kill me
+        } else { // player is immortal, enemy cannot kill player
             return false; 
         }
     }
@@ -115,7 +115,6 @@ public class Player extends LifeEntity {
 
     @Override
     public void tick(Dungeon dungeon) {
-        // TODO Auto-generated method stub
         inventory.tick(dungeon);
         ticksSinceUp++;
         ticksSinceDown++;
