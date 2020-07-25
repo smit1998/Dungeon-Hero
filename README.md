@@ -649,6 +649,7 @@ Marks will be deducted for poor git and GitLab usage. For example, meaningless c
 
 **Fergus**
 * Implement game loop and tick system in DungeonController
+* Created PlayerObservers so that enemies can observe player
 
 ##### 24/07/2020
 
