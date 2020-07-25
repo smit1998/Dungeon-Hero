@@ -47,6 +47,11 @@ public class Player extends LifeEntity {
         ItemEntity itemAdded = inventory.addItem(e);
         if (itemAdded != null) {
             e.setVisibility(false);
+            if (e instanceof Potion) {
+                Potion potion = (Potion) e; 
+                System.out.println("picked potion"); 
+                potion.startEffects();
+            }
             return itemAdded;
         }
         return null;
