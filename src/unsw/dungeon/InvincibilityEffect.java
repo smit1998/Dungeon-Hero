@@ -4,6 +4,10 @@ public class InvincibilityEffect implements EffectBehaviour {
 
     LifeEntity subject; 
 
+    public InvincibilityEffect(Dungeon dungeon) {
+        subject = dungeon.getPlayer(); 
+    }
+
     @Override
     public void startEffect() {
         // set the player mortality to false - player is immortal
