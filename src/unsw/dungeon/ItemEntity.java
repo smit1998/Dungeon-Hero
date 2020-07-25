@@ -1,8 +1,5 @@
 package unsw.dungeon;
 
-import java.util.HashSet;
-import java.util.Set;
-
 /**
  * An abstract class for an ItemEntity
  */
