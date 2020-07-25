@@ -645,6 +645,22 @@ Marks will be deducted for poor git and GitLab usage. For example, meaningless c
 * Removed coordinate class
 * Finished UML diagram
 
+##### 23/07/2020
+
+**Fergus**
+* Implement game loop and tick system in DungeonController
+
+##### 24/07/2020
+
+**Fergus**
+* Fixed bug in tick system
+* Changed tests to work with tick system
+
+##### 25/07/2020
+
+**Fergus**
+* Created rough version of main menu and dungeon selector in JavaFX
+
 
 ### Week-09
 
