@@ -21,12 +21,14 @@ public class Potion extends ItemEntity {
     public void startEffects() {
         for (EffectBehaviour e : effects) {
             e.startEffect(); 
+            isActive = true; 
         }
     } 
 
     public void stopEffects() {
         for (EffectBehaviour e : effects) {
             e.stopEffect(); 
+            isActive = false; 
         }
     }
     
@@ -54,6 +56,7 @@ public class Potion extends ItemEntity {
 
     @Override
     public void tick(Dungeon dungeon) {
+        // System.out.println(ticksElapsed + " " + DURATION_TICKS); 
         if (isActive) {
             ticksElapsed++;
             if (ticksElapsed > DURATION_TICKS) {

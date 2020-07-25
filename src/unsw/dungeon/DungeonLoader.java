@@ -160,7 +160,7 @@ public abstract class DungeonLoader {
             }
             case "invincibility": {
                 ArrayList<EffectBehaviour> effects = new ArrayList<EffectBehaviour>(); 
-                effects.add(new InvincibilityEffect(dungeon)); 
+                // effects.add(new InvincibilityEffect(dungeon)); 
                 // effects.add(new FearEffect(dungeon)); 
                 Potion potion = new Potion(x, y, dungeon, effects);
                 onLoad(potion);

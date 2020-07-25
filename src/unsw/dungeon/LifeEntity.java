@@ -18,7 +18,7 @@ public abstract class LifeEntity extends Entity {
     public LifeEntity(int x, int y, Dungeon dungeon) {
         super(x, y, dungeon);
         this.isAlive = true;
-        this.isMortal = false; 
+        this.isMortal = true; 
     }
 
     public boolean isMortal() {
