@@ -16,6 +16,9 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
+
 import java.io.File;
 import java.io.IOException;
 
@@ -47,6 +50,7 @@ public class DungeonController implements Runnable, Controller {
         this.dungeon = dungeon;
         this.player = dungeon.getPlayer();
         this.initialEntities = new ArrayList<>(initialEntities);
+        trackCompletion(dungeon);
     }
 
     @FXML
@@ -152,4 +156,12 @@ public class DungeonController implements Runnable, Controller {
         }
     }
 
+    public void trackCompletion(Dungeon dungeon) {
+        dungeon.isCompleted().addListener(new ChangeListener<Boolean>() {
+            @Override
+            public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
+                running = false;
+            }
+        });
+    }
 }
