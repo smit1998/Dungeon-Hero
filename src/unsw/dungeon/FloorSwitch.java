@@ -84,4 +84,10 @@ public class FloorSwitch extends Entity implements Subject {
             observer.update(this);
         }
     }
+
+    @Override
+    public void tick(Dungeon dungeon) {
+        // TODO Auto-generated method stub
+
+    }
 }

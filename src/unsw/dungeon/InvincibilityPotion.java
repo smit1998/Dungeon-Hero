@@ -1,8 +1,5 @@
 package unsw.dungeon;
 
-import java.util.Timer;
-import java.util.TimerTask;
-
 /**
  * An invisibility potion entity that shakes fear in all enemies, and kills all
  * enemies upon impact. Effects lasts for 5 seconds
@@ -12,7 +9,12 @@ public class InvincibilityPotion extends ItemEntity implements Weapon {
     private final static int MAX_PICKUP = 1;
     private final static int PRIORITY = 100;
 
-    private final static int DURATION_MS = 5000;
+    private boolean isActive = false;
+    private final int TPS = 30;
+    private final int DURATION_SEC = 5;
+    private final int DURATION_TICKS = TPS * DURATION_SEC;
+
+    private int ticksElapsed = 0;
 
     /**
      * Constructor for an invincibility potion
@@ -23,19 +25,6 @@ public class InvincibilityPotion extends ItemEntity implements Weapon {
      */
     public InvincibilityPotion(int x, int y, Dungeon dungeon) {
         super(x, y, dungeon);
-    }
-
-    /**
-     * Sets a timer task, for DURATION_MS amount of time during this time all
-     * enemies run from the entity that uses potion
-     */
-    private void usePotion() {
-        TimerTask effectsWearOff = new TimerTask() {
-            public void run() {
-                notifyObservers();
-            }
-        };
-        new Timer().schedule(effectsWearOff, DURATION_MS);
     }
 
     /**
@@ -82,5 +71,26 @@ public class InvincibilityPotion extends ItemEntity implements Weapon {
      */
     public void attack(LifeEntity e) {
         e.kill();
+    }
+
+    private void usePotion() {
+        isActive = true;
+    }
+
+    private void wearOff() {
+        isActive = false;
+        notifyObservers();
+    }
+
+    @Override
+    public void tick(Dungeon dungeon) {
+        // TODO Auto-generated method stub
+        if (isActive) {
+            ticksElapsed++;
+            if (ticksElapsed > DURATION_TICKS) {
+                wearOff();
+            }
+        }
+
     }
 }

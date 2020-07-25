@@ -57,4 +57,10 @@ public class Key extends ItemEntity {
         return MAX_PICKUP;
     }
 
+    @Override
+    public void tick(Dungeon dungeon) {
+        // TODO Auto-generated method stub
+
+    }
+
 }

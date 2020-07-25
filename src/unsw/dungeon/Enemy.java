@@ -2,23 +2,19 @@ package unsw.dungeon;
 
 import java.util.HashSet;
 import java.util.Set;
-import java.util.Timer;
-import java.util.TimerTask;
 
 /**
  * An enemy entity which moves towards/away from the player in hopes of
  * defeating them
  */
-public class Enemy extends LifeEntity implements Subject {
+public class Enemy extends LifeEntity implements Subject, PlayerObserver {
 
     private Set<Observer> observers = new HashSet<Observer>();
 
-    private Timer timer = new Timer();
-    private TimerTask task = new TimerTask() {
-        public void run() {
-            gotoPlayer();
-        }
-    };
+    private final int NO_POSITION = -1;
+    private int playerX = NO_POSITION;
+    private int playerY = NO_POSITION;
+    private boolean playerPotion = false;
 
     /**
      * Creates an enemy entity in the square(x, y)
@@ -28,32 +24,16 @@ public class Enemy extends LifeEntity implements Subject {
      */
     public Enemy(int x, int y, Dungeon dungeon) {
         super(x, y, dungeon);
-        start();
-    }
-
-    /**
-     * Starts the timer for the enemy movement
-     */
-    public void start() {
-        timer.scheduleAtFixedRate(task, 2000, 500);
-    }
-
-    /**
-     * @return the player entity in the dungeon
-     */
-    private Player getPlayer() {
-        return dungeon().getPlayer();
     }
 
     /**
      * Enemy entity moves towards the player entity
      */
     private void gotoPlayer() {
-        Player player = getPlayer();
-        int fearModifier = player.hasPotion() ? -1 : 1;
+        int fearModifier = playerPotion ? -1 : 1;
 
-        int diffX = (player.getX() - getX()) * fearModifier;
-        int diffY = (player.getY() - getY()) * fearModifier;
+        int diffX = (playerX - getX()) * fearModifier;
+        int diffY = (playerY - getY()) * fearModifier;
 
         int xDirection = diffX > 0 ? 1 : -1;
         if (diffY == 0) {
@@ -126,8 +106,6 @@ public class Enemy extends LifeEntity implements Subject {
     @Override
     public void kill() {
         super.kill();
-        task = null;
-        timer.cancel();
         notifyObservers();
     }
 
@@ -156,6 +134,29 @@ public class Enemy extends LifeEntity implements Subject {
         for (Observer obs : observers) {
             obs.update(this);
         }
+    }
+
+    private int ticksSinceLastMove;
+    private final static int TICKS_PER_MOVE = 10;
+
+    @Override
+    public void tick(Dungeon dungeon) {
+        // TODO Auto-generated method stub
+        if (ticksSinceLastMove < TICKS_PER_MOVE) {
+            ticksSinceLastMove++;
+        } else {
+            gotoPlayer();
+            ticksSinceLastMove = 0;
+        }
+    }
+
+    public void update(int x, int y) {
+        playerX = x;
+        playerY = y;
+    }
+
+    public void updateFear(boolean fear) {
+        playerPotion = fear;
     }
 
 }

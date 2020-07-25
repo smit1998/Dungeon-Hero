@@ -1,6 +1,7 @@
 package unsw.dungeon;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Inventory class - stores items for the player
@@ -77,6 +78,8 @@ public class Inventory implements Observer {
         return chosenWeapon;
     }
 
+    private List<ItemEntity> toRemove = new ArrayList<>();
+
     /**
      * Removes an object given from the inventory, when notifyObserver is called by
      * the subjects
@@ -84,7 +87,7 @@ public class Inventory implements Observer {
      * @param obj to be removed
      */
     public void update(Subject obj) {
-        removeItem((ItemEntity) obj);
+        toRemove.add((ItemEntity) obj);
     }
 
     /**
@@ -99,5 +102,12 @@ public class Inventory implements Observer {
             }
         }
         return null;
+    }
+
+    public void tick(Dungeon dungeon) {
+        for (ItemEntity i : items) {
+            i.tick(dungeon);
+        }
+        items.removeAll(toRemove);
     }
 }
