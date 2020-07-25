@@ -68,6 +68,21 @@ public class DungeonController implements Runnable, Controller {
     public void handleKeyPress(KeyEvent e) {
         String code = e.getCode().toString();
         input.add(code);
+
+        switch (e.getCode()) {
+            case ESCAPE:
+                System.out.println("ESCAPE");
+                // stop();
+                running = false;
+                break;
+            case ENTER:
+                System.out.println("ENTER");
+                start();
+                break;
+
+            default:
+                break;
+        }
     }
 
     @FXML
