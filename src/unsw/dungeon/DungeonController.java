@@ -97,15 +97,14 @@ public class DungeonController implements Runnable, Controller {
         switch (e.getCode()) {
             case ESCAPE:
                 System.out.println("ESCAPE");
-                // stop();
-                running = false;
-                pause_menu.setDisable(false);
-                pause_menu.setVisible(true);
-
-                break;
-            case ENTER:
-                System.out.println("ENTER");
-                start();
+                if (running) {
+                    stopGameLoop();
+                    setIsPaused(true);
+                    // pause_menu.requestFocus();
+                } else {
+                    setIsPaused(false);
+                    start();
+                }
                 break;
 
             default:
@@ -171,7 +170,8 @@ public class DungeonController implements Runnable, Controller {
         dungeon.isCompleted().addListener(new ChangeListener<Boolean>() {
             @Override
             public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
-                running = false;
+                stopGameLoop();
+                System.out.println("Dungeon complete");
             }
         });
     }
@@ -180,7 +180,7 @@ public class DungeonController implements Runnable, Controller {
         player.isAlive().addListener(new ChangeListener<Boolean>() {
             @Override
             public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
-                running = false;
+                stopGameLoop();
                 System.out.println("Player has died");
             }
         });
@@ -197,9 +197,36 @@ public class DungeonController implements Runnable, Controller {
 
     @FXML
     public void handleResume(ActionEvent event) {
-        pause_menu.setDisable(true);
-        pause_menu.setVisible(false);
+        setIsPaused(false);
         stack.requestFocus();
         start();
+    }
+
+    public void handlePause(ActionEvent event) {
+        setIsPaused(true);
+        stopGameLoop();
+    }
+
+    private void stopGameLoop() {
+        running = false;
+    }
+
+    private void setIsPaused(boolean isPaused) {
+        pause_menu.setVisible(isPaused);
+        pause_menu.setDisable(!isPaused);
+    }
+
+    @FXML
+    public void handlePauseKeyPress(KeyEvent e) {
+        switch (e.getCode()) {
+            case ESCAPE:
+                System.out.println("Unpause game");
+                setIsPaused(false);
+                start();
+                break;
+
+            default:
+                break;
+        }
     }
 }

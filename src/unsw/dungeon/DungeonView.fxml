@@ -23,7 +23,7 @@
             <HBox fx:id="items" alignment="CENTER" prefHeight="100.0" />
          </children>
       </VBox>
-      <HBox fx:id="pause_menu" alignment="CENTER" disable="true" visible="false">
+      <HBox fx:id="pause_menu" onKeyPressed="#handlePauseKeyPress" alignment="CENTER" disable="true" visible="false">
          <children>
             <VBox alignment="CENTER">
                <children>
