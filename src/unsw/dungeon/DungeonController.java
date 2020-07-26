@@ -10,6 +10,7 @@ import javafx.fxml.FXML;
 
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
@@ -19,6 +20,7 @@ import javafx.stage.Stage;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.application.Platform;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -44,10 +46,13 @@ public class DungeonController implements Runnable, Controller {
     private GridPane squares;
 
     @FXML
-    public VBox pane;
+    private VBox pane;
 
     @FXML
     private VBox pause_menu;
+
+    @FXML
+    private Button quit_button, resume_button;
 
     private List<ImageView> initialEntities;
 
@@ -67,7 +72,9 @@ public class DungeonController implements Runnable, Controller {
     }
 
     @FXML
-    public void initialize() {
+    public void initialize() throws IOException {
+        resume_button.setOnKeyPressed(e -> handleResumeKeyPress(e));
+        quit_button.setOnKeyPressed(e -> handleQuitKeyPress(e));
 
         Image ground = new Image((new File("images/dirt_0_new.png")).toURI().toString());
 
@@ -88,12 +95,6 @@ public class DungeonController implements Runnable, Controller {
             }
         });
 
-        // double windowHeight = squares.getHeight();
-        // double windowWidth = squares.getWidth();
-
-        // pane.setPrefHeight(windowHeight);
-        // pane.setPrefWidth(windowWidth);
-
         start();
     }
 
@@ -106,10 +107,7 @@ public class DungeonController implements Runnable, Controller {
 
         switch (e.getCode()) {
             case ESCAPE:
-                System.out.println("ESCAPE");
-                if (running) {
-                    handlePause();
-                }
+                handlePause();
                 break;
 
             default:
@@ -192,18 +190,32 @@ public class DungeonController implements Runnable, Controller {
     }
 
     @FXML
-    public void handleQuit(ActionEvent event) throws IOException {
+    public void handleQuit() throws IOException {
         System.out.println("Going back to main menu");
-        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        Stage stage = (Stage) squares.getScene().getWindow();
         MainMenuController controller = new MainMenuController();
         stage.setScene(controller.getScene());
         stage.show();
     }
 
+    private void handleQuitKeyPress(KeyEvent event) {
+        try {
+            if (event.getCode().equals(KeyCode.ENTER))
+                handleQuit();
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    private void handleResumeKeyPress(KeyEvent event) {
+        if (event.getCode().equals(KeyCode.ENTER))
+            handleResume();
+
+    }
+
     @FXML
     public void handleResume() {
         setIsPaused(false);
-        stack.requestFocus();
         start();
         squares.requestFocus();
     }
@@ -229,6 +241,16 @@ public class DungeonController implements Runnable, Controller {
             case ESCAPE:
                 handleResume();
                 break;
+            case LEFT:
+                // change quit button
+                quit_button.requestFocus();
+                break;
+
+            case RIGHT:
+                // change resume button
+                resume_button.requestFocus();
+                break;
+
             default:
                 break;
         }

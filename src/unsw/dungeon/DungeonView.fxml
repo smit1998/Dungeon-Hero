@@ -36,7 +36,7 @@
             </HBox>
             <HBox alignment="CENTER" spacing="30.0">
                <children>
-                  <Button mnemonicParsing="false" onAction="#handleQuit" prefWidth="80.0" text="Quit" />
+                  <Button fx:id="quit_button" mnemonicParsing="false" onAction="#handleQuit" prefWidth="80.0" text="Quit" />
                   <Button fx:id="resume_button" mnemonicParsing="false" onAction="#handleResume" prefWidth="80.0" text="Resume" />
                </children>
                <padding>
