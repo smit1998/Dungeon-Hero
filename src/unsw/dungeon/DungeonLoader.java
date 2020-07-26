@@ -22,6 +22,7 @@ import org.json.JSONTokener;
 public abstract class DungeonLoader {
 
     private JSONObject json;
+    private File file;
 
     private int enemiesSpawned;
     private int switchesSpawned;
@@ -35,6 +36,7 @@ public abstract class DungeonLoader {
      */
     public DungeonLoader(File file) throws FileNotFoundException {
         json = new JSONObject(new JSONTokener(new FileReader(file)));
+        this.file = file;
     }
 
     /**
@@ -44,7 +46,9 @@ public abstract class DungeonLoader {
      * @throws FileNotFoundException
      */
     public DungeonLoader(String filename) throws FileNotFoundException {
-        json = new JSONObject(new JSONTokener(new FileReader("dungeons/" + filename)));
+        String path = "dungeons/" + filename;
+        file = new File(path);
+        json = new JSONObject(new JSONTokener(new FileReader(path)));
     }
 
     /**
@@ -249,5 +253,9 @@ public abstract class DungeonLoader {
             goals.add(loadGoal(goalsJSON.getJSONObject(i)));
         }
         return goals;
+    }
+
+    public File getFile() {
+        return file;
     }
 }
