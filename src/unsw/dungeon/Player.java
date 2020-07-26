@@ -49,8 +49,8 @@ public class Player extends LifeEntity {
      *         is added to the inventory
      */
     public boolean pickupItem(ItemEntity e) {
-        inventory.addItem(e); 
-        return true; 
+        inventory.addItem(e);
+        return true;
     }
 
     /**
@@ -82,8 +82,9 @@ public class Player extends LifeEntity {
     }
 
     public Inventory getInventory() {
-        return inventory; 
+        return inventory;
     }
+
     /**
      * Interact with this entity
      * 
@@ -92,7 +93,7 @@ public class Player extends LifeEntity {
      */
     public boolean interact(Entity caller) {
         if (caller instanceof Enemy) {
-            return interact((Enemy) caller); 
+            return interact((Enemy) caller);
         }
         return false;
     }
@@ -103,10 +104,10 @@ public class Player extends LifeEntity {
             weapon.attack(enemy);
             return false;
         } else if (this.isMortal()) { // player is mortal, enemy kills player
-            enemy.attack(this); 
+            enemy.attack(this);
             return true;
         } else { // player is immortal, enemy cannot kill player
-            return false; 
+            return false;
         }
     }
 
@@ -212,4 +213,7 @@ public class Player extends LifeEntity {
         return TICKS_PER_MOVE; 
     }
 
+    public void removeItem(ItemEntity item) {
+        inventory.removeItem(item);
+    }
 }
