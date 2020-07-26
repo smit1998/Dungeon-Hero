@@ -14,14 +14,16 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-
+import javafx.application.Platform;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
+import javafx.event.Event;
 
 import java.io.File;
 import java.io.IOException;
@@ -42,7 +44,10 @@ public class DungeonController implements Runnable, Controller {
     private GridPane squares;
 
     @FXML
-    private HBox pause_menu;
+    public VBox pane;
+
+    @FXML
+    private VBox pause_menu;
 
     private List<ImageView> initialEntities;
 
@@ -76,7 +81,12 @@ public class DungeonController implements Runnable, Controller {
         for (ImageView entity : initialEntities)
             squares.getChildren().add(entity);
 
-        squares.requestFocus();
+        Platform.runLater(new Runnable() {
+            @Override
+            public void run() {
+                squares.requestFocus();
+            }
+        });
 
         // double windowHeight = squares.getHeight();
         // double windowWidth = squares.getWidth();
@@ -98,12 +108,7 @@ public class DungeonController implements Runnable, Controller {
             case ESCAPE:
                 System.out.println("ESCAPE");
                 if (running) {
-                    stopGameLoop();
-                    setIsPaused(true);
-                    // pause_menu.requestFocus();
-                } else {
-                    setIsPaused(false);
-                    start();
+                    handlePause();
                 }
                 break;
 
@@ -196,15 +201,17 @@ public class DungeonController implements Runnable, Controller {
     }
 
     @FXML
-    public void handleResume(ActionEvent event) {
+    public void handleResume() {
         setIsPaused(false);
         stack.requestFocus();
         start();
+        squares.requestFocus();
     }
 
-    public void handlePause(ActionEvent event) {
+    public void handlePause() {
         setIsPaused(true);
         stopGameLoop();
+        pause_menu.requestFocus();
     }
 
     private void stopGameLoop() {
@@ -220,11 +227,8 @@ public class DungeonController implements Runnable, Controller {
     public void handlePauseKeyPress(KeyEvent e) {
         switch (e.getCode()) {
             case ESCAPE:
-                System.out.println("Unpause game");
-                setIsPaused(false);
-                start();
+                handleResume();
                 break;
-
             default:
                 break;
         }

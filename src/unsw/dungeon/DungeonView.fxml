@@ -12,42 +12,39 @@
 <?import javafx.scene.text.Text ?>
 
 
-<StackPane fx:id="stack" onKeyPressed="#handleKeyPress" onKeyReleased="#handleKeyRelease" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<StackPane fx:id="stack" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <VBox fx:id="pane" alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity">
          <children>
-            <GridPane fx:id="squares">
+            <GridPane fx:id="squares" onKeyPressed="#handleKeyPress" onKeyReleased="#handleKeyRelease">
                <columnConstraints></columnConstraints>
                <rowConstraints></rowConstraints>
             </GridPane>
             <HBox fx:id="items" alignment="CENTER" prefHeight="100.0" />
          </children>
       </VBox>
-      <HBox fx:id="pause_menu" onKeyPressed="#handlePauseKeyPress" alignment="CENTER" disable="true" visible="false">
+      <VBox fx:id="pause_menu" onKeyPressed="#handlePauseKeyPress" alignment="CENTER" disable="true" visible="false">
          <children>
-            <VBox alignment="CENTER">
+            <HBox alignment="CENTER">
                <children>
-                  <HBox alignment="CENTER">
-                     <children>
-                        <Text disable="true" strokeType="OUTSIDE" strokeWidth="0.0" text="Paused" textAlignment="CENTER">
-                           <font>
-                              <Font size="24.0" />
-                           </font>
-                        </Text>
-                     </children>
-                  </HBox>
-                  <HBox alignment="CENTER" spacing="30.0">
-                     <children>
-                        <Button mnemonicParsing="false" onAction="#handleQuit" prefWidth="80.0" text="Quit" />
-                        <Button fx:id="resume_button" mnemonicParsing="false" onAction="#handleResume" prefWidth="80.0" text="Resume" />
-                     </children>
-                     <padding>
-                        <Insets top="20.0" />
-                     </padding>
-                  </HBox>
+                  <Text disable="true" strokeType="OUTSIDE" strokeWidth="0.0" text="Paused" textAlignment="CENTER">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </Text>
                </children>
-            </VBox>
+            </HBox>
+            <HBox alignment="CENTER" spacing="30.0">
+               <children>
+                  <Button mnemonicParsing="false" onAction="#handleQuit" prefWidth="80.0" text="Quit" />
+                  <Button fx:id="resume_button" mnemonicParsing="false" onAction="#handleResume" prefWidth="80.0" text="Resume" />
+               </children>
+               <padding>
+                  <Insets top="20.0" />
+               </padding>
+            </HBox>
+            <HBox alignment="CENTER" prefHeight="100.0" />
          </children>
-      </HBox>
+      </VBox>
    </children>
 </StackPane>
