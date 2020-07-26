@@ -6,14 +6,14 @@
 <?import javafx.scene.text.Text ?>
 
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<Pane onKeyPressed="#handleKeyPress" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <Button fx:id="play_button" onAction="#handlePlay" layoutX="243.0" layoutY="232.0" minWidth="-Infinity" mnemonicParsing="false" prefHeight="45.0" prefWidth="115.0" text="Play">
+      <Button fx:id="play_button" onAction="#handlePlay" onKeyPressed="#handlePlayKeyPress" layoutX="243.0" layoutY="232.0" minWidth="-Infinity" mnemonicParsing="false" prefHeight="45.0" prefWidth="115.0" text="Play">
          <font>
             <Font size="24.0" />
          </font>
       </Button>
-      <Button fx:id="quit_button" onAction="#handleQuit" layoutX="243.0" layoutY="295.0" minWidth="-Infinity" mnemonicParsing="false" prefHeight="45.0" prefWidth="115.0" text="Quit">
+      <Button fx:id="quit_button" onAction="#handleQuit" onKeyPressed="#handleQuitKeyPress" layoutX="243.0" layoutY="295.0" minWidth="-Infinity" mnemonicParsing="false" prefHeight="45.0" prefWidth="115.0" text="Quit">
          <font>
             <Font size="24.0" />
          </font>

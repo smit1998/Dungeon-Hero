@@ -15,6 +15,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 
 public class DungeonMenuController implements Controller {
@@ -37,6 +38,13 @@ public class DungeonMenuController implements Controller {
     public void initialize() {
         listview.setItems(observableList);
         listview.getSelectionModel().selectFirst();
+        Platform.runLater(new Runnable() {
+            @Override
+            public void run() {
+                listview.requestFocus();
+            }
+        });
+
     }
 
     @FXML
@@ -95,13 +103,7 @@ public class DungeonMenuController implements Controller {
 
     private void play(Event event) throws IOException {
         DungeonMenuItem selection = listview.getSelectionModel().getSelectedItem();
-        if (selection == null) {
-            System.out.println("No dungeon selected");
-            return;
-            // TODO Display message
-        }
         System.out.println("Loading map: " + selection + "...");
-
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         DungeonControllerLoader dungeonLoader = new DungeonControllerLoader(selection.getDungeonFile());
         DungeonController controller = dungeonLoader.loadController();
