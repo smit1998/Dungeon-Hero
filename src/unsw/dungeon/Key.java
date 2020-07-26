@@ -1,14 +1,11 @@
 package unsw.dungeon;
 
-import java.util.ArrayList;
-
 /**
  * A key entity that can be used to unlock a door
  */
-public class Key extends ItemEntity implements Subject{
+public class Key extends ItemEntity {
 
     private final static int MAX_PICKUP = 1;
-    private ArrayList<Observer> observers; 
     private int id;
 
     /**
@@ -63,23 +60,6 @@ public class Key extends ItemEntity implements Subject{
     public void tick(Dungeon dungeon) {
         // TODO Auto-generated method stub
 
-    }
-
-    @Override
-    public void attach(Observer o) {
-        observers.add(o); 
-    }
-
-    @Override
-    public void detach(Observer o) {
-        observers.remove(o); 
-    }
-
-    @Override
-    public void notifyObservers() {
-        for (Observer o : observers) {
-            o.update(this); 
-        }
     }
 
 }
