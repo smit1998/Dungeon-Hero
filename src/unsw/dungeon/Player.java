@@ -27,7 +27,6 @@ public class Player extends LifeEntity {
 
     private Inventory inventory;
 
-    // private Set<PlayerObserver> playerObservers = new TreeSet<>();
     private List<PlayerObserver> playerObservers = new ArrayList<>();
 
     /**
@@ -49,13 +48,9 @@ public class Player extends LifeEntity {
      *         to the player not being able to, null is returned otherwise, the item
      *         is added to the inventory
      */
-    public ItemEntity pickupItem(ItemEntity e) {
-        ItemEntity itemAdded = inventory.addItem(e);
-        if (itemAdded != null) {
-            e.setVisibility(false);
-            return itemAdded;
-        }
-        return null;
+    public boolean pickupItem(ItemEntity e) {
+        inventory.addItem(e); 
+        return true; 
     }
 
     /**
@@ -82,10 +77,13 @@ public class Player extends LifeEntity {
     /**
      * @return a Weapon with the highest priority in the players inventory
      */
-    private Weapon getWeapon() {
+    public Weapon getWeapon() {
         return inventory.getWeapon();
     }
 
+    public Inventory getInventory() {
+        return inventory; 
+    }
     /**
      * Interact with this entity
      * 
@@ -94,29 +92,26 @@ public class Player extends LifeEntity {
      */
     public boolean interact(Entity caller) {
         if (caller instanceof Enemy) {
-            Enemy enemy = (Enemy) caller;
-            Weapon weapon = inventory.getWeapon();
-            if (weapon != null) {
-                weapon.attack(enemy);
-                return false;
-            } else {
-                enemy.attack(this);
-                return true;
-            }
+            return interact((Enemy) caller); 
         }
         return false;
     }
 
-    /**
-     * @return whether the player has an invincibility potion
-     */
-    public boolean hasPotion() {
-        return getWeapon() instanceof InvincibilityPotion;
+    public boolean interact(Enemy enemy) {
+        Weapon weapon = inventory.getWeapon();
+        if (weapon != null) { // player has weapon, player kills enemy
+            weapon.attack(enemy);
+            return false;
+        } else if (this.isMortal()) { // player is mortal, enemy kills player
+            enemy.attack(this); 
+            return true;
+        } else { // player is immortal, enemy cannot kill player
+            return false; 
+        }
     }
 
     @Override
     public void tick(Dungeon dungeon) {
-        // TODO Auto-generated method stub
         inventory.tick(dungeon);
         ticksSinceUp++;
         ticksSinceDown++;
@@ -186,7 +181,6 @@ public class Player extends LifeEntity {
     public void notifyObservers() {
         for (PlayerObserver o : playerObservers) {
             o.update(getX(), getY());
-            o.updateFear(hasPotion());
         }
     }
 

@@ -63,6 +63,16 @@ public class Dungeon {
         return player;
     }
 
+    public ArrayList<Enemy> getEnemies() {
+        ArrayList<Enemy> enemies = new ArrayList<Enemy>() ; 
+        for (Entity e : entities) {
+            if (e instanceof Enemy) {
+                enemies.add((Enemy) e); 
+            }
+        }
+        return enemies; 
+    }
+
     /**
      * Set the player entity of the dungeon
      * 
@@ -70,6 +80,10 @@ public class Dungeon {
      */
     public void setPlayer(Player player) {
         this.player = player;
+    }
+
+    public Inventory getInventory() {
+        return player.getInventory();
     }
 
     /**
