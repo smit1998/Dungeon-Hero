@@ -13,7 +13,7 @@ public class SpeedUpEffect implements EffectBehaviour {
 
     @Override
     public void startEffect() {
-        subject.setSpeed(2);
+        subject.setSpeed(1);
     }
 
     @Override
