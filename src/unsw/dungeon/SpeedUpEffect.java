@@ -1,10 +1,11 @@
+
 package unsw.dungeon;
 
-public class SpeedEffect implements EffectBehaviour {
+public class SpeedUpEffect implements EffectBehaviour {
 
     LifeEntity subject; 
 
-    public SpeedEffect(Dungeon dungeon) {
+    public SpeedUpEffect(Dungeon dungeon) {
         subject = dungeon.getPlayer(); 
     }
 
