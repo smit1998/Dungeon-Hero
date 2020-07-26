@@ -36,6 +36,7 @@ public class Inventory {
     private void setWeapon(Weapon weapon) {
         if (this.weapon == null) {
             this.weapon = weapon;
+            weapon.attachInventory(this);
             weapon.setVisibility(false);
         }
     }
