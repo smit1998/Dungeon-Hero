@@ -175,4 +175,8 @@ public class Enemy extends LifeEntity implements Subject, PlayerObserver {
         this.feared = fear;
     }
 
+    public boolean isAlive() {
+        return super.getLifeStatus(); 
+    }
+
 }
