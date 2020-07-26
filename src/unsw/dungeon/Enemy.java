@@ -109,6 +109,16 @@ public class Enemy extends LifeEntity implements Subject, PlayerObserver {
         }
     }
 
+    /**
+     * Interaction with a boulder
+     * @param boulder that wants to run over the enemy
+     * If a boulder interacts with this enemy, the enemy dies, and boulder can locate to the current position
+     */
+    public boolean interact(Boulder boulder) {
+        this.kill(); 
+        return true; 
+    }
+
     @Override
     public void kill() {
         super.kill();
