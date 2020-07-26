@@ -52,6 +52,7 @@ public class Inventory {
         if (this.potion == null) {
             this.potion = potion;
             potion.setVisibility(false);
+            potion.startEffects();
         }
     }
 
