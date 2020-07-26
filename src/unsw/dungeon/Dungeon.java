@@ -3,6 +3,9 @@ package unsw.dungeon;
 import java.util.ArrayList;
 import java.util.List;
 
+import javafx.beans.property.BooleanProperty;
+import javafx.beans.property.SimpleBooleanProperty;
+
 /**
  * A dungeon in the interactive dungeon player.
  *
@@ -18,6 +21,7 @@ public class Dungeon {
     private List<Entity> entities;
     private Player player;
     private ComponentGoal goal;
+    private BooleanProperty isComplete = new SimpleBooleanProperty(false);
 
     /**
      * Constructs a dungeon of width and height
@@ -115,7 +119,17 @@ public class Dungeon {
      * @return whether the dungeon goal is completed
      */
     public boolean isComplete() {
-        return goal.isComplete();
+        return isCompleted().getValue();
+    }
+
+    /**
+     * Return whether the dungeon goal has been completed
+     * 
+     * @return whether the dungeon goal is completed
+     */
+    public BooleanProperty isCompleted() {
+        isComplete.setValue(goal.isComplete());
+        return isComplete;
     }
 
     /**
@@ -195,6 +209,9 @@ public class Dungeon {
             }
         }
         entities.removeAll(toRemove);
+        if (isComplete()) {
+            System.out.println("Dungeon is complete");
+        }
     }
 
     public void tick(long ticks) {
