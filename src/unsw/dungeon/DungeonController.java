@@ -5,13 +5,31 @@ import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
 
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.FXML;
+
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
+import javafx.scene.text.Text;
+import javafx.stage.Stage;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.application.Platform;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
+import javafx.event.ActionEvent;
+import javafx.event.Event;
 
 import java.io.File;
+import java.io.IOException;
 
 /**
  * A JavaFX controller for the dungeon.
@@ -19,28 +37,48 @@ import java.io.File;
  * @author Robert Clifton-Everest
  *
  */
-public class DungeonController implements Runnable {
+
+public class DungeonController implements Runnable, Controller {
+
+    @FXML
+    private StackPane stack;
 
     @FXML
     private GridPane squares;
+
+    @FXML
+    private VBox pane;
+
+    @FXML
+    private VBox pause_menu;
+
+    @FXML
+    private Button quit_button, resume_button;
 
     private List<ImageView> initialEntities;
 
     private Player player;
 
     private Dungeon dungeon;
+    private File file;
 
     private boolean running = false;
     private Thread thread;
 
-    public DungeonController(Dungeon dungeon, List<ImageView> initialEntities) {
+    public DungeonController(Dungeon dungeon, List<ImageView> initialEntities, File file) {
         this.dungeon = dungeon;
         this.player = dungeon.getPlayer();
         this.initialEntities = new ArrayList<>(initialEntities);
+        this.file = file;
+        trackCompletion(dungeon);
+        trackIsAlive(player);
     }
 
     @FXML
-    public void initialize() {
+    public void initialize() throws IOException {
+        resume_button.setOnKeyPressed(e -> handleResumeKeyPress(e));
+        quit_button.setOnKeyPressed(e -> handleQuitKeyPress(e));
+
         Image ground = new Image((new File("images/dirt_0_new.png")).toURI().toString());
 
         // Add the ground first so it is below all other entities
@@ -53,6 +91,13 @@ public class DungeonController implements Runnable {
         for (ImageView entity : initialEntities)
             squares.getChildren().add(entity);
 
+        Platform.runLater(new Runnable() {
+            @Override
+            public void run() {
+                squares.requestFocus();
+            }
+        });
+
         start();
     }
 
@@ -62,6 +107,15 @@ public class DungeonController implements Runnable {
     public void handleKeyPress(KeyEvent e) {
         String code = e.getCode().toString();
         input.add(code);
+
+        switch (e.getCode()) {
+            case ESCAPE:
+                handlePause();
+                break;
+
+            default:
+                break;
+        }
     }
 
     @FXML
@@ -90,6 +144,15 @@ public class DungeonController implements Runnable {
         stop();
     }
 
+    public Scene getScene() throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("DungeonView.fxml"));
+        loader.setController(this);
+        Parent root = loader.load();
+        Scene scene = new Scene(root);
+        root.requestFocus();
+        return scene;
+    }
+
     public synchronized void start() {
         if (!running) {
             running = true;
@@ -106,6 +169,129 @@ public class DungeonController implements Runnable {
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
+        }
+    }
+
+    public void trackCompletion(Dungeon dungeon) {
+        dungeon.isCompleted().addListener(new ChangeListener<Boolean>() {
+            @Override
+            public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
+                stopGameLoop();
+                System.out.println("Dungeon complete");
+                Platform.runLater(new Runnable() {
+                    @Override
+                    public void run() {
+                        EndScreenController controller = new EndScreenController(true, file);
+                        try {
+                            stack.getChildren().add((Node) controller.getParent());
+                        } catch (Exception e) {
+                            throw new RuntimeException(e);
+                        }
+                    }
+                });
+            }
+        });
+    }
+
+    public void trackIsAlive(Player player) {
+        player.isAlive().addListener(new ChangeListener<Boolean>() {
+            @Override
+            public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
+                stopGameLoop();
+                System.out.println("Player has died");
+                Platform.runLater(new Runnable() {
+                    @Override
+                    public void run() {
+                        EndScreenController controller = new EndScreenController(false, file);
+                        try {
+                            stack.getChildren().add((Node) controller.getParent());
+                        } catch (Exception e) {
+                            throw new RuntimeException(e);
+                        }
+                    }
+                });
+            }
+        });
+    }
+
+    @FXML
+    public void handleQuit() throws IOException {
+        System.out.println("Going back to main menu");
+        Stage stage = (Stage) squares.getScene().getWindow();
+        MainMenuController controller = new MainMenuController();
+        stage.setScene(controller.getScene());
+        stage.show();
+    }
+
+    @FXML
+    public void handleResume() {
+        setIsPaused(false);
+        start();
+        squares.requestFocus();
+    }
+
+    public void handlePause() {
+        setIsPaused(true);
+        stopGameLoop();
+        resume_button.requestFocus();
+    }
+
+    private void stopGameLoop() {
+        running = false;
+    }
+
+    private void setIsPaused(boolean isPaused) {
+        pause_menu.setVisible(isPaused);
+        pause_menu.setDisable(!isPaused);
+    }
+
+    @FXML
+    public void handlePauseKeyPress(KeyEvent e) {
+        switch (e.getCode()) {
+            case ESCAPE:
+                handleResume();
+                break;
+            case LEFT:
+                quit_button.requestFocus();
+                break;
+
+            case RIGHT:
+                resume_button.requestFocus();
+                break;
+
+            default:
+                break;
+        }
+    }
+
+    private void handleQuitKeyPress(KeyEvent event) {
+        try {
+            switch (event.getCode()) {
+                case ENTER:
+                    handleQuit();
+                    break;
+                case RIGHT:
+                case D:
+                    resume_button.requestFocus();
+                    break;
+                default:
+                    break;
+            }
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    private void handleResumeKeyPress(KeyEvent event) {
+        switch (event.getCode()) {
+            case ENTER:
+                handleResume();
+                break;
+            case LEFT:
+            case A:
+                quit_button.requestFocus();
+            default:
+                break;
         }
     }
 

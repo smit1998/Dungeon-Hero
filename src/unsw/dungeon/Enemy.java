@@ -14,7 +14,7 @@ public class Enemy extends LifeEntity implements Subject, PlayerObserver {
     private final int NO_POSITION = -1;
     private int playerX = NO_POSITION;
     private int playerY = NO_POSITION;
-    private boolean playerPotion = false;
+    private boolean feared = false;
 
     /**
      * Creates an enemy entity in the square(x, y)
@@ -30,7 +30,7 @@ public class Enemy extends LifeEntity implements Subject, PlayerObserver {
      * Enemy entity moves towards the player entity
      */
     private void gotoPlayer() {
-        int fearModifier = playerPotion ? -1 : 1;
+        int fearModifier = feared ? -1 : 1;
 
         int diffX = (playerX - getX()) * fearModifier;
         int diffY = (playerY - getY()) * fearModifier;
@@ -156,7 +156,7 @@ public class Enemy extends LifeEntity implements Subject, PlayerObserver {
     }
 
     public void updateFear(boolean fear) {
-        playerPotion = fear;
+        this.feared = fear;
     }
 
 }

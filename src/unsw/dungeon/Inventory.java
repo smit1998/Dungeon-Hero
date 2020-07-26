@@ -1,113 +1,78 @@
 package unsw.dungeon;
 
-import java.util.ArrayList;
-import java.util.List;
-
 /**
  * Inventory class - stores items for the player
  */
-public class Inventory implements Observer {
+public class Inventory {
 
-    private ArrayList<ItemEntity> items;
+    private Weapon weapon;
+    private Key key;
+    private Potion potion;
 
-    /**
-     * creates a new inventory object
-     */
-    public Inventory() {
-        items = new ArrayList<ItemEntity>();
-    }
-
-    /**
-     * Adds an item to the inventory
-     * 
-     * @param item to be added
-     * @return the Item added if it can be added, otherwise null
-     */
-    public ItemEntity addItem(ItemEntity item) {
-        if (countItem(item) < item.getMaxPickup()) {
-            items.add(item);
-            item.attach(this);
-            return item;
+    public void addItem(ItemEntity item) {
+        if (item instanceof Weapon) {
+            setWeapon((Weapon) item);
         }
-        return null;
+        if (item instanceof Key) {
+            setKey((Key) item);
+        }
+        if (item instanceof Potion) {
+            setPotion((Potion) item);
+        }
     }
 
-    /**
-     * Removes an item from the inventory
-     * 
-     * @param item to be removed no item is removed if item does not exist in
-     *             inventory
-     */
     public void removeItem(ItemEntity item) {
-        items.remove(item);
-    }
-
-    /**
-     * Counts the number of items in the inventory, by item class
-     * 
-     * @param item to be counted
-     * @return an integer >= 0, representing the number of items of the same class
-     *         already inside the inventory
-     */
-    private int countItem(ItemEntity item) {
-        int count = 0;
-        for (ItemEntity inventoryItem : items) {
-            if (item.getClass() == inventoryItem.getClass()) {
-                count += 1;
-            }
+        if (item instanceof Weapon) {
+            this.weapon = null;
         }
-        return count;
+        if (item instanceof Key) {
+            this.key = null;
+        }
+        if (item instanceof Potion) {
+            this.potion = null;
+        }
     }
 
-    /**
-     * Attempt to retrieve a weapon from the inventory
-     * 
-     * @return a weapon object if a weapon exists in the inventory, with the highest
-     *         priority if no weapon exists, then null is returned.
-     */
+    private void setWeapon(Weapon weapon) {
+        if (this.weapon == null) {
+            this.weapon = weapon;
+            weapon.attachInventory(this);
+            weapon.setVisibility(false);
+        }
+    }
+
+    private void setKey(Key key) {
+        if (this.key == null) {
+            this.key = key;
+            key.setVisibility(false);
+        }
+    }
+
+    private void setPotion(Potion potion) {
+        if (this.potion == null) {
+            this.potion = potion;
+            potion.setVisibility(false);
+        }
+    }
+
     public Weapon getWeapon() {
-        Weapon chosenWeapon = null;
-        for (ItemEntity inventoryItem : items) {
-            if (inventoryItem instanceof Weapon) {
-                Weapon inventoryWeapon = (Weapon) inventoryItem;
-                if (chosenWeapon == null || chosenWeapon.getPriority() < inventoryWeapon.getPriority()) {
-                    chosenWeapon = (Weapon) inventoryItem;
-                }
-            }
-        }
-        return chosenWeapon;
+        return weapon;
     }
 
-    private List<ItemEntity> toRemove = new ArrayList<>();
-
-    /**
-     * Removes an object given from the inventory, when notifyObserver is called by
-     * the subjects
-     * 
-     * @param obj to be removed
-     */
-    public void update(Subject obj) {
-        toRemove.add((ItemEntity) obj);
-    }
-
-    /**
-     * Attempt to retrieve a key from inventory
-     * 
-     * @return null if no key in inventory, otherwise the key object
-     */
     public Key getKey() {
-        for (ItemEntity item : items) {
-            if (item instanceof Key) {
-                return (Key) item;
-            }
-        }
-        return null;
+        return key;
     }
 
     public void tick(Dungeon dungeon) {
-        for (ItemEntity i : items) {
-            i.tick(dungeon);
+        tickPotion(dungeon);
+    }
+
+    private void tickPotion(Dungeon dungeon) {
+        if (potion != null) {
+            potion.tick(dungeon);
+            if (!potion.isActive()) {
+                potion = null;
+            }
         }
-        items.removeAll(toRemove);
     }
 }

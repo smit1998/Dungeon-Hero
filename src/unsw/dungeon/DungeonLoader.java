@@ -1,5 +1,6 @@
 package unsw.dungeon;
 
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.util.ArrayList;
@@ -21,6 +22,7 @@ import org.json.JSONTokener;
 public abstract class DungeonLoader {
 
     private JSONObject json;
+    private File file;
 
     private int enemiesSpawned;
     private int switchesSpawned;
@@ -32,8 +34,21 @@ public abstract class DungeonLoader {
      * @param filename the filename of a file located in the 'dungeons' directory
      * @throws FileNotFoundException
      */
+    public DungeonLoader(File file) throws FileNotFoundException {
+        json = new JSONObject(new JSONTokener(new FileReader(file)));
+        this.file = file;
+    }
+
+    /**
+     * Constructor for a DungeonLoader
+     * 
+     * @param filename the filename of a file located in the 'dungeons' directory
+     * @throws FileNotFoundException
+     */
     public DungeonLoader(String filename) throws FileNotFoundException {
-        json = new JSONObject(new JSONTokener(new FileReader("dungeons/" + filename)));
+        String path = "dungeons/" + filename;
+        file = new File(path);
+        json = new JSONObject(new JSONTokener(new FileReader(path)));
     }
 
     /**
@@ -153,13 +168,17 @@ public abstract class DungeonLoader {
                 break;
             }
             case "sword": {
-                Sword sword = new Sword(x, y, dungeon);
+                Weapon sword = new Weapon(x, y, dungeon, new InstantKillAttack(), 5);
                 onLoad(sword);
                 entity = sword;
                 break;
             }
             case "invincibility": {
-                InvincibilityPotion potion = new InvincibilityPotion(x, y, dungeon);
+                ArrayList<EffectBehaviour> effects = new ArrayList<EffectBehaviour>(); 
+                effects.add(new InvincibilityEffect(dungeon)); 
+                effects.add(new FearEffect(dungeon)); 
+                effects.add(new MeleeKillEffect(dungeon)); 
+                Potion potion = new Potion(x, y, dungeon, effects);
                 onLoad(potion);
                 entity = potion;
                 break;
@@ -188,9 +207,9 @@ public abstract class DungeonLoader {
 
     public abstract void onLoad(Enemy enemy);
 
-    public abstract void onLoad(Sword sword);
+    public abstract void onLoad(Weapon sword);
 
-    public abstract void onLoad(InvincibilityPotion invincibilityPotion);
+    public abstract void onLoad(Potion invincibilityPotion);
 
     /**
      * Load a goal
@@ -238,5 +257,9 @@ public abstract class DungeonLoader {
             goals.add(loadGoal(goalsJSON.getJSONObject(i)));
         }
         return goals;
+    }
+
+    public File getFile() {
+        return file;
     }
 }
