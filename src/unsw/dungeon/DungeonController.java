@@ -200,17 +200,33 @@ public class DungeonController implements Runnable, Controller {
 
     private void handleQuitKeyPress(KeyEvent event) {
         try {
-            if (event.getCode().equals(KeyCode.ENTER))
-                handleQuit();
+            switch (event.getCode()) {
+                case ENTER:
+                    handleQuit();
+                    break;
+                case RIGHT:
+                case D:
+                    resume_button.requestFocus();
+                    break;
+                default:
+                    break;
+            }
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
     }
 
     private void handleResumeKeyPress(KeyEvent event) {
-        if (event.getCode().equals(KeyCode.ENTER))
-            handleResume();
-
+        switch (event.getCode()) {
+            case ENTER:
+                handleResume();
+                break;
+            case LEFT:
+            case A:
+                quit_button.requestFocus();
+            default:
+                break;
+        }
     }
 
     @FXML
@@ -223,7 +239,7 @@ public class DungeonController implements Runnable, Controller {
     public void handlePause() {
         setIsPaused(true);
         stopGameLoop();
-        pause_menu.requestFocus();
+        resume_button.requestFocus();
     }
 
     private void stopGameLoop() {
