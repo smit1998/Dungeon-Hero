@@ -24,7 +24,7 @@ public class DungeonMenuController implements Controller {
     private ListView<DungeonMenuItem> listview;
 
     @FXML
-    private Button play_btn;
+    private Button play_button, back_button;
 
     private DungeonMenu menu;
     private ObservableList<DungeonMenuItem> observableList;
@@ -48,12 +48,18 @@ public class DungeonMenuController implements Controller {
     }
 
     @FXML
-    public void handlePlay(ActionEvent event) throws IOException {
-        play(event);
+    public void handlePlay(Event event) throws IOException {
+        DungeonMenuItem selection = listview.getSelectionModel().getSelectedItem();
+        System.out.println("Loading map: " + selection + "...");
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        DungeonControllerLoader dungeonLoader = new DungeonControllerLoader(selection.getDungeonFile());
+        DungeonController controller = dungeonLoader.loadController();
+        stage.setScene(controller.getScene());
+        stage.show();
     }
 
     @FXML
-    private void handleBack(ActionEvent event) throws IOException {
+    private void handleBack(Event event) throws IOException {
         System.out.println("Going back to main menu");
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         MainMenuController controller = new MainMenuController();
@@ -64,8 +70,30 @@ public class DungeonMenuController implements Controller {
     @FXML
     public void handleListKeyPress(KeyEvent event) throws IOException {
         switch (event.getCode()) {
+            case W:
+                selectPrevious();
+                break;
+
+            case S:
+                selectNext();
+                break;
+
+            case LEFT:
+            case A:
+                back_button.requestFocus();
+                break;
+
+            case RIGHT:
+            case D:
+                play_button.requestFocus();
+                break;
+
             case ENTER:
-                play(event);
+                handlePlay(event);
+                break;
+
+            case ESCAPE:
+                handleBack(event);
                 break;
 
             default:
@@ -75,40 +103,65 @@ public class DungeonMenuController implements Controller {
 
     @FXML
     public void handlePlayKeyPress(KeyEvent event) throws IOException {
-        int selectionIndex = listview.getSelectionModel().getSelectedIndex();
         switch (event.getCode()) {
+            case W:
             case UP:
-                if (selectionIndex > 0) {
-                    listview.getSelectionModel().selectPrevious();
-                }
+                listview.requestFocus();
+                selectPrevious();
                 break;
+
+            case S:
             case DOWN:
-                if (selectionIndex < menu.size() - 1) {
-                    listview.getSelectionModel().selectNext();
-                }
+                listview.requestFocus();
+                selectNext();
                 break;
+
+            case LEFT:
+            case A:
+                back_button.requestFocus();
+                break;
+
             case ENTER:
-                play(event);
+                handlePlay(event);
                 break;
+
+            case ESCAPE:
+                handleBack(event);
+                break;
+
             default:
                 break;
         }
     }
 
     @FXML
-    public void handleKeyPress(KeyEvent event) {
-        listview.requestFocus();
+    public void handleBackKeyPress(KeyEvent event) throws IOException {
+        switch (event.getCode()) {
+            case W:
+            case UP:
+                listview.requestFocus();
+                selectPrevious();
+                break;
 
-    }
+            case S:
+            case DOWN:
+                listview.requestFocus();
+                selectNext();
+                break;
 
-    private void play(Event event) throws IOException {
-        DungeonMenuItem selection = listview.getSelectionModel().getSelectedItem();
-        System.out.println("Loading map: " + selection + "...");
-        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        DungeonControllerLoader dungeonLoader = new DungeonControllerLoader(selection.getDungeonFile());
-        DungeonController controller = dungeonLoader.loadController();
-        stage.setScene(controller.getScene());
-        stage.show();
+            case RIGHT:
+            case D:
+                play_button.requestFocus();
+                break;
+
+            case ESCAPE:
+            case ENTER:
+                handleBack(event);
+                break;
+
+            default:
+                break;
+        }
     }
 
     public Scene getScene() throws IOException {
@@ -118,6 +171,20 @@ public class DungeonMenuController implements Controller {
         Scene scene = new Scene(root);
         root.requestFocus();
         return scene;
+    }
+
+    private void selectPrevious() {
+        int selectionIndex = listview.getSelectionModel().getSelectedIndex();
+        if (selectionIndex > 0) {
+            listview.getSelectionModel().selectPrevious();
+        }
+    }
+
+    private void selectNext() {
+        int selectionIndex = listview.getSelectionModel().getSelectedIndex();
+        if (selectionIndex < menu.size() - 1) {
+            listview.getSelectionModel().selectNext();
+        }
     }
 
 }
