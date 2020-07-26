@@ -179,7 +179,15 @@ public abstract class DungeonLoader {
                 effects.add(new FearEffect(dungeon)); 
                 effects.add(new MeleeKillEffect(dungeon)); 
                 Potion potion = new Potion(x, y, dungeon, effects);
-                onLoad(potion);
+                onLoad(potion, "invincibility");
+                entity = potion;
+                break;
+            }
+            case "speed": {
+                ArrayList<EffectBehaviour> effects = new ArrayList<EffectBehaviour>(); 
+                effects.add(new SpeedUpEffect(dungeon));
+                Potion potion = new Potion(x, y, dungeon, effects);
+                onLoad(potion, "speedBoots");
                 entity = potion;
                 break;
             }
@@ -209,7 +217,7 @@ public abstract class DungeonLoader {
 
     public abstract void onLoad(Weapon sword);
 
-    public abstract void onLoad(Potion invincibilityPotion);
+    public abstract void onLoad(Potion potion, String type);
 
     /**
      * Load a goal

@@ -18,7 +18,7 @@ public class Player extends LifeEntity {
 
     private BooleanProperty isAlive = new SimpleBooleanProperty(true);
 
-    private final static int TICKS_PER_MOVE = 5;
+    private static int TICKS_PER_MOVE = 5;
 
     private int ticksSinceUp = 0;
     private int ticksSinceDown = 0;
@@ -203,6 +203,14 @@ public class Player extends LifeEntity {
 
     public BooleanProperty isAlive() {
         return isAlive;
+    }
+
+    public void setSpeed(int ticksPerMove) {
+        TICKS_PER_MOVE = ticksPerMove; 
+    }
+
+    public int getSpeed() {
+        return TICKS_PER_MOVE; 
     }
 
     public void removeItem(ItemEntity item) {
