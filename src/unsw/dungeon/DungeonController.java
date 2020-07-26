@@ -12,12 +12,16 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
+import javafx.stage.Stage;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
+import javafx.event.ActionEvent;
 
 import java.io.File;
 import java.io.IOException;
@@ -31,11 +35,14 @@ import java.io.IOException;
 
 public class DungeonController implements Runnable, Controller {
 
-    // @FXML
-    // private StackPane pane;
+    @FXML
+    private StackPane stack;
 
     @FXML
     private GridPane squares;
+
+    @FXML
+    private HBox pause_menu;
 
     private List<ImageView> initialEntities;
 
@@ -92,6 +99,9 @@ public class DungeonController implements Runnable, Controller {
                 System.out.println("ESCAPE");
                 // stop();
                 running = false;
+                pause_menu.setDisable(false);
+                pause_menu.setVisible(true);
+
                 break;
             case ENTER:
                 System.out.println("ENTER");
@@ -174,5 +184,22 @@ public class DungeonController implements Runnable, Controller {
                 System.out.println("Player has died");
             }
         });
+    }
+
+    @FXML
+    public void handleQuit(ActionEvent event) throws IOException {
+        System.out.println("Going back to main menu");
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        MainMenuController controller = new MainMenuController();
+        stage.setScene(controller.getScene());
+        stage.show();
+    }
+
+    @FXML
+    public void handleResume(ActionEvent event) {
+        pause_menu.setDisable(true);
+        pause_menu.setVisible(false);
+        stack.requestFocus();
+        start();
     }
 }
