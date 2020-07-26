@@ -189,8 +189,17 @@ public class DungeonController implements Runnable, Controller {
             public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
                 stopGameLoop();
                 System.out.println("Dungeon complete");
-                end_screen_text.setText("Victory!");
-                showEndScreen(true);
+                Platform.runLater(new Runnable() {
+                    @Override
+                    public void run() {
+                        EndScreenController controller = new EndScreenController(true, file);
+                        try {
+                            stack.getChildren().add((Node) controller.getParent());
+                        } catch (Exception e) {
+                            throw new RuntimeException(e);
+                        }
+                    }
+                });
             }
         });
     }
@@ -201,8 +210,17 @@ public class DungeonController implements Runnable, Controller {
             public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
                 stopGameLoop();
                 System.out.println("Player has died");
-                end_screen_text.setText("Game Over!");
-                showEndScreen(true);
+                Platform.runLater(new Runnable() {
+                    @Override
+                    public void run() {
+                        EndScreenController controller = new EndScreenController(false, file);
+                        try {
+                            stack.getChildren().add((Node) controller.getParent());
+                        } catch (Exception e) {
+                            throw new RuntimeException(e);
+                        }
+                    }
+                });
             }
         });
     }

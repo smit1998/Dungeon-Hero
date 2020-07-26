@@ -46,28 +46,5 @@
             <HBox alignment="CENTER" prefHeight="100.0" />
          </children>
       </VBox>
-      <VBox fx:id="end_screen" onKeyPressed="#handleEndScreenKeyPress" alignment="CENTER" disable="true" visible="false">
-         <children>
-            <HBox alignment="CENTER">
-               <children>
-                  <Text fx:id="end_screen_text" disable="true" strokeType="OUTSIDE" strokeWidth="0.0" text="Victory" textAlignment="CENTER">
-                     <font>
-                        <Font size="24.0" />
-                     </font>
-                  </Text>
-               </children>
-            </HBox>
-            <HBox alignment="CENTER" spacing="30.0">
-               <children>
-                  <Button fx:id="quit_button2" mnemonicParsing="false" onAction="#handleQuit" prefWidth="80.0" text="Quit" />
-                  <Button fx:id="replay_button" mnemonicParsing="false" onAction="#handleReplay" prefWidth="80.0" text="Replay" />
-               </children>
-               <padding>
-                  <Insets top="20.0" />
-               </padding>
-            </HBox>
-            <HBox alignment="CENTER" prefHeight="100.0" />
-         </children>
-      </VBox>
    </children>
 </StackPane>
