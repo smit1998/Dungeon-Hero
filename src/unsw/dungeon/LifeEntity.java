@@ -6,6 +6,7 @@ package unsw.dungeon;
 public abstract class LifeEntity extends Entity {
 
     private boolean isAlive;
+    private boolean isMortal; 
 
     /**
      * Constructs a new life entity at (x,y) in the dungeon
@@ -17,6 +18,15 @@ public abstract class LifeEntity extends Entity {
     public LifeEntity(int x, int y, Dungeon dungeon) {
         super(x, y, dungeon);
         this.isAlive = true;
+        this.isMortal = true; 
+    }
+
+    public boolean isMortal() {
+        return isMortal; 
+    }
+
+    public void setMortality(boolean isMortal) {
+        this.isMortal = isMortal; 
     }
 
     /**
