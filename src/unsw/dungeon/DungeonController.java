@@ -223,37 +223,6 @@ public class DungeonController implements Runnable, Controller {
         stage.show();
     }
 
-    private void handleQuitKeyPress(KeyEvent event) {
-        try {
-            switch (event.getCode()) {
-                case ENTER:
-                    handleQuit();
-                    break;
-                case RIGHT:
-                case D:
-                    resume_button.requestFocus();
-                    break;
-                default:
-                    break;
-            }
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
-    }
-
-    private void handleResumeKeyPress(KeyEvent event) {
-        switch (event.getCode()) {
-            case ENTER:
-                handleResume();
-                break;
-            case LEFT:
-            case A:
-                quit_button.requestFocus();
-            default:
-                break;
-        }
-    }
-
     @FXML
     public void handleResume() {
         setIsPaused(false);
@@ -290,6 +259,37 @@ public class DungeonController implements Runnable, Controller {
                 resume_button.requestFocus();
                 break;
 
+            default:
+                break;
+        }
+    }
+
+    private void handleQuitKeyPress(KeyEvent event) {
+        try {
+            switch (event.getCode()) {
+                case ENTER:
+                    handleQuit();
+                    break;
+                case RIGHT:
+                case D:
+                    resume_button.requestFocus();
+                    break;
+                default:
+                    break;
+            }
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    private void handleResumeKeyPress(KeyEvent event) {
+        switch (event.getCode()) {
+            case ENTER:
+                handleResume();
+                break;
+            case LEFT:
+            case A:
+                quit_button.requestFocus();
             default:
                 break;
         }
