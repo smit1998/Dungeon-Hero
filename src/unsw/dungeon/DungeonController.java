@@ -55,15 +55,6 @@ public class DungeonController implements Runnable, Controller {
     @FXML
     private Button quit_button, resume_button;
 
-    @FXML
-    private VBox end_screen;
-
-    @FXML
-    private Button quit_button2, replay_button;
-
-    @FXML
-    private Text end_screen_text;
-
     private List<ImageView> initialEntities;
 
     private Player player;
@@ -87,8 +78,6 @@ public class DungeonController implements Runnable, Controller {
     public void initialize() throws IOException {
         resume_button.setOnKeyPressed(e -> handleResumeKeyPress(e));
         quit_button.setOnKeyPressed(e -> handleQuitKeyPress(e));
-
-        quit_button2.setOnKeyPressed(e -> handleQuitKeyPress2(e));
 
         Image ground = new Image((new File("images/dirt_0_new.png")).toURI().toString());
 
@@ -287,11 +276,6 @@ public class DungeonController implements Runnable, Controller {
         pause_menu.setDisable(!isPaused);
     }
 
-    private void showEndScreen(boolean isShown) {
-        end_screen.setVisible(isShown);
-        end_screen.setDisable(!isShown);
-    }
-
     @FXML
     public void handlePauseKeyPress(KeyEvent e) {
         switch (e.getCode()) {
@@ -311,57 +295,4 @@ public class DungeonController implements Runnable, Controller {
         }
     }
 
-    @FXML
-    public void handleEndScreenKeyPress(KeyEvent e) {
-        switch (e.getCode()) {
-            case ESCAPE:
-                handleResume();
-                break;
-            case LEFT:
-                quit_button2.requestFocus();
-                break;
-
-            case RIGHT:
-                replay_button.requestFocus();
-                break;
-
-            default:
-                break;
-        }
-    }
-
-    @FXML
-    public void handleReplay(Event event) throws IOException {
-        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        DungeonControllerLoader dungeonLoader = new DungeonControllerLoader(file);
-        DungeonController controller = dungeonLoader.loadController();
-        stage.setScene(controller.getScene());
-        stage.show();
-    }
-
-    private void handleQuitKeyPress2(KeyEvent event) {
-        try {
-            switch (event.getCode()) {
-                case ENTER:
-                    handleQuit();
-                    break;
-                case RIGHT:
-                case D:
-                    replay_button.requestFocus();
-                    break;
-                default:
-                    break;
-            }
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
-    }
-
-    private void focusReplay() {
-        replay_button.requestFocus();
-    }
-
-    private void focusQuit() {
-        quit_button2.requestFocus();
-    }
 }
