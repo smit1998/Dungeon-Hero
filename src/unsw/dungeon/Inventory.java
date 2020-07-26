@@ -5,62 +5,73 @@ package unsw.dungeon;
  */
 public class Inventory {
 
-    private Weapon weapon; 
-    private Key key; 
+    private Weapon weapon;
+    private Key key;
     private Potion potion;
 
     public void addItem(ItemEntity item) {
         if (item instanceof Weapon) {
-            setWeapon((Weapon) item); 
-        } 
+            setWeapon((Weapon) item);
+        }
         if (item instanceof Key) {
-            setKey((Key) item); 
+            setKey((Key) item);
         }
         if (item instanceof Potion) {
-            setPotion((Potion) item); 
+            setPotion((Potion) item);
         }
     }
 
     public void removeItem(ItemEntity item) {
         if (item instanceof Weapon) {
             this.weapon = null;
-        } 
+        }
         if (item instanceof Key) {
-            this.key = null; 
+            this.key = null;
         }
         if (item instanceof Potion) {
-            this.potion = null; 
+            this.potion = null;
         }
     }
 
-    private void setWeapon (Weapon weapon) {
+    private void setWeapon(Weapon weapon) {
         if (this.weapon == null) {
-            this.weapon = weapon; 
+            this.weapon = weapon;
             weapon.setVisibility(false);
-        } 
+        }
     }
 
-    private void setKey (Key key) {
+    private void setKey(Key key) {
         if (this.key == null) {
-            this.key = key; 
+            this.key = key;
             key.setVisibility(false);
         }
     }
 
-    private void setPotion (Potion potion) {
+    private void setPotion(Potion potion) {
         if (this.potion == null) {
-            this.potion = potion; 
+            this.potion = potion;
+            potion.setVisibility(false);
         }
     }
 
     public Weapon getWeapon() {
-        return weapon; 
+        return weapon;
     }
 
     public Key getKey() {
-        return key; 
+        return key;
     }
 
     public void tick(Dungeon dungeon) {
+        tickPotion(dungeon);
+    }
+
+    private void tickPotion(Dungeon dungeon) {
+        if (potion != null) {
+            potion.tick(dungeon);
+            if (!potion.isActive()) {
+                potion = null;
+            }
+        }
     }
 }
