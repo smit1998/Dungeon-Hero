@@ -2,6 +2,7 @@ package unsw.dungeon;
 
 import java.util.List;
 import java.util.Set;
+import java.util.function.BooleanSupplier;
 
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
@@ -216,4 +217,8 @@ public class Player extends LifeEntity {
     public void removeItem(ItemEntity item) {
         inventory.removeItem(item);
     }
+
+	public BooleanSupplier hasPotion() {
+		return null;
+	}
 }

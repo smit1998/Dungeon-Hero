@@ -14,7 +14,8 @@
     { "x": 7, "y": 5, "type": "switch" },
     { "x": 8, "y": 5, "type": "portal", "id": 1 },
     { "x": 2, "y": 3, "type": "sword" },
-    { "x": 1, "y": 3, "type": "invincibility" }
+    { "x": 1, "y": 3, "type": "invincibility" },
+    { "x": 10, "y": 3, "type": "dagger" }
   ],
   "goal-condition": { "goal": "exit" }
 }
