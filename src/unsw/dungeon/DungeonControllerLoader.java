@@ -38,6 +38,7 @@ public class DungeonControllerLoader extends DungeonLoader {
     private Image enemyImage = new Image((new File("images/deep_elf_master_archer.png")).toURI().toString());
     private Image swordImage = new Image((new File("images/greatsword_1_new.png")).toURI().toString());
     private Image invincibilityImage = new Image((new File("images/brilliant_blue_new.png")).toURI().toString());
+    private Image speedBootsImage = new Image((new File("images/speedBoots.png")).toURI().toString());
 
     public DungeonControllerLoader(String filename) throws FileNotFoundException {
         super(filename);
@@ -115,8 +116,14 @@ public class DungeonControllerLoader extends DungeonLoader {
     }
 
     @Override
-    public void onLoad(Potion potion) {
-        ImageView view = new ImageView(invincibilityImage);
+    public void onLoad(Potion potion, String type) {
+        ImageView view = null; 
+        if (type.equals("invincibility")) {
+            view = new ImageView(invincibilityImage);
+        } 
+        if (type.equals("speedBoots")) {
+            view = new ImageView(speedBootsImage);
+        }
         addEntity(potion, view);
     }
 
