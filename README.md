@@ -613,12 +613,24 @@ Marks will be deducted for poor git and GitLab usage. For example, meaningless c
 **Duy**
 * updated UML to reflect imagined refactored potion and sword classes
 
+##### 25/07/2020
+
+**Smit**
+* worked on Refactoring the interact method as sudguested by tutor.
+
 ##### 26/07/2020
 
 **Duy**
 * refactored the weapon, potion and inventory
 * added changes to UML
 
+**Smit**
+* Started working on the Knife weapon(for the Extra makrs part).
 ### Week-09
 
+##### 27/07/2020
+**Smit**
+* Added the css for dungeon main screen.
+* Added css for DungeonMenu screen.
+* Added css for EndScreen.
 Fill in here.
