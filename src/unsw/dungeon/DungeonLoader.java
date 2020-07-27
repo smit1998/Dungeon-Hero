@@ -169,7 +169,7 @@ public abstract class DungeonLoader {
             }
             case "sword": {
                 Weapon sword = new Weapon(x, y, dungeon, new InstantKillAttack(), 5);
-                onLoad(sword);
+                onLoad(sword, "sword");
                 entity = sword;
                 break;
             }
@@ -189,6 +189,13 @@ public abstract class DungeonLoader {
                 Potion potion = new Potion(x, y, dungeon, effects);
                 onLoad(potion, "speedBoots");
                 entity = potion;
+                break;
+            }
+
+            case "dagger": {
+                Weapon dagger = new Weapon(x, y, dungeon, new InstantKillAttack(), 1);
+                onLoad(dagger, "dagger");
+                entity = dagger;
                 break;
             }
         }
@@ -215,7 +222,7 @@ public abstract class DungeonLoader {
 
     public abstract void onLoad(Enemy enemy);
 
-    public abstract void onLoad(Weapon sword);
+    public abstract void onLoad(Weapon sword, String type);
 
     public abstract void onLoad(Potion potion, String type);
 

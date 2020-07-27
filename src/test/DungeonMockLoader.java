@@ -50,10 +50,10 @@ public class DungeonMockLoader extends DungeonLoader {
     }
 
     @Override
-    public void onLoad(Sword sword) {
+    public void onLoad(Weapon sword, String type) {
     }
 
     @Override
-    public void onLoad(InvincibilityPotion invincibilityPotion) {
+    public void onLoad(Potion invincibilityPotion, String type) {
     }
 }
