@@ -85,22 +85,38 @@ public class Enemy extends LifeEntity implements Subject, PlayerObserver {
         return true;
     }
 
+    public boolean interact(Entity caller) {
+        if (caller.getClass() == Player.class) {
+            return interact((Player) caller); 
+        }
+        if (caller.getClass() == Boulder.class) {
+            return interact((Boulder) caller); 
+        }
+        return false;
+    }
+
     /**
      * Interacts with the player entity when player is on the same grid as enemy
      * 
      * @param caller is the player entity that is to be attacked
      */
-    public boolean interact(Entity caller) {
-        if (caller instanceof Player) {
-            Player player = (Player) caller;
-            if (player.attack(this) == true) {
-                return true;
-            } else {
-                this.attack(player);
-                return false;
-            }
+    public boolean interact(Player player) {
+        if (player.attack(this) == true) {
+            return true;
+        } else {
+            this.attack(player);
+            return false;
         }
-        return false;
+    }
+
+    /**
+     * Interaction with a boulder
+     * @param boulder that wants to run over the enemy
+     * If a boulder interacts with this enemy, the enemy dies, and boulder can locate to the current position
+     */
+    public boolean interact(Boulder boulder) {
+        this.kill(); 
+        return true; 
     }
 
     @Override
@@ -157,6 +173,10 @@ public class Enemy extends LifeEntity implements Subject, PlayerObserver {
 
     public void updateFear(boolean fear) {
         this.feared = fear;
+    }
+
+    public boolean isAlive() {
+        return super.getLifeStatus(); 
     }
 
 }
