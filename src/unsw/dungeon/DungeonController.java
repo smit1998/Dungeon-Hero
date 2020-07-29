@@ -88,6 +88,7 @@ public class DungeonController implements Runnable, Controller {
             }
         }
         items.getChildren().add(new ImageView(backpack));
+        items.setStyle("-fx-background-color: black;");
 
         for (EntityView entityView : initialEntities) {
             trackPickedUp(entityView);
@@ -228,13 +229,13 @@ public class DungeonController implements Runnable, Controller {
         item.isPickedUp().addListener(new ChangeListener<Boolean>() {
             @Override
             public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
-                System.out.println("item pick up" + newValue);
                 Platform.runLater(new Runnable() {
                     @Override
                     public void run() {
                         if (newValue) {
                             squares.getChildren().remove(view);
                             view.setVisible(true);
+                            view.setStyle("-fx-effect: dropshadow(gaussian, yellow, 5, 0.0, 0, 0)");
                             items.getChildren().add(view);
                         } else {
                             view.setVisible(false);

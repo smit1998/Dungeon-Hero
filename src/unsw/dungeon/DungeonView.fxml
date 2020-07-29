@@ -20,7 +20,11 @@
                <columnConstraints></columnConstraints>
                <rowConstraints></rowConstraints>
             </GridPane>
-            <HBox fx:id="items" alignment="CENTER_LEFT" prefHeight="32.0" />
+            <HBox fx:id="items" alignment="CENTER_LEFT" prefHeight="48.0">
+               <padding>
+                  <Insets left="8.0" />
+               </padding>
+            </HBox>
          </children>
       </VBox>
       <VBox fx:id="pause_menu" onKeyPressed="#handlePauseKeyPress" alignment="CENTER" disable="true" visible="false">
