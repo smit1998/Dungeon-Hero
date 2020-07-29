@@ -55,6 +55,9 @@ public class DungeonController implements Runnable, Controller {
     @FXML
     private Button quit_button, resume_button;
 
+    @FXML
+    private HBox items;
+
     private List<ImageView> initialEntities;
 
     private Player player;
@@ -80,6 +83,7 @@ public class DungeonController implements Runnable, Controller {
         quit_button.setOnKeyPressed(e -> handleQuitKeyPress(e));
 
         Image ground = new Image((new File("images/dirt_0_new.png")).toURI().toString());
+        Image backpack = new Image((new File("images/backpack.png")).toURI().toString());
 
         // Add the ground first so it is below all other entities
         for (int x = 0; x < dungeon.getWidth(); x++) {
@@ -87,6 +91,7 @@ public class DungeonController implements Runnable, Controller {
                 squares.add(new ImageView(ground), x, y);
             }
         }
+        items.getChildren().add(new ImageView(backpack));
 
         for (ImageView entity : initialEntities)
             squares.getChildren().add(entity);
