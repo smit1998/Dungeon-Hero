@@ -5,6 +5,8 @@ import java.util.List;
 
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 
 /**
  * A dungeon in the interactive dungeon player.
@@ -64,13 +66,13 @@ public class Dungeon {
     }
 
     public ArrayList<Enemy> getEnemies() {
-        ArrayList<Enemy> enemies = new ArrayList<Enemy>() ; 
+        ArrayList<Enemy> enemies = new ArrayList<Enemy>();
         for (Entity e : entities) {
             if (e instanceof Enemy) {
-                enemies.add((Enemy) e); 
+                enemies.add((Enemy) e);
             }
         }
-        return enemies; 
+        return enemies;
     }
 
     /**
@@ -111,6 +113,7 @@ public class Dungeon {
      */
     public void setGoal(ComponentGoal goal) {
         this.goal = goal;
+        essentialGoals = FXCollections.observableList(goal.getEssentialGoals());
     }
 
     /**
@@ -215,6 +218,7 @@ public class Dungeon {
         if (isComplete()) {
             System.out.println("Dungeon is complete");
         }
+        updateEssentialGoals();
     }
 
     /**
@@ -226,4 +230,27 @@ public class Dungeon {
         }
     }
 
+    private ObservableList<ComponentGoal> essentialGoals;
+
+    private void updateEssentialGoals() {
+        List<ComponentGoal> newGoals = goal.getEssentialGoals();
+        List<ComponentGoal> toAdd = new ArrayList<>();
+        List<ComponentGoal> toRemove = new ArrayList<>();
+        for (ComponentGoal eGoal : newGoals) {
+            if (!essentialGoals.contains(eGoal)) {
+                toAdd.add(eGoal);
+            }
+        }
+        for (ComponentGoal oldGoal : essentialGoals) {
+            if (!newGoals.contains(oldGoal)) {
+                toRemove.add(oldGoal);
+            }
+        }
+        essentialGoals.removeAll(toRemove);
+        essentialGoals.addAll(toAdd);
+    }
+
+    public ObservableList<ComponentGoal> getEssentialGoals() {
+        return essentialGoals;
+    }
 }

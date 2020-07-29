@@ -38,4 +38,14 @@ public class ComplexGoal implements ComponentGoal {
     public boolean isComplete() {
         return strategy.isComplete(goals);
     }
+
+    public List<ComponentGoal> getEssentialGoals() {
+        return strategy.getEssentialGoals(goals);
+    }
+
+    @Override
+    public GoalType getType() {
+        return GoalType.COMPLEX_GOAL;
+    }
+
 }

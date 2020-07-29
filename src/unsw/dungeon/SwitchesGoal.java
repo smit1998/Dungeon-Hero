@@ -1,5 +1,8 @@
 package unsw.dungeon;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * A goal whether all floor switches must be pressed down by boulders
  */
@@ -48,5 +51,18 @@ public class SwitchesGoal extends BasicGoal {
         if (s instanceof FloorSwitch) {
             s.attach(this);
         }
+    }
+
+    @Override
+    public List<ComponentGoal> getEssentialGoals() {
+        List<ComponentGoal> essentials = new ArrayList<>();
+        if (!isComplete())
+            essentials.add(this);
+        return essentials;
+    }
+
+    @Override
+    public GoalType getType() {
+        return GoalType.SWITCHES_GOAL;
     }
 }
