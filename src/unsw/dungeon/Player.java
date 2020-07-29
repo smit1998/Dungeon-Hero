@@ -6,6 +6,7 @@ import java.util.function.BooleanSupplier;
 
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
+import javafx.collections.ObservableList;
 
 import java.util.ArrayList;
 
@@ -207,18 +208,19 @@ public class Player extends LifeEntity {
     }
 
     public void setSpeed(int ticksPerMove) {
-        TICKS_PER_MOVE = ticksPerMove; 
+        TICKS_PER_MOVE = ticksPerMove;
     }
 
     public int getSpeed() {
-        return TICKS_PER_MOVE; 
+        return TICKS_PER_MOVE;
     }
 
     public void removeItem(ItemEntity item) {
         inventory.removeItem(item);
     }
 
-	public BooleanSupplier hasPotion() {
-		return null;
-	}
+    public BooleanSupplier hasPotion() {
+        return null;
+    }
+
 }

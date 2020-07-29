@@ -2,6 +2,9 @@ package unsw.dungeon;
 
 import java.util.ArrayList;
 
+import javafx.beans.property.BooleanProperty;
+import javafx.beans.property.SimpleBooleanProperty;
+
 public class Potion extends ItemEntity {
 
     private final int DURATION_TICKS = 150;
@@ -9,6 +12,7 @@ public class Potion extends ItemEntity {
     private ArrayList<EffectBehaviour> effects;
     private int ticksElapsed;
     private boolean active;
+    private BooleanProperty isPickedUp = new SimpleBooleanProperty(false);
 
     public Potion(int x, int y, Dungeon dungeon, ArrayList<EffectBehaviour> effects) {
         super(x, y, dungeon);
@@ -22,6 +26,7 @@ public class Potion extends ItemEntity {
     }
 
     public void startEffects() {
+        isPickedUp.setValue(true);
         active = true;
         for (EffectBehaviour e : effects) {
             e.startEffect();
@@ -31,8 +36,9 @@ public class Potion extends ItemEntity {
     public void stopEffects() {
         for (EffectBehaviour e : effects) {
             e.stopEffect();
-            active = false;
         }
+        active = false;
+        isPickedUp.setValue(false);
     }
 
     @Override
@@ -63,5 +69,9 @@ public class Potion extends ItemEntity {
                 stopEffects();
             }
         }
+    }
+
+    public BooleanProperty isPickedUp() {
+        return isPickedUp;
     }
 }

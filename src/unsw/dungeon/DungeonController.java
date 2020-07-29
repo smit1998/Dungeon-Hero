@@ -10,13 +10,11 @@ import javafx.fxml.FXML;
 
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
-import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.scene.Node;
 import javafx.scene.Parent;
@@ -59,7 +57,10 @@ public class DungeonController implements Runnable, Controller {
     @FXML
     private Button quit_button, resume_button;
 
-    private List<ImageView> initialEntities;
+    @FXML
+    private HBox items;
+
+    private List<EntityView> initialEntities;
 
     private Player player;
 
@@ -69,7 +70,7 @@ public class DungeonController implements Runnable, Controller {
     private boolean running = false;
     private Thread thread;
 
-    public DungeonController(Dungeon dungeon, List<ImageView> initialEntities, File file) {
+    public DungeonController(Dungeon dungeon, List<EntityView> initialEntities, File file) {
         this.dungeon = dungeon;
         this.player = dungeon.getPlayer();
         this.initialEntities = new ArrayList<>(initialEntities);
@@ -85,6 +86,7 @@ public class DungeonController implements Runnable, Controller {
         quit_button.setOnKeyPressed(e -> handleQuitKeyPress(e));
 
         Image ground = new Image((new File("images/dirt_0_new.png")).toURI().toString());
+        Image backpack = new Image((new File("images/backpack.png")).toURI().toString());
 
         // Add the ground first so it is below all other entities
         for (int x = 0; x < dungeon.getWidth(); x++) {
@@ -92,9 +94,13 @@ public class DungeonController implements Runnable, Controller {
                 squares.add(new ImageView(ground), x, y);
             }
         }
+        items.getChildren().add(new ImageView(backpack));
+        items.setStyle("-fx-background-color: black;");
 
-        for (ImageView entity : initialEntities)
-            squares.getChildren().add(entity);
+        for (EntityView entityView : initialEntities) {
+            trackPickedUp(entityView);
+            squares.getChildren().add(entityView.getView());
+        }
 
         Platform.runLater(new Runnable() {
             @Override
@@ -260,6 +266,31 @@ public class DungeonController implements Runnable, Controller {
                             break;
                     }
                 }
+    public void trackPickedUp(EntityView entityView) {
+        Entity entity = entityView.getEntity();
+        ImageView view = entityView.getView();
+
+        if (entity instanceof ItemEntity == false)
+            return;
+
+        ItemEntity item = (ItemEntity) entity;
+        item.isPickedUp().addListener(new ChangeListener<Boolean>() {
+            @Override
+            public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
+                Platform.runLater(new Runnable() {
+                    @Override
+                    public void run() {
+                        if (newValue) {
+                            squares.getChildren().remove(view);
+                            view.setVisible(true);
+                            view.setStyle("-fx-effect: dropshadow(gaussian, yellow, 5, 0.0, 0, 0)");
+                            items.getChildren().add(view);
+                        } else {
+                            view.setVisible(false);
+                            items.getChildren().remove(view);
+                        }
+                    }
+                });
             }
         });
     }

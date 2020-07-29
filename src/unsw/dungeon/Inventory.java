@@ -10,8 +10,7 @@ public class Inventory {
     private Potion potion;
 
     /**
-     * adds an item to the inventory and
-     * does nothing if item type already exists
+     * adds an item to the inventory and does nothing if item type already exists
      */
     public void addItem(ItemEntity item) {
         if (item instanceof Weapon) {
@@ -26,8 +25,7 @@ public class Inventory {
     }
 
     /**
-     * removes an item from the inventory, 
-     * does nothing if item doesn't exist
+     * removes an item from the inventory, does nothing if item doesn't exist
      */
     public void removeItem(ItemEntity item) {
         if (item instanceof Weapon) {
@@ -42,31 +40,30 @@ public class Inventory {
     }
 
     /**
-     * sets the weapon slot in the inventory to
-     * the weapon provided
+     * sets the weapon slot in the inventory to the weapon provided
      */
     private void setWeapon(Weapon weapon) {
         if (this.weapon == null) {
             this.weapon = weapon;
             weapon.attachInventory(this);
             weapon.setVisibility(false);
+            weapon.setIsPickedUp(true);
         }
     }
 
     /**
-     * sets the key slot in the inventory to
-     * the key provided
+     * sets the key slot in the inventory to the key provided
      */
     private void setKey(Key key) {
         if (this.key == null) {
             this.key = key;
             key.setVisibility(false);
+            key.setPickedUp(true);
         }
     }
 
     /**
-     * sets the potion slot in the inventory to
-     * the potion provided
+     * sets the potion slot in the inventory to the potion provided
      */
     private void setPotion(Potion potion) {
         if (this.potion == null) {
@@ -80,10 +77,14 @@ public class Inventory {
     public Weapon getWeapon() {
         return weapon;
     }
-    
+
     // return current key in inventory
     public Key getKey() {
         return key;
+    }
+
+    public Potion getPotion() {
+        return potion;
     }
 
     // update of the game state ticks the potion effects
@@ -91,7 +92,7 @@ public class Inventory {
         tickPotion(dungeon);
     }
 
-    // tick the potion 
+    // tick the potion
     private void tickPotion(Dungeon dungeon) {
         if (potion != null) {
             potion.tick(dungeon);
