@@ -266,6 +266,11 @@ public class DungeonController implements Runnable, Controller {
                             break;
                     }
                 }
+
+            }
+        });
+    }
+
     public void trackPickedUp(EntityView entityView) {
         Entity entity = entityView.getEntity();
         ImageView view = entityView.getView();
