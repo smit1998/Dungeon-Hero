@@ -9,6 +9,10 @@ public class Inventory {
     private Key key;
     private Potion potion;
 
+    /**
+     * adds an item to the inventory and
+     * does nothing if item type already exists
+     */
     public void addItem(ItemEntity item) {
         if (item instanceof Weapon) {
             setWeapon((Weapon) item);
@@ -21,6 +25,10 @@ public class Inventory {
         }
     }
 
+    /**
+     * removes an item from the inventory, 
+     * does nothing if item doesn't exist
+     */
     public void removeItem(ItemEntity item) {
         if (item instanceof Weapon) {
             this.weapon = null;
@@ -33,6 +41,10 @@ public class Inventory {
         }
     }
 
+    /**
+     * sets the weapon slot in the inventory to
+     * the weapon provided
+     */
     private void setWeapon(Weapon weapon) {
         if (this.weapon == null) {
             this.weapon = weapon;
@@ -41,6 +53,10 @@ public class Inventory {
         }
     }
 
+    /**
+     * sets the key slot in the inventory to
+     * the key provided
+     */
     private void setKey(Key key) {
         if (this.key == null) {
             this.key = key;
@@ -48,6 +64,10 @@ public class Inventory {
         }
     }
 
+    /**
+     * sets the potion slot in the inventory to
+     * the potion provided
+     */
     private void setPotion(Potion potion) {
         if (this.potion == null) {
             this.potion = potion;
@@ -55,18 +75,22 @@ public class Inventory {
         }
     }
 
+    // returns current weapon in inventory
     public Weapon getWeapon() {
         return weapon;
     }
-
+    
+    // return current key in inventory
     public Key getKey() {
         return key;
     }
 
+    // update of the game state ticks the potion effects
     public void tick(Dungeon dungeon) {
         tickPotion(dungeon);
     }
 
+    // tick the potion 
     private void tickPotion(Dungeon dungeon) {
         if (potion != null) {
             potion.tick(dungeon);
