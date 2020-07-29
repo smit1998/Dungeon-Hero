@@ -85,9 +85,10 @@ public class FloorSwitch extends Entity implements Subject {
         }
     }
 
+    /**
+     * no changes when game state updates
+     */
     @Override
     public void tick(Dungeon dungeon) {
-        // TODO Auto-generated method stub
-
     }
 }

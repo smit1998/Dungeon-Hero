@@ -119,6 +119,10 @@ public class Enemy extends LifeEntity implements Subject, PlayerObserver {
         return true; 
     }
 
+    /**
+     * kills the current player, as well as notifying any observers
+     * of this change
+     */
     @Override
     public void kill() {
         super.kill();
@@ -155,9 +159,11 @@ public class Enemy extends LifeEntity implements Subject, PlayerObserver {
     private int ticksSinceLastMove;
     private final static int TICKS_PER_MOVE = 10;
 
+    /**
+     * moves the enemy towards the player in the next game state
+     */
     @Override
     public void tick(Dungeon dungeon) {
-        // TODO Auto-generated method stub
         if (ticksSinceLastMove < TICKS_PER_MOVE) {
             ticksSinceLastMove++;
         } else {
@@ -166,11 +172,17 @@ public class Enemy extends LifeEntity implements Subject, PlayerObserver {
         }
     }
 
+    /**
+     * updates the current position of the enemy
+     */
     public void update(int x, int y) {
         playerX = x;
         playerY = y;
     }
 
+    /**
+     * updates the state of the enemy currently being feared or not
+     */
     public void updateFear(boolean fear) {
         this.feared = fear;
     }

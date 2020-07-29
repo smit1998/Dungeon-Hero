@@ -52,12 +52,12 @@ class BoulderTest {
         player.moveUp();
 
         // Test that player is back in their original position
-        assertTrue(player.getX() == 0);
-        assertTrue(player.getY() == 0);
+        assertTrue(player.getX() == 1);
+        assertTrue(player.getY() == 1);
 
         // Test that boulder did not move
-        assertTrue(boulder.getX() == 1);
-        assertTrue(boulder.getY() == 1);
+        assertTrue(boulder.getX() == 0);
+        assertTrue(boulder.getY() == 0);
 
     }
 

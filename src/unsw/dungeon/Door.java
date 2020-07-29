@@ -82,6 +82,9 @@ public class Door extends Entity {
         return false;
     }
 
+    /**
+     * no changes made when the game state updates
+     */
     @Override
     public void tick(Dungeon dungeon) {
         // TODO Auto-generated method stub

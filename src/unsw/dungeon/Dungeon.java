@@ -198,6 +198,9 @@ public class Dungeon {
         return true;
     }
 
+    /**
+     * no changes made when the game state updates
+     */
     public void tick() {
         for (Entity e : entities) {
             e.tick(this);
@@ -214,6 +217,9 @@ public class Dungeon {
         }
     }
 
+    /**
+     * no changes made when the game state updates
+     */
     public void tick(long ticks) {
         for (int i = 0; i < ticks; i++) {
             tick();
