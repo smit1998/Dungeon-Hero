@@ -77,10 +77,11 @@ public class Exit extends Entity implements Subject {
         }
     }
 
+    /**
+     * no changes made when game state is updated
+     */
     @Override
     public void tick(Dungeon dungeon) {
-        // TODO Auto-generated method stub
-
     }
 
 }
