@@ -37,6 +37,7 @@ public class Weapon extends ItemEntity {
         hits--;
         if (hits == 0) {
             deleteWeapon();
+            setIsPickedUp(false);
         }
     }
 
