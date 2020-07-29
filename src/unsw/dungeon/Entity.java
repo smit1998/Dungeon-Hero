@@ -111,6 +111,9 @@ public abstract class Entity {
         this.isVisible.setValue(isVisible);
     }
 
+    /**
+     * updates the game state
+     */
     public abstract void tick(Dungeon dungeon);
 
 }
