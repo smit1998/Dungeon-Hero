@@ -10,13 +10,11 @@ import javafx.fxml.FXML;
 
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
-import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.scene.Node;
 import javafx.scene.Parent;
@@ -25,8 +23,6 @@ import javafx.scene.control.Button;
 import javafx.application.Platform;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
-import javafx.event.ActionEvent;
-import javafx.event.Event;
 
 import java.io.File;
 import java.io.IOException;
@@ -58,7 +54,7 @@ public class DungeonController implements Runnable, Controller {
     @FXML
     private HBox items;
 
-    private List<ImageView> initialEntities;
+    private List<EntityView> initialEntities;
 
     private Player player;
 
@@ -68,7 +64,7 @@ public class DungeonController implements Runnable, Controller {
     private boolean running = false;
     private Thread thread;
 
-    public DungeonController(Dungeon dungeon, List<ImageView> initialEntities, File file) {
+    public DungeonController(Dungeon dungeon, List<EntityView> initialEntities, File file) {
         this.dungeon = dungeon;
         this.player = dungeon.getPlayer();
         this.initialEntities = new ArrayList<>(initialEntities);
@@ -93,8 +89,10 @@ public class DungeonController implements Runnable, Controller {
         }
         items.getChildren().add(new ImageView(backpack));
 
-        for (ImageView entity : initialEntities)
-            squares.getChildren().add(entity);
+        for (EntityView entityView : initialEntities) {
+            trackPickedUp(entityView);
+            squares.getChildren().add(entityView.getView());
+        }
 
         Platform.runLater(new Runnable() {
             @Override
@@ -212,6 +210,35 @@ public class DungeonController implements Runnable, Controller {
                             stack.getChildren().add((Node) controller.getParent());
                         } catch (Exception e) {
                             throw new RuntimeException(e);
+                        }
+                    }
+                });
+            }
+        });
+    }
+
+    public void trackPickedUp(EntityView entityView) {
+        Entity entity = entityView.getEntity();
+        ImageView view = entityView.getView();
+
+        if (entity instanceof ItemEntity == false)
+            return;
+
+        ItemEntity item = (ItemEntity) entity;
+        item.isPickedUp().addListener(new ChangeListener<Boolean>() {
+            @Override
+            public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
+                System.out.println("item pick up" + newValue);
+                Platform.runLater(new Runnable() {
+                    @Override
+                    public void run() {
+                        if (newValue) {
+                            squares.getChildren().remove(view);
+                            view.setVisible(true);
+                            items.getChildren().add(view);
+                        } else {
+                            view.setVisible(false);
+                            items.getChildren().remove(view);
                         }
                     }
                 });

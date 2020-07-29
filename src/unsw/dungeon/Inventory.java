@@ -38,6 +38,7 @@ public class Inventory {
             this.weapon = weapon;
             weapon.attachInventory(this);
             weapon.setVisibility(false);
+            weapon.setIsPickedUp(true);
         }
     }
 
@@ -45,6 +46,7 @@ public class Inventory {
         if (this.key == null) {
             this.key = key;
             key.setVisibility(false);
+            key.setPickedUp(true);
         }
     }
 
@@ -62,6 +64,10 @@ public class Inventory {
 
     public Key getKey() {
         return key;
+    }
+
+    public Potion getPotion() {
+        return potion;
     }
 
     public void tick(Dungeon dungeon) {

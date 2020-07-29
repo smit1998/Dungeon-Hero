@@ -1,5 +1,8 @@
 package unsw.dungeon;
 
+import javafx.beans.property.BooleanProperty;
+import javafx.beans.property.SimpleBooleanProperty;
+
 //import sun.net.www.content.text.plain;
 
 /**
@@ -9,6 +12,7 @@ public class Key extends ItemEntity {
 
     private final static int MAX_PICKUP = 1;
     private int id;
+    private BooleanProperty isPickedUp = new SimpleBooleanProperty(false);
 
     /**
      * Constructs a new key entity at the (x, y) coordinate in the dungeon with the
@@ -60,8 +64,14 @@ public class Key extends ItemEntity {
 
     @Override
     public void tick(Dungeon dungeon) {
-        // TODO Auto-generated method stub
+    }
 
+    public BooleanProperty isPickedUp() {
+        return isPickedUp;
+    }
+
+    public void setPickedUp(boolean newIsPickedUp) {
+        isPickedUp.setValue(newIsPickedUp);
     }
 
 }

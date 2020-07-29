@@ -22,7 +22,7 @@ import java.io.File;
  */
 public class DungeonControllerLoader extends DungeonLoader {
 
-    private List<ImageView> entities = new ArrayList<>();
+    private List<EntityView> entities = new ArrayList<>();
 
     // Images
     private Image playerImage = new Image((new File("images/human_new.png")).toURI().toString());
@@ -52,98 +52,105 @@ public class DungeonControllerLoader extends DungeonLoader {
     @Override
     public void onLoad(Player player) {
         ImageView view = new ImageView(playerImage);
-        addEntity(player, view);
+        addEntity(new EntityView(player, view));
     }
 
     @Override
     public void onLoad(Wall wall) {
         ImageView view = new ImageView(wallImage);
-        addEntity(wall, view);
+        addEntity(new EntityView(wall, view));
     }
 
     @Override
     public void onLoad(Exit exit) {
         ImageView view = new ImageView(exitImage);
-        addEntity(exit, view);
+        addEntity(new EntityView(exit, view));
     }
 
     @Override
     public void onLoad(Treasure treasure) {
         ImageView view = new ImageView(treasureImage);
-        addEntity(treasure, view);
+        addEntity(new EntityView(treasure, view));
     }
 
     @Override
     public void onLoad(Door door) {
         ImageView view = new ImageView(closedDoorImage);
         trackOpen(door, view);
-        addEntity(door, view);
+        addEntity(new EntityView(door, view));
     }
 
     @Override
     public void onLoad(Key key) {
         ImageView view = new ImageView(keyImage);
-        addEntity(key, view);
+        addEntity(new EntityView(key, view));
     }
 
     @Override
     public void onLoad(Boulder boulder) {
         ImageView view = new ImageView(boulderImage);
-        addEntity(boulder, view);
+        addEntity(new EntityView(boulder, view));
     }
 
     @Override
     public void onLoad(FloorSwitch floorSwitch) {
         ImageView view = new ImageView(switchImage);
-        addEntity(floorSwitch, view);
+        addEntity(new EntityView(floorSwitch, view));
     }
 
     @Override
     public void onLoad(Portal portal) {
         ImageView view = new ImageView(portalImage);
-        addEntity(portal, view);
+        addEntity(new EntityView(portal, view));
     }
 
     @Override
     public void onLoad(Enemy enemy) {
         ImageView view = new ImageView(enemyImage);
-        addEntity(enemy, view);
+        addEntity(new EntityView(enemy, view));
     }
 
-    /*@Override
-    public void onLoad(Weapon sword) {
-        ImageView view = new ImageView(swordImage);
-        addEntity(sword, view);
-    }*/
+    /*
+     * @Override public void onLoad(Weapon sword) { ImageView view = new
+     * ImageView(swordImage); addEntity(sword, view); }
+     */
 
-    @Override 
+    @Override
     public void onLoad(Weapon sword, String type) {
         ImageView view = null;
-        if(type.equals("sword")) {
-            view = new ImageView(swordImage);
+        switch (type) {
+            case "sword":
+                view = new ImageView(swordImage);
+                break;
+            case "dagger":
+                view = new ImageView(daggerImage);
+                break;
+            default:
+                throw new Error(String.format("Invalid weapon type '%s'", type));
         }
-        if(type.equals("dagger")) {
-            view = new ImageView(daggerImage);
-        }
-        addEntity(sword, view);
+        addEntity(new EntityView(sword, view));
     }
 
     @Override
     public void onLoad(Potion potion, String type) {
-        ImageView view = null; 
-        if (type.equals("invincibility")) {
-            view = new ImageView(invincibilityImage);
-        } 
-        if (type.equals("speedBoots")) {
-            view = new ImageView(speedBootsImage);
+        ImageView view = null;
+        switch (type) {
+            case "invincibility":
+                view = new ImageView(invincibilityImage);
+                break;
+            case "speedBoots":
+                view = new ImageView(speedBootsImage);
+                break;
+            default:
+                throw new Error(String.format("Invalid potion type '%s'", type));
         }
-        addEntity(potion, view);
+        addEntity(new EntityView(potion, view));
     }
 
-    private void addEntity(Entity entity, ImageView view) {
-        trackPosition(entity, view);
-        trackVisibility(entity, view);
-        entities.add(view);
+    private void addEntity(EntityView entityView) {
+        trackPosition(entityView);
+        trackVisibility(entityView);
+        entities.add(entityView);
     }
 
     /**
@@ -157,7 +164,9 @@ public class DungeonControllerLoader extends DungeonLoader {
      * @param entity
      * @param node
      */
-    private void trackPosition(Entity entity, Node node) {
+    private void trackPosition(EntityView entityView) {
+        Node node = entityView.getView();
+        Entity entity = entityView.getEntity();
         GridPane.setColumnIndex(node, entity.getX());
         GridPane.setRowIndex(node, entity.getY());
         entity.x().addListener(new ChangeListener<Number>() {
@@ -174,7 +183,9 @@ public class DungeonControllerLoader extends DungeonLoader {
         });
     }
 
-    public void trackVisibility(Entity entity, Node node) {
+    public void trackVisibility(EntityView entityView) {
+        Node node = entityView.getView();
+        Entity entity = entityView.getEntity();
         entity.isVisible().addListener(new ChangeListener<Boolean>() {
             @Override
             public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
