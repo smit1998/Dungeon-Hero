@@ -180,19 +180,21 @@ public class DungeonController implements Runnable, Controller {
         dungeon.isCompleted().addListener(new ChangeListener<Boolean>() {
             @Override
             public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
-                stopGameLoop();
-                System.out.println("Dungeon complete");
-                Platform.runLater(new Runnable() {
-                    @Override
-                    public void run() {
-                        EndScreenController controller = new EndScreenController(true, file);
-                        try {
-                            stack.getChildren().add((Node) controller.getParent());
-                        } catch (Exception e) {
-                            throw new RuntimeException(e);
+                if (newValue == true) {
+                    stopGameLoop();
+                    System.out.println("Dungeon complete");
+                    Platform.runLater(new Runnable() {
+                        @Override
+                        public void run() {
+                            EndScreenController controller = new EndScreenController(true, file);
+                            try {
+                                stack.getChildren().add((Node) controller.getParent());
+                            } catch (Exception e) {
+                                throw new RuntimeException(e);
+                            }
                         }
-                    }
-                });
+                    });
+                }
             }
         });
     }
