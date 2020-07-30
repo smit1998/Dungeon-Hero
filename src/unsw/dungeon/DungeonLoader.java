@@ -25,7 +25,6 @@ public abstract class DungeonLoader {
     private File file;
 
     private int enemiesSpawned;
-    private int switchesSpawned;
     private int treasureSpawned;
 
     /**
@@ -150,7 +149,6 @@ public abstract class DungeonLoader {
                 FloorSwitch floorSwitch = new FloorSwitch(x, y, dungeon);
                 onLoad(floorSwitch);
                 entity = floorSwitch;
-                switchesSpawned++;
                 break;
             }
             case "portal": {
@@ -174,17 +172,17 @@ public abstract class DungeonLoader {
                 break;
             }
             case "invincibility": {
-                ArrayList<EffectBehaviour> effects = new ArrayList<EffectBehaviour>(); 
-                effects.add(new InvincibilityEffect(dungeon)); 
-                effects.add(new FearEffect(dungeon)); 
-                effects.add(new MeleeKillEffect(dungeon)); 
+                ArrayList<EffectBehaviour> effects = new ArrayList<EffectBehaviour>();
+                effects.add(new InvincibilityEffect(dungeon));
+                effects.add(new FearEffect(dungeon));
+                effects.add(new MeleeKillEffect(dungeon));
                 Potion potion = new Potion(x, y, dungeon, effects);
                 onLoad(potion, "invincibility");
                 entity = potion;
                 break;
             }
             case "speed": {
-                ArrayList<EffectBehaviour> effects = new ArrayList<EffectBehaviour>(); 
+                ArrayList<EffectBehaviour> effects = new ArrayList<EffectBehaviour>();
                 effects.add(new SpeedUpEffect(dungeon));
                 Potion potion = new Potion(x, y, dungeon, effects);
                 onLoad(potion, "speedBoots");
@@ -241,7 +239,7 @@ public abstract class DungeonLoader {
             case "enemies":
                 return new EnemiesGoal(enemiesSpawned);
             case "boulders":
-                return new SwitchesGoal(switchesSpawned);
+                return new SwitchesGoal();
             case "treasure":
                 return new TreasureGoal(treasureSpawned);
             case "AND": {

@@ -665,4 +665,7 @@ Marks will be deducted for poor git and GitLab usage. For example, meaningless c
 
 ### Week-09
 
-Fill in here.
+##### 30/07/2020
+
+**Fergus**
+* Changed how the switch goal determines if it is completed.
