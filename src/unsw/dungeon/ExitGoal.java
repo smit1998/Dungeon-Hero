@@ -58,4 +58,8 @@ public class ExitGoal extends BasicGoal {
         return GoalType.EXIT_GOAL;
     }
 
+    @Override
+    public String toString() {
+        return "Exit the dungeon";
+    }
 }

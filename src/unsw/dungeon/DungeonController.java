@@ -109,6 +109,7 @@ public class DungeonController implements Runnable, Controller {
             }
         });
 
+        System.out.println(dungeon.getGoalString());
         start();
     }
 

@@ -34,4 +34,12 @@ public class AndGoalStrategy implements GoalStrategy {
         return essentials;
     }
 
+    public String toString(List<ComponentGoal> goals) {
+        String str = "Complete all of the following goals";
+        for (ComponentGoal subgoal : goals) {
+            str += "\n" + subgoal;
+        }
+        return str;
+    }
+
 }

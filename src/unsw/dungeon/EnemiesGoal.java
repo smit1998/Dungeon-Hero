@@ -64,4 +64,8 @@ public class EnemiesGoal extends BasicGoal {
         return GoalType.ENEMIES_GOAL;
     }
 
+    @Override
+    public String toString() {
+        return "Defeat all enemies";
+    }
 }

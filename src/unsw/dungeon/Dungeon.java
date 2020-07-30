@@ -253,4 +253,8 @@ public class Dungeon {
     public ObservableList<ComponentGoal> getEssentialGoals() {
         return essentialGoals;
     }
+
+    public String getGoalString() {
+        return goal.toString();
+    }
 }

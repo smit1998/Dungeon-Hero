@@ -65,4 +65,9 @@ public class SwitchesGoal extends BasicGoal {
     public GoalType getType() {
         return GoalType.SWITCHES_GOAL;
     }
+
+    @Override
+    public String toString() {
+        return "Activate all switches";
+    }
 }

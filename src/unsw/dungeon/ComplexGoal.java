@@ -48,4 +48,8 @@ public class ComplexGoal implements ComponentGoal {
         return GoalType.COMPLEX_GOAL;
     }
 
+    @Override
+    public String toString() {
+        return strategy.toString(goals);
+    }
 }

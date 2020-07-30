@@ -17,4 +17,5 @@ public interface GoalStrategy {
 
     public List<ComponentGoal> getEssentialGoals(List<ComponentGoal> goals);
 
+    public String toString(List<ComponentGoal> goals);
 }
