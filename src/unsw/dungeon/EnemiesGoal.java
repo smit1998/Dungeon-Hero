@@ -3,7 +3,7 @@ package unsw.dungeon;
 /**
  * A goal where all enemies must be defeated
  */
-public class EnemiesGoal extends BasicGoal {
+public class EnemiesGoal extends BasicGoal implements Observer {
 
     private int enemiesSpawned;
     private int enemiesKilled;
@@ -42,9 +42,10 @@ public class EnemiesGoal extends BasicGoal {
      * 
      * @param s the subject to be observed
      */
-    public void attachTo(Subject s) {
-        if (s instanceof Enemy) {
-            s.attach(this);
+    public void attachTo(Entity e) {
+        if (e instanceof Enemy) {
+            Enemy enemy = (Enemy) e;
+            enemy.attach(this);
         }
     }
 }

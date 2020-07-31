@@ -25,7 +25,6 @@ public abstract class DungeonLoader {
     private File file;
 
     private int enemiesSpawned;
-    private int switchesSpawned;
     private int treasureSpawned;
 
     /**
@@ -150,7 +149,6 @@ public abstract class DungeonLoader {
                 FloorSwitch floorSwitch = new FloorSwitch(x, y, dungeon);
                 onLoad(floorSwitch);
                 entity = floorSwitch;
-                switchesSpawned++;
                 break;
             }
             case "portal": {
@@ -169,18 +167,33 @@ public abstract class DungeonLoader {
             }
             case "sword": {
                 Weapon sword = new Weapon(x, y, dungeon, new InstantKillAttack(), 5);
-                onLoad(sword);
+                onLoad(sword, "sword");
                 entity = sword;
                 break;
             }
             case "invincibility": {
-                ArrayList<EffectBehaviour> effects = new ArrayList<EffectBehaviour>(); 
-                effects.add(new InvincibilityEffect(dungeon)); 
-                effects.add(new FearEffect(dungeon)); 
-                effects.add(new MeleeKillEffect(dungeon)); 
+                ArrayList<EffectBehaviour> effects = new ArrayList<EffectBehaviour>();
+                effects.add(new InvincibilityEffect(dungeon));
+                effects.add(new FearEffect(dungeon));
+                effects.add(new MeleeKillEffect(dungeon));
                 Potion potion = new Potion(x, y, dungeon, effects);
-                onLoad(potion);
+                onLoad(potion, "invincibility");
                 entity = potion;
+                break;
+            }
+            case "speed": {
+                ArrayList<EffectBehaviour> effects = new ArrayList<EffectBehaviour>();
+                effects.add(new SpeedUpEffect(dungeon));
+                Potion potion = new Potion(x, y, dungeon, effects);
+                onLoad(potion, "speedBoots");
+                entity = potion;
+                break;
+            }
+
+            case "dagger": {
+                Weapon dagger = new Weapon(x, y, dungeon, new InstantKillAttack(), 1);
+                onLoad(dagger, "dagger");
+                entity = dagger;
                 break;
             }
         }
@@ -207,9 +220,9 @@ public abstract class DungeonLoader {
 
     public abstract void onLoad(Enemy enemy);
 
-    public abstract void onLoad(Weapon sword);
+    public abstract void onLoad(Weapon sword, String type);
 
-    public abstract void onLoad(Potion invincibilityPotion);
+    public abstract void onLoad(Potion potion, String type);
 
     /**
      * Load a goal
@@ -226,7 +239,7 @@ public abstract class DungeonLoader {
             case "enemies":
                 return new EnemiesGoal(enemiesSpawned);
             case "boulders":
-                return new SwitchesGoal(switchesSpawned);
+                return new SwitchesGoal();
             case "treasure":
                 return new TreasureGoal(treasureSpawned);
             case "AND": {

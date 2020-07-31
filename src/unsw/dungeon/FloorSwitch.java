@@ -1,14 +1,10 @@
 package unsw.dungeon;
 
-import java.util.HashSet;
-import java.util.Set;
-
 /**
  * A floor switch entity that can be activated by a boulder
  */
-public class FloorSwitch extends Entity implements Subject {
+public class FloorSwitch extends Entity {
 
-    private Set<Observer> observers = new HashSet<Observer>();
     private boolean isPressed;
 
     /**
@@ -54,40 +50,13 @@ public class FloorSwitch extends Entity implements Subject {
         } else {
             updateIsPressed(false);
         }
-        notifyObservers();
         return true;
     }
 
     /**
-     * Attach the observer to the subject
-     * 
-     * @param o observer to be attached
+     * no changes when game state updates
      */
-    public void attach(Observer o) {
-        observers.add(o);
-    }
-
-    /**
-     * Detach an observer from the subject
-     * 
-     * @param o observer to be removed
-     */
-    public void detach(Observer o) {
-        observers.remove(o);
-    }
-
-    /**
-     * Notifies all observers of a change to the subject
-     */
-    public void notifyObservers() {
-        for (Observer observer : observers) {
-            observer.update(this);
-        }
-    }
-
     @Override
     public void tick(Dungeon dungeon) {
-        // TODO Auto-generated method stub
-
     }
 }

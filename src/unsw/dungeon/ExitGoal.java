@@ -3,7 +3,7 @@ package unsw.dungeon;
 /**
  * A goal where the player must reach the exit of the dungeon
  */
-public class ExitGoal extends BasicGoal {
+public class ExitGoal extends BasicGoal implements Observer {
 
     private boolean isComplete;
 
@@ -36,9 +36,10 @@ public class ExitGoal extends BasicGoal {
      * 
      * @param s the subject to be observed
      */
-    public void attachTo(Subject s) {
-        if (s instanceof Exit) {
-            s.attach(this);
+    public void attachTo(Entity e) {
+        if (e instanceof Exit) {
+            Exit exit = (Exit) e;
+            exit.attach(this);
         }
     }
 }

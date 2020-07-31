@@ -2,9 +2,11 @@ package unsw.dungeon;
 
 import java.util.List;
 import java.util.Set;
+import java.util.function.BooleanSupplier;
 
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
+import javafx.collections.ObservableList;
 
 import java.util.ArrayList;
 
@@ -18,7 +20,7 @@ public class Player extends LifeEntity {
 
     private BooleanProperty isAlive = new SimpleBooleanProperty(true);
 
-    private final static int TICKS_PER_MOVE = 5;
+    private static int TICKS_PER_MOVE = 5;
 
     private int ticksSinceUp = 0;
     private int ticksSinceDown = 0;
@@ -103,7 +105,7 @@ public class Player extends LifeEntity {
         if (weapon != null) { // player has weapon, player kills enemy
             weapon.attack(enemy);
             return false;
-        } else if (this.isMortal()) { // player is mortal, enemy kills player
+        } else if (this.isMortal() && enemy.isAlive()) { // player is mortal, enemy kills player
             enemy.attack(this);
             return true;
         } else { // player is immortal, enemy cannot kill player
@@ -205,7 +207,20 @@ public class Player extends LifeEntity {
         return isAlive;
     }
 
+    public void setSpeed(int ticksPerMove) {
+        TICKS_PER_MOVE = ticksPerMove;
+    }
+
+    public int getSpeed() {
+        return TICKS_PER_MOVE;
+    }
+
     public void removeItem(ItemEntity item) {
         inventory.removeItem(item);
     }
+
+    public BooleanSupplier hasPotion() {
+        return null;
+    }
+
 }

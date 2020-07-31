@@ -1,5 +1,7 @@
 package unsw.dungeon;
 
+import javafx.beans.property.BooleanProperty;
+
 /**
  * An abstract class for an ItemEntity
  */
@@ -15,4 +17,7 @@ public abstract class ItemEntity extends Entity {
     public ItemEntity(int x, int y, Dungeon dungeon) {
         super(x, y, dungeon);
     }
+
+    public abstract BooleanProperty isPickedUp();
+
 }

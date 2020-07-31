@@ -74,6 +74,7 @@ public class Door extends Entity {
             if (key != null) {
                 if (open(key)) {
                     key.setVisibility(false);
+                    key.setPickedUp(false);
                     player.removeItem(key);
                     return true;
                 }
@@ -82,6 +83,9 @@ public class Door extends Entity {
         return false;
     }
 
+    /**
+     * no changes made when the game state updates
+     */
     @Override
     public void tick(Dungeon dungeon) {
         // TODO Auto-generated method stub
