@@ -2,7 +2,7 @@
     "width": 21,
     "height": 21,
     "entities": [
-    
+      { "x": 0, "y": 0, "type": "player" }
     ],
-    "goal-condition": { }
+    "goal-condition": {"goal": "exit" }
   }
