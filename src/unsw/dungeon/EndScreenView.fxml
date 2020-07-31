@@ -1,24 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.VBox?>
-<?import javafx.scene.text.Font?>
-<?import javafx.scene.text.Text?>
+<?import javafx.geometry.Insets ?>
+<?import javafx.scene.control.Button ?>
+<?import javafx.scene.layout.HBox ?>
+<?import javafx.scene.layout.VBox ?>
+<?import javafx.scene.text.Font ?>
+<?import javafx.scene.text.Text ?>
+<?import javafx.scene.image.Image ?>
+<?import javafx.scene.image.ImageView ?>
 
 <VBox fx:id="end_screen" alignment="CENTER" stylesheets="@EndScreen.css" xmlns="http://javafx.com/javafx/11.0.4" xmlns:fx="http://javafx.com/fxml/1">
     <children>
-        <HBox alignment="CENTER">
-            <children>
-                <Text fx:id="end_screen_text" fill="#eeeded" strokeType="OUTSIDE" strokeWidth="0.0" text="Victory" textAlignment="CENTER">
-                    <font>
-                        <Font size="24.0" />
-                    </font>
-                </Text>
-            </children>
-        </HBox>
-        <HBox alignment="CENTER" spacing="30.0">
+        <ImageView fx:id="end_screen_text" fitWidth="400.0" preserveRatio="true">
+            <VBox.margin>
+                <Insets bottom="15.0" />
+            </VBox.margin>
+        </ImageView>
+        <HBox alignment="CENTER" spacing="15.0">
             <children>
                 <Button fx:id="quit_button" mnemonicParsing="false" onAction="#handleQuit" prefWidth="80.0" text="Quit" textFill="#ee0606" />
                 <Button fx:id="replay_button" mnemonicParsing="false" onAction="#handleReplay" prefWidth="80.0" text="Replay" textFill="#3807f7" />
