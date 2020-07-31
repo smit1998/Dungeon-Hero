@@ -105,6 +105,9 @@ public abstract class DungeonLoader {
 
         EntityFactory factory = new EntityFactory();
         Entity entity = factory.createEntity(type, x, y, id, dungeon);
+        if (entity == null) {
+            throw new Error("Invalid entity type");
+        }
         switch (type) {
             case PLAYER: {
                 Player player = (Player) entity;
