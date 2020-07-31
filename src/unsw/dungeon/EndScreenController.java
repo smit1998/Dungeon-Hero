@@ -18,9 +18,6 @@ import java.io.IOException;
 
 public class EndScreenController implements Controller {
 
-    private final static String VICTORY_TEXT = "Victory!";
-    private final static String LOSING_TEXT = "Game Over!";
-
     private final static Image VICTORY_IMG = new Image(
             (new File("src/unsw/dungeon/victory_text.png")).toURI().toString());
     private final static Image GAMEOVER_IMG = new Image(
