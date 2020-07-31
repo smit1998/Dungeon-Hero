@@ -13,9 +13,9 @@
 <?import javafx.scene.image.Image ?>
 <?import javafx.scene.image.ImageView ?>
 
-<StackPane fx:id="stack" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<StackPane fx:id="stack" stylesheets="@DungeonStyle.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <VBox fx:id="pane" alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity">
+      <VBox fx:id="pane" alignment="TOP_CENTER">
          <children>
             <GridPane fx:id="squares" onKeyPressed="#handleKeyPress" onKeyReleased="#handleKeyRelease">
                <columnConstraints></columnConstraints>
@@ -30,7 +30,7 @@
       </VBox>
       <VBox fx:id="pause_menu" onKeyPressed="#handlePauseKeyPress" alignment="CENTER" disable="true" visible="false">
          <children>
-            <ImageView fx:id="paused_text" preserveRatio="true">
+            <ImageView fx:id="paused_text" styleClass="text-image" preserveRatio="true">
                <image>
                   <Image url="@paused_text.png" />
                </image>

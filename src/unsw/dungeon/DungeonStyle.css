@@ -1,0 +1,14 @@
+* {
+  dark-primary-color: #663425;
+  default-primary-color: #795548;
+  light-primary-color: #c9c8d7;
+  text-primary-color: #ffffff;
+  accent-color: #536dfe;
+  primary-text-color: #212121;
+  secondary-text-color: #390888;
+  divider-color: #bdbdbd;
+}
+
+.text-image {
+  -fx-effect: dropshadow(three-pass-box, rgba(255, 185, 0, 0.8), 5, 0, 0, 0);
+}
