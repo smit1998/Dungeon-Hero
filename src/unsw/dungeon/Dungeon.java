@@ -131,8 +131,12 @@ public class Dungeon {
      * @return whether the dungeon goal is completed
      */
     public BooleanProperty isCompleted() {
-        isComplete.setValue(goal.isComplete());
+        updateCompletion();
         return isComplete;
+    }
+
+    public void updateCompletion() {
+        isComplete.setValue(goal.isComplete());
     }
 
     /**
@@ -140,10 +144,7 @@ public class Dungeon {
      */
     public void connectGoals() {
         for (Entity entity : entities) {
-            if (entity instanceof Subject) {
-                Subject s = (Subject) entity;
-                goal.attachTo(s);
-            }
+            goal.attachTo(entity);
         }
     }
 
@@ -215,10 +216,8 @@ public class Dungeon {
             }
         }
         entities.removeAll(toRemove);
-        if (isComplete()) {
-            System.out.println("Dungeon is complete");
-        }
         updateEssentialGoals();
+        updateCompletion();
     }
 
     /**

@@ -26,9 +26,9 @@ public class ComplexGoal implements ComponentGoal {
      * 
      * @param s the subject to be observed
      */
-    public void attachTo(Subject s) {
+    public void attachTo(Entity e) {
         for (ComponentGoal goal : goals) {
-            goal.attachTo(s);
+            goal.attachTo(e);
         }
     }
 

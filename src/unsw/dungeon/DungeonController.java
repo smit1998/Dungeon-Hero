@@ -14,8 +14,8 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
@@ -104,7 +104,9 @@ public class DungeonController implements Runnable, Controller {
         // Add the ground first so it is below all other entities
         for (int x = 0; x < dungeon.getWidth(); x++) {
             for (int y = 0; y < dungeon.getHeight(); y++) {
-                squares.add(new ImageView(ground), x, y);
+                ImageView groundView = new ImageView(ground);
+                groundView.setViewOrder(RenderLayer.FLOOR);
+                squares.add(groundView, x, y);
             }
         }
         items.getChildren().add(new ImageView(backpack));
@@ -200,19 +202,21 @@ public class DungeonController implements Runnable, Controller {
         dungeon.isCompleted().addListener(new ChangeListener<Boolean>() {
             @Override
             public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
-                stopGameLoop();
-                System.out.println("Dungeon complete");
-                Platform.runLater(new Runnable() {
-                    @Override
-                    public void run() {
-                        EndScreenController controller = new EndScreenController(true, file);
-                        try {
-                            stack.getChildren().add((Node) controller.getParent());
-                        } catch (Exception e) {
-                            throw new RuntimeException(e);
+                if (newValue == true) {
+                    stopGameLoop();
+                    System.out.println("Dungeon complete");
+                    Platform.runLater(new Runnable() {
+                        @Override
+                        public void run() {
+                            EndScreenController controller = new EndScreenController(true, file);
+                            try {
+                                stack.getChildren().add((Node) controller.getParent());
+                            } catch (Exception e) {
+                                throw new RuntimeException(e);
+                            }
                         }
-                    }
-                });
+                    });
+                }
             }
         });
     }

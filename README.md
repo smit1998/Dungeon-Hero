@@ -663,6 +663,15 @@ Marks will be deducted for poor git and GitLab usage. For example, meaningless c
 * Created rough version of main menu and dungeon selector in JavaFX
 
 
+##### 27/07/2020
+
+**Fergus**
+* Added RenderLayer class to hold constants to control JavaFX entity display order
+
+
 ### Week-09
 
-Fill in here.
+##### 30/07/2020
+
+**Fergus**
+* Changed how the switch goal determines if it is completed.

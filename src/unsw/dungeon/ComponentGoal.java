@@ -20,5 +20,5 @@ public interface ComponentGoal {
      * 
      * @param s the subject to be observed
      */
-    public void attachTo(Subject s);
+    public void attachTo(Entity e);
 }

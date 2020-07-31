@@ -6,7 +6,7 @@ import java.util.List;
 /**
  * A goal where all treasure must be collected.
  */
-public class TreasureGoal extends BasicGoal {
+public class TreasureGoal extends BasicGoal implements Observer {
 
     private int treasureSpawned;
     private int treasureCollected;
@@ -42,9 +42,10 @@ public class TreasureGoal extends BasicGoal {
      * 
      * @param s the subject to be observed
      */
-    public void attachTo(Subject s) {
-        if (s instanceof Treasure) {
-            s.attach(this);
+    public void attachTo(Entity e) {
+        if (e instanceof Treasure) {
+            Treasure t = (Treasure) e;
+            t.attach(this);
         }
     }
 

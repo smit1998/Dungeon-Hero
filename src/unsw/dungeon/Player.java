@@ -218,9 +218,4 @@ public class Player extends LifeEntity {
     public void removeItem(ItemEntity item) {
         inventory.removeItem(item);
     }
-
-    public BooleanSupplier hasPotion() {
-        return null;
-    }
-
 }

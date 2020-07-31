@@ -15,10 +15,9 @@
 }
 
 .button {
-    -fx-text-fill: accent-color;
     -fx-padding: 5;
-    -fx-effect: dropshadow(one-pass-box, red, 10, 0.0, 6, 0);
-    -fx-background-radius: 10;
+    -fx-effect: dropshadow(one-pass-box, rgb(43, 24, 218), 10, 0.0, 6, 0);
+    -fx-background-radius: 15;
 }
 
 .label {

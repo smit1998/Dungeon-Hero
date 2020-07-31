@@ -15,9 +15,8 @@ divider-color: #BDBDBD;
 }
 
 .button {
-    -fx-text-fill: accent-color;
     -fx-padding: 5;
-    -fx-effect: dropshadow(one-pass-box, primary-text-color, 10, 0.0, 6, 0);
+    -fx-effect: dropshadow(one-pass-box, rgb(34, 34, 197), 10, 0.0, 6, 0);
     -fx-background-radius: 10;
 }
 
