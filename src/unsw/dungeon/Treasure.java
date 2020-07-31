@@ -69,6 +69,6 @@ public class Treasure extends Entity implements Subject {
     @Override
     public void tick(Dungeon dungeon) {
         // TODO Auto-generated method stub
-
     }
+
 }
