@@ -74,6 +74,7 @@ public class Door extends Entity {
             if (key != null) {
                 if (open(key)) {
                     key.setVisibility(false);
+                    key.setPickedUp(false);
                     player.removeItem(key);
                     return true;
                 }

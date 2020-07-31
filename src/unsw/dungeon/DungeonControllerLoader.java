@@ -52,30 +52,35 @@ public class DungeonControllerLoader extends DungeonLoader {
     @Override
     public void onLoad(Player player) {
         ImageView view = new ImageView(playerImage);
+        view.setViewOrder(RenderLayer.PLAYER);
         addEntity(new EntityView(player, view));
     }
 
     @Override
     public void onLoad(Wall wall) {
         ImageView view = new ImageView(wallImage);
+        view.setViewOrder(RenderLayer.PLAYER);
         addEntity(new EntityView(wall, view));
     }
 
     @Override
     public void onLoad(Exit exit) {
         ImageView view = new ImageView(exitImage);
+        view.setViewOrder(RenderLayer.CEILING);
         addEntity(new EntityView(exit, view));
     }
 
     @Override
     public void onLoad(Treasure treasure) {
         ImageView view = new ImageView(treasureImage);
+        view.setViewOrder(RenderLayer.ITEM);
         addEntity(new EntityView(treasure, view));
     }
 
     @Override
     public void onLoad(Door door) {
         ImageView view = new ImageView(closedDoorImage);
+        view.setViewOrder(RenderLayer.PLAYER);
         trackOpen(door, view);
         addEntity(new EntityView(door, view));
     }
@@ -83,30 +88,35 @@ public class DungeonControllerLoader extends DungeonLoader {
     @Override
     public void onLoad(Key key) {
         ImageView view = new ImageView(keyImage);
+        view.setViewOrder(RenderLayer.ITEM);
         addEntity(new EntityView(key, view));
     }
 
     @Override
     public void onLoad(Boulder boulder) {
         ImageView view = new ImageView(boulderImage);
+        view.setViewOrder(RenderLayer.PLAYER);
         addEntity(new EntityView(boulder, view));
     }
 
     @Override
     public void onLoad(FloorSwitch floorSwitch) {
         ImageView view = new ImageView(switchImage);
+        view.setViewOrder(RenderLayer.SWITCH);
         addEntity(new EntityView(floorSwitch, view));
     }
 
     @Override
     public void onLoad(Portal portal) {
         ImageView view = new ImageView(portalImage);
+        view.setViewOrder(RenderLayer.PLAYER);
         addEntity(new EntityView(portal, view));
     }
 
     @Override
     public void onLoad(Enemy enemy) {
         ImageView view = new ImageView(enemyImage);
+        view.setViewOrder(RenderLayer.PLAYER);
         addEntity(new EntityView(enemy, view));
     }
 
@@ -128,6 +138,7 @@ public class DungeonControllerLoader extends DungeonLoader {
             default:
                 throw new Error(String.format("Invalid weapon type '%s'", type));
         }
+        view.setViewOrder(RenderLayer.ITEM);
         addEntity(new EntityView(sword, view));
     }
 
@@ -144,6 +155,7 @@ public class DungeonControllerLoader extends DungeonLoader {
             default:
                 throw new Error(String.format("Invalid potion type '%s'", type));
         }
+        view.setViewOrder(RenderLayer.ITEM);
         addEntity(new EntityView(potion, view));
     }
 
