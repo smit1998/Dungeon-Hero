@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<Pane prefHeight="400.0" prefWidth="600.0" stylesheets="@DungeonMenuView.css" xmlns="http://javafx.com/javafx/11.0.4" xmlns:fx="http://javafx.com/fxml/1">
+<Pane prefHeight="400.0" prefWidth="600.0" stylesheets="@MainMenu.css" xmlns="http://javafx.com/javafx/11.0.4" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <ImageView fitHeight="464.0" fitWidth="425.0" layoutX="175.0" pickOnBounds="true" preserveRatio="true">
          <image>
