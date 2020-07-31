@@ -3,26 +3,42 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
+<?import javafx.scene.effect.Bloom?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
 <Pane prefHeight="400.0" prefWidth="600.0" stylesheets="@DungeonMenuView.css" xmlns="http://javafx.com/javafx/11.0.4" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <ListView fx:id="listview" layoutX="125.0" layoutY="76.0" onKeyPressed="#handleListKeyPress" prefHeight="275.0" prefWidth="350.0" />
-      <Button fx:id="play_button" layoutX="501.0" layoutY="351.0" mnemonicParsing="false" onAction="#handlePlay" onKeyPressed="#handlePlayKeyPress" prefHeight="35.0" prefWidth="85.0" text="Play">
+      <ImageView fitHeight="464.0" fitWidth="425.0" layoutX="175.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@wallimagebg.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="400.0" fitWidth="650.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@wallimagebg.png" />
+         </image>
+      </ImageView>
+      <ListView fx:id="listview" layoutX="125.0" layoutY="76.0" onKeyPressed="#handleListKeyPress" opacity="0.75" prefHeight="275.0" prefWidth="350.0" />
+      <Button fx:id="play_button" layoutX="501.0" layoutY="351.0" mnemonicParsing="false" onAction="#handlePlay" onKeyPressed="#handlePlayKeyPress" prefHeight="35.0" prefWidth="85.0" text="Play" textFill="#1a08e8">
          <font>
             <Font size="18.0" />
          </font>
       </Button>
-      <Button fx:id="back_button" layoutX="14.0" layoutY="351.0" mnemonicParsing="false" onAction="#handleBack" onKeyPressed="#handleBackKeyPress" prefHeight="35.0" prefWidth="85.0" text="Back">
+      <Button fx:id="back_button" layoutX="14.0" layoutY="351.0" mnemonicParsing="false" onAction="#handleBack" onKeyPressed="#handleBackKeyPress" prefHeight="35.0" prefWidth="85.0" text="Back" textFill="#f80202">
          <font>
             <Font size="18.0" />
          </font>
       </Button>
-      <Label layoutX="258.0" layoutY="35.0" prefHeight="35.0" prefWidth="85.0" text="Levels" textFill="#ededee">
+      <Label layoutX="241.0" layoutY="32.0" prefHeight="43.0" prefWidth="139.0" text="Levels" textFill="#ebeb05">
          <font>
-            <Font size="25.0" />
+            <Font size="36.0" />
          </font>
+         <effect>
+            <Bloom />
+         </effect>
       </Label>
    </children>
 </Pane>
