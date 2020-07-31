@@ -5,6 +5,8 @@ import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
 
+import javax.swing.Action;
+
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.FXML;
 
@@ -15,11 +17,19 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
+import javafx.scene.text.Text;
+import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.animation.FadeTransition;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.application.Platform;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -50,6 +60,9 @@ public class DungeonController implements Runnable, Controller {
 
     @FXML
     private VBox pane;
+
+    @FXML
+    private StackPane map_stack;
 
     @FXML
     private VBox pause_menu;
@@ -109,7 +122,6 @@ public class DungeonController implements Runnable, Controller {
             }
         });
 
-        System.out.println(dungeon.getGoalString());
         start();
     }
 
@@ -382,4 +394,19 @@ public class DungeonController implements Runnable, Controller {
         }
     }
 
+    private void displayGoal() {
+        Text goalText = new Text(dungeon.getGoalType() == GoalType.COMPLEX_GOAL ? "" : dungeon.getGoalString());
+        goalText.setTextAlignment(TextAlignment.CENTER);
+        goalText.setFill(Color.WHITE);
+        goalText.setFont(Font.font("Verdana", 20));
+
+        FadeTransition ft = new FadeTransition(Duration.millis(3000), goalText);
+        ft.setFromValue(1.0);
+        ft.setToValue(0.0);
+        ft.setCycleCount(1);
+        ft.setAutoReverse(true);
+
+        map_stack.getChildren().add(goalText);
+        ft.play();
+    }
 }
