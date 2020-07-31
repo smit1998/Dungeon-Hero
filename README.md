@@ -637,9 +637,22 @@ Marks will be deducted for poor git and GitLab usage. For example, meaningless c
 * Added the css for dungeon main screen.
 * Added css for DungeonMenu screen.
 * Added css for EndScreen.
-Fill in here.
 
-##### 31/08/2020
+##### 28/07/2020
+**Smit**
+* Changed javafx a bit.
+* Worked on adding image of dagger entuty.
+
+##### 30/07/2020
+**Smit**
+* Worked on improving the UI of the game.
+
+#####31/07/2020
+**Smit**
+* Added Image to the background of the UI.
+* Worked on making an advnced maze.
+
+##### 31/07/2020
 **Duy**
 * brainstorm benefits for extensions
 * get started on map making
