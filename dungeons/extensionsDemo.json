@@ -104,7 +104,12 @@
       { "x" : 16, "y" : 2, "type" : "wall" }, 
       { "x" : 17, "y" : 2, "type" : "wall" }, 
       { "x" : 18, "y" : 2, "type" : "wall" }, 
-      { "x" : 19, "y" : 2, "type" : "wall" }, 
+      { "x" : 8, "y" : 1, "type" : "enemy" }, 
+      { "x" : 10, "y" : 1, "type" : "enemy" }, 
+      { "x" : 12, "y" : 1, "type" : "enemy" }, 
+      { "x" : 14, "y" : 1, "type" : "enemy" }, 
+      { "x" : 16, "y" : 1, "type" : "enemy" },
+      { "x" : 18, "y" : 1, "type" : "enemy" }, 
     ],
     "goal-condition": {"goal" : "exit" }
   }
