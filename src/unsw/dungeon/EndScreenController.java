@@ -8,8 +8,9 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
-import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 import java.io.File;
@@ -17,11 +18,13 @@ import java.io.IOException;
 
 public class EndScreenController implements Controller {
 
-    private final static String VICTORY_TEXT = "Victory!";
-    private final static String LOSING_TEXT = "Game Over!";
+    private final static Image VICTORY_IMG = new Image(
+            (new File("src/unsw/dungeon/victory_text.png")).toURI().toString());
+    private final static Image GAMEOVER_IMG = new Image(
+            (new File("src/unsw/dungeon/game_over_text.png")).toURI().toString());
 
     @FXML
-    private Text end_screen_text;
+    private ImageView end_screen_text;
 
     @FXML
     private Button replay_button, quit_button;
@@ -36,7 +39,8 @@ public class EndScreenController implements Controller {
 
     @FXML
     public void initialize() {
-        end_screen_text.setText(victory ? VICTORY_TEXT : LOSING_TEXT);
+        end_screen_text.setImage(victory ? VICTORY_IMG : GAMEOVER_IMG);
+        // end_screen_text.setText(victory ? VICTORY_TEXT : LOSING_TEXT);
 
         replay_button.setOnKeyPressed(e -> handleReplayKeyPress(e));
         quit_button.setOnKeyPressed(e -> handleQuitKeyPress(e));

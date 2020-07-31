@@ -73,6 +73,9 @@ public class DungeonController implements Runnable, Controller {
     @FXML
     private HBox items;
 
+    @FXML
+    private ImageView paused_text;
+
     private List<EntityView> initialEntities;
 
     private Player player;
@@ -116,6 +119,8 @@ public class DungeonController implements Runnable, Controller {
             trackPickedUp(entityView);
             squares.getChildren().add(entityView.getView());
         }
+
+        paused_text.setFitWidth((squares.getColumnCount() * 32) * 0.6);
 
         Platform.runLater(new Runnable() {
             @Override
