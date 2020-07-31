@@ -25,6 +25,14 @@
             <Font size="24.0" />
          </font>
       </Button>
+      <Text fill="#f5f311" layoutX="64.0" layoutY="127.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Dungeon Hero" wrappingWidth="587.25">
+         <font>
+            <Font size="72.0" />
+         </font>
+         <effect>
+            <ColorAdjust />
+         </effect>
+      </Text>
       <ImageView fitHeight="39.0" fitWidth="31.0" layoutX="327.0" layoutY="302.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../../images/gnome.png" />
@@ -35,13 +43,5 @@
             <Image url="@../../../images/human_new.png" />
          </image>
       </ImageView>
-      <Text fill="#f5f311" layoutX="64.0" layoutY="127.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Dungeon Hero" wrappingWidth="587.25">
-         <font>
-            <Font size="72.0" />
-         </font>
-         <effect>
-            <ColorAdjust />
-         </effect>
-      </Text>
    </children>
 </Pane>
