@@ -2,7 +2,28 @@
     "width": 21,
     "height": 21,
     "entities": [
-      { "x": 0, "y": 0, "type": "player" }
+      { "x" : 0, "y" : 0, "type": "player" }, 
+      { "x" : 0, "y" : 0, "type" : "wall" }, 
+      { "x" : 0, "y" : 1, "type" : "wall" }, 
+      { "x" : 0, "y" : 2, "type" : "wall" }, 
+      { "x" : 0, "y" : 3, "type" : "wall" }, 
+      { "x" : 0, "y" : 4, "type" : "wall" }, 
+      { "x" : 0, "y" : 5, "type" : "wall" }, 
+      { "x" : 0, "y" : 6, "type" : "wall" }, 
+      { "x" : 0, "y" : 7, "type" : "wall" }, 
+      { "x" : 0, "y" : 8, "type" : "wall" }, 
+      { "x" : 0, "y" : 9, "type" : "wall" }, 
+      { "x" : 0, "y" : 10, "type" : "wall" }, 
+      { "x" : 0, "y" : 11, "type" : "wall" }, 
+      { "x" : 0, "y" : 12, "type" : "wall" }, 
+      { "x" : 0, "y" : 13, "type" : "wall" }, 
+      { "x" : 0, "y" : 14, "type" : "wall" }, 
+      { "x" : 0, "y" : 15, "type" : "wall" }, 
+      { "x" : 0, "y" : 16, "type" : "wall" }, 
+      { "x" : 0, "y" : 17, "type" : "wall" }, 
+      { "x" : 0, "y" : 18, "type" : "wall" }, 
+      { "x" : 0, "y" : 19, "type" : "wall" }, 
+      { "x" : 0, "y" : 20, "type" : "wall" }, 
     ],
-    "goal-condition": {"goal": "exit" }
+    "goal-condition": {"goal" : "exit" }
   }
