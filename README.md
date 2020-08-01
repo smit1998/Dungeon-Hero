@@ -680,3 +680,13 @@ Marks will be deducted for poor git and GitLab usage. For example, meaningless c
 
 **Fergus**
 * Added main CSS for frontend
+* Added graphical text to the main and level selection menu
+
+##### 01/08/2020
+
+**Fergus**
+* Created a new map
+* Implemented factory pattern to create entities
+* Changed pause menu and end screen text to graphical images
+* Add restart button to pause menu
+* Added goal display for basic goals 
