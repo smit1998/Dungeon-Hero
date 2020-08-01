@@ -112,7 +112,16 @@
       { "x" : 3, "y" : 3, "type" : "sword" }, 
       { "x" : 18, "y" : 2, "type" : "portal", "id" : 1}, 
       { "x" : 1, "y" : 10, "type" : "portal", "id" : 1}, 
-      { "x" : 4, "y" : 18, "type" : "speed" } 
+      { "x" : 4, "y" : 18, "type" : "speed" }, 
+      { "x" : 2, "y" : 6, "type" : "enemy" }, 
+      { "x" : 4, "y" : 6, "type" : "enemy" }, 
+      { "x" : 6, "y" : 6, "type" : "enemy" }, 
+      { "x" : 8, "y" : 6, "type" : "enemy" }, 
+      { "x" : 10, "y" : 6, "type" : "enemy" }, 
+      { "x" : 12, "y" : 6, "type" : "enemy" }, 
+      { "x" : 14, "y" : 6, "type" : "enemy" }, 
+      { "x" : 16, "y" : 6, "type" : "enemy" }, 
+      { "x" : 18, "y" : 6, "type" : "enemy" }, 
     ],
     "goal-condition": {"goal" : "exit" }
   }
