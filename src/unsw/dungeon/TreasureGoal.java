@@ -45,4 +45,15 @@ public class TreasureGoal extends BasicGoal implements Observer {
             t.attach(this);
         }
     }
+
+    @Override
+    public GoalType getType() {
+        return GoalType.TREASURE_GOAL;
+    }
+
+    @Override
+    public String toString() {
+        return "Collect all treasure";
+    }
+
 }

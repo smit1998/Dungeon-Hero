@@ -42,4 +42,14 @@ public class ExitGoal extends BasicGoal implements Observer {
             exit.attach(this);
         }
     }
+
+    @Override
+    public GoalType getType() {
+        return GoalType.EXIT_GOAL;
+    }
+
+    @Override
+    public String toString() {
+        return "Exit the dungeon";
+    }
 }

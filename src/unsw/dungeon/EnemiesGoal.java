@@ -48,4 +48,14 @@ public class EnemiesGoal extends BasicGoal implements Observer {
             enemy.attach(this);
         }
     }
+
+    @Override
+    public GoalType getType() {
+        return GoalType.ENEMIES_GOAL;
+    }
+
+    @Override
+    public String toString() {
+        return "Defeat all enemies";
+    }
 }

@@ -23,4 +23,14 @@ public class OrGoalStrategy implements GoalStrategy {
         return false;
     }
 
+    public String toString(List<ComponentGoal> goals) {
+        String str = "Complete any of the following goals:";
+        for (ComponentGoal subgoal : goals) {
+            String subgoalString = subgoal.toString();
+            subgoalString = subgoalString.replaceAll("(^|\n)", "$1  ");
+            str += "\n" + subgoalString;
+        }
+        return str;
+    }
+
 }

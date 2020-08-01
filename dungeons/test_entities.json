@@ -17,5 +17,17 @@
     { "x": 1, "y": 3, "type": "invincibility" },
     { "x": 10, "y": 3, "type": "dagger" }
   ],
-  "goal-condition": { "goal": "exit" }
+  "goal-condition": {
+    "goal": "AND",
+    "subgoals": [
+      {
+        "goal": "OR",
+        "subgoals": [{ "goal": "exit" }, { "goal": "treasure" }]
+      },
+      {
+        "goal": "OR",
+        "subgoals": [{ "goal": "boulders" }, { "goal": "enemies" }]
+      }
+    ]
+  }
 }
