@@ -189,11 +189,15 @@ public abstract class DungeonLoader {
                 entity = potion;
                 break;
             }
-
             case "dagger": {
                 Weapon dagger = new Weapon(x, y, dungeon, new InstantKillAttack(), 1);
                 onLoad(dagger, "dagger");
                 entity = dagger;
+                break;
+            }
+            case "checkpoint": {
+                Checkpoint checkpoint = new Checkpoint(x, y, dungeon);
+                entity = checkpoint;
                 break;
             }
         }
