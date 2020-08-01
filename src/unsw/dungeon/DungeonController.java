@@ -11,18 +11,34 @@ import javafx.fxml.FXML;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
+import javafx.scene.paint.Paint;
+import javafx.scene.text.Font;
+import javafx.scene.text.Text;
+import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.animation.FadeTransition;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.application.Platform;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
+import javafx.collections.FXCollections;
+import javafx.collections.ListChangeListener;
+import javafx.collections.ObservableList;
+import javafx.collections.ListChangeListener.Change;
+import javafx.event.ActionEvent;
+import javafx.event.Event;
 
 import java.io.File;
 import java.io.IOException;
@@ -44,6 +60,9 @@ public class DungeonController implements Runnable, Controller {
 
     @FXML
     private VBox pane;
+
+    @FXML
+    private StackPane map_stack;
 
     @FXML
     private VBox pause_menu;
@@ -105,11 +124,12 @@ public class DungeonController implements Runnable, Controller {
         Platform.runLater(new Runnable() {
             @Override
             public void run() {
-                squares.requestFocus();
+                stack.requestFocus();
             }
         });
 
         start();
+
     }
 
     private Set<String> input = new TreeSet<String>();
@@ -136,6 +156,48 @@ public class DungeonController implements Runnable, Controller {
     }
 
     public void run() {
+
+        StackPane goalTextPane = new StackPane();
+        goalTextPane.setStyle("-fx-background-color: black");
+
+        Text goalText = new Text(dungeon.getGoalType() == GoalType.COMPLEX_GOAL ? "" : dungeon.getGoalString());
+        goalText.setTextAlignment(TextAlignment.CENTER);
+        goalText.setFill(Color.WHITE);
+        goalText.setFont(Font.font("", 20));
+
+        goalTextPane.getChildren().add(goalText);
+        stack.getChildren().add(goalTextPane);
+        goalText.toFront();
+
+        FadeTransition fadeInText = new FadeTransition(Duration.millis(750), goalText);
+        fadeInText.setFromValue(0.0);
+        fadeInText.setToValue(1.0);
+        fadeInText.setCycleCount(1);
+        fadeInText.setAutoReverse(true);
+
+        FadeTransition fadeOutBlack = new FadeTransition(Duration.millis(4000), goalTextPane);
+        fadeOutBlack.setFromValue(1.0);
+        fadeOutBlack.setToValue(0.0);
+        fadeOutBlack.setCycleCount(1);
+        fadeOutBlack.setAutoReverse(true);
+
+        fadeOutBlack.play();
+        fadeInText.play();
+
+        try {
+            Thread.sleep(2500);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+
+        Platform.runLater(new Runnable() {
+            @Override
+            public void run() {
+                map_stack.getChildren().remove(goalTextPane);
+                squares.requestFocus();
+            }
+        });
+
         // https://youtu.be/w1aB5gc38C8
         int fps = 30;
         double timePerTick = 1000000000 / fps;
@@ -337,4 +399,19 @@ public class DungeonController implements Runnable, Controller {
         }
     }
 
+    private void displayGoal() {
+        Text goalText = new Text(dungeon.getGoalType() == GoalType.COMPLEX_GOAL ? "" : dungeon.getGoalString());
+        goalText.setTextAlignment(TextAlignment.CENTER);
+        goalText.setFill(Color.WHITE);
+        goalText.setFont(Font.font("Verdana", 20));
+
+        FadeTransition ft = new FadeTransition(Duration.millis(3000), goalText);
+        ft.setFromValue(1.0);
+        ft.setToValue(0.0);
+        ft.setCycleCount(1);
+        ft.setAutoReverse(true);
+
+        map_stack.getChildren().add(goalText);
+        ft.play();
+    }
 }
