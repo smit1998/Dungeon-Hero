@@ -1,6 +1,6 @@
-package main.java.unsw.dungeon;
+package main.java.unsw.dungeon.goals;
 
-;
+import main.java.unsw.dungeon.*;
 
 /**
  * A goal where the player must reach the exit of the dungeon

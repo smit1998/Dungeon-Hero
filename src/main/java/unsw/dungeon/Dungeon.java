@@ -1,5 +1,7 @@
 package main.java.unsw.dungeon;
 
+import main.java.unsw.dungeon.goals.*;
+
 import java.util.ArrayList;
 import java.util.List;
 

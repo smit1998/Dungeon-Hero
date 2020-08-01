@@ -1,12 +1,12 @@
-package main.java.unsw.dungeon;
+package main.java.unsw.dungeon.goals;
 
 import java.util.List;
 
 /**
- * A goal strategy where the complex goal will be completed if any of its
- * subgoals are completed.
+ * A goal strategy where all subgoals must be completed before the complex goal
+ * is considered completed.
  */
-public class OrGoalStrategy implements GoalStrategy {
+public class AndGoalStrategy implements GoalStrategy {
 
     /**
      * Determine of a list of goals completes the requirement of this goal strategy.
@@ -16,15 +16,15 @@ public class OrGoalStrategy implements GoalStrategy {
      */
     public boolean isComplete(List<ComponentGoal> goals) {
         for (ComponentGoal goal : goals) {
-            if (goal.isComplete() == true) {
-                return true;
+            if (goal.isComplete() == false) {
+                return false;
             }
         }
-        return false;
+        return true;
     }
 
     public String toString(List<ComponentGoal> goals) {
-        String str = "Complete any of the following goals:";
+        String str = "Complete all of the following goals:";
         for (ComponentGoal subgoal : goals) {
             String subgoalString = subgoal.toString();
             subgoalString = subgoalString.replaceAll("(^|\n)", "$1  ");

@@ -1,5 +1,7 @@
 package main.java.unsw.dungeon;
 
+import main.java.unsw.dungeon.goals.*;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;

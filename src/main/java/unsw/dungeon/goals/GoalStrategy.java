@@ -1,4 +1,4 @@
-package main.java.unsw.dungeon;
+package main.java.unsw.dungeon.goals;
 
 import java.util.List;
 
