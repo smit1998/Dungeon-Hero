@@ -155,8 +155,64 @@ public class DungeonController implements Runnable, Controller {
         input.remove(code);
     }
 
-    public void run() {
+    private final Object lock = new Object();
 
+    private boolean isPaused = false;
+
+    public void run() {
+        // Game loop - https://youtu.be/w1aB5gc38C8
+        // Pause runnable - https://stackoverflow.com/a/37565875
+        try {
+            // For fade out of black
+            Thread.sleep(2500);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+        int fps = 30;
+        double timePerTick = 1000000000 / fps;
+        double delta = 0;
+        long now;
+        long lastTime = System.nanoTime();
+        while (running) {
+            synchronized (lock) {
+                if (!running)
+                    break;
+                if (isPaused) {
+                    try {
+                        synchronized (lock) {
+                            lock.wait();
+                        }
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                        break;
+                    }
+                    if (!running)
+                        break;
+                    lastTime = System.nanoTime();
+                }
+            }
+            now = System.nanoTime();
+            delta += (now - lastTime) / timePerTick;
+            lastTime = now;
+            if (delta >= 1) {
+                player.tick(input);
+                dungeon.tick();
+                delta -= 1;
+            }
+        }
+        stop();
+    }
+
+    public Scene getScene() throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("DungeonView.fxml"));
+        loader.setController(this);
+        Parent root = loader.load();
+        Scene scene = new Scene(root);
+        root.requestFocus();
+        return scene;
+    }
+
+    public synchronized void start() {
         StackPane goalTextPane = new StackPane();
         goalTextPane.setStyle("-fx-background-color: black");
 
@@ -184,12 +240,6 @@ public class DungeonController implements Runnable, Controller {
         fadeOutBlack.play();
         fadeInText.play();
 
-        try {
-            Thread.sleep(2500);
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
-        }
-
         Platform.runLater(new Runnable() {
             @Override
             public void run() {
@@ -198,35 +248,6 @@ public class DungeonController implements Runnable, Controller {
             }
         });
 
-        // https://youtu.be/w1aB5gc38C8
-        int fps = 30;
-        double timePerTick = 1000000000 / fps;
-        double delta = 0;
-        long now;
-        long lastTime = System.nanoTime();
-        while (running) {
-            now = System.nanoTime();
-            delta += (now - lastTime) / timePerTick;
-            lastTime = now;
-            if (delta >= 1) {
-                player.tick(input);
-                dungeon.tick();
-                delta -= 1;
-            }
-        }
-        stop();
-    }
-
-    public Scene getScene() throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("DungeonView.fxml"));
-        loader.setController(this);
-        Parent root = loader.load();
-        Scene scene = new Scene(root);
-        root.requestFocus();
-        return scene;
-    }
-
-    public synchronized void start() {
         if (!running) {
             running = true;
             thread = new Thread(this);
@@ -329,14 +350,15 @@ public class DungeonController implements Runnable, Controller {
 
     @FXML
     public void handleResume() {
-        setIsPaused(false);
-        start();
+        synchronized (lock) {
+            setIsPaused(false);
+            lock.notifyAll();
+        }
         squares.requestFocus();
     }
 
     public void handlePause() {
         setIsPaused(true);
-        stopGameLoop();
         resume_button.requestFocus();
     }
 
@@ -345,6 +367,7 @@ public class DungeonController implements Runnable, Controller {
     }
 
     private void setIsPaused(boolean isPaused) {
+        this.isPaused = isPaused;
         pause_menu.setVisible(isPaused);
         pause_menu.setDisable(!isPaused);
     }
@@ -397,21 +420,5 @@ public class DungeonController implements Runnable, Controller {
             default:
                 break;
         }
-    }
-
-    private void displayGoal() {
-        Text goalText = new Text(dungeon.getGoalType() == GoalType.COMPLEX_GOAL ? "" : dungeon.getGoalString());
-        goalText.setTextAlignment(TextAlignment.CENTER);
-        goalText.setFill(Color.WHITE);
-        goalText.setFont(Font.font("Verdana", 20));
-
-        FadeTransition ft = new FadeTransition(Duration.millis(3000), goalText);
-        ft.setFromValue(1.0);
-        ft.setToValue(0.0);
-        ft.setCycleCount(1);
-        ft.setAutoReverse(true);
-
-        map_stack.getChildren().add(goalText);
-        ft.play();
     }
 }
