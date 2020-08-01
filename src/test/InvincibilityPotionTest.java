@@ -10,6 +10,7 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import main.java.unsw.dungeon.*;
+import main.java.unsw.dungeon.entities.*;
 
 class InvincibilityPotionTest {
 

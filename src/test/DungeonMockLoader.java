@@ -2,6 +2,7 @@ package test;
 
 import org.json.JSONObject;
 import main.java.unsw.dungeon.*;
+import main.java.unsw.dungeon.entities.*;
 
 public class DungeonMockLoader extends DungeonLoader {
 

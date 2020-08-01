@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import main.java.unsw.dungeon.*;
+import main.java.unsw.dungeon.entities.*;
 
 class FloorSwitchTest {
 

@@ -4,6 +4,7 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import main.java.unsw.dungeon.*;
+import main.java.unsw.dungeon.entities.*;
 
 class BoulderTest {
 
