@@ -18,12 +18,11 @@ public class Player extends LifeEntity {
 
     private BooleanProperty isAlive = new SimpleBooleanProperty(true);
 
-    private static int TICKS_PER_MOVE = 5;
-
     private int ticksSinceUp = 0;
     private int ticksSinceDown = 0;
     private int ticksSinceLeft = 0;
     private int ticksSinceRight = 0;
+    private int TICKS_PER_MOVE= 5; 
 
     private Inventory inventory;
 
