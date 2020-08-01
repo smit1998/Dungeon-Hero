@@ -51,9 +51,11 @@ public class EntityFactory {
                 effects.add(new SpeedUpEffect(dungeon));
                 return new Potion(x, y, dungeon, effects);
             }
-
             case DAGGER: {
                 return new Weapon(x, y, dungeon, new InstantKillAttack(), 1);
+            }
+            case CHECKPOINT: {
+                return new Checkpoint(x, y, dungeon);
             }
             default:
                 return null;

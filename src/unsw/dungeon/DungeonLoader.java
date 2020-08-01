@@ -183,10 +183,9 @@ public abstract class DungeonLoader {
                 onLoad(dagger, "dagger");
                 break;
             }
-            case "checkpoint": {
-                Checkpoint checkpoint = new Checkpoint(x, y, dungeon);
+            case CHECKPOINT: {
+                Checkpoint checkpoint = (Checkpoint) entity;
                 onLoad(checkpoint);
-                entity = checkpoint;
                 break;
             }
         }
