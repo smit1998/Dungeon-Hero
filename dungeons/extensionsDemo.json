@@ -103,13 +103,15 @@
       { "x" : 15, "y" : 2, "type" : "wall" }, 
       { "x" : 16, "y" : 2, "type" : "wall" }, 
       { "x" : 17, "y" : 2, "type" : "wall" }, 
-      { "x" : 18, "y" : 2, "type" : "wall" }, 
       { "x" : 8, "y" : 1, "type" : "enemy" }, 
       { "x" : 10, "y" : 1, "type" : "enemy" }, 
       { "x" : 12, "y" : 1, "type" : "enemy" }, 
       { "x" : 14, "y" : 1, "type" : "enemy" }, 
       { "x" : 16, "y" : 1, "type" : "enemy" },
       { "x" : 18, "y" : 1, "type" : "enemy" }, 
+      { "x" : 3, "y" : 3, "type" : "sword" }, 
+      { "x" : 18, "y" : 2, "type" : "portal", "id" : 1}, 
+      { "x" : 1, "y" : 10, "type" : "portal", "id" : 1} 
     ],
     "goal-condition": {"goal" : "exit" }
   }
