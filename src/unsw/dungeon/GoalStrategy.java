@@ -15,7 +15,5 @@ public interface GoalStrategy {
      */
     public boolean isComplete(List<ComponentGoal> goals);
 
-    public List<ComponentGoal> getEssentialGoals(List<ComponentGoal> goals);
-
     public String toString(List<ComponentGoal> goals);
 }

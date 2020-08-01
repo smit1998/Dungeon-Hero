@@ -1,8 +1,5 @@
 package unsw.dungeon;
 
-import java.util.ArrayList;
-import java.util.List;
-
 /**
  * A goal where all enemies must be defeated
  */
@@ -50,14 +47,6 @@ public class EnemiesGoal extends BasicGoal implements Observer {
             Enemy enemy = (Enemy) e;
             enemy.attach(this);
         }
-    }
-
-    @Override
-    public List<ComponentGoal> getEssentialGoals() {
-        List<ComponentGoal> essentials = new ArrayList<>();
-        if (!isComplete())
-            essentials.add(this);
-        return essentials;
     }
 
     @Override

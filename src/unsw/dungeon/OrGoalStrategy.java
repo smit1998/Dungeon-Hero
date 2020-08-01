@@ -1,6 +1,5 @@
 package unsw.dungeon;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -22,17 +21,6 @@ public class OrGoalStrategy implements GoalStrategy {
             }
         }
         return false;
-    }
-
-    public List<ComponentGoal> getEssentialGoals(List<ComponentGoal> goals) {
-        List<ComponentGoal> essentials = new ArrayList<>();
-        if (goals.isEmpty())
-            return essentials;
-
-        for (ComponentGoal goal : goals.get(0).getEssentialGoals()) {
-            essentials.add(goal);
-        }
-        return essentials;
     }
 
     public String toString(List<ComponentGoal> goals) {

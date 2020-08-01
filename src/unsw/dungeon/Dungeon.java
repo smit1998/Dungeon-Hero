@@ -5,8 +5,6 @@ import java.util.List;
 
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 
 /**
  * A dungeon in the interactive dungeon player.
@@ -113,7 +111,6 @@ public class Dungeon {
      */
     public void setGoal(ComponentGoal goal) {
         this.goal = goal;
-        essentialGoals = FXCollections.observableList(goal.getEssentialGoals());
     }
 
     /**
@@ -216,7 +213,6 @@ public class Dungeon {
             }
         }
         entities.removeAll(toRemove);
-        updateEssentialGoals();
         updateCompletion();
     }
 
@@ -227,30 +223,6 @@ public class Dungeon {
         for (int i = 0; i < ticks; i++) {
             tick();
         }
-    }
-
-    private ObservableList<ComponentGoal> essentialGoals;
-
-    private void updateEssentialGoals() {
-        List<ComponentGoal> newGoals = goal.getEssentialGoals();
-        List<ComponentGoal> toAdd = new ArrayList<>();
-        List<ComponentGoal> toRemove = new ArrayList<>();
-        for (ComponentGoal eGoal : newGoals) {
-            if (!essentialGoals.contains(eGoal)) {
-                toAdd.add(eGoal);
-            }
-        }
-        for (ComponentGoal oldGoal : essentialGoals) {
-            if (!newGoals.contains(oldGoal)) {
-                toRemove.add(oldGoal);
-            }
-        }
-        essentialGoals.removeAll(toRemove);
-        essentialGoals.addAll(toAdd);
-    }
-
-    public ObservableList<ComponentGoal> getEssentialGoals() {
-        return essentialGoals;
     }
 
     public String getGoalString() {

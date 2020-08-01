@@ -92,7 +92,6 @@ public class DungeonController implements Runnable, Controller {
         this.initialEntities = new ArrayList<>(initialEntities);
         this.file = file;
         trackCompletion(dungeon);
-        trackEssentialGoals(dungeon);
         trackIsAlive(player);
     }
 
@@ -125,7 +124,7 @@ public class DungeonController implements Runnable, Controller {
         Platform.runLater(new Runnable() {
             @Override
             public void run() {
-                squares.requestFocus();
+                stack.requestFocus();
             }
         });
 
@@ -186,16 +185,18 @@ public class DungeonController implements Runnable, Controller {
         fadeInText.play();
 
         try {
-            Thread.sleep(3000);
-            Platform.runLater(new Runnable() {
-                @Override
-                public void run() {
-                    map_stack.getChildren().remove(goalTextPane);
-                }
-            });
+            Thread.sleep(2500);
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
+
+        Platform.runLater(new Runnable() {
+            @Override
+            public void run() {
+                map_stack.getChildren().remove(goalTextPane);
+                squares.requestFocus();
+            }
+        });
 
         // https://youtu.be/w1aB5gc38C8
         int fps = 30;
@@ -284,52 +285,6 @@ public class DungeonController implements Runnable, Controller {
                         }
                     }
                 });
-            }
-        });
-    }
-
-    public void trackEssentialGoals(Dungeon dungeon) {
-        dungeon.getEssentialGoals().addListener(new ListChangeListener<ComponentGoal>() {
-            @Override
-            public void onChanged(Change<? extends ComponentGoal> c) {
-                c.next();
-                for (ComponentGoal goal : c.getAddedSubList()) {
-                    switch (goal.getType()) {
-                        case EXIT_GOAL:
-                            System.out.println("Add exit goal");
-                            break;
-                        case ENEMIES_GOAL:
-                            System.out.println("Add enemies goal");
-                            break;
-                        case TREASURE_GOAL:
-                            System.out.println("Add treaure goal");
-                            break;
-                        case SWITCHES_GOAL:
-                            System.out.println("Add switch goal");
-                            break;
-                        default:
-                            break;
-                    }
-                }
-                for (ComponentGoal goal : c.getRemoved()) {
-                    switch (goal.getType()) {
-                        case EXIT_GOAL:
-                            System.out.println("Remove exit goal");
-                            break;
-                        case ENEMIES_GOAL:
-                            System.out.println("Remove enemies goal");
-                            break;
-                        case TREASURE_GOAL:
-                            System.out.println("Remove treaure goal");
-                            break;
-                        case SWITCHES_GOAL:
-                            System.out.println("Remove switch goal");
-                            break;
-                        default:
-                            break;
-                    }
-                }
-
             }
         });
     }

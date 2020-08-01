@@ -1,8 +1,5 @@
 package unsw.dungeon;
 
-import java.util.ArrayList;
-import java.util.List;
-
 /**
  * A goal where the player must reach the exit of the dungeon
  */
@@ -44,14 +41,6 @@ public class ExitGoal extends BasicGoal implements Observer {
             Exit exit = (Exit) e;
             exit.attach(this);
         }
-    }
-
-    @Override
-    public List<ComponentGoal> getEssentialGoals() {
-        List<ComponentGoal> essentials = new ArrayList<>();
-        if (!isComplete())
-            essentials.add(this);
-        return essentials;
     }
 
     @Override

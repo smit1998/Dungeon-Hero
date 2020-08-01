@@ -30,14 +30,6 @@ public class SwitchesGoal extends BasicGoal {
     }
 
     @Override
-    public List<ComponentGoal> getEssentialGoals() {
-        List<ComponentGoal> essentials = new ArrayList<>();
-        if (!isComplete())
-            essentials.add(this);
-        return essentials;
-    }
-
-    @Override
     public GoalType getType() {
         return GoalType.SWITCHES_GOAL;
     }

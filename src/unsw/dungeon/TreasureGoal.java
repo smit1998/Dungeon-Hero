@@ -1,8 +1,5 @@
 package unsw.dungeon;
 
-import java.util.ArrayList;
-import java.util.List;
-
 /**
  * A goal where all treasure must be collected.
  */
@@ -47,14 +44,6 @@ public class TreasureGoal extends BasicGoal implements Observer {
             Treasure t = (Treasure) e;
             t.attach(this);
         }
-    }
-
-    @Override
-    public List<ComponentGoal> getEssentialGoals() {
-        List<ComponentGoal> essentials = new ArrayList<>();
-        if (!isComplete())
-            essentials.add(this);
-        return essentials;
     }
 
     @Override
