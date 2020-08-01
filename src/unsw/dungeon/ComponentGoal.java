@@ -9,6 +9,8 @@ public interface ComponentGoal {
      */
     public boolean isComplete();
 
+    public GoalType getType();
+
     /**
      * Attach a subject to be observed by this goal
      * 

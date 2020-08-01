@@ -2,11 +2,9 @@ package unsw.dungeon;
 
 import java.util.List;
 import java.util.Set;
-import java.util.function.BooleanSupplier;
 
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
-import javafx.collections.ObservableList;
 
 import java.util.ArrayList;
 

@@ -225,4 +225,11 @@ public class Dungeon {
         }
     }
 
+    public String getGoalString() {
+        return goal.toString();
+    }
+
+    public GoalType getGoalType() {
+        return goal.getType();
+    }
 }
