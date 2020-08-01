@@ -1,4 +1,6 @@
-package main.java.unsw.dungeon;
+package main.java.unsw.dungeon.entities;
+
+import main.java.unsw.dungeon.*;
 
 /**
  * A boulder entity that can be pushed by the player

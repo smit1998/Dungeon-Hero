@@ -1,6 +1,6 @@
-package main.java.unsw.dungeon;
+package main.java.unsw.dungeon.entities;
 
-;
+import main.java.unsw.dungeon.*;
 
 /**
  * A floor switch entity that can be activated by a boulder

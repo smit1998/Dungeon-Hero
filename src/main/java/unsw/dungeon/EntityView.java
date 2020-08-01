@@ -1,5 +1,6 @@
 package main.java.unsw.dungeon;
 
+import main.java.unsw.dungeon.entities.*;
 import javafx.scene.image.ImageView;
 
 public class EntityView {

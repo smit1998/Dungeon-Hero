@@ -1,6 +1,7 @@
 package main.java.unsw.dungeon.goals;
 
 import main.java.unsw.dungeon.*;
+import main.java.unsw.dungeon.entities.*;
 
 /**
  * A goal where all treasure must be collected.

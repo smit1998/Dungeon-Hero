@@ -1,6 +1,6 @@
-package main.java.unsw.dungeon;
+package main.java.unsw.dungeon.entities;
 
-;
+import main.java.unsw.dungeon.*;
 
 /**
  * A portal entity that can transport the player to a different linked portal

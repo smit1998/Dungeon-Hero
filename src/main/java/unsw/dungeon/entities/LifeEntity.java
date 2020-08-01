@@ -1,6 +1,6 @@
-package main.java.unsw.dungeon;
+package main.java.unsw.dungeon.entities;
 
-;
+import main.java.unsw.dungeon.*;
 
 /**
  * A living entity that be attack and be killed

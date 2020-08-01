@@ -1,4 +1,6 @@
-package main.java.unsw.dungeon;
+package main.java.unsw.dungeon.entities;
+
+import main.java.unsw.dungeon.*;
 
 import java.util.HashSet;
 import java.util.Set;
