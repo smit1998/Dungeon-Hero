@@ -183,6 +183,12 @@ public abstract class DungeonLoader {
                 onLoad(dagger, "dagger");
                 break;
             }
+            case "checkpoint": {
+                Checkpoint checkpoint = new Checkpoint(x, y, dungeon);
+                onLoad(checkpoint);
+                entity = checkpoint;
+                break;
+            }
         }
         dungeon.addEntity(entity);
     }
@@ -210,6 +216,8 @@ public abstract class DungeonLoader {
     public abstract void onLoad(Weapon sword, String type);
 
     public abstract void onLoad(Potion potion, String type);
+
+    public abstract void onLoad(Checkpoint checkpoint);
 
     /**
      * Load a goal

@@ -690,3 +690,4 @@ Marks will be deducted for poor git and GitLab usage. For example, meaningless c
 * Changed pause menu and end screen text to graphical images
 * Add restart button to pause menu
 * Added goal display for basic goals 
+* Implemented checkpoint entity as an extension
