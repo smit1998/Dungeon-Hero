@@ -5,19 +5,19 @@ import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
 
-import javax.swing.Action;
-
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.FXML;
 
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
+import javafx.scene.paint.Paint;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
@@ -130,6 +130,7 @@ public class DungeonController implements Runnable, Controller {
         });
 
         start();
+
     }
 
     private Set<String> input = new TreeSet<String>();
@@ -156,6 +157,46 @@ public class DungeonController implements Runnable, Controller {
     }
 
     public void run() {
+
+        StackPane goalTextPane = new StackPane();
+        goalTextPane.setStyle("-fx-background-color: black");
+
+        Text goalText = new Text(dungeon.getGoalType() == GoalType.COMPLEX_GOAL ? "" : dungeon.getGoalString());
+        goalText.setTextAlignment(TextAlignment.CENTER);
+        goalText.setFill(Color.WHITE);
+        goalText.setFont(Font.font("", 20));
+
+        goalTextPane.getChildren().add(goalText);
+        stack.getChildren().add(goalTextPane);
+        goalText.toFront();
+
+        FadeTransition fadeInText = new FadeTransition(Duration.millis(750), goalText);
+        fadeInText.setFromValue(0.0);
+        fadeInText.setToValue(1.0);
+        fadeInText.setCycleCount(1);
+        fadeInText.setAutoReverse(true);
+
+        FadeTransition fadeOutBlack = new FadeTransition(Duration.millis(4000), goalTextPane);
+        fadeOutBlack.setFromValue(1.0);
+        fadeOutBlack.setToValue(0.0);
+        fadeOutBlack.setCycleCount(1);
+        fadeOutBlack.setAutoReverse(true);
+
+        fadeOutBlack.play();
+        fadeInText.play();
+
+        try {
+            Thread.sleep(3000);
+            Platform.runLater(new Runnable() {
+                @Override
+                public void run() {
+                    map_stack.getChildren().remove(goalTextPane);
+                }
+            });
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+
         // https://youtu.be/w1aB5gc38C8
         int fps = 30;
         double timePerTick = 1000000000 / fps;
