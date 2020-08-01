@@ -1,4 +1,4 @@
-package main.java.unsw.dungeon;
+package main.java.unsw.dungeon.controllers;
 
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
@@ -48,7 +48,7 @@ public class MainMenuController implements Controller {
     }
 
     public Scene getScene() throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("../../../resources/fxml/MainMenuView.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("../../../../resources/fxml/MainMenuView.fxml"));
         loader.setController(this);
         Parent root = loader.load();
         Scene scene = new Scene(root);

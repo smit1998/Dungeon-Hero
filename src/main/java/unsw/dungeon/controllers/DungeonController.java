@@ -1,4 +1,6 @@
-package main.java.unsw.dungeon;
+package main.java.unsw.dungeon.controllers;
+
+import main.java.unsw.dungeon.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -195,7 +197,7 @@ public class DungeonController implements Runnable, Controller {
     }
 
     public Scene getScene() throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("../../../resources/fxml/DungeonView.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("../../../../resources/fxml/DungeonView.fxml"));
         loader.setController(this);
         Parent root = loader.load();
         Scene scene = new Scene(root);

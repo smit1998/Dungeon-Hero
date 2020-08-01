@@ -1,5 +1,6 @@
 package main.java.unsw.dungeon;
 
+import main.java.unsw.dungeon.controllers.MainMenuController;
 import java.io.IOException;
 
 import javafx.application.Application;

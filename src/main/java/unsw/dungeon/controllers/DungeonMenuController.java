@@ -1,4 +1,6 @@
-package main.java.unsw.dungeon;
+package main.java.unsw.dungeon.controllers;
+
+import main.java.unsw.dungeon.*;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -165,7 +167,7 @@ public class DungeonMenuController implements Controller {
     }
 
     public Scene getScene() throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("../../../resources/fxml/DungeonMenuView.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("../../../../resources/fxml/DungeonMenuView.fxml"));
         loader.setController(this);
         Parent root = loader.load();
         Scene scene = new Scene(root);

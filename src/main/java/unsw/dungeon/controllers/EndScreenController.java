@@ -1,4 +1,6 @@
-package main.java.unsw.dungeon;
+package main.java.unsw.dungeon.controllers;
+
+import main.java.unsw.dungeon.*;
 
 import javafx.application.Platform;
 import javafx.event.Event;
@@ -75,14 +77,14 @@ public class EndScreenController implements Controller {
     }
 
     public Parent getParent() throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("../../../resources/fxml/EndScreenView.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("../../../../resources/fxml/EndScreenView.fxml"));
         loader.setController(this);
         Parent root = loader.load();
         return root;
     }
 
     public Scene getScene() throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("../../../resources/fxml/EndScreenView.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("../../../../resources/fxml/EndScreenView.fxml"));
         loader.setController(this);
         Parent root = loader.load();
         Scene scene = new Scene(root);

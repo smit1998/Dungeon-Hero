@@ -1,4 +1,6 @@
-package main.java.unsw.dungeon;
+package main.java.unsw.dungeon.controllers;
+
+import main.java.unsw.dungeon.*;
 
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
