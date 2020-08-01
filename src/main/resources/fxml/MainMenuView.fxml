@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.URL?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onKeyPressed="#handleKeyPress" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <ImageView fitHeight="400.0" fitWidth="600.0" pickOnBounds="true">
+         <image>
+            <Image url="@../images/wallimagebg.png" />
+         </image>
+      </ImageView>
+      <VBox alignment="CENTER" spacing="20.0">
+         <ImageView fitHeight="150.0" fitWidth="550.0" styleClass="text-image">
+            <image>
+               <Image url="@../images/title_text.png" />
+            </image>
+            <VBox.margin>
+               <Insets bottom="15.0" />
+            </VBox.margin>
+         </ImageView>
+         <StackPane>
+            <Button fx:id="play_button" mnemonicParsing="false" onAction="#handlePlay" onKeyPressed="#handlePlayKeyPress" prefHeight="45.0" prefWidth="120.0" text="Play" textFill="#2b09d3">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </Button>
+            <ImageView fitHeight="45.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true" translateX="-40.0">
+               <image>
+                  <Image url="@../images/human_new.png" />
+               </image>
+            </ImageView>
+         </StackPane>
+         <StackPane>
+            <Button fx:id="quit_button" mnemonicParsing="false" onAction="#handleQuit" onKeyPressed="#handleQuitKeyPress" prefHeight="45.0" prefWidth="120.0" text="Quit" textFill="#ee0602">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </Button>
+            <ImageView fitHeight="45.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true" translateX="40.0">
+               <image>
+                  <Image url="@../images/gnome.png" />
+               </image>
+            </ImageView>
+         </StackPane>
+      </VBox>
+   </children>
+   <stylesheets>
+      <URL value="@../css/DungeonStyle.css" />
+      <URL value="@../css/MainMenu.css" />
+   </stylesheets>
+</StackPane>

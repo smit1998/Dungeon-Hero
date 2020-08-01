@@ -10,7 +10,7 @@
       "name": "CodeLens (Launch) - DungeonApplication",
       "request": "launch",
       "vmArgs": "--module-path ./lib/symlink_javafx --add-modules javafx.controls,javafx.fxml",
-      "mainClass": "unsw.dungeon.DungeonApplication"
+      "mainClass": "main.java.unsw.dungeon.DungeonApplication"
     }
   ]
 }

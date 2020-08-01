@@ -4,7 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.jupiter.api.Test;
 
-import unsw.dungeon.Dungeon;
+import main.java.unsw.dungeon.Dungeon;
 
 public class MattTest {
     @Test

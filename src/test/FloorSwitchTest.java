@@ -4,7 +4,7 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import unsw.dungeon.*;
+import main.java.unsw.dungeon.*;
 
 class FloorSwitchTest {
 
@@ -111,7 +111,7 @@ class FloorSwitchTest {
         assertFalse(floorSwitch.isPressed());
     }
 
-    @Test 
+    @Test
     void PlayerWalksOverMultipleTimes() {
         Dungeon dungeon = new Dungeon(3, 1);
         Player player = new Player(dungeon, 0, 0);
@@ -120,7 +120,7 @@ class FloorSwitchTest {
         dungeon.addEntity(player);
         dungeon.addEntity(floorSwitch);
 
-        //player moves on and of the switch multiple times
+        // player moves on and of the switch multiple times
         player.moveRight();
         player.moveLeft();
         player.moveRight();

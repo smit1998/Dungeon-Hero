@@ -1,7 +1,7 @@
 package test;
 
 import org.json.JSONObject;
-import unsw.dungeon.*;
+import main.java.unsw.dungeon.*;
 
 public class DungeonMockLoader extends DungeonLoader {
 

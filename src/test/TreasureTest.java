@@ -7,11 +7,11 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-import unsw.dungeon.*;
+import main.java.unsw.dungeon.*;
 
 class treasureTest {
     @Test
-    void BasicTreasureTest () {
+    void BasicTreasureTest() {
         JSONObject playerJSON = new JSONObject();
         playerJSON.put("x", 0);
         playerJSON.put("y", 0);
