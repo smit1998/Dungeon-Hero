@@ -12,3 +12,7 @@
 .text-image {
   -fx-effect: dropshadow(three-pass-box, rgba(255, 185, 0, 0.8), 5, 0, 0, 0);
 }
+
+.button-selected {
+  -fx-effect: dropshadow(one-pass-box, rgb(255, 0, 0), 50, 0, 0, 0);
+}
