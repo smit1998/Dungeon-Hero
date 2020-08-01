@@ -43,6 +43,7 @@ public class DungeonControllerLoader extends DungeonLoader {
     private Image invincibilityImage = new Image((new File("images/brilliant_blue_new.png")).toURI().toString());
     private Image speedBootsImage = new Image((new File("images/speedBoots.png")).toURI().toString());
     private Image daggerImage = new Image((new File("images/Dagger.png")).toURI().toString());
+    private Image checkpointImage = new Image((new File("images/checkpoint.png")).toURI().toString());
 
     public DungeonControllerLoader(String filename) throws FileNotFoundException {
         super(filename);
@@ -123,6 +124,12 @@ public class DungeonControllerLoader extends DungeonLoader {
         addEntity(new EntityView(enemy, view));
     }
 
+    @Override
+    public void onLoad(Checkpoint checkpoint) {
+        ImageView view = new ImageView(checkpointImage);
+        view.setViewOrder(RenderLayer.ITEM);
+        addEntity(new EntityView(checkpoint, view));
+    }
     /*
      * @Override public void onLoad(Weapon sword) { ImageView view = new
      * ImageView(swordImage); addEntity(sword, view); }

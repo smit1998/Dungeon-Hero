@@ -19,6 +19,8 @@ import java.util.ArrayList;
 public class Player extends LifeEntity {
 
     private BooleanProperty isAlive = new SimpleBooleanProperty(true);
+    private int livesRemaining = 1;
+    private Checkpoint checkpoint;
 
     private int ticksSinceUp = 0;
     private int ticksSinceDown = 0;
@@ -188,8 +190,14 @@ public class Player extends LifeEntity {
 
     @Override
     public void kill() {
-        super.kill();
-        isAlive.setValue(false);
+        if (livesRemaining > 1 && checkpoint != null) {
+            livesRemaining--;
+            setX(checkpoint.getX());
+            setY(checkpoint.getY());
+        } else {
+            super.kill();
+            isAlive.setValue(false);
+        }
     }
 
     /**
@@ -217,4 +225,13 @@ public class Player extends LifeEntity {
     public void removeItem(ItemEntity item) {
         inventory.removeItem(item);
     }
+
+    public void increaseLives() {
+        livesRemaining++;
+    }
+
+    public void setCheckpoint(Checkpoint checkpoint) {
+        this.checkpoint = checkpoint;
+    }
+
 }
