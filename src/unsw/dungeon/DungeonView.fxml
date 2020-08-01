@@ -40,15 +40,16 @@
                   <Insets bottom="15.0" />
                </VBox.margin>
             </ImageView>
-            <HBox alignment="CENTER" spacing="30.0">
+            <VBox alignment="CENTER" spacing="30.0">
                <children>
-                  <Button fx:id="quit_button" mnemonicParsing="false" onAction="#handleQuit" prefWidth="80.0" text="Quit" />
                   <Button fx:id="resume_button" mnemonicParsing="false" onAction="#handleResume" prefWidth="80.0" text="Resume" />
+                  <Button fx:id="restart_button" mnemonicParsing="false" onAction="#handleRestart" prefWidth="80.0" text="Restart" />
+                  <Button fx:id="quit_button" mnemonicParsing="false" onAction="#handleQuit" prefWidth="80.0" text="Quit" />
                </children>
                <padding>
                   <Insets top="20.0" />
                </padding>
-            </HBox>
+            </VBox>
             <HBox alignment="CENTER" prefHeight="64.0" />
          </children>
       </VBox>

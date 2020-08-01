@@ -11,13 +11,11 @@ import javafx.fxml.FXML;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
-import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
-import javafx.scene.paint.Paint;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
@@ -28,16 +26,9 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.animation.FadeTransition;
-import javafx.animation.KeyFrame;
-import javafx.animation.Timeline;
 import javafx.application.Platform;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
-import javafx.collections.FXCollections;
-import javafx.collections.ListChangeListener;
-import javafx.collections.ObservableList;
-import javafx.collections.ListChangeListener.Change;
-import javafx.event.ActionEvent;
 import javafx.event.Event;
 
 import java.io.File;
@@ -97,8 +88,8 @@ public class DungeonController implements Runnable, Controller {
 
     @FXML
     public void initialize() throws IOException {
-        resume_button.setOnKeyPressed(e -> handleResumeKeyPress(e));
-        quit_button.setOnKeyPressed(e -> handleQuitKeyPress(e));
+        // resume_button.setOnKeyPressed(e -> handleResumeKeyPress(e));
+        // quit_button.setOnKeyPressed(e -> handleQuitKeyPress(e));
 
         Image ground = new Image((new File("images/dirt_0_new.png")).toURI().toString());
         Image backpack = new Image((new File("images/backpack.png")).toURI().toString());
@@ -264,6 +255,7 @@ public class DungeonController implements Runnable, Controller {
                 e.printStackTrace();
             }
         }
+
     }
 
     public void trackCompletion(Dungeon dungeon) {
@@ -357,6 +349,15 @@ public class DungeonController implements Runnable, Controller {
         squares.requestFocus();
     }
 
+    @FXML
+    public void handleRestart(Event event) throws IOException {
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        DungeonControllerLoader dungeonLoader = new DungeonControllerLoader(file);
+        DungeonController controller = dungeonLoader.loadController();
+        stage.setScene(controller.getScene());
+        stage.show();
+    }
+
     public void handlePause() {
         setIsPaused(true);
         resume_button.requestFocus();
@@ -391,34 +392,22 @@ public class DungeonController implements Runnable, Controller {
         }
     }
 
-    private void handleQuitKeyPress(KeyEvent event) {
-        try {
-            switch (event.getCode()) {
-                case ENTER:
-                    handleQuit();
-                    break;
-                case RIGHT:
-                case D:
-                    resume_button.requestFocus();
-                    break;
-                default:
-                    break;
-            }
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
-    }
+    // private void handleQuitKeyPress(KeyEvent event) {
+    // try {
+    // switch (event.getCode()) {
+    // case ENTER:
+    // handleQuit();
+    // break;
+    // case RIGHT:
+    // case D:
+    // resume_button.requestFocus();
+    // break;
+    // default:
+    // break;
+    // }
+    // } catch (Exception e) {
+    // throw new RuntimeException(e);
+    // }
+    // }
 
-    private void handleResumeKeyPress(KeyEvent event) {
-        switch (event.getCode()) {
-            case ENTER:
-                handleResume();
-                break;
-            case LEFT:
-            case A:
-                quit_button.requestFocus();
-            default:
-                break;
-        }
-    }
 }
