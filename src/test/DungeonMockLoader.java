@@ -56,4 +56,8 @@ public class DungeonMockLoader extends DungeonLoader {
     @Override
     public void onLoad(Potion invincibilityPotion, String type) {
     }
+
+    @Override
+    public void onLoad(Checkpoint checkpoint) {
+    }
 }
