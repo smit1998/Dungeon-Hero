@@ -111,7 +111,8 @@
       { "x" : 18, "y" : 1, "type" : "enemy" }, 
       { "x" : 3, "y" : 3, "type" : "sword" }, 
       { "x" : 18, "y" : 2, "type" : "portal", "id" : 1}, 
-      { "x" : 1, "y" : 10, "type" : "portal", "id" : 1} 
+      { "x" : 1, "y" : 10, "type" : "portal", "id" : 1}, 
+      { "x" : 4, "y" : 18, "type" : "speed" } 
     ],
     "goal-condition": {"goal" : "exit" }
   }
