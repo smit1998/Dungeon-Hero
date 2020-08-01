@@ -93,107 +93,94 @@ public abstract class DungeonLoader {
      * @param json    JSONObject containing entity details
      */
     private void loadEntity(Dungeon dungeon, JSONObject json) {
-        String type = json.getString("type");
+        EntityType type = EntityType.get(json.getString("type"));
         int x = json.getInt("x");
         int y = json.getInt("y");
 
-        Entity entity = null;
+        int id = -1;
+        try {
+            id = json.getInt("id");
+        } catch (Exception e) {
+        }
+
+        EntityFactory factory = new EntityFactory();
+        Entity entity = factory.createEntity(type, x, y, id, dungeon);
+        if (entity == null) {
+            throw new Error("Invalid entity type");
+        }
         switch (type) {
-            case "player": {
-                Player player = new Player(dungeon, x, y);
+            case PLAYER: {
+                Player player = (Player) entity;
                 dungeon.setPlayer(player);
                 onLoad(player);
-                entity = player;
                 break;
             }
-            case "wall": {
-                Wall wall = new Wall(x, y, dungeon);
+            case WALL: {
+                Wall wall = (Wall) entity;
                 onLoad(wall);
-                entity = wall;
                 break;
             }
-            case "exit": {
-                Exit exit = new Exit(x, y, dungeon);
+            case EXIT: {
+                Exit exit = (Exit) entity;
                 onLoad(exit);
-                entity = exit;
                 break;
             }
-            case "treasure": {
-                Treasure treasure = new Treasure(x, y, dungeon);
+            case TREASURE: {
+                Treasure treasure = (Treasure) entity;
                 onLoad(treasure);
-                entity = treasure;
                 treasureSpawned++;
                 break;
             }
-            case "door": {
-                int id = json.getInt("id");
-                Door door = new Door(x, y, dungeon, id);
+            case DOOR: {
+                Door door = (Door) entity;
                 onLoad(door);
-                entity = door;
                 break;
             }
-            case "key": {
-                int id = json.getInt("id");
-                Key key = new Key(x, y, dungeon, id);
+            case KEY: {
+                Key key = (Key) entity;
                 onLoad(key);
-                entity = key;
                 break;
             }
-            case "boulder": {
-                Boulder boulder = new Boulder(x, y, dungeon);
+            case BOULDER: {
+                Boulder boulder = (Boulder) entity;
                 onLoad(boulder);
-                entity = boulder;
                 break;
             }
-            case "switch": {
-                FloorSwitch floorSwitch = new FloorSwitch(x, y, dungeon);
+            case SWITCH: {
+                FloorSwitch floorSwitch = (FloorSwitch) entity;
                 onLoad(floorSwitch);
-                entity = floorSwitch;
                 break;
             }
-            case "portal": {
-                int id = json.getInt("id");
-                Portal portal = new Portal(x, y, dungeon, id);
+            case PORTAL: {
+                Portal portal = (Portal) entity;
                 onLoad(portal);
-                entity = portal;
                 break;
             }
-            case "enemy": {
-                Enemy enemy = new Enemy(x, y, dungeon);
+            case ENEMY: {
+                Enemy enemy = (Enemy) entity;
                 onLoad(enemy);
-                entity = enemy;
                 enemiesSpawned++;
                 break;
             }
-            case "sword": {
-                Weapon sword = new Weapon(x, y, dungeon, new InstantKillAttack(), 5);
+            case SWORD: {
+                Weapon sword = (Weapon) entity;
                 onLoad(sword, "sword");
-                entity = sword;
                 break;
             }
-            case "invincibility": {
-                ArrayList<EffectBehaviour> effects = new ArrayList<EffectBehaviour>();
-                effects.add(new InvincibilityEffect(dungeon));
-                effects.add(new FearEffect(dungeon));
-                effects.add(new MeleeKillEffect(dungeon));
-                Potion potion = new Potion(x, y, dungeon, effects);
+            case INVINCIBILITY: {
+                Potion potion = (Potion) entity;
                 onLoad(potion, "invincibility");
-                entity = potion;
                 break;
             }
-            case "speed": {
-                ArrayList<EffectBehaviour> effects = new ArrayList<EffectBehaviour>();
-                effects.add(new SpeedUpEffect(dungeon));
-                Potion potion = new Potion(x, y, dungeon, effects);
+            case SPEED: {
+                Potion potion = (Potion) entity;
                 onLoad(potion, "speedBoots");
-                entity = potion;
                 break;
             }
 
-            case "dagger": {
-                Weapon dagger = new Weapon(x, y, dungeon, new InstantKillAttack(), 1);
+            case DAGGER: {
+                Weapon dagger = (Weapon) entity;
                 onLoad(dagger, "dagger");
-                entity = dagger;
                 break;
             }
         }
