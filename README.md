@@ -675,3 +675,8 @@ Marks will be deducted for poor git and GitLab usage. For example, meaningless c
 
 **Fergus**
 * Changed how the switch goal determines if it is completed.
+
+##### 31/07/2020
+
+**Fergus**
+* Added main CSS for frontend

@@ -1,7 +1,6 @@
 package test;
 
 import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import unsw.dungeon.*;
@@ -217,28 +216,22 @@ class BoulderTest {
         assertTrue(exit.getY() == 0);
     }
 
-    /*@Test
-    void testInvincibilityPotionObstruction() {
-        Dungeon dungeon = new Dungeon(3, 1);
-        Player player = new Player(dungeon, 0, 0);
-        Boulder boulder = new Boulder(1, 0, dungeon);
-        InvincibilityPotion potion = new InvincibilityPotion(2, 0, dungeon);
-        dungeon.addEntity(player);
-        dungeon.addEntity(boulder);
-        dungeon.addEntity(potion);
-
-        player.moveRight();
-
-        // Test that no entities have moved
-        assertTrue(player.getX() == 0);
-        assertTrue(player.getY() == 0);
-
-        assertTrue(boulder.getX() == 1);
-        assertTrue(boulder.getY() == 0);
-
-        assertTrue(potion.getX() == 2);
-        assertTrue(potion.getY() == 0);
-    }*/
+    /*
+     * @Test void testInvincibilityPotionObstruction() { Dungeon dungeon = new
+     * Dungeon(3, 1); Player player = new Player(dungeon, 0, 0); Boulder boulder =
+     * new Boulder(1, 0, dungeon); InvincibilityPotion potion = new
+     * InvincibilityPotion(2, 0, dungeon); dungeon.addEntity(player);
+     * dungeon.addEntity(boulder); dungeon.addEntity(potion);
+     * 
+     * player.moveRight();
+     * 
+     * // Test that no entities have moved assertTrue(player.getX() == 0);
+     * assertTrue(player.getY() == 0);
+     * 
+     * assertTrue(boulder.getX() == 1); assertTrue(boulder.getY() == 0);
+     * 
+     * assertTrue(potion.getX() == 2); assertTrue(potion.getY() == 0); }
+     */
 
     @Test
     void testKeyObstruction() {
@@ -263,28 +256,22 @@ class BoulderTest {
         assertTrue(key.getY() == 0);
     }
 
-   /* @Test
-    void testSwordObstruction() {
-        Dungeon dungeon = new Dungeon(3, 1);
-        Player player = new Player(dungeon, 0, 0);
-        Boulder boulder = new Boulder(1, 0, dungeon);
-        Sword sword = new Sword(2, 0, dungeon);
-        dungeon.addEntity(player);
-        dungeon.addEntity(boulder);
-        dungeon.addEntity(sword);
-
-        player.moveRight();
-
-        // Test that no entities have moved
-        assertTrue(player.getX() == 0);
-        assertTrue(player.getY() == 0);
-
-        assertTrue(boulder.getX() == 1);
-        assertTrue(boulder.getY() == 0);
-
-        assertTrue(sword.getX() == 2);
-        assertTrue(sword.getY() == 0);
-    } */
+    /*
+     * @Test void testSwordObstruction() { Dungeon dungeon = new Dungeon(3, 1);
+     * Player player = new Player(dungeon, 0, 0); Boulder boulder = new Boulder(1,
+     * 0, dungeon); Sword sword = new Sword(2, 0, dungeon);
+     * dungeon.addEntity(player); dungeon.addEntity(boulder);
+     * dungeon.addEntity(sword);
+     * 
+     * player.moveRight();
+     * 
+     * // Test that no entities have moved assertTrue(player.getX() == 0);
+     * assertTrue(player.getY() == 0);
+     * 
+     * assertTrue(boulder.getX() == 1); assertTrue(boulder.getY() == 0);
+     * 
+     * assertTrue(sword.getX() == 2); assertTrue(sword.getY() == 0); }
+     */
 
     @Test
     void testTreasureObstruction() {

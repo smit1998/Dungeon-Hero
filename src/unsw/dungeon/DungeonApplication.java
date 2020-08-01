@@ -9,7 +9,7 @@ public class DungeonApplication extends Application {
 
     @Override
     public void start(Stage primaryStage) throws IOException {
-        primaryStage.setTitle("Dungeon");
+        primaryStage.setTitle("Dungeon Hero");
 
         MainMenuController controller = new MainMenuController();
         primaryStage.setScene(controller.getScene());
