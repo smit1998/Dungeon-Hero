@@ -24,3 +24,22 @@
 .split-pane *.split-pane-divider {
   -fx-padding: 0 0 0 0;
 }
+
+.list-view {
+  -fx-opacity: 1;
+  -fx-background-color: #222222;
+}
+
+.list-cell {
+  -fx-alignment: center-left;
+  -fx-cell-size: 50;
+  -fx-font-size: 20;
+  -fx-background-color: transparent;
+  -fx-text-fill: white;
+  -fx-opacity: 1;
+}
+
+.list-cell:selected {
+  -fx-background-color: #1a1a1a;
+  -fx-text-fill: #fdd700;
+}

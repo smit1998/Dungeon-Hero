@@ -7,6 +7,7 @@ import java.util.List;
 
 import javafx.collections.ObservableList;
 import javafx.scene.layout.StackPane;
+import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.event.Event;
@@ -15,9 +16,12 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Cell;
+import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
+import javafx.util.Callback;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 
@@ -46,6 +50,22 @@ public class DungeonMenuController implements Controller {
     public void initialize() {
         buttons.add(play_button);
         buttons.add(back_button);
+        dungeonList.setCellFactory(new Callback<ListView<DungeonMenuItem>, ListCell<DungeonMenuItem>>() {
+            @Override
+            public ListCell<DungeonMenuItem> call(ListView<DungeonMenuItem> listview) {
+                ListCell<DungeonMenuItem> cell = new ListCell<>() {
+                    @Override
+                    protected void updateItem(DungeonMenuItem item, boolean empty) {
+                        super.updateItem(item, empty);
+                        if (item != null) {
+                            setText(item.toString());
+                            setFont(MAIN_FONT);
+                        }
+                    }
+                };
+                return cell;
+            }
+        });
         dungeonList.setItems(observableList);
         dungeonList.getSelectionModel().selectFirst();
 
