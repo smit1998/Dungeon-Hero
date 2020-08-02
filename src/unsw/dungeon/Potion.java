@@ -43,10 +43,10 @@ public class Potion extends ItemEntity {
 
     @Override
     public boolean interact(Entity caller) {
-        if (caller instanceof Player) {
+        if (caller.getClass() == Player.class) {
             return interact((Player) caller);
         }
-        if (caller instanceof Boulder) {
+        if (caller.getClass() == Boulder.class) {
             return interact((Boulder) caller);
         }
         return false;

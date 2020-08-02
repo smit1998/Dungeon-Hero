@@ -45,12 +45,17 @@ public class FloorSwitch extends Entity {
      * @return whether the interaction was successful
      */
     public boolean interact(Entity caller) {
-        if (caller instanceof Boulder) {
-            updateIsPressed(true);
+        if (caller.getClass() == Boulder.class) {
+            return interact((Boulder) caller); 
         } else {
             updateIsPressed(false);
         }
         return true;
+    }
+
+    private boolean interact(Boulder boulder) {
+        updateIsPressed(true); 
+        return true; 
     }
 
     /**

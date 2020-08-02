@@ -29,11 +29,11 @@ public class Treasure extends Entity implements Subject {
      * @return whether the interaction was successful
      */
     public boolean interact(Entity caller) {
-        if (caller instanceof Player) {
+        if (caller.getClass() == Player.class) {
             notifyObservers();
             setVisibility(false);
         }
-        if (caller instanceof Boulder) {
+        if (caller.getClass() == Boulder.class) {
             return false;
         }
         return true;

@@ -13,13 +13,13 @@ public class Inventory {
      * adds an item to the inventory and does nothing if item type already exists
      */
     public void addItem(ItemEntity item) {
-        if (item instanceof Weapon) {
+        if (item.getClass() == Weapon.class) {
             setWeapon((Weapon) item);
         }
-        if (item instanceof Key) {
+        if (item.getClass() == Key.class) {
             setKey((Key) item);
         }
-        if (item instanceof Potion) {
+        if (item.getClass() == Potion.class) {
             setPotion((Potion) item);
         }
     }
@@ -28,13 +28,13 @@ public class Inventory {
      * removes an item from the inventory, does nothing if item doesn't exist
      */
     public void removeItem(ItemEntity item) {
-        if (item instanceof Weapon) {
+        if (item.getClass() == Weapon.class) {
             this.weapon = null;
         }
-        if (item instanceof Key) {
+        if (item.getClass() == Key.class) {
             this.key = null;
         }
-        if (item instanceof Potion) {
+        if (item.getClass() == Potion.class) {
             this.potion = null;
         }
     }

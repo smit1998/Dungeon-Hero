@@ -42,15 +42,28 @@ public class Key extends ItemEntity {
      * attempt to pick this key up if they can.
      */
     public boolean interact(Entity caller) {
-        // makes the player pickup the sword
-        if (caller instanceof Player) {
-            Player player = (Player) caller;
-            player.pickupItem(this);
+        if (caller.getClass() == Player.class) {
+            return interact((Player) caller); 
         }
-        if (caller instanceof Boulder) {
-            return false;
+        if (caller.getClass() == Boulder.class) {
+            return interact((Boulder) caller); 
         }
         return true;
+    }
+
+    /**
+     * player picks up key
+     */
+    private boolean interact(Player player) {
+        player.pickupItem(this); 
+        return true; 
+    }
+
+    /**
+     * boulder cannot pass a key
+     */
+    private boolean interact(Boulder boulder) {
+        return false;
     }
 
     /**
