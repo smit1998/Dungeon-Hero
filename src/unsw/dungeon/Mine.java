@@ -10,16 +10,16 @@ public class Mine extends Entity{
 
     @Override
     public boolean interact(Entity caller) {
-        if(caller instanceof Player ) {
+        if(caller.getClass() == Player.class ) {
             return interact((Player) caller);
         }
-        else if(caller instanceof Enemy){
+        else if (caller.getClass() == Enemy.class){
             return interact((Enemy) caller);
         }
         return false;
     }
 
-    public boolean interact(Player player) {
+    private boolean interact(Player player) {
         if(this.isActive == true) {
             player.kill();
             return true;
@@ -27,7 +27,7 @@ public class Mine extends Entity{
         return false;
     }
 
-    public boolean interact(Enemy enemy) {
+    private boolean interact(Enemy enemy) {
         if(this.isActive == true) {
             enemy.kill();
             return true;
@@ -37,8 +37,6 @@ public class Mine extends Entity{
 
     @Override
     public void tick(Dungeon dungeon) {
-        // TODO Auto-generated method stub
-
     }
     
 }
