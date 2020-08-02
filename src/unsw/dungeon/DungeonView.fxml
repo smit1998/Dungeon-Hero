@@ -1,27 +1,52 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets ?>
-<?import javafx.scene.image.Image ?>
-<?import javafx.scene.image.ImageView ?>
-<?import javafx.scene.layout.GridPane ?>
-<?import javafx.scene.layout.HBox ?>
-<?import javafx.scene.layout.StackPane ?>
-<?import javafx.scene.layout.VBox ?>
-<?import javafx.scene.text.Font ?>
-<?import javafx.scene.text.Text ?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
 <StackPane fx:id="stack" stylesheets="@DungeonStyle.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <VBox fx:id="pane" alignment="TOP_CENTER">
+      <ImageView fx:id="background_image" fitHeight="720.0" fitWidth="672.0" pickOnBounds="true">
+         <image>
+            <Image url="@wallimagebg.png" />
+         </image>
+      </ImageView>
+      <VBox fx:id="pane" alignment="CENTER">
          <children>
-            <StackPane fx:id="map_stack">
-               <GridPane fx:id="squares" onKeyPressed="#handleKeyPress" onKeyReleased="#handleKeyRelease" />
-            </StackPane>
-            <HBox fx:id="items" alignment="CENTER_LEFT" prefHeight="48.0">
-               <padding>
-                  <Insets left="8.0" />
-               </padding>
+            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <StackPane fx:id="map_stack">
+                     <GridPane fx:id="squares" onKeyPressed="#handleKeyPress" onKeyReleased="#handleKeyRelease" />
+                  </StackPane>
+               </children>
             </HBox>
+            <SplitPane fx:id="lower_box" dividerPositions="0.5" prefWidth="672.0" style="-fx-background-color: transparent;">
+              <items>
+                  <HBox fx:id="items" prefWidth="336.0" />
+                  <VBox prefWidth="336.0">
+                     <children>
+                        <Text fx:id="goal_string" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </Text>
+                     </children>
+                  </VBox>
+              </items>
+               <VBox.margin>
+                  <Insets />
+               </VBox.margin>
+               <padding>
+                  <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
+               </padding>
+            </SplitPane>
          </children>
       </VBox>
    </children>

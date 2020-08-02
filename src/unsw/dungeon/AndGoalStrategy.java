@@ -16,21 +16,23 @@ public class AndGoalStrategy implements GoalStrategy {
      */
     public boolean isComplete(Iterator<ComponentGoal> goals) {
         while (goals.hasNext()) {
-            ComponentGoal goal = goals.next(); 
-            if (!goal.isComplete()) { return false; }
+            ComponentGoal goal = goals.next();
+            if (!goal.isComplete()) {
+                return false;
+            }
         }
-        return true; 
+        return true;
     }
 
     public String toString(Iterator<ComponentGoal> goals) {
         String str = "Complete all of the following goals:";
         while (goals.hasNext()) {
-            ComponentGoal subgoal = goals.next(); 
+            ComponentGoal subgoal = goals.next();
             String subgoalString = subgoal.toString();
-            subgoalString = subgoalString.replaceAll("(^|\n)", "$1  ");
+            subgoalString = subgoalString.replaceAll("(^|\n)", "$1\t");
             str += "\n" + subgoalString;
         }
-        return str; 
+        return str;
     }
 
 }

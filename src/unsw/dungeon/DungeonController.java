@@ -24,6 +24,7 @@ import javafx.util.Duration;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.SplitPane;
 import javafx.animation.FadeTransition;
 import javafx.application.Platform;
 import javafx.beans.value.ChangeListener;
@@ -57,6 +58,15 @@ public class DungeonController implements Runnable, Controller {
     @FXML
     private HBox items;
 
+    @FXML
+    private Text goal_string;
+
+    @FXML
+    private SplitPane lower_box;
+
+    @FXML
+    private ImageView background_image;
+
     private List<EntityView> initialEntities;
 
     private Player player;
@@ -79,6 +89,9 @@ public class DungeonController implements Runnable, Controller {
     @FXML
     public void initialize() throws IOException {
 
+        background_image.fitHeightProperty().bind(stack.heightProperty());
+        background_image.fitWidthProperty().bind(stack.widthProperty());
+
         Image ground = new Image((new File("images/dirt_0_new.png")).toURI().toString());
         Image backpack = new Image((new File("images/backpack.png")).toURI().toString());
 
@@ -91,12 +104,14 @@ public class DungeonController implements Runnable, Controller {
             }
         }
         items.getChildren().add(new ImageView(backpack));
-        items.setStyle("-fx-background-color: black;");
 
         for (EntityView entityView : initialEntities) {
             trackPickedUp(entityView);
             squares.getChildren().add(entityView.getView());
         }
+
+        goal_string.setText(dungeon.getGoalString());
+        lower_box.setMaxWidth(dungeon.getWidth() * 32);
 
         Platform.runLater(new Runnable() {
             @Override

@@ -16,21 +16,23 @@ public class OrGoalStrategy implements GoalStrategy {
      */
     public boolean isComplete(Iterator<ComponentGoal> goals) {
         while (goals.hasNext()) {
-            ComponentGoal goal = goals.next(); 
-            if (goal.isComplete()) { return true; }
+            ComponentGoal goal = goals.next();
+            if (goal.isComplete()) {
+                return true;
+            }
         }
-        return false; 
+        return false;
     }
 
     public String toString(Iterator<ComponentGoal> goals) {
         String str = "Complete any of the following goals:";
         while (goals.hasNext()) {
-            ComponentGoal subgoal = goals.next(); 
+            ComponentGoal subgoal = goals.next();
             String subgoalString = subgoal.toString();
-            subgoalString = subgoalString.replaceAll("(^|\n)", "$1  ");
+            subgoalString = subgoalString.replaceAll("(^|\n)", "$1\t");
             str += "\n" + subgoalString;
         }
-        return str; 
+        return str;
     }
 
 }
