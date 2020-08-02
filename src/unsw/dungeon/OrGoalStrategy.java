@@ -1,5 +1,6 @@
 package unsw.dungeon;
 
+import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -14,13 +15,14 @@ public class OrGoalStrategy implements GoalStrategy {
      * @param goals a list of goals
      * @return whether the list of goals meet the requirements of this strategy
      */
-    public boolean isComplete(List<ComponentGoal> goals) {
-        for (ComponentGoal goal : goals) {
-            if (goal.isComplete() == true) {
-                return true;
+    public boolean isComplete(Iterator<ComponentGoal> goals) {
+        while (goals.hasNext()) {
+            ComponentGoal goal = goals.next(); 
+            if (goal.isComplete()) {
+                 return true; 
             }
         }
-        return false;
+        return false; 
     }
 
     public String toString(List<ComponentGoal> goals) {
