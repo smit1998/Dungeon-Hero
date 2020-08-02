@@ -25,11 +25,14 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.SplitPane;
+import javafx.scene.control.TreeView;
+import javafx.scene.control.cell.CheckBoxTreeCell;
 import javafx.animation.FadeTransition;
 import javafx.application.Platform;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.Event;
+import javafx.scene.control.CheckBoxTreeItem;
 
 import java.io.File;
 import java.io.IOException;
@@ -62,10 +65,15 @@ public class DungeonController implements Runnable, Controller {
     private Text goal_string;
 
     @FXML
+    private VBox goal_box;
+
+    @FXML
     private SplitPane side_box;
 
     @FXML
     private ImageView background_image;
+
+    private Node pause_screen;
 
     private List<EntityView> initialEntities;
 
@@ -109,7 +117,14 @@ public class DungeonController implements Runnable, Controller {
             trackPickedUp(entityView);
             squares.getChildren().add(entityView.getView());
         }
+        squares.setFocusTraversable(false);
 
+        TreeView<String> goalTree = new TreeView<String>();
+        goalTree.setRoot(getGoalTree(dungeon.getGoal()));
+        goalTree.setCellFactory(CheckBoxTreeCell.<String>forTreeView());
+        goalTree.setFocusTraversable(false);
+
+        goal_box.getChildren().add(goalTree);
         goal_string.setText(dungeon.getGoalString());
         goal_string.setFont(Font.loadFont("file:resources/fonts/DUNGRG__.TTF", 25));
 
@@ -210,7 +225,7 @@ public class DungeonController implements Runnable, Controller {
         StackPane goalTextPane = new StackPane();
         goalTextPane.setStyle("-fx-background-color: black");
 
-        Text goalText = new Text(dungeon.getGoalType() == GoalType.COMPLEX_GOAL ? "" : dungeon.getGoalString());
+        Text goalText = new Text(dungeon.getGoalType().isComplex() ? "" : dungeon.getGoalString());
         goalText.setTextAlignment(TextAlignment.CENTER);
         goalText.setFill(Color.WHITE);
         goalText.setFont(Font.loadFont("file:resources/fonts/DUNGRG__.TTF", 45));
@@ -377,6 +392,23 @@ public class DungeonController implements Runnable, Controller {
 
     private void setIsPaused(boolean isPaused) {
         this.isPaused = isPaused;
+    }
+
+    private CheckBoxTreeItem<String> getGoalTree(ComponentGoal goal) {
+        CheckBoxTreeItem<String> item = null;
+        if (goal.getClass() == ComplexGoal.class) {
+            ComplexGoal complex = (ComplexGoal) goal;
+            item = new CheckBoxTreeItem<>(complex.getRequirement());
+            item.selectedProperty().bind(goal.isCompleteProperty());
+            item.setExpanded(true);
+            for (ComponentGoal subgoal : complex.getSubgoals()) {
+                item.getChildren().add(getGoalTree(subgoal));
+            }
+        } else {
+            item = new CheckBoxTreeItem<>(goal.toString());
+            item.selectedProperty().bind(goal.isCompleteProperty());
+        }
+        return item;
     }
 
 }

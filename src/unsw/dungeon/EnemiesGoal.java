@@ -1,5 +1,8 @@
 package unsw.dungeon;
 
+import javafx.beans.property.BooleanProperty;
+import javafx.beans.property.SimpleBooleanProperty;
+
 /**
  * A goal where all enemies must be defeated
  */
@@ -7,6 +10,7 @@ public class EnemiesGoal extends BasicGoal implements Observer {
 
     private int enemiesSpawned;
     private int enemiesKilled;
+    private BooleanProperty isComplete = new SimpleBooleanProperty(false);
 
     /**
      * Constructor for an enemy goal
@@ -22,7 +26,8 @@ public class EnemiesGoal extends BasicGoal implements Observer {
      * @return whether this goal is complete
      */
     public boolean isComplete() {
-        return (enemiesSpawned == enemiesKilled);
+        isComplete.setValue(enemiesSpawned == enemiesKilled);
+        return isComplete.getValue();
     }
 
     /**
@@ -57,5 +62,10 @@ public class EnemiesGoal extends BasicGoal implements Observer {
     @Override
     public String toString() {
         return "Defeat all enemies";
+    }
+
+    @Override
+    public BooleanProperty isCompleteProperty() {
+        return isComplete;
     }
 }

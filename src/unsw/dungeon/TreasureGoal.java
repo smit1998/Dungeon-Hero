@@ -1,5 +1,8 @@
 package unsw.dungeon;
 
+import javafx.beans.property.BooleanProperty;
+import javafx.beans.property.SimpleBooleanProperty;
+
 /**
  * A goal where all treasure must be collected.
  */
@@ -7,6 +10,7 @@ public class TreasureGoal extends BasicGoal implements Observer {
 
     private int treasureSpawned;
     private int treasureCollected;
+    private BooleanProperty isComplete = new SimpleBooleanProperty(false);
 
     /**
      * Constructor for a treasure goal
@@ -22,7 +26,8 @@ public class TreasureGoal extends BasicGoal implements Observer {
      * @return whether this goal is complete
      */
     public boolean isComplete() {
-        return (treasureSpawned == treasureCollected);
+        isComplete.setValue(treasureSpawned == treasureCollected);
+        return isComplete.getValue();
     }
 
     /**
@@ -54,6 +59,11 @@ public class TreasureGoal extends BasicGoal implements Observer {
     @Override
     public String toString() {
         return "Collect all treasure";
+    }
+
+    @Override
+    public BooleanProperty isCompleteProperty() {
+        return isComplete;
     }
 
 }

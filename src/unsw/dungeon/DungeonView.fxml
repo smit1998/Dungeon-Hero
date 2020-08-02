@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
-<?import javafx.scene.control.SplitPane?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.GridPane?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.StackPane?>
-<?import javafx.scene.layout.VBox?>
-<?import javafx.scene.text.Text?>
+<?import javafx.geometry.Insets ?>
+<?import javafx.scene.control.SplitPane ?>
+<?import javafx.scene.image.Image ?>
+<?import javafx.scene.image.ImageView ?>
+<?import javafx.scene.layout.GridPane ?>
+<?import javafx.scene.layout.HBox ?>
+<?import javafx.scene.layout.StackPane ?>
+<?import javafx.scene.layout.VBox ?>
+<?import javafx.scene.text.Text ?>
 
 <StackPane fx:id="stack" stylesheets="@DungeonStyle.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
@@ -28,7 +28,7 @@
             </VBox>
             <SplitPane fx:id="side_box" dividerPositions="0.5" orientation="VERTICAL" style="-fx-background-color: transparent;">
                <items>
-                  <VBox>
+                  <VBox fx:id="goal_box">
                      <children>
                         <Text fx:id="goal_string" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" />
                      </children>

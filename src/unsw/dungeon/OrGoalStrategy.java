@@ -35,4 +35,14 @@ public class OrGoalStrategy implements GoalStrategy {
         return str;
     }
 
+    @Override
+    public String getRequirement() {
+        return "Complete all of the following goals";
+    }
+
+    @Override
+    public GoalType getType() {
+        return GoalType.OR_GOAL;
+    }
+
 }

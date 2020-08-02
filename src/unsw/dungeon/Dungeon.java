@@ -246,4 +246,8 @@ public class Dungeon {
     public GoalType getGoalType() {
         return goal.getType();
     }
+
+    public ComponentGoal getGoal() {
+        return goal;
+    }
 }
