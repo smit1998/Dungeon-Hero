@@ -9,7 +9,7 @@
 <?import javafx.scene.text.Font ?>
 <?import javafx.scene.text.Text ?>
 
-<VBox fx:id="end_screen" alignment="CENTER" onKeyPressed="#handleEndScreenKeyPress" styleClass="overlay" stylesheets="@DungeonStyle.css, @EndScreen.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<VBox fx:id="end_screen" alignment="CENTER" onKeyPressed="#handleEndScreenKeyPress" styleClass="overlay" stylesheets="@DungeonStyle.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
     <children>
         <ImageView fx:id="end_screen_text" fitWidth="400.0" preserveRatio="true" styleClass="text-image">
             <VBox.margin>
