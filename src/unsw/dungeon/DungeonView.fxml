@@ -12,37 +12,37 @@
 
 <StackPane fx:id="stack" stylesheets="@DungeonStyle.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <ImageView fx:id="background_image" fitHeight="720.0" fitWidth="672.0" pickOnBounds="true">
+      <ImageView fx:id="background_image" fitHeight="700.0" fitWidth="965.0" pickOnBounds="true">
          <image>
             <Image url="@wallimagebg.png" />
          </image>
       </ImageView>
-      <VBox fx:id="pane" alignment="CENTER">
+      <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
          <children>
-            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+            <VBox fx:id="pane" alignment="CENTER">
                <children>
                   <StackPane fx:id="map_stack">
                      <GridPane fx:id="squares" onKeyPressed="#handleKeyPress" onKeyReleased="#handleKeyRelease" style="-fx-border-color: #262626; -fx-border-width: 5;" />
                   </StackPane>
                </children>
-            </HBox>
-            <SplitPane fx:id="lower_box" dividerPositions="0.5" prefWidth="672.0" style="-fx-background-color: transparent;">
+            </VBox>
+            <SplitPane fx:id="side_box" dividerPositions="0.5" orientation="VERTICAL" style="-fx-background-color: transparent;">
                <items>
-                  <HBox fx:id="items" prefWidth="336.0" />
-                  <VBox prefWidth="336.0">
+                  <VBox>
                      <children>
                         <Text fx:id="goal_string" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" />
                      </children>
                   </VBox>
+                  <HBox fx:id="items" />
                </items>
-               <VBox.margin>
-                  <Insets />
-               </VBox.margin>
                <padding>
                   <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
                </padding>
             </SplitPane>
          </children>
-      </VBox>
+         <padding>
+            <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
+         </padding>
+      </HBox>
    </children>
 </StackPane>

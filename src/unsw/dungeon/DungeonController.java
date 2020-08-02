@@ -62,7 +62,7 @@ public class DungeonController implements Runnable, Controller {
     private Text goal_string;
 
     @FXML
-    private SplitPane lower_box;
+    private SplitPane side_box;
 
     @FXML
     private ImageView background_image;
@@ -113,7 +113,7 @@ public class DungeonController implements Runnable, Controller {
         goal_string.setText(dungeon.getGoalString());
         goal_string.setFont(Font.loadFont("file:resources/fonts/DUNGRG__.TTF", 25));
 
-        lower_box.setMaxWidth(dungeon.getWidth() * 32);
+        side_box.setMaxHeight(dungeon.getHeight() * 32);
 
         Platform.runLater(new Runnable() {
             @Override

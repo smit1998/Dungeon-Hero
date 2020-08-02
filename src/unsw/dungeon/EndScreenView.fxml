@@ -11,7 +11,7 @@
 
 <VBox fx:id="end_screen" alignment="CENTER" onKeyPressed="#handleEndScreenKeyPress" styleClass="overlay" stylesheets="@DungeonStyle.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
     <children>
-        <ImageView fx:id="end_screen_text" fitWidth="400.0" preserveRatio="true" styleClass="text-image">
+        <ImageView fx:id="end_screen_text" fitWidth="500.0" preserveRatio="true" styleClass="text-image">
             <VBox.margin>
                 <Insets bottom="30.0" />
             </VBox.margin>
