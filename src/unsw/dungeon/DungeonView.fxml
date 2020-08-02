@@ -83,7 +83,6 @@
                   <Insets top="20.0" />
                </padding>
             </VBox>
-            <HBox alignment="CENTER" prefHeight="64.0" />
          </children>
       </VBox>
    </children>

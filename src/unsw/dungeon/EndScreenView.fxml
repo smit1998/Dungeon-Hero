@@ -48,9 +48,8 @@
                 </StackPane>
             </children>
             <padding>
-                <Insets top="20.0" />
+                <Insets bottom="20.0" top="20.0" />
             </padding>
         </HBox>
-        <HBox alignment="CENTER" prefHeight="100.0" />
     </children>
 </VBox>
