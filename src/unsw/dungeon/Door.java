@@ -94,6 +94,6 @@ public class Door extends Entity {
 
     @Override
     public boolean canCollide(Entity entity) {
-        return isOpen.getValue();
+        return true;
     }
 }
