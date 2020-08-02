@@ -68,19 +68,23 @@ public class Door extends Entity {
         if (getIsOpen()) {
             return true;
         }
-        if (caller instanceof Player) {
-            Player player = (Player) caller;
-            Key key = player.getKey();
-            if (key != null) {
-                if (open(key)) {
-                    key.setVisibility(false);
-                    key.setPickedUp(false);
-                    player.removeItem(key);
-                    return true;
-                }
-            }
+        if (caller.getClass() == Player.class) {
+            interact((Player) caller); 
         }
         return false;
+    }
+
+    private boolean interact(Player player) {
+        Key key = player.getKey();
+        if (key != null) {
+            if (open(key)) {
+                key.setVisibility(false);
+                key.setPickedUp(false);
+                player.removeItem(key);
+                return true;
+            }
+        }
+        return false; 
     }
 
     /**
