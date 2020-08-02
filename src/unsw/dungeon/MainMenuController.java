@@ -9,6 +9,8 @@ import javafx.scene.Scene;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.StackPane;
+import javafx.scene.text.Font;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -17,11 +19,19 @@ import java.util.List;
 
 public class MainMenuController implements Controller {
 
+    private final static Font MAIN_FONT = Font.loadFont("file:resources/fonts/DUNGRG__.TTF", 35);
+
+    @FXML
+    private Text play_text, quit_text;
+
     @FXML
     public void initialize() {
         buttons.add(play_button);
         buttons.add(quit_button);
         setFocus(play_button);
+
+        play_text.setFont(MAIN_FONT);
+        quit_text.setFont(MAIN_FONT);
     }
 
     @FXML

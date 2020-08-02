@@ -38,7 +38,7 @@
                         <Image url="@button.png" />
                      </image>
                   </ImageView>
-                  <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Back" translateY="3.0">
+                  <Text fx:id="back_text" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Back" translateY="3.0">
                      <font>
                         <Font size="23.0" />
                      </font>
@@ -52,7 +52,7 @@
                         <Image url="@button.png" />
                      </image>
                   </ImageView>
-                  <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Play" translateY="3.0">
+                  <Text fx:id="play_text" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Play" translateY="3.0">
                      <font>
                         <Font size="23.0" />
                      </font>

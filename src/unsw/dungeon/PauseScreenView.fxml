@@ -28,7 +28,7 @@
                                 <Image url="@button.png" />
                             </image>
                         </ImageView>
-                        <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Resume" translateY="3.0">
+                        <Text fx:id="resume_text" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Resume" translateY="3.0">
                             <font>
                                 <Font size="20.0" />
                             </font>
@@ -42,7 +42,7 @@
                                 <Image url="@button.png" />
                             </image>
                         </ImageView>
-                        <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Restart" translateY="3.0">
+                        <Text fx:id="restart_text" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Restart" translateY="3.0">
                             <font>
                                 <Font size="20.0" />
                             </font>
@@ -56,7 +56,7 @@
                                 <Image url="@button.png" />
                             </image>
                         </ImageView>
-                        <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Quit" translateY="3.0">
+                        <Text fx:id="quit_text" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Quit" translateY="3.0">
                             <font>
                                 <Font size="20.0" />
                             </font>

@@ -4,29 +4,32 @@ import javafx.application.Platform;
 import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
-import javafx.stage.Stage;
+import javafx.scene.text.Font;
+import javafx.scene.text.Text;
 
-import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 public class PauseScreenController implements Controller {
 
+    private final static Font MAIN_FONT = Font.loadFont("file:resources/fonts/DUNGRG__.TTF", 32);
+
     @FXML
     private VBox pause_menu;
 
     @FXML
     private ImageView paused_text;
+
+    @FXML
+    private Text resume_text, restart_text, quit_text;
 
     @FXML
     private StackPane resume_button, restart_button, quit_button;
@@ -44,6 +47,10 @@ public class PauseScreenController implements Controller {
         buttons.add(resume_button);
         buttons.add(restart_button);
         buttons.add(quit_button);
+
+        resume_text.setFont(MAIN_FONT);
+        restart_text.setFont(MAIN_FONT);
+        quit_text.setFont(MAIN_FONT);
 
         Platform.runLater(new Runnable() {
             @Override

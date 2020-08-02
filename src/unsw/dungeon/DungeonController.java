@@ -111,6 +111,8 @@ public class DungeonController implements Runnable, Controller {
         }
 
         goal_string.setText(dungeon.getGoalString());
+        goal_string.setFont(Font.loadFont("file:resources/fonts/Coder's Crux.ttf", 25));
+
         lower_box.setMaxWidth(dungeon.getWidth() * 32);
 
         Platform.runLater(new Runnable() {
@@ -211,7 +213,7 @@ public class DungeonController implements Runnable, Controller {
         Text goalText = new Text(dungeon.getGoalType() == GoalType.COMPLEX_GOAL ? "" : dungeon.getGoalString());
         goalText.setTextAlignment(TextAlignment.CENTER);
         goalText.setFill(Color.WHITE);
-        goalText.setFont(Font.font("", 20));
+        goalText.setFont(Font.loadFont("file:resources/fonts/Coder's Crux.ttf", 45));
 
         goalTextPane.getChildren().add(goalText);
         stack.getChildren().add(goalTextPane);
