@@ -7,14 +7,17 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class EndScreenController implements Controller {
 
@@ -24,10 +27,14 @@ public class EndScreenController implements Controller {
             (new File("src/unsw/dungeon/game_over_text.png")).toURI().toString());
 
     @FXML
+    private VBox end_screen;
+
+    @FXML
     private ImageView end_screen_text;
 
     @FXML
-    private Button replay_button, quit_button;
+    private StackPane replay_button, quit_button;
+    private List<StackPane> buttons = new ArrayList<>();
 
     private boolean victory;
     private File dungeon;
@@ -40,19 +47,19 @@ public class EndScreenController implements Controller {
     @FXML
     public void initialize() {
         end_screen_text.setImage(victory ? VICTORY_IMG : GAMEOVER_IMG);
-        // end_screen_text.setText(victory ? VICTORY_TEXT : LOSING_TEXT);
 
-        replay_button.setOnKeyPressed(e -> handleReplayKeyPress(e));
-        quit_button.setOnKeyPressed(e -> handleQuitKeyPress(e));
+        buttons.add(replay_button);
+        buttons.add(quit_button);
 
         Platform.runLater(new Runnable() {
             @Override
             public void run() {
                 if (victory) {
-                    quit_button.requestFocus();
+                    focusButton(quit_button);
                 } else {
-                    replay_button.requestFocus();
+                    focusButton(replay_button);
                 }
+                end_screen.requestFocus();
             }
         });
     }
@@ -91,40 +98,55 @@ public class EndScreenController implements Controller {
         return scene;
     }
 
-    private void handleQuitKeyPress(KeyEvent event) {
-        try {
-            switch (event.getCode()) {
-                case ENTER:
-                    handleQuit(event);
-                    break;
-                case RIGHT:
-                case D:
-                    replay_button.requestFocus();
-                    break;
-                default:
-                    break;
-            }
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
-    }
-
-    private void handleReplayKeyPress(KeyEvent event) {
-        try {
-            switch (event.getCode()) {
-                case ENTER:
+    @FXML
+    public void handleEndScreenKeyPress(KeyEvent event) throws IOException {
+        switch (event.getCode()) {
+            case ENTER:
+                if (inFocus(replay_button)) {
                     handleReplay(event);
-                    break;
-                case LEFT:
-                case A:
-                    quit_button.requestFocus();
-                    break;
-                default:
-                    break;
-            }
-        } catch (Exception e) {
-            throw new RuntimeException(e);
+                } else if (inFocus(quit_button)) {
+                    handleQuit(event);
+                }
+                break;
+            case LEFT:
+            case A:
+                focusButton(quit_button);
+                break;
+            case RIGHT:
+            case D:
+                focusButton(replay_button);
+            default:
+                break;
         }
     }
 
+    private boolean inFocus(StackPane button) {
+        return button.getStyleClass().contains("button-selected");
+    }
+
+    public void handleReplayMouseEnter() {
+        focusButton(replay_button);
+    }
+
+    public void handleReplayMouseExit() {
+        unfocusButton(replay_button);
+    }
+
+    public void handleQuitMouseEnter() {
+        focusButton(quit_button);
+    }
+
+    public void handleQuitMouseExit() {
+        unfocusButton(quit_button);
+    }
+
+    public void focusButton(StackPane button) {
+        for (StackPane btn : buttons)
+            unfocusButton(btn);
+        button.getStyleClass().add("button-selected");
+    }
+
+    public void unfocusButton(StackPane button) {
+        button.getStyleClass().remove("button-selected");
+    }
 }
