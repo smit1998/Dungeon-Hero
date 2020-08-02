@@ -18,21 +18,20 @@ public class OrGoalStrategy implements GoalStrategy {
     public boolean isComplete(Iterator<ComponentGoal> goals) {
         while (goals.hasNext()) {
             ComponentGoal goal = goals.next(); 
-            if (goal.isComplete()) {
-                 return true; 
-            }
+            if (goal.isComplete()) { return true; }
         }
         return false; 
     }
 
-    public String toString(List<ComponentGoal> goals) {
+    public String toString(Iterator<ComponentGoal> goals) {
         String str = "Complete any of the following goals:";
-        for (ComponentGoal subgoal : goals) {
+        while (goals.hasNext()) {
+            ComponentGoal subgoal = goals.next(); 
             String subgoalString = subgoal.toString();
             subgoalString = subgoalString.replaceAll("(^|\n)", "$1  ");
             str += "\n" + subgoalString;
         }
-        return str;
+        return str; 
     }
 
 }
