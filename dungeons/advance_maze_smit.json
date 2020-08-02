@@ -293,6 +293,16 @@
         {"x": 2, "y": 5, "type": "mine"}
         
     ],
-    "goal-condition": { "goal": "exit" }
+    "goal-condition": {
+        "goal": "AND",
+        "subgoals": [
+          {
+            "goal": "exit"
+          },
+          {
+            "goal": "treasure"
+          }
+        ]
+      }
 
 }
