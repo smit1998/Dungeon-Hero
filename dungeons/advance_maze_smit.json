@@ -290,8 +290,8 @@
         {"x": 19, "y": 17, "type": "key", "id": 4},
         {"x": 18, "y": 19, "type": "door", "id": 4},
         {"x": 7, "y": 18, "type": "dagger"},
-        {"x": 2, "y": 5, "type": "mine"}
-        
+        {"x": 2, "y": 5, "type": "mine"},
+        {"x": 19, "y": 4, "type": "key", "id": 3}
     ],
     "goal-condition": {
         "goal": "AND",
