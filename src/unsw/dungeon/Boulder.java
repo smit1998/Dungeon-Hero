@@ -20,17 +20,17 @@ public class Boulder extends Entity {
      */
     public boolean interact(Entity caller) {
         if (caller.getClass() == Player.class) {
-            interact((Player) caller); 
+            return interact((Player) caller); 
         }
-        return false; 
+        return false;
     }
 
     private boolean interact(Player player) {
         int oldX = getX();
         int oldY = getY();
 
-        int newX = getX() * 2 - caller.getX();
-        int newY = getY() * 2 - caller.getY();
+        int newX = getX() * 2 - player.getX();
+        int newY = getY() * 2 - player.getY();
 
         if (dungeon().interact(this, newX, newY)) {
             if (newX >= 0 && newX < dungeon().getWidth()) {
@@ -49,7 +49,6 @@ public class Boulder extends Entity {
         }
         return false; 
     }
-    
 
     /**
      * no changes made when the game state updates
