@@ -1,7 +1,6 @@
 package unsw.dungeon;
 
 import java.util.Iterator;
-import java.util.List;
 
 /**
  * A goal strategy where all subgoals must be completed before the complex goal
