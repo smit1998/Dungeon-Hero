@@ -24,7 +24,6 @@ import javafx.util.Duration;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
 import javafx.animation.FadeTransition;
 import javafx.application.Platform;
 import javafx.beans.value.ChangeListener;
@@ -56,16 +55,7 @@ public class DungeonController implements Runnable, Controller {
     private StackPane map_stack;
 
     @FXML
-    private VBox pause_menu;
-
-    @FXML
-    private Button quit_button, resume_button;
-
-    @FXML
     private HBox items;
-
-    @FXML
-    private ImageView paused_text;
 
     private List<EntityView> initialEntities;
 
@@ -88,8 +78,6 @@ public class DungeonController implements Runnable, Controller {
 
     @FXML
     public void initialize() throws IOException {
-        // resume_button.setOnKeyPressed(e -> handleResumeKeyPress(e));
-        // quit_button.setOnKeyPressed(e -> handleQuitKeyPress(e));
 
         Image ground = new Image((new File("images/dirt_0_new.png")).toURI().toString());
         Image backpack = new Image((new File("images/backpack.png")).toURI().toString());
@@ -109,8 +97,6 @@ public class DungeonController implements Runnable, Controller {
             trackPickedUp(entityView);
             squares.getChildren().add(entityView.getView());
         }
-
-        paused_text.setFitWidth((squares.getColumnCount() * 32) * 0.6);
 
         Platform.runLater(new Runnable() {
             @Override
@@ -360,7 +346,12 @@ public class DungeonController implements Runnable, Controller {
 
     public void handlePause() {
         setIsPaused(true);
-        resume_button.requestFocus();
+        PauseScreenController controller = new PauseScreenController(this);
+        try {
+            stack.getChildren().add((Node) controller.getParent());
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 
     private void stopGameLoop() {
@@ -369,45 +360,6 @@ public class DungeonController implements Runnable, Controller {
 
     private void setIsPaused(boolean isPaused) {
         this.isPaused = isPaused;
-        pause_menu.setVisible(isPaused);
-        pause_menu.setDisable(!isPaused);
     }
-
-    @FXML
-    public void handlePauseKeyPress(KeyEvent e) {
-        switch (e.getCode()) {
-            case ESCAPE:
-                handleResume();
-                break;
-            case LEFT:
-                quit_button.requestFocus();
-                break;
-
-            case RIGHT:
-                resume_button.requestFocus();
-                break;
-
-            default:
-                break;
-        }
-    }
-
-    // private void handleQuitKeyPress(KeyEvent event) {
-    // try {
-    // switch (event.getCode()) {
-    // case ENTER:
-    // handleQuit();
-    // break;
-    // case RIGHT:
-    // case D:
-    // resume_button.requestFocus();
-    // break;
-    // default:
-    // break;
-    // }
-    // } catch (Exception e) {
-    // throw new RuntimeException(e);
-    // }
-    // }
 
 }

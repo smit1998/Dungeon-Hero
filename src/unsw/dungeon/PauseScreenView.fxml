@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets ?>
+<?import javafx.scene.image.Image ?>
+<?import javafx.scene.image.ImageView ?>
+<?import javafx.scene.layout.HBox ?>
+<?import javafx.scene.layout.StackPane ?>
+<?import javafx.scene.layout.VBox ?>
+<?import javafx.scene.text.Font ?>
+<?import javafx.scene.text.Text ?>
+
+<VBox fx:id="pause_menu" alignment="CENTER" onKeyPressed="#handlePauseKeyPress" styleClass="overlay" stylesheets="@DungeonStyle.css, @EndScreen.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+    <children>
+        <ImageView fx:id="paused_text" preserveRatio="true" styleClass="text-image">
+            <image>
+                <Image url="@paused_text.png" />
+            </image>
+            <VBox.margin>
+                <Insets bottom="15.0" />
+            </VBox.margin>
+        </ImageView>
+        <VBox alignment="CENTER" spacing="20.0">
+            <children>
+                <StackPane fx:id="resume_button" maxHeight="-Infinity" maxWidth="-Infinity" onMouseClicked="#handleResume" onMouseEntered="#handleResumeMouseEnter" onMouseExited="#handleResumeMouseExit">
+                    <children>
+                        <ImageView fitHeight="60.0" pickOnBounds="true" preserveRatio="true" styleClass="button-hover">
+                            <image>
+                                <Image url="@button.png" />
+                            </image>
+                        </ImageView>
+                        <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Resume" translateY="3.0">
+                            <font>
+                                <Font size="20.0" />
+                            </font>
+                        </Text>
+                    </children>
+                </StackPane>
+                <StackPane fx:id="restart_button" maxHeight="-Infinity" maxWidth="-Infinity" onMouseClicked="#handleRestart" onMouseEntered="#handleRestartMouseEnter" onMouseExited="#handleRestartMouseExit">
+                    <children>
+                        <ImageView fitHeight="60.0" pickOnBounds="true" preserveRatio="true" styleClass="button-hover">
+                            <image>
+                                <Image url="@button.png" />
+                            </image>
+                        </ImageView>
+                        <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Restart" translateY="3.0">
+                            <font>
+                                <Font size="20.0" />
+                            </font>
+                        </Text>
+                    </children>
+                </StackPane>
+                <StackPane fx:id="quit_button" maxHeight="-Infinity" maxWidth="-Infinity" onMouseClicked="#handleQuit" onMouseEntered="#handleQuitMouseEnter" onMouseExited="#handleQuitMouseExit">
+                    <children>
+                        <ImageView fitHeight="60.0" pickOnBounds="true" preserveRatio="true">
+                            <image>
+                                <Image url="@button.png" />
+                            </image>
+                        </ImageView>
+                        <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Quit" translateY="3.0">
+                            <font>
+                                <Font size="20.0" />
+                            </font>
+                        </Text>
+                    </children>
+                </StackPane>
+            </children>
+            <padding>
+                <Insets top="20.0" />
+            </padding>
+        </VBox>
+    </children>
+</VBox>

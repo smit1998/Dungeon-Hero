@@ -1,34 +1,27 @@
 package unsw.dungeon;
 
-import javafx.application.Platform;
-import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
-import javafx.scene.layout.Pane;
+import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class MainMenuController implements Controller {
 
     @FXML
-    private Button play_button, quit_button;
-
-    @FXML
     public void initialize() {
-        Platform.runLater(new Runnable() {
-            @Override
-            public void run() {
-                play_button.requestFocus();
-            }
-        });
+        buttons.add(play_button);
+        buttons.add(quit_button);
+        setFocus(play_button);
     }
 
     @FXML
@@ -56,20 +49,25 @@ public class MainMenuController implements Controller {
         return scene;
     }
 
-    public void handleKeyPress(KeyEvent e) {
+    public void handleKeyPress(KeyEvent e) throws IOException {
         switch (e.getCode()) {
             case UP:
             case W:
-                play_button.requestFocus();
+                focusButton(play_button);
                 break;
             case DOWN:
             case S:
-                quit_button.requestFocus();
+                focusButton(quit_button);
                 break;
+            case ENTER:
+                if (inFocus(play_button)) {
+                    handlePlay(e);
+                } else if (inFocus(quit_button)) {
+                    handleQuit(e);
+                }
             default:
                 break;
         }
-
     }
 
     public void handlePlayKeyPress(KeyEvent e) throws IOException {
@@ -82,6 +80,45 @@ public class MainMenuController implements Controller {
         if (e.getCode().equals(KeyCode.ENTER)) {
             handleQuit(e);
         }
+    }
+
+    @FXML
+    private StackPane play_button, quit_button;
+
+    private List<StackPane> buttons = new ArrayList<>();
+
+    private void setFocus(StackPane button) {
+        focusButton(button);
+    }
+
+    private boolean inFocus(StackPane button) {
+        return button.getStyleClass().contains("button-selected");
+    }
+
+    public void handlePlayMouseEnter() {
+        focusButton(play_button);
+    }
+
+    public void handlePlayMouseExit() {
+        unfocusButton(play_button);
+    }
+
+    public void handleQuitMouseEnter() {
+        focusButton(quit_button);
+    }
+
+    public void handleQuitMouseExit() {
+        unfocusButton(quit_button);
+    }
+
+    public void focusButton(StackPane button) {
+        for (StackPane btn : buttons)
+            unfocusButton(btn);
+        button.getStyleClass().add("button-selected");
+    }
+
+    public void unfocusButton(StackPane button) {
+        button.getStyleClass().remove("button-selected");
     }
 
 }
