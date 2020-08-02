@@ -30,4 +30,9 @@ public class Wall extends Entity {
         // TODO Auto-generated method stub
 
     }
+
+    @Override
+    public boolean canCollide(Entity entity) {
+        return false;
+    }
 }

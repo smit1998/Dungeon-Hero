@@ -116,4 +116,6 @@ public abstract class Entity {
      */
     public abstract void tick(Dungeon dungeon);
 
+    public abstract boolean canCollide(Entity entity);
+
 }

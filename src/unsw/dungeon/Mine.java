@@ -1,6 +1,6 @@
 package unsw.dungeon;
 
-public class Mine extends Entity{
+public class Mine extends Entity {
 
     private boolean isActive = true;
 
@@ -10,17 +10,16 @@ public class Mine extends Entity{
 
     @Override
     public boolean interact(Entity caller) {
-        if(caller instanceof Player ) {
+        if (caller instanceof Player) {
             return interact((Player) caller);
-        }
-        else if(caller instanceof Enemy){
+        } else if (caller instanceof Enemy) {
             return interact((Enemy) caller);
         }
         return false;
     }
 
     public boolean interact(Player player) {
-        if(this.isActive == true) {
+        if (this.isActive == true) {
             player.kill();
             return true;
         }
@@ -28,7 +27,7 @@ public class Mine extends Entity{
     }
 
     public boolean interact(Enemy enemy) {
-        if(this.isActive == true) {
+        if (this.isActive == true) {
             enemy.kill();
             return true;
         }
@@ -40,5 +39,10 @@ public class Mine extends Entity{
         // TODO Auto-generated method stub
 
     }
-    
+
+    @Override
+    public boolean canCollide(Entity entity) {
+        return true;
+    }
+
 }

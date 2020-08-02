@@ -192,4 +192,8 @@ public class Enemy extends LifeEntity implements Subject, PlayerObserver {
         return super.getLifeStatus();
     }
 
+    @Override
+    public boolean canCollide(Entity entity) {
+        return true;
+    }
 }

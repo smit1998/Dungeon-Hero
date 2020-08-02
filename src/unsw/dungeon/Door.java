@@ -91,4 +91,9 @@ public class Door extends Entity {
         // TODO Auto-generated method stub
 
     }
+
+    @Override
+    public boolean canCollide(Entity entity) {
+        return true;
+    }
 }

@@ -199,6 +199,20 @@ public class Dungeon {
         return true;
     }
 
+    public boolean canMove(Entity caller, int x, int y) {
+        for (Entity entity : entities) {
+            if (entity == caller || entity == null)
+                continue;
+
+            if (entity.isVisible().getValue() && entity.getX() == x && entity.getY() == y) {
+                if (!entity.canCollide(caller)) {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+
     /**
      * no changes made when the game state updates
      */
