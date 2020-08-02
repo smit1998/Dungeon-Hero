@@ -39,7 +39,7 @@ public class DungeonControllerLoader extends DungeonLoader {
     private Image swordImage = new Image((new File("images/greatsword_1_new.png")).toURI().toString());
     private Image invincibilityImage = new Image((new File("images/brilliant_blue_new.png")).toURI().toString());
     private Image speedBootsImage = new Image((new File("images/speedBoots.png")).toURI().toString());
-    private Image daggerImage = new Image((new File("images/Dagger.png")).toURI().toString());
+    private Image daggerImage = new Image((new File("images/dagger.png")).toURI().toString());
     private Image checkpointImage = new Image((new File("images/checkpoint.png")).toURI().toString());
     private Image mineImage = new Image((new File("images/bomb.png")).toURI().toString());
 
