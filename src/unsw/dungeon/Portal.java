@@ -58,25 +58,28 @@ public class Portal extends Entity {
         if (pair == null) {
             return false;
         }
-
-        if (caller instanceof Player || caller instanceof Boulder) {
-            int oldX = caller.getX();
-            int oldY = caller.getY();
-
-            int newX = getX() - caller.getX() + pair.getX();
-            int newY = getY() - caller.getY() + pair.getY();
-
-            caller.setX(pair.getX());
-            caller.setY(pair.getY());
-            if (dungeon().interact(caller, newX, newY)) {
-                caller.setX(newX);
-                caller.setY(newY);
-            } else {
-                caller.setX(oldX);
-                caller.setY(oldY);
-            }
-        }
+        if (caller.getClass() == Player.class || caller.getClass() == Boulder.class) {
+            updatePosition(caller); 
+        } 
         return false;
+    }
+
+    private void updatePosition(Entity caller) {
+        int oldX = caller.getX();
+        int oldY = caller.getY();
+
+        int newX = getX() - caller.getX() + pair.getX();
+        int newY = getY() - caller.getY() + pair.getY();
+
+        caller.setX(pair.getX());
+        caller.setY(pair.getY());
+        if (dungeon().interact(caller, newX, newY)) {
+            caller.setX(newX);
+            caller.setY(newY);
+        } else {
+            caller.setX(oldX);
+            caller.setY(oldY);
+        }
     }
 
     @Override
