@@ -23,14 +23,15 @@ public class AndGoalStrategy implements GoalStrategy {
         return true; 
     }
 
-    public String toString(List<ComponentGoal> goals) {
+    public String toString(Iterator<ComponentGoal> goals) {
         String str = "Complete all of the following goals:";
-        for (ComponentGoal subgoal : goals) {
+        while (goals.hasNext()) {
+            ComponentGoal subgoal = goals.next(); 
             String subgoalString = subgoal.toString();
             subgoalString = subgoalString.replaceAll("(^|\n)", "$1  ");
             str += "\n" + subgoalString;
         }
-        return str;
+        return str; 
     }
 
 }
