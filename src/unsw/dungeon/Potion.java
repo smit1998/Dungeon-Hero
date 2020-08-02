@@ -74,4 +74,9 @@ public class Potion extends ItemEntity {
     public BooleanProperty isPickedUp() {
         return isPickedUp;
     }
+
+    @Override
+    public boolean canCollide(Entity entity) {
+        return true;
+    }
 }

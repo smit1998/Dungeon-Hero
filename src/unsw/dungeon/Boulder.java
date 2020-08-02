@@ -57,4 +57,10 @@ public class Boulder extends Entity {
     public void tick(Dungeon dungeon) {
     }
 
+    @Override
+    public boolean canCollide(Entity caller) {
+        int newX = getX() * 2 - caller.getX();
+        int newY = getY() * 2 - caller.getY();
+        return dungeon().canMove(this, newX, newY);
+    }
 }

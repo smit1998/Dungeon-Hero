@@ -89,4 +89,8 @@ public class Exit extends Entity implements Subject {
     public void tick(Dungeon dungeon) {
     }
 
+    @Override
+    public boolean canCollide(Entity entity) {
+        return entity instanceof Player;
+    }
 }

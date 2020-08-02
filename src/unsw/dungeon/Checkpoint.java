@@ -29,4 +29,9 @@ public class Checkpoint extends Entity {
     public void tick(Dungeon dungeon) {
     }
 
+    @Override
+    public boolean canCollide(Entity entity) {
+        return true;
+    }
+
 }

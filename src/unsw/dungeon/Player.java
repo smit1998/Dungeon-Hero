@@ -232,4 +232,8 @@ public class Player extends LifeEntity {
         this.checkpoint = checkpoint;
     }
 
+    @Override
+    public boolean canCollide(Entity entity) {
+        return true;
+    }
 }

@@ -93,4 +93,9 @@ public class Door extends Entity {
     @Override
     public void tick(Dungeon dungeon) {
     }
+
+    @Override
+    public boolean canCollide(Entity entity) {
+        return true;
+    }
 }

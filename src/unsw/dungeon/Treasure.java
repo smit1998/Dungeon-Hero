@@ -71,4 +71,8 @@ public class Treasure extends Entity implements Subject {
         // TODO Auto-generated method stub
     }
 
+    @Override
+    public boolean canCollide(Entity entity) {
+        return true;
+    }
 }
