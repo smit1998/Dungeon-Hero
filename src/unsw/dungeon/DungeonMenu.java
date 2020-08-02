@@ -4,6 +4,8 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FilenameFilter;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 public class DungeonMenu {
@@ -36,6 +38,7 @@ public class DungeonMenu {
         for (File file : dungeonFiles) {
             menuItems.add(new DungeonMenuItem(file));
         }
+        Collections.sort(menuItems, Comparator.comparing(DungeonMenuItem::getDifficulty));
     }
 
     public List<DungeonMenuItem> getMenu() {

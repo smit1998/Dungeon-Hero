@@ -696,3 +696,4 @@ Marks will be deducted for poor git and GitLab usage. For example, meaningless c
 
 **Fergus**
 * Polished user interface by resizing primary stage and adding graphical buttons
+* Implemented sorting in the level selection menu

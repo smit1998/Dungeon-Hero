@@ -12,15 +12,22 @@ public class DungeonMenuItem {
 
     private String dungeonName;
     private File dungeonFile;
+    private DungeonDifficulty difficulty;
 
     public DungeonMenuItem(File dungeonFile) throws FileNotFoundException {
         this.dungeonFile = dungeonFile;
 
+        JSONObject json = new JSONObject(new JSONTokener(new FileReader(dungeonFile)));
         try {
-            JSONObject json = new JSONObject(new JSONTokener(new FileReader(dungeonFile)));
             dungeonName = json.getString("name");
         } catch (JSONException e) {
             dungeonName = formatDungeonName(dungeonFile.getName());
+        }
+
+        try {
+            difficulty = DungeonDifficulty.get(json.getString("difficulty"));
+        } catch (JSONException e) {
+            difficulty = DungeonDifficulty.EASY;
         }
     }
 
@@ -64,6 +71,10 @@ public class DungeonMenuItem {
     @Override
     public String toString() {
         return dungeonName;
+    }
+
+    public DungeonDifficulty getDifficulty() {
+        return difficulty;
     }
 
 }
