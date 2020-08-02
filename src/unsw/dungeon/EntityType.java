@@ -7,7 +7,7 @@ public enum EntityType {
 
     PLAYER("player"), WALL("wall"), EXIT("exit"), TREASURE("treasure"), DOOR("door"), KEY("key"), BOULDER("boulder"),
     SWITCH("switch"), PORTAL("portal"), ENEMY("enemy"), SWORD("sword"), INVINCIBILITY("invincibility"), SPEED("speed"),
-    DAGGER("dagger"), CHECKPOINT("checkpoint");
+    DAGGER("dagger"), CHECKPOINT("checkpoint"), MINE("mine");
 
     private String type;
 

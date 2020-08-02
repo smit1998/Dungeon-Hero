@@ -289,7 +289,19 @@
         {"x": 19, "y": 17, "type": "key", "id": 4},
         {"x": 18, "y": 19, "type": "door", "id": 4},
         {"x": 7, "y": 18, "type": "dagger"},
-        {"x": 2, "y": 5, "type": "mine"}
+
+        {"x": 19, "y": 18, "type": "wall"},
+        {"x": 16, "y": 7, "type": "door", "id": 5},
+        {"x": 19, "y": 5, "type": "enemy"},
+        {"x": 19, "y": 4, "type": "key", "id": 3},
+
+        {"x": 16, "y": 3, "type": "wall"},
+        {"x": 16, "y": 4, "type": "wall"},
+        {"x": 16, "y": 5, "type": "wall"},
+        {"x": 16, "y": 6, "type": "wall"},
+        {"x": 17, "y": 3, "type": "wall"},
+        {"x": 18, "y": 3, "type": "wall"},
+        {"x": 19, "y": 3, "type": "wall"}
         
     ],
     "goal-condition": { "goal": "exit" }
