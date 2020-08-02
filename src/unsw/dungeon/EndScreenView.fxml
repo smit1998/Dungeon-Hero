@@ -9,7 +9,7 @@
 <?import javafx.scene.image.Image ?>
 <?import javafx.scene.image.ImageView ?>
 
-<VBox fx:id="end_screen" alignment="CENTER" stylesheets="@DungeonStyle.css, @EndScreen.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<VBox fx:id="end_screen" styleClass="overlay" alignment="CENTER" stylesheets="@DungeonStyle.css, @EndScreen.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
     <children>
         <ImageView fx:id="end_screen_text" styleClass="text-image" fitWidth="400.0" preserveRatio="true">
             <VBox.margin>

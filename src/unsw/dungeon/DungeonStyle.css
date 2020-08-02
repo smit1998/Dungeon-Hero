@@ -16,3 +16,7 @@
 .button-selected {
   -fx-effect: dropshadow(one-pass-box, rgb(255, 0, 0), 50, 0, 0, 0);
 }
+
+.overlay {
+  -fx-background-color: rgb(0, 0, 0, 0.8);
+}
