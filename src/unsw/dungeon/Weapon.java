@@ -47,10 +47,10 @@ public class Weapon extends ItemEntity {
 
     @Override
     public boolean interact(Entity caller) {
-        if (caller instanceof Player) {
+        if (caller.getClass() == Player.class) {
             return interact((Player) caller);
         }
-        if (caller instanceof Boulder) {
+        if (caller.getClass() == Boulder.class) {
             return interact((Boulder) caller);
         }
         return false;
@@ -75,5 +75,10 @@ public class Weapon extends ItemEntity {
 
     public void setIsPickedUp(boolean newIsPickedUp) {
         isPickedUp.setValue(newIsPickedUp);
+    }
+
+    @Override
+    public boolean canCollide(Entity entity) {
+        return !(entity instanceof Boulder);
     }
 }

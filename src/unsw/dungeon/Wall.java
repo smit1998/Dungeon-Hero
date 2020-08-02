@@ -27,7 +27,10 @@ public class Wall extends Entity {
 
     @Override
     public void tick(Dungeon dungeon) {
-        // TODO Auto-generated method stub
+    }
 
+    @Override
+    public boolean canCollide(Entity entity) {
+        return false;
     }
 }

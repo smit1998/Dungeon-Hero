@@ -1,6 +1,6 @@
 package unsw.dungeon;
 
-import java.util.List;
+import java.util.Iterator;
 
 /**
  * A goal strategy where the complex goal will be completed if any of its
@@ -14,23 +14,23 @@ public class OrGoalStrategy implements GoalStrategy {
      * @param goals a list of goals
      * @return whether the list of goals meet the requirements of this strategy
      */
-    public boolean isComplete(List<ComponentGoal> goals) {
-        for (ComponentGoal goal : goals) {
-            if (goal.isComplete() == true) {
-                return true;
-            }
+    public boolean isComplete(Iterator<ComponentGoal> goals) {
+        while (goals.hasNext()) {
+            ComponentGoal goal = goals.next(); 
+            if (goal.isComplete()) { return true; }
         }
-        return false;
+        return false; 
     }
 
-    public String toString(List<ComponentGoal> goals) {
+    public String toString(Iterator<ComponentGoal> goals) {
         String str = "Complete any of the following goals:";
-        for (ComponentGoal subgoal : goals) {
+        while (goals.hasNext()) {
+            ComponentGoal subgoal = goals.next(); 
             String subgoalString = subgoal.toString();
             subgoalString = subgoalString.replaceAll("(^|\n)", "$1  ");
             str += "\n" + subgoalString;
         }
-        return str;
+        return str; 
     }
 
 }

@@ -10,7 +10,7 @@ public class Checkpoint extends Entity {
 
     @Override
     public boolean interact(Entity caller) {
-        if (caller instanceof Player) {
+        if (caller.getClass() == Player.class) {
             return interact((Player) caller);
         }
         return true;
@@ -27,6 +27,11 @@ public class Checkpoint extends Entity {
 
     @Override
     public void tick(Dungeon dungeon) {
+    }
+
+    @Override
+    public boolean canCollide(Entity entity) {
+        return true;
     }
 
 }

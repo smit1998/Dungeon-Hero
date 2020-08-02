@@ -36,16 +36,21 @@ public class Exit extends Entity implements Subject {
      */
     @Override
     public boolean interact(Entity caller) {
-        if (caller instanceof Player) {
-            isExiting = true;
-            notifyObservers();
-            if (dungeon().isComplete()) {
-                return true;
-            }
-            isExiting = false;
-            notifyObservers();
+        if (caller.getClass() == Player.class) {
+            return interact((Player) caller); 
         }
         return false;
+    }
+
+    private boolean interact(Player player) {
+        isExiting = true;
+        notifyObservers();
+        if (dungeon().isComplete()) {
+            return true;
+        }
+        isExiting = false;
+        notifyObservers();
+        return false; 
     }
 
     /**
@@ -84,4 +89,8 @@ public class Exit extends Entity implements Subject {
     public void tick(Dungeon dungeon) {
     }
 
+    @Override
+    public boolean canCollide(Entity entity) {
+        return entity instanceof Player;
+    }
 }

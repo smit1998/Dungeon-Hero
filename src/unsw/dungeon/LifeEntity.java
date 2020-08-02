@@ -6,7 +6,7 @@ package unsw.dungeon;
 public abstract class LifeEntity extends Entity {
 
     private boolean isAlive;
-    private boolean isMortal; 
+    private boolean isMortal;
 
     /**
      * Constructs a new life entity at (x,y) in the dungeon
@@ -18,22 +18,22 @@ public abstract class LifeEntity extends Entity {
     public LifeEntity(int x, int y, Dungeon dungeon) {
         super(x, y, dungeon);
         this.isAlive = true;
-        this.isMortal = true; 
+        this.isMortal = true;
     }
 
     public boolean isMortal() {
-        return isMortal; 
+        return isMortal;
     }
 
     public void setMortality(boolean isMortal) {
-        this.isMortal = isMortal; 
+        this.isMortal = isMortal;
     }
 
     /**
      * Move upwards in the dungeon if possible
      */
     public void moveUp() {
-        if (dungeon().interact(this, getX(), getY() - 1)) {
+        if (dungeon().canMove(this, getX(), getY() - 1) && dungeon().interact(this, getX(), getY() - 1)) {
             if (getY() > 0)
                 setY(getY() - 1);
         }
@@ -43,7 +43,7 @@ public abstract class LifeEntity extends Entity {
      * Move downwards in the dungeon if possible
      */
     public void moveDown() {
-        if (dungeon().interact(this, getX(), getY() + 1)) {
+        if (dungeon().canMove(this, getX(), getY() + 1) && dungeon().interact(this, getX(), getY() + 1)) {
             if (getY() < dungeon().getHeight() - 1)
                 setY(getY() + 1);
         }
@@ -53,7 +53,7 @@ public abstract class LifeEntity extends Entity {
      * Move leftwards in the dungeon if possible
      */
     public void moveLeft() {
-        if (dungeon().interact(this, getX() - 1, getY())) {
+        if (dungeon().canMove(this, getX() - 1, getY()) && dungeon().interact(this, getX() - 1, getY())) {
             if (getX() > 0)
                 setX(getX() - 1);
         }
@@ -63,7 +63,7 @@ public abstract class LifeEntity extends Entity {
      * Move rightwards in the dungeon if possible
      */
     public void moveRight() {
-        if (dungeon().interact(this, getX() + 1, getY())) {
+        if (dungeon().canMove(this, getX() + 1, getY()) && dungeon().interact(this, getX() + 1, getY())) {
             if (getX() < dungeon().getWidth() - 1)
                 setX(getX() + 1);
         }

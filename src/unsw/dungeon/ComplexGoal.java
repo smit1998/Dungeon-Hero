@@ -36,7 +36,7 @@ public class ComplexGoal implements ComponentGoal {
      * @return whether this goal is complete
      */
     public boolean isComplete() {
-        return strategy.isComplete(goals);
+        return strategy.isComplete(goals.iterator());
     }
 
     @Override
@@ -46,6 +46,6 @@ public class ComplexGoal implements ComponentGoal {
 
     @Override
     public String toString() {
-        return strategy.toString(goals);
+        return strategy.toString(goals.iterator());
     }
 }

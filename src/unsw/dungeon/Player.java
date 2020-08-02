@@ -93,13 +93,13 @@ public class Player extends LifeEntity {
      * @return - true if caller was able to interact with the player otherwise false
      */
     public boolean interact(Entity caller) {
-        if (caller instanceof Enemy) {
+        if (caller.getClass() == Enemy.class) {
             return interact((Enemy) caller);
         }
         return false;
     }
 
-    public boolean interact(Enemy enemy) {
+    private boolean interact(Enemy enemy) {
         Weapon weapon = inventory.getWeapon();
         if (weapon != null) { // player has weapon, player kills enemy
             weapon.attack(enemy);
@@ -232,4 +232,8 @@ public class Player extends LifeEntity {
         this.checkpoint = checkpoint;
     }
 
+    @Override
+    public boolean canCollide(Entity entity) {
+        return true;
+    }
 }

@@ -689,5 +689,11 @@ Marks will be deducted for poor git and GitLab usage. For example, meaningless c
 * Implemented factory pattern to create entities
 * Changed pause menu and end screen text to graphical images
 * Add restart button to pause menu
-* Added goal display for basic goals 
+* Added goal display for basic goals
 * Implemented checkpoint entity as an extension
+
+##### 02/08/2020
+
+**Fergus**
+* Polished user interface by resizing primary stage and adding graphical buttons
+* Implemented sorting in the level selection menu
