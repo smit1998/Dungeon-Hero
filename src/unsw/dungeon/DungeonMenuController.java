@@ -2,16 +2,17 @@ package unsw.dungeon;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
+import javafx.scene.layout.StackPane;
 import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
@@ -21,10 +22,10 @@ import javafx.collections.FXCollections;
 public class DungeonMenuController implements Controller {
 
     @FXML
-    private ListView<DungeonMenuItem> listview;
+    private ListView<DungeonMenuItem> dungeonList;
 
     @FXML
-    private Button play_button, back_button;
+    private StackPane stack;
 
     private DungeonMenu menu;
     private ObservableList<DungeonMenuItem> observableList;
@@ -36,20 +37,21 @@ public class DungeonMenuController implements Controller {
 
     @FXML
     public void initialize() {
-        listview.setItems(observableList);
-        listview.getSelectionModel().selectFirst();
+        buttons.add(play_button);
+        buttons.add(back_button);
+        dungeonList.setItems(observableList);
+        dungeonList.getSelectionModel().selectFirst();
         Platform.runLater(new Runnable() {
             @Override
             public void run() {
-                listview.requestFocus();
+                dungeonList.requestFocus();
             }
         });
-
     }
 
     @FXML
     public void handlePlay(Event event) throws IOException {
-        DungeonMenuItem selection = listview.getSelectionModel().getSelectedItem();
+        DungeonMenuItem selection = dungeonList.getSelectionModel().getSelectedItem();
         System.out.println("Loading map: " + selection + "...");
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         DungeonControllerLoader dungeonLoader = new DungeonControllerLoader(selection.getDungeonFile());
@@ -68,6 +70,38 @@ public class DungeonMenuController implements Controller {
     }
 
     @FXML
+    public void handleMainKeyPress(KeyEvent event) throws IOException {
+        switch (event.getCode()) {
+            case ENTER:
+                if (inFocus(play_button)) {
+                    handlePlay(event);
+                } else if (inFocus(back_button)) {
+                    handleBack(event);
+                }
+                break;
+            case W:
+            case UP:
+                for (StackPane btn : buttons)
+                    unfocusButton(btn);
+                dungeonList.requestFocus();
+                break;
+            case LEFT:
+            case A:
+                focusButton(back_button);
+                stack.requestFocus();
+                break;
+
+            case RIGHT:
+            case D:
+                focusButton(play_button);
+                stack.requestFocus();
+                break;
+            default:
+                break;
+        }
+    }
+
+    @FXML
     public void handleListKeyPress(KeyEvent event) throws IOException {
         switch (event.getCode()) {
             case W:
@@ -80,12 +114,14 @@ public class DungeonMenuController implements Controller {
 
             case LEFT:
             case A:
-                back_button.requestFocus();
+                focusButton(back_button);
+                stack.requestFocus();
                 break;
 
             case RIGHT:
             case D:
-                play_button.requestFocus();
+                focusButton(play_button);
+                stack.requestFocus();
                 break;
 
             case ENTER:
@@ -93,69 +129,6 @@ public class DungeonMenuController implements Controller {
                 break;
 
             case ESCAPE:
-                handleBack(event);
-                break;
-
-            default:
-                break;
-        }
-    }
-
-    @FXML
-    public void handlePlayKeyPress(KeyEvent event) throws IOException {
-        switch (event.getCode()) {
-            case W:
-            case UP:
-                listview.requestFocus();
-                selectPrevious();
-                break;
-
-            case S:
-            case DOWN:
-                listview.requestFocus();
-                selectNext();
-                break;
-
-            case LEFT:
-            case A:
-                back_button.requestFocus();
-                break;
-
-            case ENTER:
-                handlePlay(event);
-                break;
-
-            case ESCAPE:
-                handleBack(event);
-                break;
-
-            default:
-                break;
-        }
-    }
-
-    @FXML
-    public void handleBackKeyPress(KeyEvent event) throws IOException {
-        switch (event.getCode()) {
-            case W:
-            case UP:
-                listview.requestFocus();
-                selectPrevious();
-                break;
-
-            case S:
-            case DOWN:
-                listview.requestFocus();
-                selectNext();
-                break;
-
-            case RIGHT:
-            case D:
-                play_button.requestFocus();
-                break;
-
-            case ESCAPE:
-            case ENTER:
                 handleBack(event);
                 break;
 
@@ -174,17 +147,51 @@ public class DungeonMenuController implements Controller {
     }
 
     private void selectPrevious() {
-        int selectionIndex = listview.getSelectionModel().getSelectedIndex();
+        int selectionIndex = dungeonList.getSelectionModel().getSelectedIndex();
         if (selectionIndex > 0) {
-            listview.getSelectionModel().selectPrevious();
+            dungeonList.getSelectionModel().selectPrevious();
         }
     }
 
     private void selectNext() {
-        int selectionIndex = listview.getSelectionModel().getSelectedIndex();
+        int selectionIndex = dungeonList.getSelectionModel().getSelectedIndex();
         if (selectionIndex < menu.size() - 1) {
-            listview.getSelectionModel().selectNext();
+            dungeonList.getSelectionModel().selectNext();
         }
     }
 
+    @FXML
+    private StackPane play_button, back_button;
+
+    private List<StackPane> buttons = new ArrayList<>();
+
+    public void handlePlayMouseEnter() {
+        focusButton(play_button);
+    }
+
+    public void handlePlayMouseExit() {
+        unfocusButton(play_button);
+    }
+
+    public void handleBackMouseEnter() {
+        focusButton(back_button);
+    }
+
+    public void handleBackMouseExit() {
+        unfocusButton(back_button);
+    }
+
+    public void focusButton(StackPane button) {
+        for (StackPane btn : buttons)
+            unfocusButton(btn);
+        button.getStyleClass().add("button-selected");
+    }
+
+    public void unfocusButton(StackPane button) {
+        button.getStyleClass().remove("button-selected");
+    }
+
+    private boolean inFocus(StackPane button) {
+        return button.getStyleClass().contains("button-selected");
+    }
 }
