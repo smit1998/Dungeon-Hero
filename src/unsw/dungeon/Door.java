@@ -69,7 +69,7 @@ public class Door extends Entity {
             return true;
         }
         if (caller.getClass() == Player.class) {
-            interact((Player) caller); 
+            return interact((Player) caller); 
         }
         return false;
     }
@@ -92,7 +92,5 @@ public class Door extends Entity {
      */
     @Override
     public void tick(Dungeon dungeon) {
-        // TODO Auto-generated method stub
-
     }
 }
