@@ -188,10 +188,16 @@ public abstract class DungeonLoader {
                 onLoad(checkpoint);
                 break;
             }
+            case MINE: {
+                Mine mine = (Mine) entity;
+                onLoad(mine);
+                break;
+            }
         }
         dungeon.addEntity(entity);
     }
 
+    
     public abstract void onLoad(Player player);
 
     public abstract void onLoad(Wall wall);
@@ -217,6 +223,8 @@ public abstract class DungeonLoader {
     public abstract void onLoad(Potion potion, String type);
 
     public abstract void onLoad(Checkpoint checkpoint);
+
+    public abstract void onLoad(Mine mine);
 
     /**
      * Load a goal

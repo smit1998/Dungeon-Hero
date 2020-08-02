@@ -41,6 +41,7 @@ public class DungeonControllerLoader extends DungeonLoader {
     private Image speedBootsImage = new Image((new File("images/speedBoots.png")).toURI().toString());
     private Image daggerImage = new Image((new File("images/Dagger.png")).toURI().toString());
     private Image checkpointImage = new Image((new File("images/checkpoint.png")).toURI().toString());
+    private Image mineImage = new Image((new File("images/bomb.png")).toURI().toString());
 
     public DungeonControllerLoader(String filename) throws FileNotFoundException {
         super(filename);
@@ -164,6 +165,13 @@ public class DungeonControllerLoader extends DungeonLoader {
         }
         view.setViewOrder(RenderLayer.ITEM);
         addEntity(new EntityView(potion, view));
+    }
+
+    @Override
+    public void onLoad(Mine mine) {
+        ImageView view = new ImageView(mineImage);
+        view.setViewOrder(RenderLayer.PLAYER);
+        addEntity(new EntityView(mine, view));
     }
 
     private void addEntity(EntityView entityView) {
