@@ -26,7 +26,7 @@ public class Boulder extends Entity {
             int newX = getX() * 2 - caller.getX();
             int newY = getY() * 2 - caller.getY();
 
-            if (dungeon().interact(this, newX, newY)) {
+            if (dungeon().canMove(this, newX, newY) && dungeon().interact(this, newX, newY)) {
                 if (newX >= 0 && newX < dungeon().getWidth()) {
                     setX(newX);
                 } else {
@@ -54,6 +54,6 @@ public class Boulder extends Entity {
 
     @Override
     public boolean canCollide(Entity entity) {
-        return true;
+        return !(entity instanceof Boulder);
     }
 }
