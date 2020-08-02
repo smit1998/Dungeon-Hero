@@ -60,4 +60,8 @@ public class DungeonMockLoader extends DungeonLoader {
     @Override
     public void onLoad(Checkpoint checkpoint) {
     }
+
+    @Override
+    public void onLoad(Mine mine) {
+    }
 }

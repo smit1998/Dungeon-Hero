@@ -57,6 +57,9 @@ public class EntityFactory {
             case CHECKPOINT: {
                 return new Checkpoint(x, y, dungeon);
             }
+            case MINE: {
+                return new Mine(x, y, dungeon);
+            }
             default:
                 return null;
         }
