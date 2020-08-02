@@ -76,4 +76,9 @@ public class Weapon extends ItemEntity {
     public void setIsPickedUp(boolean newIsPickedUp) {
         isPickedUp.setValue(newIsPickedUp);
     }
+
+    @Override
+    public boolean canCollide(Entity entity) {
+        return !(entity instanceof Boulder);
+    }
 }

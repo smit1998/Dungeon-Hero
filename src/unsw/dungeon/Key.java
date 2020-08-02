@@ -74,4 +74,9 @@ public class Key extends ItemEntity {
         isPickedUp.setValue(newIsPickedUp);
     }
 
+    @Override
+    public boolean canCollide(Entity entity) {
+        return !(entity instanceof Boulder);
+    }
+
 }
