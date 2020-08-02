@@ -27,7 +27,5 @@ public class Wall extends Entity {
 
     @Override
     public void tick(Dungeon dungeon) {
-        // TODO Auto-generated method stub
-
     }
 }
