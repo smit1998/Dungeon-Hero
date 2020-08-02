@@ -656,3 +656,12 @@ Marks will be deducted for poor git and GitLab usage. For example, meaningless c
 **Duy**
 * brainstorm benefits for extensions
 * get started on map making
+
+##### 1/08/2020
+**Smit**
+* Created a advanced map.
+
+##### 2/08/2020
+**Smit**
+* Created a new extension called mine(Land mine).
+* Created a new map for land mine and checkpoint.
