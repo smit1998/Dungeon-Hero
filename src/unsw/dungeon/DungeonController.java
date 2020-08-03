@@ -150,7 +150,7 @@ public class DungeonController implements Runnable, Controller {
 
         switch (e.getCode()) {
             case ESCAPE:
-                handlePause();
+                togglePause();
                 break;
 
             default:
@@ -253,7 +253,7 @@ public class DungeonController implements Runnable, Controller {
             @Override
             public void run() {
                 map_stack.getChildren().remove(goalTextPane);
-                squares.requestFocus();
+                stack.requestFocus();
             }
         });
 
@@ -358,13 +358,22 @@ public class DungeonController implements Runnable, Controller {
         stage.show();
     }
 
+    public void togglePause() {
+        if (isPaused) {
+            handleResume();
+        } else {
+            handlePause();
+        }
+    }
+
     @FXML
     public void handleResume() {
         synchronized (lock) {
             setIsPaused(false);
             lock.notifyAll();
         }
-        squares.requestFocus();
+        stack.requestFocus();
+        stack.getChildren().remove(pause_screen);
     }
 
     @FXML
@@ -380,7 +389,8 @@ public class DungeonController implements Runnable, Controller {
         setIsPaused(true);
         PauseScreenController controller = new PauseScreenController(this);
         try {
-            stack.getChildren().add((Node) controller.getParent());
+            pause_screen = (Node) controller.getParent();
+            stack.getChildren().add(pause_screen);
         } catch (Exception e) {
             throw new RuntimeException(e);
         }

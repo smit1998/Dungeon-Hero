@@ -78,12 +78,6 @@ public class PauseScreenController implements Controller {
         return scene;
     }
 
-    public void handleResume() {
-        Pane parent = (Pane) pause_menu.getParent();
-        parent.getChildren().remove(pause_menu);
-        game.handleResume();
-    }
-
     public void handleRestart(Event e) throws IOException {
         game.handleRestart(e);
     }
@@ -95,15 +89,14 @@ public class PauseScreenController implements Controller {
     @FXML
     public void handlePauseKeyPress(KeyEvent e) throws IOException {
         switch (e.getCode()) {
-            case ESCAPE:
-                handleResume();
-                break;
             case W:
             case UP:
                 if (inFocus(quit_button)) {
                     focusButton(restart_button);
                 } else if (inFocus(restart_button)) {
                     focusButton(resume_button);
+                } else if (!inFocus(resume_button)) {
+                    focusButton(quit_button);
                 }
                 break;
             case S:
@@ -112,6 +105,8 @@ public class PauseScreenController implements Controller {
                     focusButton(restart_button);
                 } else if (inFocus(restart_button)) {
                     focusButton(quit_button);
+                } else if (!inFocus(quit_button)) {
+                    focusButton(resume_button);
                 }
                 break;
             case ENTER:

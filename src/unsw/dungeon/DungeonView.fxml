@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.VBox ?>
 <?import javafx.scene.text.Text ?>
 
-<StackPane fx:id="stack" stylesheets="@DungeonStyle.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<StackPane fx:id="stack" onKeyPressed="#handleKeyPress" onKeyReleased="#handleKeyRelease" stylesheets="@DungeonStyle.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <ImageView fx:id="background_image" fitHeight="700.0" fitWidth="965.0" pickOnBounds="true">
          <image>
@@ -22,11 +22,11 @@
             <VBox fx:id="pane" alignment="CENTER">
                <children>
                   <StackPane fx:id="map_stack">
-                     <GridPane fx:id="squares" onKeyPressed="#handleKeyPress" onKeyReleased="#handleKeyRelease" style="-fx-border-color: #262626; -fx-border-width: 5;" />
+                     <GridPane fx:id="squares" style="-fx-border-color: #262626; -fx-border-width: 5;" />
                   </StackPane>
                </children>
             </VBox>
-            <SplitPane fx:id="side_box" dividerPositions="0.5" orientation="VERTICAL" style="-fx-background-color: transparent;">
+            <SplitPane fx:id="side_box" dividerPositions="0.5" focusTraversable="false" orientation="VERTICAL" style="-fx-background-color: transparent;">
                <items>
                   <VBox fx:id="goal_box">
                      <children>
