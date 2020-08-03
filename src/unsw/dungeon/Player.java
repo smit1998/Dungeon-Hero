@@ -224,6 +224,10 @@ public class Player extends LifeEntity {
         inventory.removeItem(item);
     }
 
+    public int getLives() {
+        return livesRemaining;
+    }
+
     public void increaseLives() {
         livesRemaining++;
     }
