@@ -37,7 +37,7 @@ public class OrGoalStrategy implements GoalStrategy {
 
     @Override
     public String getRequirement() {
-        return "Complete all of the following goals";
+        return "Complete one of the following goals";
     }
 
     @Override
