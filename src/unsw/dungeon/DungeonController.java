@@ -114,7 +114,7 @@ public class DungeonController implements Runnable, Controller {
 
         for (EntityView entityView : initialEntities) {
             trackPickedUp(entityView);
-            trackWeapon(entityView);
+            trackDetailedItem(entityView);
             squares.getChildren().add(entityView.getView());
         }
         squares.setFocusTraversable(false);
@@ -313,7 +313,7 @@ public class DungeonController implements Runnable, Controller {
         Entity entity = entityView.getEntity();
         ImageView view = entityView.getView();
 
-        if (entity instanceof ItemEntity == false || entity instanceof Weapon)
+        if (entity instanceof ItemEntity == false || entity instanceof DetailedItem)
             return;
 
         ItemEntity item = (ItemEntity) entity;
@@ -339,14 +339,14 @@ public class DungeonController implements Runnable, Controller {
         });
     }
 
-    private void trackWeapon(EntityView entityView) {
+    private void trackDetailedItem(EntityView entityView) {
         Entity entity = entityView.getEntity();
         ImageView view = entityView.getView();
 
-        if (entity instanceof Weapon == false)
+        if (entity instanceof DetailedItem == false)
             return;
 
-        Weapon weapon = (Weapon) entity;
+        ItemEntity item = (ItemEntity) entity;
         Text text = entityView.getText();
         text.setFill(Color.WHITE);
         text.setFont(Font.font(15));
@@ -355,7 +355,7 @@ public class DungeonController implements Runnable, Controller {
         StackPane itemStack = new StackPane();
         itemStack.setAlignment(Pos.BOTTOM_RIGHT);
 
-        weapon.isPickedUp().addListener(new ChangeListener<Boolean>() {
+        item.isPickedUp().addListener(new ChangeListener<Boolean>() {
             @Override
             public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
                 Platform.runLater(new Runnable() {

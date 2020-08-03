@@ -4,8 +4,10 @@ import java.util.ArrayList;
 
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
+import javafx.beans.property.StringProperty;
+import javafx.beans.property.SimpleStringProperty;
 
-public class Potion extends ItemEntity {
+public class Potion extends ItemEntity implements DetailedItem {
 
     private final int DURATION_TICKS = 150;
 
@@ -13,12 +15,14 @@ public class Potion extends ItemEntity {
     private int ticksElapsed;
     private boolean active;
     private BooleanProperty isPickedUp = new SimpleBooleanProperty(false);
+    private StringProperty info;
 
     public Potion(int x, int y, Dungeon dungeon, ArrayList<EffectBehaviour> effects) {
         super(x, y, dungeon);
         this.ticksElapsed = 0;
         this.effects = effects;
         this.active = false;
+        info = new SimpleStringProperty((int) (DURATION_TICKS / 30) + "s");
     }
 
     public boolean isActive() {
@@ -65,6 +69,7 @@ public class Potion extends ItemEntity {
     public void tick(Dungeon dungeon) {
         if (active == true) {
             ticksElapsed++;
+            info.setValue((int) ((DURATION_TICKS - ticksElapsed) / 30) + "s");
             if (ticksElapsed > DURATION_TICKS) {
                 stopEffects();
             }
@@ -88,4 +93,9 @@ public class Potion extends ItemEntity {
         }
         return null;
     }
+
+    public StringProperty getInfoProperty() {
+        return info;
+    }
+
 }

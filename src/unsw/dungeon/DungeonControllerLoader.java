@@ -147,7 +147,7 @@ public class DungeonControllerLoader extends DungeonLoader {
         Text text = new Text();
         EntityView entityView = new EntityView(weapon, view);
         entityView.setText(text);
-        trackHitsRemaining(weapon, text);
+        trackItemInfo(weapon, text);
         addEntity(entityView);
     }
 
@@ -165,7 +165,11 @@ public class DungeonControllerLoader extends DungeonLoader {
                 throw new Error(String.format("Invalid potion type '%s'", type));
         }
         view.setViewOrder(RenderLayer.ITEM);
-        addEntity(new EntityView(potion, view));
+        Text text = new Text();
+        EntityView entityView = new EntityView(potion, view);
+        entityView.setText(text);
+        trackItemInfo(potion, text);
+        addEntity(entityView);
     }
 
     @Override
@@ -236,14 +240,17 @@ public class DungeonControllerLoader extends DungeonLoader {
         });
     }
 
-    private void trackHitsRemaining(Weapon weapon, Text text) {
-        text.setText("x" + weapon.hitsRemaining().getValue());
-        weapon.hitsRemaining().addListener(new ChangeListener<Number>() {
-            @Override
-            public void changed(ObservableValue<? extends Number> arg0, Number arg1, Number arg2) {
-                text.setText("x" + arg2);
-            }
-        });
+    private void trackItemInfo(DetailedItem item, Text text) {
+        text.textProperty().bind(item.getInfoProperty());
+        // text.setText(item.getInfoProperty().toString());
+        // text.setText("x" + weapon.hitsRemaining().getValue());
+        // weapon.hitsRemaining().addListener(new ChangeListener<Number>() {
+        // @Override
+        // public void changed(ObservableValue<? extends Number> arg0, Number arg1,
+        // Number arg2) {
+        // text.setText("x" + arg2);
+        // }
+        // });
     }
 
     /**
