@@ -6,6 +6,7 @@ import java.util.Set;
 import java.util.TreeSet;
 
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Pos;
 import javafx.fxml.FXML;
 
 import javafx.scene.image.Image;
@@ -113,6 +114,7 @@ public class DungeonController implements Runnable, Controller {
 
         for (EntityView entityView : initialEntities) {
             trackPickedUp(entityView);
+            trackDetailedItem(entityView);
             squares.getChildren().add(entityView.getView());
         }
         squares.setFocusTraversable(false);
@@ -311,10 +313,11 @@ public class DungeonController implements Runnable, Controller {
         Entity entity = entityView.getEntity();
         ImageView view = entityView.getView();
 
-        if (entity instanceof ItemEntity == false)
+        if (entity instanceof ItemEntity == false || entity instanceof DetailedItem)
             return;
 
         ItemEntity item = (ItemEntity) entity;
+
         item.isPickedUp().addListener(new ChangeListener<Boolean>() {
             @Override
             public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
@@ -329,6 +332,45 @@ public class DungeonController implements Runnable, Controller {
                         } else {
                             view.setVisible(false);
                             items.getChildren().remove(view);
+                        }
+                    }
+                });
+            }
+        });
+    }
+
+    private void trackDetailedItem(EntityView entityView) {
+        Entity entity = entityView.getEntity();
+        ImageView view = entityView.getView();
+
+        if (entity instanceof DetailedItem == false)
+            return;
+
+        ItemEntity item = (ItemEntity) entity;
+        Text text = entityView.getText();
+        text.setFill(Color.WHITE);
+        text.setFont(Font.font(15));
+        text.setStyle("-fx-font-family: serif");
+
+        StackPane itemStack = new StackPane();
+        itemStack.setAlignment(Pos.BOTTOM_RIGHT);
+
+        item.isPickedUp().addListener(new ChangeListener<Boolean>() {
+            @Override
+            public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
+                Platform.runLater(new Runnable() {
+                    @Override
+                    public void run() {
+                        if (newValue) {
+                            squares.getChildren().remove(view);
+                            view.setVisible(true);
+                            view.setStyle("-fx-effect: dropshadow(gaussian, yellow, 5, 0.0, 0, 0)");
+                            itemStack.getChildren().add(text);
+                            itemStack.getChildren().add(view);
+                            items.getChildren().add(itemStack);
+                        } else {
+                            view.setVisible(false);
+                            items.getChildren().remove(itemStack);
                         }
                     }
                 });
