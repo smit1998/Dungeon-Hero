@@ -661,7 +661,15 @@ Marks will be deducted for poor git and GitLab usage. For example, meaningless c
 **Smit**
 * Created a advanced map.
 
+**Duy**
+* Completed extension map
+
 ##### 2/08/2020
 **Smit**
 * Created a new extension called mine(Land mine).
 * Created a new map for land mine and checkpoint.
+
+**Duy**
+* Refactor - added iterator pattern + use getclass instead of instance of
+
+##### 3/08/2020
