@@ -1,10 +1,12 @@
 package unsw.dungeon;
 
 import javafx.scene.image.ImageView;
+import javafx.scene.text.Text;
 
 public class EntityView {
     private Entity entity;
     private ImageView view;
+    private Text text;
 
     public EntityView(Entity entity, ImageView view) {
         this.entity = entity;
@@ -25,6 +27,14 @@ public class EntityView {
 
     public void setView(ImageView view) {
         this.view = view;
+    }
+
+    public Text getText() {
+        return text;
+    }
+
+    public void setText(Text text) {
+        this.text = text;
     }
 
 }

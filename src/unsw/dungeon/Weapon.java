@@ -2,6 +2,8 @@ package unsw.dungeon;
 
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
+import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.SimpleIntegerProperty;
 
 /**
  * Interface for a weapon, used for items that can be used to attack enemies
@@ -9,14 +11,14 @@ import javafx.beans.property.SimpleBooleanProperty;
 public class Weapon extends ItemEntity {
 
     private AttackBehaviour attackBehaviour;
-    private int hits;
+    private IntegerProperty hits;
     private Inventory inventory;
     private BooleanProperty isPickedUp = new SimpleBooleanProperty(false);
 
     public Weapon(int x, int y, Dungeon dungeon, AttackBehaviour attackBehaviour, int hits) {
         super(x, y, dungeon);
         this.attackBehaviour = attackBehaviour;
-        this.hits = hits;
+        this.hits = new SimpleIntegerProperty(hits);
     }
 
     /**
@@ -34,8 +36,8 @@ public class Weapon extends ItemEntity {
     }
 
     private void decrementHits() {
-        hits--;
-        if (hits == 0) {
+        hits.setValue(hits.getValue() - 1);
+        if (hits.getValue() == 0) {
             deleteWeapon();
             setIsPickedUp(false);
         }
@@ -80,5 +82,9 @@ public class Weapon extends ItemEntity {
     @Override
     public boolean canCollide(Entity entity) {
         return !(entity instanceof Boulder);
+    }
+
+    public IntegerProperty hitsRemaining() {
+        return hits;
     }
 }

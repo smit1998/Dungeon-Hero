@@ -10,6 +10,7 @@ import javafx.scene.Node;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
+import javafx.scene.text.Text;
 
 import java.io.File;
 
@@ -130,7 +131,7 @@ public class DungeonControllerLoader extends DungeonLoader {
     }
 
     @Override
-    public void onLoad(Weapon sword, String type) {
+    public void onLoad(Weapon weapon, String type) {
         ImageView view = null;
         switch (type) {
             case "sword":
@@ -143,7 +144,11 @@ public class DungeonControllerLoader extends DungeonLoader {
                 throw new Error(String.format("Invalid weapon type '%s'", type));
         }
         view.setViewOrder(RenderLayer.ITEM);
-        addEntity(new EntityView(sword, view));
+        Text text = new Text();
+        EntityView entityView = new EntityView(weapon, view);
+        entityView.setText(text);
+        trackHitsRemaining(weapon, text);
+        addEntity(entityView);
     }
 
     @Override
@@ -227,6 +232,16 @@ public class DungeonControllerLoader extends DungeonLoader {
                 } else {
                     view.setImage(closedDoorImage);
                 }
+            }
+        });
+    }
+
+    private void trackHitsRemaining(Weapon weapon, Text text) {
+        text.setText("x" + weapon.hitsRemaining().getValue());
+        weapon.hitsRemaining().addListener(new ChangeListener<Number>() {
+            @Override
+            public void changed(ObservableValue<? extends Number> arg0, Number arg1, Number arg2) {
+                text.setText("x" + arg2);
             }
         });
     }
