@@ -2,17 +2,17 @@
 
 <?import javafx.geometry.Insets ?>
 <?import javafx.scene.control.SplitPane ?>
+<?import javafx.scene.control.TreeView ?>
 <?import javafx.scene.image.Image ?>
 <?import javafx.scene.image.ImageView ?>
 <?import javafx.scene.layout.GridPane ?>
 <?import javafx.scene.layout.HBox ?>
 <?import javafx.scene.layout.StackPane ?>
 <?import javafx.scene.layout.VBox ?>
-<?import javafx.scene.text.Text ?>
 
 <StackPane fx:id="stack" onKeyPressed="#handleKeyPress" onKeyReleased="#handleKeyRelease" stylesheets="@DungeonStyle.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <ImageView fx:id="background_image" fitHeight="700.0" fitWidth="965.0" pickOnBounds="true">
+      <ImageView fx:id="background_image" fitHeight="700.0" fitWidth="1000.0" pickOnBounds="true">
          <image>
             <Image url="@wallimagebg.png" />
          </image>
@@ -28,11 +28,7 @@
             </VBox>
             <SplitPane fx:id="side_box" dividerPositions="0.5" focusTraversable="false" orientation="VERTICAL" style="-fx-background-color: transparent;">
                <items>
-                  <VBox fx:id="goal_box">
-                     <children>
-                        <Text fx:id="goal_string" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" />
-                     </children>
-                  </VBox>
+                  <TreeView fx:id="goal_tree" minWidth="275.0" />
                   <HBox fx:id="items" />
                </items>
                <padding>

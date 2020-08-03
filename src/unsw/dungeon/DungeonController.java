@@ -62,16 +62,13 @@ public class DungeonController implements Runnable, Controller {
     private HBox items;
 
     @FXML
-    private Text goal_string;
-
-    @FXML
-    private VBox goal_box;
-
-    @FXML
     private SplitPane side_box;
 
     @FXML
     private ImageView background_image;
+
+    @FXML
+    private TreeView<String> goal_tree;
 
     private Node pause_screen;
 
@@ -119,14 +116,9 @@ public class DungeonController implements Runnable, Controller {
         }
         squares.setFocusTraversable(false);
 
-        TreeView<String> goalTree = new TreeView<String>();
-        goalTree.setRoot(getGoalTree(dungeon.getGoal()));
-        goalTree.setCellFactory(CheckBoxTreeCell.<String>forTreeView());
-        goalTree.setFocusTraversable(false);
-
-        goal_box.getChildren().add(goalTree);
-        goal_string.setText(dungeon.getGoalString());
-        goal_string.setFont(Font.loadFont("file:resources/fonts/DUNGRG__.TTF", 25));
+        goal_tree.setRoot(getGoalTree(dungeon.getGoal()));
+        goal_tree.setCellFactory(CheckBoxTreeCell.<String>forTreeView());
+        goal_tree.setFocusTraversable(false);
 
         side_box.setMaxHeight(dungeon.getHeight() * 32);
 
