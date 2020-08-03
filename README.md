@@ -757,7 +757,7 @@ Marks will be deducted for poor git and GitLab usage. For example, meaningless c
 * Implemented CheckBoxTreeView for goal display
 * Added controllers and frontend components to UML diagram
 
-**Smit**
-* Added user stories for the extensions.
-
+**Duy**
+* updated maps info
+* created new advance map to reflect complex goals
 
