@@ -27,9 +27,9 @@
         { "x" : 20, "y" : 10, "type" : "wall" }, 
 
         { "y" : 0, "x" : 10, "type" : "wall" }, 
-        { "y" : 1, "x" : 10, "type" : "wall" }, 
         { "y" : 2, "x" : 10, "type" : "wall" }, 
         { "y" : 3, "x" : 10, "type" : "wall" }, 
+        { "y" : 1, "x" : 10, "type" : "door", "id" : 2 }, 
         { "y" : 4, "x" : 10, "type" : "wall" }, 
         { "y" : 5, "x" : 10, "type" : "wall" }, 
         { "y" : 6, "x" : 10, "type" : "wall" }, 
@@ -68,6 +68,7 @@
         { "y" : 4, "x" : 5, "type" : "door", "id" : 1 }, 
         { "y" : 17, "x" : 17, "type" : "key", "id" : 1 }, 
         { "x" : 5, "y" : 5, "type" : "switch"},
+        { "x" : 5, "y" : 5, "type" : "key", "id" : 2},
         { "x" : 4, "y" : 7, "type" : "enemy"},
         { "x" : 7, "y" : 4, "type" : "enemy"},
 
@@ -80,6 +81,8 @@
         { "x" : 19, "y" : 12, "type" : "enemy"},
 
         { "x" : 14, "y" : 19, "type" : "mine"},
+
+        { "x" : 5, "y" : 15, "type" : "treasure"},
 
 
     ],
