@@ -62,7 +62,7 @@ public class DungeonController implements Runnable, Controller {
     private HBox items;
 
     @FXML
-    private SplitPane side_box;
+    private VBox side_box;
 
     @FXML
     private ImageView background_image;
