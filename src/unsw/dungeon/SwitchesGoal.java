@@ -11,7 +11,6 @@ import javafx.beans.property.SimpleBooleanProperty;
  */
 public class SwitchesGoal extends BasicGoal {
 
-    // private Set<FloorSwitch> switches = new HashSet<>();
     private List<FloorSwitch> switches = new ArrayList<>();
 
     private BooleanProperty isComplete = new SimpleBooleanProperty(false);
