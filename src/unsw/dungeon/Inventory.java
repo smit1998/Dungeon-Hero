@@ -14,7 +14,7 @@ public class Inventory {
      */
     public void addItem(ItemEntity item) {
         if (item == null) {
-            return; 
+            return;
         }
         if (item.getClass() == Weapon.class) {
             setWeapon((Weapon) item);
@@ -54,6 +54,13 @@ public class Inventory {
             weapon.attachInventory(this);
             weapon.setVisibility(false);
             weapon.setIsPickedUp(true);
+        } else if (potion != null) {
+            MeleeKillEffect effect = potion.getMeleeKillEffect();
+            if (effect.addWeapon(weapon)) {
+                weapon.attachInventory(this);
+                weapon.setVisibility(false);
+                weapon.setIsPickedUp(true);
+            }
         }
     }
 

@@ -79,4 +79,13 @@ public class Potion extends ItemEntity {
     public boolean canCollide(Entity entity) {
         return true;
     }
+
+    public MeleeKillEffect getMeleeKillEffect() {
+        for (EffectBehaviour effect : effects) {
+            if (effect.getClass() == MeleeKillEffect.class) {
+                return (MeleeKillEffect) effect;
+            }
+        }
+        return null;
+    }
 }

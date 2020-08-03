@@ -25,4 +25,12 @@ public class MeleeKillEffect implements EffectBehaviour {
         inventory.addItem(oldWeapon);
     }
 
+    public boolean addWeapon(Weapon weapon) {
+        if (oldWeapon == null) {
+            oldWeapon = weapon;
+            return true;
+        }
+        return false;
+
+    }
 }

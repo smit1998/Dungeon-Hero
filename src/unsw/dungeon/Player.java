@@ -24,7 +24,7 @@ public class Player extends LifeEntity {
     private int ticksSinceDown = 0;
     private int ticksSinceLeft = 0;
     private int ticksSinceRight = 0;
-    private int TICKS_PER_MOVE = 5;
+    private int ticks_per_move = 5;
 
     private Inventory inventory;
 
@@ -122,19 +122,19 @@ public class Player extends LifeEntity {
     }
 
     public void tick(Set<String> input) {
-        if (input.contains("LEFT") && ticksSinceLeft > TICKS_PER_MOVE) {
+        if (input.contains("LEFT") && ticksSinceLeft > ticks_per_move) {
             ticksSinceLeft = 0;
             moveLeft();
         }
-        if (input.contains("RIGHT") && ticksSinceRight > TICKS_PER_MOVE) {
+        if (input.contains("RIGHT") && ticksSinceRight > ticks_per_move) {
             ticksSinceRight = 0;
             moveRight();
         }
-        if (input.contains("UP") && ticksSinceUp > TICKS_PER_MOVE) {
+        if (input.contains("UP") && ticksSinceUp > ticks_per_move) {
             ticksSinceUp = 0;
             moveUp();
         }
-        if (input.contains("DOWN") && ticksSinceDown > TICKS_PER_MOVE) {
+        if (input.contains("DOWN") && ticksSinceDown > ticks_per_move) {
             ticksSinceDown = 0;
             moveDown();
         }
@@ -213,11 +213,11 @@ public class Player extends LifeEntity {
     }
 
     public void setSpeed(int ticksPerMove) {
-        TICKS_PER_MOVE = ticksPerMove;
+        ticks_per_move = ticksPerMove;
     }
 
     public int getSpeed() {
-        return TICKS_PER_MOVE;
+        return ticks_per_move;
     }
 
     public void removeItem(ItemEntity item) {
