@@ -1,8 +1,14 @@
 {
-    "width": 10,
-    "height": 10,
+    "width": 20,
+    "height": 20,
     "difficulty": "medium",
     "entities": [
+        { "x" : 0, "y" : 0, "type" : "player"},
+        { "x" : 10, "y" : 10, "type" : "enemy" },
+        { "x" : 2, "y" : 2, "type" : "wall" },
+        { "x" : 3, "y" : 3, "type" : "exit" },
+        { "x" : 5, "y" : 5, "type" : "switch"},
+        { "x" : 4, "y" : 4, "type" : "boulder" }
     ],
     "goal-condition": { "goal": "OR", "subgoals": 
                         [
