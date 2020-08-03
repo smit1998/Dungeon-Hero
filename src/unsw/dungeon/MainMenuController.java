@@ -24,6 +24,11 @@ public class MainMenuController implements Controller {
     private Text play_text, quit_text;
 
     @FXML
+    private StackPane play_button, quit_button;
+
+    private List<StackPane> buttons = new ArrayList<>();
+
+    @FXML
     public void initialize() {
         buttons.add(play_button);
         buttons.add(quit_button);
@@ -90,11 +95,6 @@ public class MainMenuController implements Controller {
             handleQuit(e);
         }
     }
-
-    @FXML
-    private StackPane play_button, quit_button;
-
-    private List<StackPane> buttons = new ArrayList<>();
 
     private void setFocus(StackPane button) {
         focusButton(button);
