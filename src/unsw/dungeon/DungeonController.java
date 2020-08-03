@@ -409,7 +409,6 @@ public class DungeonController implements Runnable, Controller {
         if (goal.getClass() == ComplexGoal.class) {
             ComplexGoal complex = (ComplexGoal) goal;
             item = new CheckBoxTreeItem<>(complex.getRequirement());
-            item.selectedProperty().bind(goal.isCompleteProperty());
             item.setExpanded(true);
             for (ComponentGoal subgoal : complex.getSubgoals()) {
                 item.getChildren().add(getGoalTree(subgoal));
@@ -418,6 +417,8 @@ public class DungeonController implements Runnable, Controller {
             item = new CheckBoxTreeItem<>(goal.toString());
             item.selectedProperty().bind(goal.isCompleteProperty());
         }
+        item.selectedProperty().bind(goal.isCompleteProperty());
+        item.setIndependent(true);
         return item;
     }
 
