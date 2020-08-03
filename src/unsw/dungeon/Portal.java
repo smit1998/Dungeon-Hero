@@ -59,8 +59,8 @@ public class Portal extends Entity {
             return false;
         }
         if (caller.getClass() == Player.class || caller.getClass() == Boulder.class) {
-            updatePosition(caller); 
-        } 
+            updatePosition(caller);
+        }
         return false;
     }
 
@@ -84,8 +84,6 @@ public class Portal extends Entity {
 
     @Override
     public void tick(Dungeon dungeon) {
-        // TODO Auto-generated method stub
-
     }
 
     @Override
