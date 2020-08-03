@@ -2,4 +2,22 @@
     "width": 10,
     "height": 10,
     "difficulty": "medium",
+    "entities": [
+    ],
+    "goal-condition": { "goal": "OR", "subgoals": 
+                        [
+                            { "goal": "AND", "subgoals": 
+                                [
+                                   { "goal" : "enemies" },
+                                   { "goal" : "exit" }
+                                ]
+                            },
+                            { "goal": "AND", "subgoals": 
+                                [
+                                   { "goal" : "treasure" },
+                                   { "goal" : "boulders" }
+                                ]
+                            }
+                        ]
+                      }
 }
