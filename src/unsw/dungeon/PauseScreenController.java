@@ -8,7 +8,6 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
-import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
@@ -76,6 +75,10 @@ public class PauseScreenController implements Controller {
         Scene scene = new Scene(root);
         root.requestFocus();
         return scene;
+    }
+
+    public void handleResume() {
+        game.handleResume();
     }
 
     public void handleRestart(Event e) throws IOException {
