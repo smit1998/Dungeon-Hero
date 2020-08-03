@@ -84,7 +84,28 @@
 
         { "x" : 5, "y" : 15, "type" : "treasure"},
 
+        { "x" : 15, "y" : 0, "type" : "wall" }, 
+        { "x" : 15, "y" : 1, "type" : "wall" }, 
+        { "x" : 15, "y" : 2, "type" : "wall" }, 
+        { "x" : 15, "y" : 3, "type" : "wall" }, 
+        { "x" : 15, "y" : 4, "type" : "wall" }, 
+        { "x" : 15, "y" : 5, "type" : "wall" }, 
+        { "x" : 15, "y" : 6, "type" : "wall" }, 
+        { "x" : 15, "y" : 7, "type" : "wall" }, 
+        { "x" : 15, "y" : 8, "type" : "wall" }, 
+        { "x" : 15, "y" : 9, "type" : "wall" }, 
 
+        { "x" : 11, "y" : 4, "type" : "wall" }, 
+        { "x" : 12, "y" : 4, "type" : "wall" }, 
+        { "x" : 13, "y" : 4, "type" : "wall" }, 
+        { "x" : 14, "y" : 4, "type" : "wall" }, 
+        { "x" : 15, "y" : 4, "type" : "wall" }, 
+
+        { "x" : 16, "y" : 5, "type" : "wall" }, 
+        { "x" : 17, "y" : 5, "type" : "wall" }, 
+        { "x" : 18, "y" : 5, "type" : "wall" }, 
+        { "x" : 19, "y" : 5, "type" : "wall" }, 
+        { "x" : 20, "y" : 5, "type" : "wall" }, 
     ],
     "goal-condition": { "goal": "OR", "subgoals": 
                         [
