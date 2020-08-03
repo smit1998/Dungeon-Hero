@@ -19,7 +19,8 @@ public class Checkpoint extends Entity {
     public boolean interact(Player player) {
         if (!isUsed) {
             isUsed = true;
-            player.increaseLives();
+            if (player.getLives() == 1)
+                player.increaseLives();
             player.setCheckpoint(this);
         }
         return true;

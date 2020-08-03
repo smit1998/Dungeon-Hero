@@ -33,7 +33,8 @@
 .list-cell {
   -fx-alignment: center-left;
   -fx-cell-size: 50;
-  -fx-font-size: 20;
+  -fx-font-size: 24;
+  -fx-font-family: serif;
   -fx-background-color: transparent;
   -fx-text-fill: white;
   -fx-opacity: 1;
