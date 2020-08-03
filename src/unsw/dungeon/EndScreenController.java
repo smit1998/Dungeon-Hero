@@ -76,7 +76,7 @@ public class EndScreenController implements Controller {
 
     @FXML
     private void handleReplay(Event event) throws IOException {
-        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        Stage stage = Controller.getStage(event);
         DungeonControllerLoader dungeonLoader = new DungeonControllerLoader(dungeon);
         DungeonController controller = dungeonLoader.loadController();
         stage.setScene(controller.getScene());
@@ -86,7 +86,7 @@ public class EndScreenController implements Controller {
     @FXML
     private void handleQuit(Event event) throws IOException {
         System.out.println("Going back to main menu");
-        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        Stage stage = Controller.getStage(event);
         MainMenuController controller = new MainMenuController();
         stage.setScene(controller.getScene());
         stage.show();

@@ -370,7 +370,7 @@ public class DungeonController implements Runnable, Controller {
 
     @FXML
     public void handleRestart(Event event) throws IOException {
-        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        Stage stage = Controller.getStage(event);
         DungeonControllerLoader dungeonLoader = new DungeonControllerLoader(file);
         DungeonController controller = dungeonLoader.loadController();
         stage.setScene(controller.getScene());

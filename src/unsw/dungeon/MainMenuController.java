@@ -37,7 +37,7 @@ public class MainMenuController implements Controller {
     @FXML
     private void handlePlay(Event event) throws IOException {
         System.out.println("Pressed play");
-        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        Stage stage = Controller.getStage(event);
         DungeonMenuController controller = new DungeonMenuController();
         stage.setScene(controller.getScene());
         stage.show();
@@ -46,7 +46,7 @@ public class MainMenuController implements Controller {
     @FXML
     private void handleQuit(Event event) throws IOException {
         System.out.println("Quitting game");
-        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        Stage stage = Controller.getStage(event);
         stage.close();
     }
 
