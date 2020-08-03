@@ -6,7 +6,7 @@ import javafx.beans.property.SimpleBooleanProperty;
 /**
  * A goal where all treasure must be collected.
  */
-public class TreasureGoal extends BasicGoal implements Observer {
+public class TreasureGoal implements ComponentGoal, Observer {
 
     private int treasureSpawned;
     private int treasureCollected;

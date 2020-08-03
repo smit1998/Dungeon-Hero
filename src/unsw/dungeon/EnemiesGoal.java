@@ -6,7 +6,7 @@ import javafx.beans.property.SimpleBooleanProperty;
 /**
  * A goal where all enemies must be defeated
  */
-public class EnemiesGoal extends BasicGoal implements Observer {
+public class EnemiesGoal implements ComponentGoal, Observer {
 
     private int enemiesSpawned;
     private int enemiesKilled;
