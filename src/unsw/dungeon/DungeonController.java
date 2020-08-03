@@ -415,7 +415,6 @@ public class DungeonController implements Runnable, Controller {
             }
         } else {
             item = new CheckBoxTreeItem<>(goal.toString());
-            item.selectedProperty().bind(goal.isCompleteProperty());
         }
         item.selectedProperty().bind(goal.isCompleteProperty());
         item.setIndependent(true);

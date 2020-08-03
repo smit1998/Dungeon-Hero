@@ -43,3 +43,55 @@
   -fx-background-color: #1a1a1a;
   -fx-text-fill: #fdd700;
 }
+
+.tree-view {
+  -fx-opacity: 1;
+  -fx-background-color: transparent;
+}
+
+.tree-cell {
+  -fx-opcity: 1;
+  -fx-background-color: transparent;
+  -fx-text-fill: white;
+  -fx-cell-size: 12;
+  -fx-font-size: 16;
+  -fx-font-family: serif;
+  -fx-alignment: center-left;
+}
+
+.tree-disclosure-node,
+.arrow {
+  -fx-min-width: 0;
+  -fx-pref-width: 0;
+  -fx-max-width: 0;
+
+  -fx-min-height: 0;
+  -fx-pref-height: 0;
+  -fx-max-height: 0;
+}
+
+.check-box {
+  /* default properties */
+  selected-box-color: transparent;
+  box-color: transparent;
+  mark-color: red;
+  -fx-border-color: white;
+  -fx-border-radius: 1;
+  -fx-border-width: 2;
+}
+
+.check-box:selected > .box {
+  /* background color for selected checkbox */
+  -fx-background-color: selected-box-color;
+}
+
+.check-box > .box {
+  /* background color of unselected checkbox */
+  -fx-background-color: box-color;
+}
+
+.check-box:selected > .box > .mark,
+.check-box:indeterminate > .box > .mark {
+  /* modify mark color */
+  -fx-background-color: mark-color;
+}
