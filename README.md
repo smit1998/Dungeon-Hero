@@ -653,36 +653,80 @@ Marks will be deducted for poor git and GitLab usage. For example, meaningless c
 
 ##### 24/07/2020
 
+**Duy**
+* updated UML to reflect imagined refactored potion and sword classes
+
 **Fergus**
 * Fixed bug in tick system
 * Changed tests to work with tick system
 
 ##### 25/07/2020
 
+**Duy**
+* refactored the weapon, potion and inventory
+* added changes to UML
+
+**Smit**
+* worked on Refactoring the interact method as sudguested by tutor.
+
 **Fergus**
 * Created rough version of main menu and dungeon selector in JavaFX
 
+##### 26/07/2020
+**Duy**
+* added the boots extension 
+* added the boulder kill extension
+
+**Smit**
+* Started working on the Knife weapon(for the Extra makrs part).
+
+### Week 9
 
 ##### 27/07/2020
+
+**Smit**
+* Added the css for dungeon main screen.
+* Added css for DungeonMenu screen.
+* Added css for EndScreen.
 
 **Fergus**
 * Added RenderLayer class to hold constants to control JavaFX entity display order
 
+##### 28/07/2020
 
-### Week-09
+**Smit**
+* Changed javafx a bit.
+* Worked on adding image of dagger entuty.
 
 ##### 30/07/2020
+
+**Smit**
+* Worked on improving the UI of the game.
 
 **Fergus**
 * Changed how the switch goal determines if it is completed.
 
+**Smit**
+* Added Image to the background of the UI.
+* Worked on making an advnced maze.
+
 ##### 31/07/2020
+
+**Duy**
+* brainstorm benefits for extensions
+* get started on map making
 
 **Fergus**
 * Added main CSS for frontend
 * Added graphical text to the main and level selection menu
 
 ##### 01/08/2020
+
+**Smit**
+* Created a advanced map.
+
+**Duy**
+* Completed extension map
 
 **Fergus**
 * Created a new map
@@ -694,6 +738,22 @@ Marks will be deducted for poor git and GitLab usage. For example, meaningless c
 
 ##### 02/08/2020
 
+**Smit**
+* Created a new extension called mine(Land mine).
+* Created a new map for land mine and checkpoint.
+* Deleted the unwanted maps.
+
+**Duy**
+* Refactor - added iterator pattern + use getclass instead of instance of
+
 **Fergus**
 * Polished user interface by resizing primary stage and adding graphical buttons
 * Implemented sorting in the level selection menu
+* Implemented goal display for all goals
+
+##### 03/08/2020
+
+**Fergus**
+* Implemented CheckBoxTreeView for goal display
+* Added controllers and frontend components to UML diagram
+

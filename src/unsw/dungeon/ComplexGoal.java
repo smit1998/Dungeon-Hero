@@ -1,6 +1,10 @@
 package unsw.dungeon;
 
+import java.util.ArrayList;
 import java.util.List;
+
+import javafx.beans.property.BooleanProperty;
+import javafx.beans.property.SimpleBooleanProperty;
 
 /**
  * A complex goal which is made up of one or many subgoals.
@@ -9,6 +13,7 @@ public class ComplexGoal implements ComponentGoal {
 
     private List<ComponentGoal> goals;
     private GoalStrategy strategy;
+    private BooleanProperty isComplete = new SimpleBooleanProperty(false);
 
     /**
      * Constructor for ComplexGoal
@@ -36,16 +41,30 @@ public class ComplexGoal implements ComponentGoal {
      * @return whether this goal is complete
      */
     public boolean isComplete() {
-        return strategy.isComplete(goals.iterator());
+        isComplete.setValue(strategy.isComplete(goals.iterator()));
+        return isComplete.getValue();
     }
 
     @Override
     public GoalType getType() {
-        return GoalType.COMPLEX_GOAL;
+        return strategy.getType();
     }
 
     @Override
     public String toString() {
         return strategy.toString(goals.iterator());
+    }
+
+    public String getRequirement() {
+        return strategy.getRequirement();
+    }
+
+    @Override
+    public BooleanProperty isCompleteProperty() {
+        return isComplete;
+    }
+
+    public List<ComponentGoal> getSubgoals() {
+        return new ArrayList<>(goals);
     }
 }

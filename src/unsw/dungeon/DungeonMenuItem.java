@@ -70,7 +70,7 @@ public class DungeonMenuItem {
 
     @Override
     public String toString() {
-        return dungeonName;
+        return String.format("%s - %s", difficulty.toString().toUpperCase(), dungeonName);
     }
 
     public DungeonDifficulty getDifficulty() {

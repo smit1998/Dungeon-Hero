@@ -4,7 +4,6 @@ import javafx.application.Platform;
 import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
@@ -12,6 +11,8 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.Font;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 import java.io.File;
@@ -26,6 +27,8 @@ public class EndScreenController implements Controller {
     private final static Image GAMEOVER_IMG = new Image(
             (new File("src/unsw/dungeon/game_over_text.png")).toURI().toString());
 
+    private final static Font MAIN_FONT = Font.loadFont("file:resources/fonts/DUNGRG__.TTF", 30);
+
     @FXML
     private VBox end_screen;
 
@@ -35,6 +38,9 @@ public class EndScreenController implements Controller {
     @FXML
     private StackPane replay_button, quit_button;
     private List<StackPane> buttons = new ArrayList<>();
+
+    @FXML
+    private Text quit_text, replay_text;
 
     private boolean victory;
     private File dungeon;
@@ -51,6 +57,9 @@ public class EndScreenController implements Controller {
         buttons.add(replay_button);
         buttons.add(quit_button);
 
+        quit_text.setFont(MAIN_FONT);
+        replay_text.setFont(MAIN_FONT);
+
         Platform.runLater(new Runnable() {
             @Override
             public void run() {
@@ -66,7 +75,7 @@ public class EndScreenController implements Controller {
 
     @FXML
     private void handleReplay(Event event) throws IOException {
-        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        Stage stage = Controller.getStage(event);
         DungeonControllerLoader dungeonLoader = new DungeonControllerLoader(dungeon);
         DungeonController controller = dungeonLoader.loadController();
         stage.setScene(controller.getScene());
@@ -76,7 +85,7 @@ public class EndScreenController implements Controller {
     @FXML
     private void handleQuit(Event event) throws IOException {
         System.out.println("Going back to main menu");
-        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        Stage stage = Controller.getStage(event);
         MainMenuController controller = new MainMenuController();
         stage.setScene(controller.getScene());
         stage.show();

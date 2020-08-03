@@ -40,8 +40,8 @@ public class DungeonControllerLoader extends DungeonLoader {
     private Image invincibilityImage = new Image((new File("images/brilliant_blue_new.png")).toURI().toString());
     private Image speedBootsImage = new Image((new File("images/speedBoots.png")).toURI().toString());
     private Image daggerImage = new Image((new File("images/dagger.png")).toURI().toString());
-    private Image checkpointImage = new Image((new File("images/checkpoint.png")).toURI().toString());
-    private Image mineImage = new Image((new File("images/bomb.png")).toURI().toString());
+    private Image checkpointImage = new Image((new File("images/fountain.png")).toURI().toString());
+    private Image mineImage = new Image((new File("images/shaft.png")).toURI().toString());
 
     public DungeonControllerLoader(String filename) throws FileNotFoundException {
         super(filename);
@@ -128,10 +128,6 @@ public class DungeonControllerLoader extends DungeonLoader {
         view.setViewOrder(RenderLayer.ITEM);
         addEntity(new EntityView(checkpoint, view));
     }
-    /*
-     * @Override public void onLoad(Weapon sword) { ImageView view = new
-     * ImageView(swordImage); addEntity(sword, view); }
-     */
 
     @Override
     public void onLoad(Weapon sword, String type) {
@@ -210,7 +206,7 @@ public class DungeonControllerLoader extends DungeonLoader {
         });
     }
 
-    public void trackVisibility(EntityView entityView) {
+    private void trackVisibility(EntityView entityView) {
         Node node = entityView.getView();
         Entity entity = entityView.getEntity();
         entity.isVisible().addListener(new ChangeListener<Boolean>() {
@@ -221,7 +217,7 @@ public class DungeonControllerLoader extends DungeonLoader {
         });
     }
 
-    public void trackOpen(Door door, ImageView view) {
+    private void trackOpen(Door door, ImageView view) {
         door.isOpen().addListener(new ChangeListener<Boolean>() {
             @Override
             public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {

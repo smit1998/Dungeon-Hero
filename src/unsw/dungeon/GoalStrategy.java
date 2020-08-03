@@ -16,4 +16,8 @@ public interface GoalStrategy {
     public boolean isComplete(Iterator<ComponentGoal> goals);
 
     public String toString(Iterator<ComponentGoal> goals);
+
+    public String getRequirement();
+
+    public GoalType getType();
 }

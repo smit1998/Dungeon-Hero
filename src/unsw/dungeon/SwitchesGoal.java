@@ -3,19 +3,24 @@ package unsw.dungeon;
 import java.util.ArrayList;
 import java.util.List;
 
+import javafx.beans.property.BooleanProperty;
+import javafx.beans.property.SimpleBooleanProperty;
+
 /**
  * A goal whether all floor switches must be pressed down by boulders
  */
 public class SwitchesGoal extends BasicGoal {
 
-    // private Set<FloorSwitch> switches = new HashSet<>();
     private List<FloorSwitch> switches = new ArrayList<>();
+
+    private BooleanProperty isComplete = new SimpleBooleanProperty(false);
 
     /**
      * @return whether this goal is complete
      */
     public boolean isComplete() {
-        return switches.stream().allMatch(s -> s.isPressed());
+        isComplete.setValue(switches.stream().allMatch(s -> s.isPressed()));
+        return isComplete.getValue();
     }
 
     /**
@@ -37,5 +42,10 @@ public class SwitchesGoal extends BasicGoal {
     @Override
     public String toString() {
         return "Activate all switches";
+    }
+
+    @Override
+    public BooleanProperty isCompleteProperty() {
+        return isComplete;
     }
 }

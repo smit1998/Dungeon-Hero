@@ -1,5 +1,7 @@
 package unsw.dungeon;
 
+import javafx.beans.property.BooleanProperty;
+
 /**
  * A component goal interface
  */
@@ -17,4 +19,6 @@ public interface ComponentGoal {
      * @param s the subject to be observed
      */
     public void attachTo(Entity e);
+
+    public BooleanProperty isCompleteProperty();
 }

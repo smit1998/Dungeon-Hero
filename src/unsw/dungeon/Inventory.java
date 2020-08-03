@@ -13,6 +13,9 @@ public class Inventory {
      * adds an item to the inventory and does nothing if item type already exists
      */
     public void addItem(ItemEntity item) {
+        if (item == null) {
+            return; 
+        }
         if (item.getClass() == Weapon.class) {
             setWeapon((Weapon) item);
         }
@@ -28,6 +31,9 @@ public class Inventory {
      * removes an item from the inventory, does nothing if item doesn't exist
      */
     public void removeItem(ItemEntity item) {
+        if (item == null) {
+            return;
+        }
         if (item.getClass() == Weapon.class) {
             this.weapon = null;
         }
