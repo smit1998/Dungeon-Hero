@@ -86,7 +86,6 @@
 
         { "x" : 15, "y" : 0, "type" : "wall" }, 
         { "x" : 15, "y" : 1, "type" : "wall" }, 
-        { "x" : 15, "y" : 2, "type" : "wall" }, 
         { "x" : 15, "y" : 3, "type" : "wall" }, 
         { "x" : 15, "y" : 4, "type" : "wall" }, 
         { "x" : 15, "y" : 5, "type" : "wall" }, 
@@ -106,6 +105,13 @@
         { "x" : 18, "y" : 5, "type" : "wall" }, 
         { "x" : 19, "y" : 5, "type" : "wall" }, 
         { "x" : 20, "y" : 5, "type" : "wall" }, 
+
+        { "x" : 14, "y" : 3, "type" : "switch" }, 
+        { "x" : 11, "y" : 3, "type" : "portal", "id" : 2 }, 
+        { "x" : 18, "y" : 8, "type" : "portal", "id" : 2 }, 
+        { "x" : 17, "y" : 7, "type" : "boulder" }, 
+        { "x" : 19, "y" : 9, "type" : "key", "id" : 3 }, 
+        { "x" : 15, "y" : 2, "type" : "door", "id" : 3 } 
     ],
     "goal-condition": { "goal": "OR", "subgoals": 
                         [
