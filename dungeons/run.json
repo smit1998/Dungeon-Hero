@@ -1,6 +1,7 @@
 {
     "width": 21,
     "height": 21,
+    "difficulty": "medium", 
     "entities": [
       { "x" : 1, "y" : 1, "type": "player" }, 
       { "x" : 0, "y" : 0, "type" : "wall" }, 
