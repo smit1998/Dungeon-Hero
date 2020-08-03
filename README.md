@@ -761,3 +761,6 @@ Marks will be deducted for poor git and GitLab usage. For example, meaningless c
 * updated maps info
 * created new advance map to reflect complex goals
 
+**Smit**
+* Added the user stories and acceptance criteria for extnesions
+
