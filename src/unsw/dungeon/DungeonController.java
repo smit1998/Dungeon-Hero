@@ -24,11 +24,15 @@ import javafx.util.Duration;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.SplitPane;
+import javafx.scene.control.TreeView;
+import javafx.scene.control.cell.CheckBoxTreeCell;
 import javafx.animation.FadeTransition;
 import javafx.application.Platform;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.Event;
+import javafx.scene.control.CheckBoxTreeItem;
 
 import java.io.File;
 import java.io.IOException;
@@ -57,6 +61,17 @@ public class DungeonController implements Runnable, Controller {
     @FXML
     private HBox items;
 
+    @FXML
+    private VBox side_box;
+
+    @FXML
+    private ImageView background_image;
+
+    @FXML
+    private TreeView<String> goal_tree;
+
+    private Node pause_screen;
+
     private List<EntityView> initialEntities;
 
     private Player player;
@@ -79,6 +94,9 @@ public class DungeonController implements Runnable, Controller {
     @FXML
     public void initialize() throws IOException {
 
+        background_image.fitHeightProperty().bind(stack.heightProperty());
+        background_image.fitWidthProperty().bind(stack.widthProperty());
+
         Image ground = new Image((new File("images/dirt_0_new.png")).toURI().toString());
         Image backpack = new Image((new File("images/backpack.png")).toURI().toString());
 
@@ -91,12 +109,18 @@ public class DungeonController implements Runnable, Controller {
             }
         }
         items.getChildren().add(new ImageView(backpack));
-        items.setStyle("-fx-background-color: black;");
 
         for (EntityView entityView : initialEntities) {
             trackPickedUp(entityView);
             squares.getChildren().add(entityView.getView());
         }
+        squares.setFocusTraversable(false);
+
+        goal_tree.setRoot(getGoalTree(dungeon.getGoal()));
+        goal_tree.setCellFactory(CheckBoxTreeCell.<String>forTreeView());
+        goal_tree.setFocusTraversable(false);
+
+        side_box.setMaxHeight(dungeon.getHeight() * 32);
 
         Platform.runLater(new Runnable() {
             @Override
@@ -118,7 +142,7 @@ public class DungeonController implements Runnable, Controller {
 
         switch (e.getCode()) {
             case ESCAPE:
-                handlePause();
+                togglePause();
                 break;
 
             default:
@@ -193,10 +217,10 @@ public class DungeonController implements Runnable, Controller {
         StackPane goalTextPane = new StackPane();
         goalTextPane.setStyle("-fx-background-color: black");
 
-        Text goalText = new Text(dungeon.getGoalType() == GoalType.COMPLEX_GOAL ? "" : dungeon.getGoalString());
+        Text goalText = new Text(dungeon.getGoalType().isComplex() ? "" : dungeon.getGoalString());
         goalText.setTextAlignment(TextAlignment.CENTER);
         goalText.setFill(Color.WHITE);
-        goalText.setFont(Font.font("", 20));
+        goalText.setFont(Font.loadFont("file:resources/fonts/DUNGRG__.TTF", 45));
 
         goalTextPane.getChildren().add(goalText);
         stack.getChildren().add(goalTextPane);
@@ -221,7 +245,7 @@ public class DungeonController implements Runnable, Controller {
             @Override
             public void run() {
                 map_stack.getChildren().remove(goalTextPane);
-                squares.requestFocus();
+                stack.requestFocus();
             }
         });
 
@@ -326,13 +350,22 @@ public class DungeonController implements Runnable, Controller {
         stage.show();
     }
 
+    public void togglePause() {
+        if (isPaused) {
+            handleResume();
+        } else {
+            handlePause();
+        }
+    }
+
     @FXML
     public void handleResume() {
         synchronized (lock) {
             setIsPaused(false);
             lock.notifyAll();
         }
-        squares.requestFocus();
+        stack.requestFocus();
+        stack.getChildren().remove(pause_screen);
     }
 
     @FXML
@@ -348,7 +381,8 @@ public class DungeonController implements Runnable, Controller {
         setIsPaused(true);
         PauseScreenController controller = new PauseScreenController(this);
         try {
-            stack.getChildren().add((Node) controller.getParent());
+            pause_screen = (Node) controller.getParent();
+            stack.getChildren().add(pause_screen);
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
@@ -360,6 +394,23 @@ public class DungeonController implements Runnable, Controller {
 
     private void setIsPaused(boolean isPaused) {
         this.isPaused = isPaused;
+    }
+
+    private CheckBoxTreeItem<String> getGoalTree(ComponentGoal goal) {
+        CheckBoxTreeItem<String> item = null;
+        if (goal.getClass() == ComplexGoal.class) {
+            ComplexGoal complex = (ComplexGoal) goal;
+            item = new CheckBoxTreeItem<>(complex.getRequirement());
+            item.setExpanded(true);
+            for (ComponentGoal subgoal : complex.getSubgoals()) {
+                item.getChildren().add(getGoalTree(subgoal));
+            }
+        } else {
+            item = new CheckBoxTreeItem<>(goal.toString());
+        }
+        item.selectedProperty().bind(goal.isCompleteProperty());
+        item.setIndependent(true);
+        return item;
     }
 
 }

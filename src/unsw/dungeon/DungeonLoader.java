@@ -197,7 +197,6 @@ public abstract class DungeonLoader {
         dungeon.addEntity(entity);
     }
 
-    
     public abstract void onLoad(Player player);
 
     public abstract void onLoad(Wall wall);
@@ -234,28 +233,29 @@ public abstract class DungeonLoader {
      * @throws Error if goal in "goal" key is invalid
      */
     private ComponentGoal loadGoal(JSONObject json) {
-        String goal = json.getString("goal");
-        switch (goal) {
-            case "exit":
+        String goalString = json.getString("goal");
+        GoalType type = GoalType.get(goalString);
+        switch (type) {
+            case EXIT_GOAL:
                 return new ExitGoal();
-            case "enemies":
+            case ENEMIES_GOAL:
                 return new EnemiesGoal(enemiesSpawned);
-            case "boulders":
+            case SWITCHES_GOAL:
                 return new SwitchesGoal();
-            case "treasure":
+            case TREASURE_GOAL:
                 return new TreasureGoal(treasureSpawned);
-            case "AND": {
+            case AND_GOAL: {
                 JSONArray jsonSubgoals = json.getJSONArray("subgoals");
                 List<ComponentGoal> subgoals = loadGoals(jsonSubgoals);
                 return new ComplexGoal(new AndGoalStrategy(), subgoals);
             }
-            case "OR": {
+            case OR_GOAL: {
                 JSONArray jsonSubgoals = json.getJSONArray("subgoals");
                 List<ComponentGoal> subgoals = loadGoals(jsonSubgoals);
                 return new ComplexGoal(new OrGoalStrategy(), subgoals);
             }
             default: {
-                throw new Error(String.format("Invalid goal type: \"%s\"", goal));
+                throw new Error(String.format("Invalid goal type: \"%s\"", goalString));
             }
         }
     }

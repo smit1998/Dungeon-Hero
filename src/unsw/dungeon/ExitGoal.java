@@ -1,24 +1,27 @@
 package unsw.dungeon;
 
+import javafx.beans.property.BooleanProperty;
+import javafx.beans.property.SimpleBooleanProperty;
+
 /**
  * A goal where the player must reach the exit of the dungeon
  */
 public class ExitGoal extends BasicGoal implements Observer {
 
-    private boolean isComplete;
+    private BooleanProperty isComplete;
 
     /**
      * Constructor for an exit goal
      */
     public ExitGoal() {
-        isComplete = false;
+        isComplete = new SimpleBooleanProperty(false);
     }
 
     /**
      * @return whether this goal is complete
      */
     public boolean isComplete() {
-        return isComplete;
+        return isComplete.getValue();
     }
 
     /**
@@ -28,7 +31,7 @@ public class ExitGoal extends BasicGoal implements Observer {
      */
     public void update(Subject s) {
         Exit exit = (Exit) s;
-        isComplete = exit.getExitStatus();
+        isComplete.setValue(exit.getExitStatus());
     }
 
     /**
@@ -51,5 +54,10 @@ public class ExitGoal extends BasicGoal implements Observer {
     @Override
     public String toString() {
         return "Exit the dungeon";
+    }
+
+    @Override
+    public BooleanProperty isCompleteProperty() {
+        return isComplete;
     }
 }

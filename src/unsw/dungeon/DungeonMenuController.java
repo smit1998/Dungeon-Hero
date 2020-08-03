@@ -7,15 +7,19 @@ import java.util.List;
 
 import javafx.collections.ObservableList;
 import javafx.scene.layout.StackPane;
+import javafx.scene.text.Font;
+import javafx.scene.text.Text;
 import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
+import javafx.util.Callback;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 
@@ -27,8 +31,13 @@ public class DungeonMenuController implements Controller {
     @FXML
     private StackPane stack;
 
+    @FXML
+    private Text play_text, back_text;
+
     private DungeonMenu menu;
     private ObservableList<DungeonMenuItem> observableList;
+
+    private final static Font MAIN_FONT = Font.loadFont("file:resources/fonts/DUNGRG__.TTF", 35);
 
     public DungeonMenuController() throws FileNotFoundException {
         menu = new DungeonMenu();
@@ -39,8 +48,28 @@ public class DungeonMenuController implements Controller {
     public void initialize() {
         buttons.add(play_button);
         buttons.add(back_button);
+        dungeonList.setCellFactory(new Callback<ListView<DungeonMenuItem>, ListCell<DungeonMenuItem>>() {
+            @Override
+            public ListCell<DungeonMenuItem> call(ListView<DungeonMenuItem> listview) {
+                ListCell<DungeonMenuItem> cell = new ListCell<>() {
+                    @Override
+                    protected void updateItem(DungeonMenuItem item, boolean empty) {
+                        super.updateItem(item, empty);
+                        if (item != null) {
+                            setText(item.toString());
+                            setFont(MAIN_FONT);
+                        }
+                    }
+                };
+                return cell;
+            }
+        });
         dungeonList.setItems(observableList);
         dungeonList.getSelectionModel().selectFirst();
+
+        play_text.setFont(MAIN_FONT);
+        back_text.setFont(MAIN_FONT);
+
         Platform.runLater(new Runnable() {
             @Override
             public void run() {

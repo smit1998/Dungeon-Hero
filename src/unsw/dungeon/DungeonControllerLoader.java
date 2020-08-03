@@ -40,8 +40,8 @@ public class DungeonControllerLoader extends DungeonLoader {
     private Image invincibilityImage = new Image((new File("images/brilliant_blue_new.png")).toURI().toString());
     private Image speedBootsImage = new Image((new File("images/speedBoots.png")).toURI().toString());
     private Image daggerImage = new Image((new File("images/dagger.png")).toURI().toString());
-    private Image checkpointImage = new Image((new File("images/checkpoint.png")).toURI().toString());
-    private Image mineImage = new Image((new File("images/bomb.png")).toURI().toString());
+    private Image checkpointImage = new Image((new File("images/fountain.png")).toURI().toString());
+    private Image mineImage = new Image((new File("images/shaft.png")).toURI().toString());
 
     public DungeonControllerLoader(String filename) throws FileNotFoundException {
         super(filename);

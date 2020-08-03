@@ -9,9 +9,9 @@
 <?import javafx.scene.text.Font ?>
 <?import javafx.scene.text.Text ?>
 
-<VBox fx:id="pause_menu" alignment="CENTER" onKeyPressed="#handlePauseKeyPress" styleClass="overlay" stylesheets="@DungeonStyle.css, @EndScreen.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<VBox fx:id="pause_menu" alignment="CENTER" onKeyPressed="#handlePauseKeyPress" styleClass="overlay" stylesheets="@DungeonStyle.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
     <children>
-        <ImageView fx:id="paused_text" preserveRatio="true" styleClass="text-image">
+        <ImageView fx:id="paused_text" fitHeight="150.0" preserveRatio="true" styleClass="text-image">
             <image>
                 <Image url="@paused_text.png" />
             </image>
@@ -28,7 +28,7 @@
                                 <Image url="@button.png" />
                             </image>
                         </ImageView>
-                        <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Resume" translateY="3.0">
+                        <Text fx:id="resume_text" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Resume" translateY="3.0">
                             <font>
                                 <Font size="20.0" />
                             </font>
@@ -42,7 +42,7 @@
                                 <Image url="@button.png" />
                             </image>
                         </ImageView>
-                        <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Restart" translateY="3.0">
+                        <Text fx:id="restart_text" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Restart" translateY="3.0">
                             <font>
                                 <Font size="20.0" />
                             </font>
@@ -56,7 +56,7 @@
                                 <Image url="@button.png" />
                             </image>
                         </ImageView>
-                        <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Quit" translateY="3.0">
+                        <Text fx:id="quit_text" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Quit" translateY="3.0">
                             <font>
                                 <Font size="20.0" />
                             </font>
