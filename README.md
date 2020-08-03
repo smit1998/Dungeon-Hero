@@ -741,6 +741,7 @@ Marks will be deducted for poor git and GitLab usage. For example, meaningless c
 **Smit**
 * Created a new extension called mine(Land mine).
 * Created a new map for land mine and checkpoint.
+* Deleted the unwanted maps.
 
 **Duy**
 * Refactor - added iterator pattern + use getclass instead of instance of
