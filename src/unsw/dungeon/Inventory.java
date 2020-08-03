@@ -31,6 +31,9 @@ public class Inventory {
      * removes an item from the inventory, does nothing if item doesn't exist
      */
     public void removeItem(ItemEntity item) {
+        if (item == null) {
+            return;
+        }
         if (item.getClass() == Weapon.class) {
             this.weapon = null;
         }
