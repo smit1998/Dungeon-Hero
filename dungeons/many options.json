@@ -65,6 +65,8 @@
         { "y" : 3, "x" : 7, "type" : "wall" }, 
         { "y" : 4, "x" : 5, "type" : "door", "id" : 1 }, 
         { "x" : 5, "y" : 5, "type" : "switch"},
+        { "x" : 4, "y" : 7, "type" : "enemy"},
+        { "x" : 7, "y" : 4, "type" : "enemy"},
 
         { "x" : 1, "y" : 1, "type" : "boulder" },
 
