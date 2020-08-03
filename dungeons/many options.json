@@ -82,7 +82,6 @@
 
         { "x" : 14, "y" : 19, "type" : "mine"},
 
-        { "x" : 5, "y" : 15, "type" : "treasure"},
 
         { "x" : 15, "y" : 0, "type" : "wall" }, 
         { "x" : 15, "y" : 1, "type" : "wall" }, 
@@ -121,6 +120,46 @@
         { "y" : 16, "x" : 17, "type" : "sword" }, 
 
         { "y" : 8, "x" : 12, "type" : "portal", "id" : 4 }, 
+        { "y" : 20, "x" : 0, "type" : "portal", "id" : 4 }, 
+
+        { "x" : 0, "y" : 11, "type" : "treasure" }, 
+        { "x" : 0, "y" : 12, "type" : "treasure" }, 
+        { "x" : 0, "y" : 13, "type" : "treasure" }, 
+        { "x" : 0, "y" : 14, "type" : "treasure" }, 
+        { "x" : 0, "y" : 15, "type" : "treasure" }, 
+        { "x" : 0, "y" : 16, "type" : "treasure" }, 
+        { "x" : 0, "y" : 17, "type" : "treasure" }, 
+        { "x" : 0, "y" : 18, "type" : "treasure" }, 
+        { "x" : 0, "y" : 19, "type" : "treasure" }, 
+        { "x" : 1, "y" : 11, "type" : "treasure" }, 
+        { "x" : 2, "y" : 11, "type" : "treasure" }, 
+        { "x" : 3, "y" : 11, "type" : "treasure" }, 
+        { "x" : 4, "y" : 11, "type" : "treasure" }, 
+        { "x" : 5, "y" : 11, "type" : "treasure" }, 
+        { "x" : 6, "y" : 11, "type" : "treasure" }, 
+        { "x" : 7, "y" : 11, "type" : "treasure" }, 
+        { "x" : 8, "y" : 11, "type" : "treasure" }, 
+        { "x" : 9, "y" : 11, "type" : "treasure" }, 
+
+        { "x" : 9, "y" : 11, "type" : "treasure" }, 
+        { "x" : 9, "y" : 12, "type" : "treasure" }, 
+        { "x" : 9, "y" : 13, "type" : "treasure" }, 
+        { "x" : 9, "y" : 14, "type" : "treasure" }, 
+        { "x" : 9, "y" : 15, "type" : "treasure" }, 
+        { "x" : 9, "y" : 16, "type" : "treasure" }, 
+        { "x" : 9, "y" : 17, "type" : "treasure" }, 
+        { "x" : 9, "y" : 18, "type" : "treasure" }, 
+        { "x" : 9, "y" : 19, "type" : "treasure" }, 
+
+        { "x" : 1, "y" : 20, "type" : "treasure" }, 
+        { "x" : 2, "y" : 20, "type" : "treasure" }, 
+        { "x" : 3, "y" : 20, "type" : "treasure" }, 
+        { "x" : 4, "y" : 20, "type" : "treasure" }, 
+        { "x" : 5, "y" : 20, "type" : "treasure" }, 
+        { "x" : 6, "y" : 20, "type" : "treasure" }, 
+        { "x" : 7, "y" : 20, "type" : "treasure" }, 
+        { "x" : 8, "y" : 20, "type" : "treasure" }, 
+        { "x" : 9, "y" : 20, "type" : "treasure" }, 
     ],
     "goal-condition": { "goal": "OR", "subgoals": 
                         [
