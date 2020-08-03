@@ -54,6 +54,8 @@
 
         { "x" : 20, "y" : 20, "type" : "exit" },
 
+        { "x" : 1, "y" : 1, "type" : "boulder" },
+
         { "y" : 5, "x" : 4, "type" : "wall" }, 
         { "y" : 5, "x" : 6, "type" : "wall" }, 
         { "y" : 6, "x" : 4, "type" : "wall" }, 
@@ -64,11 +66,19 @@
         { "y" : 4, "x" : 6, "type" : "wall" }, 
         { "y" : 3, "x" : 7, "type" : "wall" }, 
         { "y" : 4, "x" : 5, "type" : "door", "id" : 1 }, 
+        { "y" : 17, "x" : 17, "type" : "key", "id" : 1 }, 
         { "x" : 5, "y" : 5, "type" : "switch"},
         { "x" : 4, "y" : 7, "type" : "enemy"},
         { "x" : 7, "y" : 4, "type" : "enemy"},
 
-        { "x" : 1, "y" : 1, "type" : "boulder" },
+        { "y" : 15, "x" : 15, "type" : "portal", "id" : 1 }, 
+        { "y" : 3, "x" : 6, "type" : "portal", "id" : 1 }, 
+
+        { "x" : 12, "y" : 12, "type" : "enemy"},
+        { "x" : 12, "y" : 19, "type" : "enemy"},
+        { "x" : 19, "y" : 19, "type" : "enemy"},
+        { "x" : 19, "y" : 12, "type" : "enemy"},
+
 
     ],
     "goal-condition": { "goal": "OR", "subgoals": 
