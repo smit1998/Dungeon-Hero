@@ -11,7 +11,7 @@
 
 <StackPane fx:id="stack" onKeyPressed="#handleKeyPress" onKeyReleased="#handleKeyRelease" stylesheets="@DungeonStyle.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <ImageView fx:id="background_image" fitHeight="700.0" fitWidth="1000.0" pickOnBounds="true">
+      <ImageView fx:id="background_image" fitHeight="700.0" fitWidth="1048.0" pickOnBounds="true">
          <image>
             <Image url="@wallimagebg.png" />
          </image>
