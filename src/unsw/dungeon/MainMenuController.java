@@ -3,7 +3,6 @@ package unsw.dungeon;
 import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.input.KeyCode;
@@ -25,6 +24,11 @@ public class MainMenuController implements Controller {
     private Text play_text, quit_text;
 
     @FXML
+    private StackPane play_button, quit_button;
+
+    private List<StackPane> buttons = new ArrayList<>();
+
+    @FXML
     public void initialize() {
         buttons.add(play_button);
         buttons.add(quit_button);
@@ -37,7 +41,7 @@ public class MainMenuController implements Controller {
     @FXML
     private void handlePlay(Event event) throws IOException {
         System.out.println("Pressed play");
-        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        Stage stage = Controller.getStage(event);
         DungeonMenuController controller = new DungeonMenuController();
         stage.setScene(controller.getScene());
         stage.show();
@@ -46,7 +50,7 @@ public class MainMenuController implements Controller {
     @FXML
     private void handleQuit(Event event) throws IOException {
         System.out.println("Quitting game");
-        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        Stage stage = Controller.getStage(event);
         stage.close();
     }
 
@@ -91,11 +95,6 @@ public class MainMenuController implements Controller {
             handleQuit(e);
         }
     }
-
-    @FXML
-    private StackPane play_button, quit_button;
-
-    private List<StackPane> buttons = new ArrayList<>();
 
     private void setFocus(StackPane button) {
         focusButton(button);

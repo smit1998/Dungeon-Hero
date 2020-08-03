@@ -1,7 +1,6 @@
 {
     "width": 21,
     "height": 21,
-    "difficulty" : "hard",
     "entities": [
         { "x": 1, "y": 1, "type": "player" },
         {"x": 0, "y": 0, "type": "wall" },
@@ -300,21 +299,10 @@
         {"x": 17, "y": 3, "type": "wall"},
         {"x": 18, "y": 3, "type": "wall"},
         {"x": 19, "y": 3, "type": "door", "id": 5},
-        {"x": 17, "y": 5, "type": "key", "id": 3},
-        {"x": 19, "y": 18, "type": "mine"}
+        {"x": 17, "y": 5, "type": "key", "id": 3}
 
         
     ],
-    "goal-condition": {
-        "goal": "AND",
-        "subgoals": [
-          {
-            "goal": "exit"
-          },
-          {
-            "goal": "treasure"
-          }
-        ]
-      }
+    "goal-condition": { "goal": "exit" }
 
 }

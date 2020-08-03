@@ -6,7 +6,7 @@ import javafx.beans.property.SimpleBooleanProperty;
 /**
  * A goal where the player must reach the exit of the dungeon
  */
-public class ExitGoal extends BasicGoal implements Observer {
+public class ExitGoal implements ComponentGoal, Observer {
 
     private BooleanProperty isComplete;
 

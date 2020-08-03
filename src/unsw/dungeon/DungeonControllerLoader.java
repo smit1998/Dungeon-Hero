@@ -128,10 +128,6 @@ public class DungeonControllerLoader extends DungeonLoader {
         view.setViewOrder(RenderLayer.ITEM);
         addEntity(new EntityView(checkpoint, view));
     }
-    /*
-     * @Override public void onLoad(Weapon sword) { ImageView view = new
-     * ImageView(swordImage); addEntity(sword, view); }
-     */
 
     @Override
     public void onLoad(Weapon sword, String type) {
@@ -210,7 +206,7 @@ public class DungeonControllerLoader extends DungeonLoader {
         });
     }
 
-    public void trackVisibility(EntityView entityView) {
+    private void trackVisibility(EntityView entityView) {
         Node node = entityView.getView();
         Entity entity = entityView.getEntity();
         entity.isVisible().addListener(new ChangeListener<Boolean>() {
@@ -221,7 +217,7 @@ public class DungeonControllerLoader extends DungeonLoader {
         });
     }
 
-    public void trackOpen(Door door, ImageView view) {
+    private void trackOpen(Door door, ImageView view) {
         door.isOpen().addListener(new ChangeListener<Boolean>() {
             @Override
             public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {

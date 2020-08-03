@@ -741,6 +741,7 @@ Marks will be deducted for poor git and GitLab usage. For example, meaningless c
 **Smit**
 * Created a new extension called mine(Land mine).
 * Created a new map for land mine and checkpoint.
+* Deleted the unwanted maps.
 
 **Duy**
 * Refactor - added iterator pattern + use getclass instead of instance of
@@ -748,5 +749,11 @@ Marks will be deducted for poor git and GitLab usage. For example, meaningless c
 **Fergus**
 * Polished user interface by resizing primary stage and adding graphical buttons
 * Implemented sorting in the level selection menu
+* Implemented goal display for all goals
 
 ##### 03/08/2020
+
+**Fergus**
+* Implemented CheckBoxTreeView for goal display
+* Added controllers and frontend components to UML diagram
+

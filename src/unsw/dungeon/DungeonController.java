@@ -24,7 +24,6 @@ import javafx.util.Duration;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.SplitPane;
 import javafx.scene.control.TreeView;
 import javafx.scene.control.cell.CheckBoxTreeCell;
 import javafx.animation.FadeTransition;
@@ -53,16 +52,13 @@ public class DungeonController implements Runnable, Controller {
     private GridPane squares;
 
     @FXML
-    private VBox pane;
+    private VBox pane, side_box;
 
     @FXML
     private StackPane map_stack;
 
     @FXML
     private HBox items;
-
-    @FXML
-    private VBox side_box;
 
     @FXML
     private ImageView background_image;
@@ -81,6 +77,11 @@ public class DungeonController implements Runnable, Controller {
 
     private boolean running = false;
     private Thread thread;
+    private final Object lock = new Object();
+
+    private boolean isPaused = false;
+
+    private Set<String> input = new TreeSet<String>();
 
     public DungeonController(Dungeon dungeon, List<EntityView> initialEntities, File file) {
         this.dungeon = dungeon;
@@ -133,10 +134,8 @@ public class DungeonController implements Runnable, Controller {
 
     }
 
-    private Set<String> input = new TreeSet<String>();
-
     @FXML
-    public void handleKeyPress(KeyEvent e) {
+    private void handleKeyPress(KeyEvent e) {
         String code = e.getCode().toString();
         input.add(code);
 
@@ -151,14 +150,10 @@ public class DungeonController implements Runnable, Controller {
     }
 
     @FXML
-    public void handleKeyRelease(KeyEvent e) {
+    private void handleKeyRelease(KeyEvent e) {
         String code = e.getCode().toString();
         input.remove(code);
     }
-
-    private final Object lock = new Object();
-
-    private boolean isPaused = false;
 
     public void run() {
         // Game loop - https://youtu.be/w1aB5gc38C8
@@ -213,7 +208,7 @@ public class DungeonController implements Runnable, Controller {
         return scene;
     }
 
-    public synchronized void start() {
+    private synchronized void start() {
         StackPane goalTextPane = new StackPane();
         goalTextPane.setStyle("-fx-background-color: black");
 
@@ -256,7 +251,7 @@ public class DungeonController implements Runnable, Controller {
         }
     }
 
-    public synchronized void stop() {
+    private synchronized void stop() {
         if (running) {
             running = false;
             try {
@@ -268,7 +263,7 @@ public class DungeonController implements Runnable, Controller {
 
     }
 
-    public void trackCompletion(Dungeon dungeon) {
+    private void trackCompletion(Dungeon dungeon) {
         dungeon.isCompleted().addListener(new ChangeListener<Boolean>() {
             @Override
             public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
@@ -291,7 +286,7 @@ public class DungeonController implements Runnable, Controller {
         });
     }
 
-    public void trackIsAlive(Player player) {
+    private void trackIsAlive(Player player) {
         player.isAlive().addListener(new ChangeListener<Boolean>() {
             @Override
             public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
@@ -312,7 +307,7 @@ public class DungeonController implements Runnable, Controller {
         });
     }
 
-    public void trackPickedUp(EntityView entityView) {
+    private void trackPickedUp(EntityView entityView) {
         Entity entity = entityView.getEntity();
         ImageView view = entityView.getView();
 
@@ -350,7 +345,7 @@ public class DungeonController implements Runnable, Controller {
         stage.show();
     }
 
-    public void togglePause() {
+    private void togglePause() {
         if (isPaused) {
             handleResume();
         } else {
@@ -370,14 +365,14 @@ public class DungeonController implements Runnable, Controller {
 
     @FXML
     public void handleRestart(Event event) throws IOException {
-        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        Stage stage = Controller.getStage(event);
         DungeonControllerLoader dungeonLoader = new DungeonControllerLoader(file);
         DungeonController controller = dungeonLoader.loadController();
         stage.setScene(controller.getScene());
         stage.show();
     }
 
-    public void handlePause() {
+    private void handlePause() {
         setIsPaused(true);
         PauseScreenController controller = new PauseScreenController(this);
         try {

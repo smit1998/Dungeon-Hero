@@ -12,7 +12,6 @@ import javafx.scene.text.Text;
 import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.ListCell;
@@ -82,7 +81,7 @@ public class DungeonMenuController implements Controller {
     public void handlePlay(Event event) throws IOException {
         DungeonMenuItem selection = dungeonList.getSelectionModel().getSelectedItem();
         System.out.println("Loading map: " + selection + "...");
-        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        Stage stage = Controller.getStage(event);
         DungeonControllerLoader dungeonLoader = new DungeonControllerLoader(selection.getDungeonFile());
         DungeonController controller = dungeonLoader.loadController();
         stage.setScene(controller.getScene());
@@ -92,7 +91,7 @@ public class DungeonMenuController implements Controller {
     @FXML
     private void handleBack(Event event) throws IOException {
         System.out.println("Going back to main menu");
-        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        Stage stage = Controller.getStage(event);
         MainMenuController controller = new MainMenuController();
         stage.setScene(controller.getScene());
         stage.show();

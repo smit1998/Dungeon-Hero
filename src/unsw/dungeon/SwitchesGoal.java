@@ -9,9 +9,8 @@ import javafx.beans.property.SimpleBooleanProperty;
 /**
  * A goal whether all floor switches must be pressed down by boulders
  */
-public class SwitchesGoal extends BasicGoal {
+public class SwitchesGoal implements ComponentGoal {
 
-    // private Set<FloorSwitch> switches = new HashSet<>();
     private List<FloorSwitch> switches = new ArrayList<>();
 
     private BooleanProperty isComplete = new SimpleBooleanProperty(false);
