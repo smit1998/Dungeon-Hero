@@ -27,7 +27,7 @@ public class Mine extends Entity {
     }
 
     public boolean interact(Enemy enemy) {
-        if (this.isActive == true) {
+        if (this.isActive == true && enemy.isAlive()) {
             enemy.kill();
             return true;
         }
