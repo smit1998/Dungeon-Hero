@@ -15,13 +15,14 @@ public class AndGoalStrategy implements GoalStrategy {
      * @return whether the list of goals meet the requirements of this strategy
      */
     public boolean isComplete(Iterator<ComponentGoal> goals) {
+        boolean isComplete = true;
         while (goals.hasNext()) {
             ComponentGoal goal = goals.next();
             if (!goal.isComplete()) {
-                return false;
+                isComplete = false;
             }
         }
-        return true;
+        return isComplete;
     }
 
     public String toString(Iterator<ComponentGoal> goals) {
