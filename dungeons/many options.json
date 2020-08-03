@@ -1,7 +1,7 @@
 {
     "width": 21,
     "height": 21,
-    "difficulty": "medium",
+    "difficulty": "hard",
     "entities": [
 
         { "x" : 0, "y" : 10, "type" : "wall" }, 
@@ -160,6 +160,18 @@
         { "x" : 7, "y" : 20, "type" : "treasure" }, 
         { "x" : 8, "y" : 20, "type" : "treasure" }, 
         { "x" : 9, "y" : 20, "type" : "treasure" }, 
+
+        { "x" : 11, "y" : 9, "type" : "speed" }, 
+        { "x" : 13, "y" : 9, "type" : "invincibility" }, 
+
+        { "x" : 5, "y" : 15, "type" : "enemy"},
+        { "x" : 4, "y" : 16, "type" : "enemy"},
+        { "x" : 6, "y" : 14, "type" : "enemy"},
+        { "x" : 7, "y" : 13, "type" : "enemy"},
+        { "x" : 4, "y" : 17, "type" : "enemy"},
+
+        { "x" : 8, "y" : 3, "type" : "wall"},
+        { "x" : 9, "y" : 3, "type" : "wall"}
     ],
     "goal-condition": { "goal": "OR", "subgoals": 
                         [
