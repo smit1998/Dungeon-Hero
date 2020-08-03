@@ -756,6 +756,7 @@ Marks will be deducted for poor git and GitLab usage. For example, meaningless c
 **Fergus**
 * Implemented CheckBoxTreeView for goal display
 * Added controllers and frontend components to UML diagram
+* Added weapon durability and potion effect duration to frontend
 
 **Duy**
 * updated maps info
@@ -763,4 +764,8 @@ Marks will be deducted for poor git and GitLab usage. For example, meaningless c
 
 **Smit**
 * Added the user stories and acceptance criteria for extnesions
+
+**Everyone**
+* Tested game in team meeting
+* Debugged mine
 
