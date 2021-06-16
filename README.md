@@ -29,9 +29,7 @@ Key Dungeon Features:
 | Sword                | This can be picked up the player and used to kill enemies. Only one sword can be carried at once. Each sword is only capable of 5 hits and disappears after that. One hit of the sword is sufficient to destroy any enemy. |
 | Invincibility potion | If the player picks this up they become invincible to enemies. Colliding with an enemy should result in their immediate destruction. Because of this, all enemies will run away from the player when they are invincible. The effect of the potion only lasts a limited time. |
 
-### Goals
-
-In addition to its layout, each dungeon also has a goal that defines what must be achieved by the player for the dungeon to be considered complete. Basic goals are:
+### Goals/Levels
 
 * Getting to an exit.
 * Destroying all enemies.
@@ -43,5 +41,3 @@ More complex goals can be built by logically composing goals. For example,
 * Destroying all enemies AND getting to an exit
 * Collecting all treasure OR having a boulder on all floor switches
 * Getting to an exit AND (destroying all enemies OR collecting all treasure)
-
-If getting to an exit is one of a conjunction of conditions, it must be done last. For example, if the condition is to destroy all enemies AND get to an exit, the player must destroy the enemies *then* get to the exit.
