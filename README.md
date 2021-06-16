@@ -12,7 +12,7 @@
 
 ### Dungeon layout
 
-To be specific, the layout of each dungeon is defined by a grid of squares, each of which may contain one or more entities. The different types of entities are as follows:
+Key Dungeon Features: 
 
 | Entity               | Example | Description                             |
 | ------               | ------- | --------------------------------------- |
@@ -45,53 +45,3 @@ More complex goals can be built by logically composing goals. For example,
 * Getting to an exit AND (destroying all enemies OR collecting all treasure)
 
 If getting to an exit is one of a conjunction of conditions, it must be done last. For example, if the condition is to destroy all enemies AND get to an exit, the player must destroy the enemies *then* get to the exit.
-
-### Input
-
-Your application will read from a JSON file containing a complete specification of the dungeon (the initial position of entities, goal, etc.). Example dungeons are included in the `dungeons` directory and the starter code contains an incomplete dungeon loader.
-
-The dungeon files have the following format:
-
-> { "width": *width in squares*, "height": *height in squares*, "entities": *list of entities*, "goal-condition": *goal condition* }
-
-Each entity in the list of entities is structured as:
-
-> { "type": *type*, "x": *x-position*, "y": *y-position* }
-
-where *type* is one of
-
-> ["player", "wall", "exit", "treasure", "door", "key", "boulder", "switch", "portal", "enemy", "sword", "invincibility"]
-
-The `door`, `key`, and `portal` entities include an additional field `id` containing a number. Keys open the door with the same `id` (e.g. the key with `id` 0 opens the door with `id` 0). Portals will teleport entities to the **one** other portal with the same ID.
-
-The goal condition is a JSON object representing the logical statement that defines the goal. Basic goals are:
-
-> { "goal": *goal* }
-
-where *goal* is one of
-
-> ["exit", "enemies", "boulders", "treasure"]
-
-In the case of a more complex goal, *goal* is the logical operator and the additional *subgoals* field is a JSON array containing subgoals, which themselves are goal conditions. For example,
-
-```JSON
-{ "goal": "AND", "subgoals":
-  [ { "goal": "exit" },
-    { "goal": "OR", "subgoals":
-      [ {"goal": "enemies" },
-        {"goal": "treasure" }
-      ]
-    }
-  ]
-}
-```
-
-Note that the same basic goal *can* appear more than once in a statement.
-
-You can extend this format to include additional information if you wish, but your application should still work with files in the original format.
-
-### User interface
-
-The UI component of this project will be implemented in JavaFX. The starter code contains a very basic UI showing how a player can be moved around with the arrow keys, but it is missing many features (the player can walk through walls for one).
-
-The client has given you free reign over the visual design of the program. Included in the starter code are some example assets, but you are free to use different ones. You can find them elsewhere or even create your own. The examples above came from [here](http://opengameart.org).
